@@ -12,8 +12,7 @@
     <li><a href="#problema">1. O Problema</a></li>
     <li><a href="#solucao">2. A Solução</a></li>
     <li><a href="#publico">3. Público Alvo</a></li>
-    <li><a href="#linksuteis">4. Links Úteis</a></li>
-    <li><a href="#equipe">5. Equipe</a></li>
+    <li><a href="#equipe">4. Equipe</a></li>
   </ul>
 
 <h2 id="problema">1. O Problema :warning:</h2>
@@ -32,13 +31,7 @@
   
   <p>Temos como principal público alvo a população em geral e cooperativas de reciclagem. A solução pode ajudar a facilitar a disponibilidade de informações acerca do descarte correto de residuos sólidos, exibir rotinas de coleta, agendar coleta em grande escala de maneira individual.</p>
   
-<h2 id="linksuteis">4. Links Úteis</h2>
-
-  <a href="" target="_blank">1 - Vídeo de Apresentação </a>
-
-  <a href="" target="_blank">2 - Manual de Uso </a>
-
-  <h2 id="equipe">5. Equipe :busts_in_silhouette::busts_in_silhouette: :bust_in_silhouette:</h2>
+  <h2 id="equipe">4. Equipe :busts_in_silhouette::busts_in_silhouette: :bust_in_silhouette:</h2>
 
   <table align="center">
   <tr>
