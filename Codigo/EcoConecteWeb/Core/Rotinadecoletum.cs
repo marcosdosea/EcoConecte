@@ -5,13 +5,13 @@ namespace Core;
 
 public partial class Rotinadecoletum
 {
-    public uint IdRotinaDeColeta { get; set; }
+    public uint Id { get; set; }
 
     public string Cep { get; set; } = null!;
 
     public string Logradouro { get; set; } = null!;
 
-    public int NumeroEndereco { get; set; }
+    public int Numero { get; set; }
 
     public DateTime DiaColeta { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Rotinadecoletum
 
     public DateTime? HorarioTermino { get; set; }
 
-    public virtual ICollection<Cooperativa> Cooperativas { get; set; } = new List<Cooperativa>();
+    public uint IdCooperativa { get; set; }
 }

@@ -5,27 +5,27 @@ namespace Core;
 
 public partial class Agendamento
 {
-    public uint IdAgendamento { get; set; }
+    public uint Id { get; set; }
 
     public DateTime Data { get; set; }
-
-    public DateTime Horario { get; set; }
 
     public string Cep { get; set; } = null!;
 
     public string Logradouro { get; set; } = null!;
 
-    public int NumeroEndereco { get; set; }
+    public string Numero { get; set; } = null!;
 
-    public uint CidadaoIdCidadao { get; set; }
+    public uint IdPessoa { get; set; }
 
-    public uint CooperadoIdCooperado { get; set; }
+    public string Bairro { get; set; } = null!;
 
-    public string CooperadoCpf { get; set; } = null!;
+    public string Cidade { get; set; } = null!;
 
-    public virtual Cidadao CidadaoIdCidadaoNavigation { get; set; } = null!;
+    public string Estado { get; set; } = null!;
 
-    public virtual Cooperado Cooperado { get; set; } = null!;
-
-    public virtual ICollection<Cooperativa> Cooperativas { get; set; } = new List<Cooperativa>();
+    /// <summary>
+    /// A - ATIVO
+    /// C -CANCELADO
+    /// </summary>
+    public string? Status { get; set; }
 }

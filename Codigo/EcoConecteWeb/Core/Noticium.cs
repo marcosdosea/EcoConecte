@@ -5,11 +5,13 @@ namespace Core;
 
 public partial class Noticium
 {
-    public uint IdNoticia { get; set; }
+    public uint Id { get; set; }
 
     public string Titulo { get; set; } = null!;
 
     public string Conteudo { get; set; } = null!;
 
-    public virtual ICollection<Cooperativa> Cooperativas { get; set; } = new List<Cooperativa>();
+    public uint IdCooperativa { get; set; }
+
+    public DateTime Data { get; set; }
 }
