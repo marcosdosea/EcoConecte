@@ -2,7 +2,70 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="container text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="intro-text">
+        Conheça a EcoConecte!!<br />Coletamos seus resíduos sólidos e efetuamos o descarte adequado.
+    </div>
+    <input type="text" class="cep-input" placeholder="Digite seu CEP" />
+    <button class="btn">Continuar</button>
+    <button class="btn">Cadastre-se</button>
+    <div class="news-title">Notícias</div>
 </div>
+
+<style>
+    .container {
+        width: 100%;
+        background: #FAFAFA;
+        padding: 20px;
+    }
+
+    .intro-text {
+        width: 1348px;
+        margin: 128px auto 0;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .cep-input {
+        width: 519px;
+        height: 63px;
+        padding: 4px;
+        margin: 20px auto;
+        background: white;
+        border-radius: 8px;
+        border: 1px #05AF16 solid;
+        display: block;
+    }
+
+    .btn {
+        width: 157px;
+        height: 53px;
+        background: #007447;
+        color: white;
+        border-radius: 15px;
+        border: 1px #B7BABC solid;
+        text-align: center;
+        line-height: 53px;
+        margin: 10px auto;
+        display: block;
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .news-title {
+        width: 100%;
+        text-align: center;
+        color: black;
+        font-size: 32px;
+        font-family: 'Abril Fatface', sans-serif;
+        margin-top: 20px;
+    }
+
+    img {
+        width: 213px;
+        height: 106px;
+    }
+</style>
