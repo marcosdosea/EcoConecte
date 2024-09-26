@@ -18,6 +18,7 @@ namespace EcoConecteWeb
                 options.UseMySQL(builder.Configuration.GetConnectionString("EcoConecteWebDatabase"));
             });
             builder.Services.AddTransient<IAgendamentoService, AgendamentoService>();
+            builder.Services.AddTransient<IPessoaService, PessoaService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
             // Configure the HTTP request pipeline.
