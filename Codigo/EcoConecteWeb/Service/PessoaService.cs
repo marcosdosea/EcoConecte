@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    class PessoaService : IPessoaService
+    public class PessoaService : IPessoaService
     {
         private readonly ecoconecteContext context;
         public PessoaService(ecoconecteContext context)
