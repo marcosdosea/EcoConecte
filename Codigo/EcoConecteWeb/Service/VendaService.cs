@@ -16,6 +16,7 @@ namespace Service
         {
             this.context = context;
         }
+
         public uint Create(Vendamaterial Venda)
         {
             context.Add(Venda);
