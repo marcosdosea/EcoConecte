@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Rotinadecoletum
+public partial class Coleta
 {
     public uint Id { get; set; }
 
