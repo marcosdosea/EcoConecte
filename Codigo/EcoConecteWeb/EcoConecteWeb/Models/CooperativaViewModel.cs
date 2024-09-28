@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EcoConecteWeb.Models
 {
-    public class CooperativaModel
+    public class CooperativaViewModel
     {
         [Display(Name = "Código")]
         [Key]

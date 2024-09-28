@@ -50,6 +50,11 @@ namespace Service
         {
             return context.Cooperativas.Find(id);
         }
+
+        public IEnumerable<Cooperativa> GetAll()
+        {
+            return context.Cooperativas.AsNoTracking();
+        }
     }
 }
 
