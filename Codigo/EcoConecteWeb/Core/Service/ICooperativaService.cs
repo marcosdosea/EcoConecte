@@ -16,6 +16,8 @@ namespace Core.Service
         Cooperativa? Get(uint Id);
 
         void Delete(uint Id);
+        IEnumerable<Cooperativa> GetAll();
+
 
     }
 }
