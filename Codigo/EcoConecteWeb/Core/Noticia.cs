@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Noticium
+public partial class Noticia
 {
     public uint Id { get; set; }
 

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EcoConecteWeb.Models
 {
-    public class NoticiumViewModel
+    public class NoticiaViewModel
     {
         [Display(Name = "Código")]
         [Key]
