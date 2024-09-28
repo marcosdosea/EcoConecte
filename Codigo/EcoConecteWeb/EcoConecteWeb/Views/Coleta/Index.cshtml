@@ -1,0 +1,77 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.ColetaViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <h1>Index</h1>
+
+    <p>
+        <a class="btn" asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link-action" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "link-action" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "link-action" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .container {
+        width: 100%;
+        background: #FAFAFA;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+    .link-action {
+        color: #007447;
+        text-decoration: none;
+    }
+
+        .link-action:hover {
+            text-decoration: underline;
+        }
+</style>
