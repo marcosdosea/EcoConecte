@@ -19,7 +19,7 @@ public partial class ecoconecteContext : DbContext
 
     public virtual DbSet<Cooperativa> Cooperativas { get; set; }
 
-    public virtual DbSet<Noticium> Noticia { get; set; }
+    public virtual DbSet<Noticia> Noticia { get; set; }
 
     public virtual DbSet<Orientaco> Orientacoes { get; set; }
 
@@ -28,6 +28,11 @@ public partial class ecoconecteContext : DbContext
     public virtual DbSet<Rotinadecoletum> Rotinadecoleta { get; set; }
 
     public virtual DbSet<Vendamaterial> Vendamaterials { get; set; }
+
+    public void Delete(uint id)
+    {
+        throw new NotImplementedException();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -130,7 +135,7 @@ public partial class ecoconecteContext : DbContext
                 .HasColumnName("telefone");
         });
 
-        modelBuilder.Entity<Noticium>(entity =>
+        modelBuilder.Entity<Noticia>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 

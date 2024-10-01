@@ -8,7 +8,7 @@ namespace EcoConecteWeb.Mapper
     {
         public CooperativaProfile()
         {
-            CreateMap<NoticiumViewModel, Noticium>().ReverseMap();
+            CreateMap<NoticiaViewModel, Noticia>().ReverseMap();
         }
     }
 }
