@@ -19,7 +19,11 @@ namespace EcoConecteWeb
             });
             builder.Services.AddTransient<IAgendamentoService, AgendamentoService>();
             builder.Services.AddTransient<IPessoaService, PessoaService>();
+<<<<<<< HEAD
             builder.Services.AddTransient<ICooperativaService, CooperativaService>();
+=======
+            builder.Services.AddTransient<ICooperativaService,CooperativaService>();
+>>>>>>> ff5fcf3989fb0841658c9425fb8b8ca952c1e6aa
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
             // Configure the HTTP request pipeline.
