@@ -4,9 +4,9 @@ using EcoConecteWeb.Models;
 
 namespace EcoConecteWeb.Mapper
 {
-    public class CooperativaProfile : Profile
+    public class NoticiaProfile : Profile
     {
-        public CooperativaProfile()
+        public NoticiaProfile()
         {
             CreateMap<NoticiaViewModel, Noticia>().ReverseMap();
         }

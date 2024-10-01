@@ -19,7 +19,7 @@ public partial class ecoconecteContext : DbContext
 
     public virtual DbSet<Cooperativa> Cooperativas { get; set; }
 
-    public virtual DbSet<Noticium> Noticia { get; set; }
+    public virtual DbSet<Noticia> Noticia { get; set; }
 
     public virtual DbSet<Orientaco> Orientacoes { get; set; }
 
@@ -28,6 +28,11 @@ public partial class ecoconecteContext : DbContext
     public virtual DbSet<Rotinadecoletum> Rotinadecoleta { get; set; }
 
     public virtual DbSet<Vendamaterial> Vendamaterials { get; set; }
+
+    public void Delete(uint id)
+    {
+        throw new NotImplementedException();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -131,7 +136,7 @@ public partial class ecoconecteContext : DbContext
                 .HasColumnName("telefone");
         });
 
-        modelBuilder.Entity<Noticium>(entity =>
+        modelBuilder.Entity<Noticia>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 

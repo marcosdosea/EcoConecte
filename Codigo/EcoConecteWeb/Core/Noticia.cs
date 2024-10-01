@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 namespace Core;
 
-public partial class Noticium
+public partial class Noticia
 {
+    /// <summary>
+    /// Variaveis
+    /// </summary>
     public uint Id { get; set; }
 
     public string Titulo { get; set; } = null!;
