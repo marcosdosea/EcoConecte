@@ -11,7 +11,7 @@ namespace Service
 {
     public class AgendamentoService : IAgendamentoService
     {
-        
+
         private readonly EcoConecteContext _EcoConecteContext;
 
         public AgendamentoService(EcoConecteContext EcoConecteContext)
