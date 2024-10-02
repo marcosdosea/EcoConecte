@@ -33,8 +33,12 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(uint id)
         {
-            context.Delete(id);
-            context.SaveChanges();
+            var noticia = context.Noticia.Find(id);
+            if (noticia != null)
+            {
+                context.Noticia.Remove(noticia);
+                context.SaveChanges();
+            }
         }
         /// <summary>
         /// Editar uma notícia

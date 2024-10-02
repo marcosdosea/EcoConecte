@@ -33,5 +33,7 @@ namespace EcoConecteWeb.Models
 
         [AllowNull]
         public string? Status { get; set; }
+
+        public uint IdPessoa { get; set; }
     }
 }

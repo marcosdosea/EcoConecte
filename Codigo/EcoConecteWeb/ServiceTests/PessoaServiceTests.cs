@@ -7,17 +7,17 @@ namespace Service.Tests
     [TestClass()]
     public class PessoaServiceTests
     {
-        private ecoconecteContext _context;
+        private EcoConecteContext _context;
         private IPessoaService _pessoaService;
 
         [TestInitialize]
         public void Initialize()
         {
-            var builder = new DbContextOptionsBuilder<ecoconecteContext>();
+            var builder = new DbContextOptionsBuilder<EcoConecteContext>();
             builder.UseInMemoryDatabase("ecoconecte");
             var options = builder.Options;
 
-            _context = new ecoconecteContext(options);
+            _context = new EcoConecteContext(options);
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
             var pessoas = new List<Pessoa>

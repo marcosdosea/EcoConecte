@@ -1,1 +1,1 @@
-﻿dotnet ef dbcontext scaffold "server=localhost;port=3306;user=root;password=l123;database=ecoconecte" MySql.EntityFrameworkCore -p Core -c ecoconecteContext -f -v
+﻿dotnet ef dbcontext scaffold "server=localhost;port=3306;user=root;password=l123;database=ecoconecte" MySql.EntityFrameworkCore -p Core -c EcoConecteContext -f -v
