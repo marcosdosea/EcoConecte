@@ -12,8 +12,8 @@ namespace Service
 {
     public class PessoaService : IPessoaService
     {
-        private readonly ecoconecteContext context;
-        public PessoaService(ecoconecteContext context)
+        private readonly EcoConecteContext context;
+        public PessoaService(EcoConecteContext context)
         {
             this.context = context;
         }

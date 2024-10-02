@@ -11,8 +11,8 @@ namespace Service
 {
     public class ColetaService : IColetaService
     {
-        private readonly ecoconecteContext context;
-        public ColetaService(ecoconecteContext context)
+        private readonly EcoConecteContext context;
+        public ColetaService(EcoConecteContext context)
         {
             this.context = context;
         }

@@ -11,8 +11,8 @@ namespace Service
 {
     public class OrientacoesService : IOrientacoesService
     {
-        private readonly ecoconecteContext context;
-        public OrientacoesService(ecoconecteContext context)
+        private readonly EcoConecteContext context;
+        public OrientacoesService(EcoConecteContext context)
         {
             this.context = context;
         }

@@ -11,8 +11,8 @@ namespace Service
 {
     public class VendaService : IVendaService
     {
-        private readonly ecoconecteContext context;
-        public VendaService(ecoconecteContext context)
+        private readonly EcoConecteContext context;
+        public VendaService(EcoConecteContext context)
         {
             this.context = context;
         }
@@ -48,7 +48,7 @@ namespace Service
 
         public void Update(Vendamaterial Venda)
         {
-            context.Vendamaterials.Update(Venda);
+            context.Update(Venda);
             context.SaveChanges();
         }
     }

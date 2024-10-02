@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core;
 
-public partial class ecoconecteContext : DbContext
+public partial class EcoConecteContext : DbContext
 {
-    public ecoconecteContext()
+    public EcoConecteContext()
     {
     }
 
-    public ecoconecteContext(DbContextOptions<ecoconecteContext> options)
+    public EcoConecteContext(DbContextOptions<EcoConecteContext> options)
         : base(options)
     {
     }

@@ -11,8 +11,8 @@ namespace Service
 {
     public class NoticiaService : INoticiaServices
     {
-        private readonly ecoconecteContext context;
-        public NoticiaService (ecoconecteContext context)
+        private readonly EcoConecteContext context;
+        public NoticiaService (EcoConecteContext context)
         {
             this.context = context;
         }

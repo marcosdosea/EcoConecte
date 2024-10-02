@@ -13,7 +13,7 @@ namespace EcoConecteWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<ecoconecteContext>(options =>
+            builder.Services.AddDbContext<EcoConecteContext>(options =>
             {
                 options.UseMySQL(builder.Configuration.GetConnectionString("EcoConecteWebDatabase"));
             });
@@ -23,6 +23,7 @@ namespace EcoConecteWeb
             builder.Services.AddTransient<INoticiaServices, NoticiaService>();
             builder.Services.AddTransient<IOrientacoesService, OrientacoesService>();
             builder.Services.AddTransient<IColetaService, ColetaService>();
+            builder.Services.AddTransient<IVendaService, VendaService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
             // Configure the HTTP request pipeline.

@@ -13,9 +13,9 @@ namespace Service
     public class CooperativaService : ICooperativaService
     {
 
-        private readonly ecoconecteContext context;
+        private readonly EcoConecteContext context;
 
-        public CooperativaService(ecoconecteContext context)
+        public CooperativaService(EcoConecteContext context)
         {
             this.context = context;
         }
