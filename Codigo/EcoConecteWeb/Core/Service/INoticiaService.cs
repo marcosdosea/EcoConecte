@@ -8,8 +8,8 @@ namespace Core.Service
 {
     public interface INoticiaServices
     {
-        uint Create(Noticia noticium);
-        void Update(Noticia noticium);
+        uint Create(Noticia noticia);
+        void Update(Noticia noticia);
         void Edit(Noticia noticia);
         void Delete(uint id);
         Noticia? GetById(uint id);

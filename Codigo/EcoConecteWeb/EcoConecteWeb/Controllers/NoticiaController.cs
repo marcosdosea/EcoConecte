@@ -19,7 +19,7 @@ namespace EcoConecteWeb.Controllers
             this._mapper = mapper;
         }
 
-        // GET: Noticium_Controller
+        // GET: Noticia_Controller
         public ActionResult Index()
         {
             var listaNoticia = _noticiaService.GetAll();
@@ -27,7 +27,7 @@ namespace EcoConecteWeb.Controllers
             return View(listaNoticiaModel);
         }
 
-        // GET: Noticium_Controller/Details/5
+        // GET: Noticia_Controller/Details/5
         public ActionResult Details(uint id)
         {
             var noticia = _noticiaService.GetById(id);
@@ -35,13 +35,13 @@ namespace EcoConecteWeb.Controllers
             return View(noticiaViewModel);
         }
 
-        // GET: Noticium_Controller/Create
+        // GET: Noticia_Controller/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Noticium_Controller/Create
+        // POST: Noticia_Controller/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(NoticiaViewModel noticiaModel)
@@ -54,7 +54,7 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Noticium_Controller/Edit/5
+        // GET: Noticia_Controller/Edit/5
         public ActionResult Edit(uint id)
         {
             var noticia = _noticiaService.GetById(id);
@@ -62,7 +62,7 @@ namespace EcoConecteWeb.Controllers
             return View(noticiaModel);
         }
 
-        // POST: Noticium_Controller/Editar/5
+        // POST: Noticia_Controller/Editar/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(uint id, NoticiaViewModel noticiaModel)
@@ -75,7 +75,7 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Noticium_Controller/Delete/5
+        // GET: Noticia_Controller/Delete/5
         public ActionResult Delete(uint id)
         {
             var noticia = _noticiaService.GetById(id);
@@ -83,7 +83,7 @@ namespace EcoConecteWeb.Controllers
             return View(noticiaModel);
         }
 
-        // POST: Noticium_Controller/Excluir/5
+        // POST: Noticia_Controller/Excluir/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(uint id, NoticiaViewModel noticiaModel)

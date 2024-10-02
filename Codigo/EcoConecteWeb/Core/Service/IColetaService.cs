@@ -9,9 +9,11 @@ namespace Core.Service
     public interface IColetaService
     {
         uint Create(Coleta coleta);
-        bool Delete(uint id);
-        IEnumerable<Coleta> GetAll();
-        Coleta? GetById(uint id);
         void Update(Coleta coleta);
+        void Edit(Coleta coleta);
+        void Delete(uint id);
+        Coleta? GetById(uint id);
+        IEnumerable<Coleta> GetAll();
+        IEnumerable<Coleta> GetByLagradouro(string lagradouro);
     }
 }

@@ -77,10 +77,14 @@ namespace Service
                         };
             return query;
         }
-
+        /// <summary>
+        /// Altera os dados de uma noticia no banco de dados
+        /// </summary>
+        /// <param name="noticia">Dados alterados da pessoa</param>
         public void Edit(Noticia noticia)
         {
-            throw new NotImplementedException();
+            context.Update(noticia);
+            context.SaveChanges();
         }
     }
 }

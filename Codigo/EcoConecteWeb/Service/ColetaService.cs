@@ -9,39 +9,82 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public ColetaService : IColetaService
+    public class ColetaService : IColetaService
     {
-        private readonly IColetaRepository _coletaRepository;
-        private readonly IMapper _mapper;
-
-        public ColetaService(IColetaRepository coletaRepository, IMapper mapper)
+        private readonly ecoconecteContext context;
+        public ColetaService(ecoconecteContext context)
         {
-            _coletaRepository = coletaRepository;
-            _mapper = mapper;
+            this.context = context;
         }
 
-        public IEnumerable<Coleta> GetAll()
+        /// </summary>
+        /// Criar uma coleta
+        /// <param name="coleta"></param>
+        /// <returns></returns>
+        public uint Create(Coleta coleta)
         {
-            return _coletaRepository.GetAll();
+            context.Add(coleta);
+            context.SaveChanges();
+            return coleta.Id;
         }
-
-        public Coleta GetById(uint id)
-        {
-            return _coletaRepository.GetById(id);
-        }
-
-        public void Create(Coleta coleta)
-        {
-            _coletaRepository.Create(coleta);
-        }
-
-        public void Update(Coleta coleta)
-        {
-            _coletaRepository.Update(coleta);
-        }
-
+        /// <summary>
+        /// Remover uma coleta
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(uint id)
         {
-            _coletaRepository.Delete(id);
+            context.Delete(id);
+            context.SaveChanges();
+        }
+        /// <summary>
+        /// Editar uma coleta
+        /// </summary>
+        /// <param name="coleta"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void Update(Coleta coleta)
+        {
+            context.Update(coleta);
+            context.SaveChanges();
+        }
+        /// <summary>
+        /// Busca todas as coletas no banco de dados
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Coleta> GetAll()
+        {
+            return context.Coleta.AsNoTracking();
+        }
+
+        /// <summary>
+        /// Busca coleta pelo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Coleta? GetById(uint Id)
+        {
+            return context.Coleta.Find(Id);
+        }
+
+        public IEnumerable<Coleta> GetByLagradouro(string lagradouro)
+        {
+            var query = from coleta in context.Coleta
+                        where coleta.Logradouro.StartsWith(lagradouro)
+                        orderby coleta.Logradouro
+                        select new Core.Coleta
+                        {
+                            Id = coleta.Id,
+                            Logradouro = coleta.Logradouro,
+                        };
+            return query;
+        }
+        /// <summary>
+        /// Altera os dados de uma coleta no banco de dados
+        /// </summary>
+        /// <param name="coleta">Dados alterados da pessoa</param>
+        public void Edit(Coleta coleta)
+        {
+            context.Update(coleta);
+            context.SaveChanges();
         }
     }
+}

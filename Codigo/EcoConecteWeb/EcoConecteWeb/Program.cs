@@ -21,6 +21,8 @@ namespace EcoConecteWeb
             builder.Services.AddTransient<IPessoaService, PessoaService>();
             builder.Services.AddTransient<ICooperativaService,CooperativaService>();
             builder.Services.AddTransient<INoticiaServices, NoticiaService>();
+            builder.Services.AddTransient<IOrientacoesService, OrientacoesService>();
+            builder.Services.AddTransient<IColetaService, ColetaService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             var app = builder.Build();
             // Configure the HTTP request pipeline.
