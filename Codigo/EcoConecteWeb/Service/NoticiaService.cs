@@ -11,8 +11,8 @@ namespace Service
 {
     public class NoticiaService : INoticiaServices
     {
-        private readonly ecoconecteContext context;
-        public NoticiaService (ecoconecteContext context)
+        private readonly EcoConecteContext context;
+        public NoticiaService (EcoConecteContext context)
         {
             this.context = context;
         }
@@ -77,10 +77,14 @@ namespace Service
                         };
             return query;
         }
-
+        /// <summary>
+        /// Altera os dados de uma noticia no banco de dados
+        /// </summary>
+        /// <param name="noticia">Dados alterados da pessoa</param>
         public void Edit(Noticia noticia)
         {
-            throw new NotImplementedException();
+            context.Update(noticia);
+            context.SaveChanges();
         }
     }
 }

@@ -12,46 +12,46 @@ namespace Service
     public class AgendamentoService : IAgendamentoService
     {
         
-        private readonly ecoconecteContext _ecoconecteContext;
+        private readonly EcoConecteContext _EcoConecteContext;
 
-        public AgendamentoService(ecoconecteContext ecoconecteContext)
+        public AgendamentoService(EcoConecteContext EcoConecteContext)
         {
-            _ecoconecteContext = ecoconecteContext;
+            _EcoConecteContext = EcoConecteContext;
         }
 
         public uint Create(Agendamento agendamento)
         {
-            _ecoconecteContext.Add(agendamento);
-            _ecoconecteContext.SaveChanges();
+            _EcoConecteContext.Add(agendamento);
+            _EcoConecteContext.SaveChanges();
             return agendamento.Id;
         }
 
         public bool Delete(uint id)
         {
-            var agendamento = _ecoconecteContext.Agendamentos.Find(id);
+            var agendamento = _EcoConecteContext.Agendamentos.Find(id);
             if (agendamento == null)
             {
                 return false;
             }
-            _ecoconecteContext.Remove(agendamento);
-            _ecoconecteContext.SaveChanges();
+            _EcoConecteContext.Remove(agendamento);
+            _EcoConecteContext.SaveChanges();
             return true;
         }
 
         public IEnumerable<Agendamento> GetAll()
         {
-            return _ecoconecteContext.Agendamentos.AsNoTracking();
+            return _EcoConecteContext.Agendamentos.AsNoTracking();
         }
 
         public Agendamento? GetById(uint id)
         {
-            return _ecoconecteContext.Agendamentos.Find(id);
+            return _EcoConecteContext.Agendamentos.Find(id);
         }
 
         public void Update(Agendamento agendamento)
         {
-            _ecoconecteContext.Agendamentos.Update(agendamento);
-            _ecoconecteContext.SaveChanges();
+            _EcoConecteContext.Agendamentos.Update(agendamento);
+            _EcoConecteContext.SaveChanges();
         }
     }
 }

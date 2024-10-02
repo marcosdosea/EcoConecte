@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core;
 
-public partial class ecoconecteContext : DbContext
+public partial class EcoConecteContext : DbContext
 {
-    public ecoconecteContext()
+    public EcoConecteContext()
     {
     }
 
-    public ecoconecteContext(DbContextOptions<ecoconecteContext> options)
+    public EcoConecteContext(DbContextOptions<EcoConecteContext> options)
         : base(options)
     {
     }
@@ -21,11 +21,11 @@ public partial class ecoconecteContext : DbContext
 
     public virtual DbSet<Noticia> Noticia { get; set; }
 
-    public virtual DbSet<Orientaco> Orientacoes { get; set; }
+    public virtual DbSet<Orientacoes> Orientacoes { get; set; }
 
     public virtual DbSet<Pessoa> Pessoas { get; set; }
 
-    public virtual DbSet<Rotinadecoletum> Rotinadecoleta { get; set; }
+    public virtual DbSet<Coleta> Coleta { get; set; }
 
     public virtual DbSet<Vendamaterial> Vendamaterials { get; set; }
 
@@ -159,7 +159,7 @@ public partial class ecoconecteContext : DbContext
                 .HasColumnName("titulo");
         });
 
-        modelBuilder.Entity<Orientaco>(entity =>
+        modelBuilder.Entity<Orientacoes>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
@@ -223,7 +223,7 @@ public partial class ecoconecteContext : DbContext
                 .HasColumnName("telefone");
         });
 
-        modelBuilder.Entity<Rotinadecoletum>(entity =>
+        modelBuilder.Entity<Coleta>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
