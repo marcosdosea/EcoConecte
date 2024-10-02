@@ -10,10 +10,10 @@ namespace EcoConecteWeb.Controllers
 {
     public class NoticiaController : Controller
     {
-        private readonly INoticiaServices _noticiaService;
+        private readonly INoticiaService _noticiaService;
         private readonly IMapper _mapper;
 
-        public NoticiaController(INoticiaServices noticiaService, IMapper mapper)
+        public NoticiaController(INoticiaService noticiaService, IMapper mapper)
         {
             this._noticiaService = noticiaService;
             this._mapper = mapper;
