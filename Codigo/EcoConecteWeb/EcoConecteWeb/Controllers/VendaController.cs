@@ -24,7 +24,7 @@ namespace EcoConecteWeb.Controllers
         {
             var ListaVendas = _vendaService.GetAll();
             var ListaVendasModel = _mapper.Map<IEnumerable<VendaViewModel>>(ListaVendas);
-            return View(ListaVendas);
+            return View(ListaVendasModel);
         }
 
         // GET: VendaController/Details/5
