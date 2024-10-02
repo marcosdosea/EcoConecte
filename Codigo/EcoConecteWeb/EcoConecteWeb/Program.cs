@@ -20,7 +20,7 @@ namespace EcoConecteWeb
             builder.Services.AddTransient<IAgendamentoService, AgendamentoService>();
             builder.Services.AddTransient<IPessoaService, PessoaService>();
             builder.Services.AddTransient<ICooperativaService,CooperativaService>();
-            builder.Services.AddTransient<INoticiaServices, NoticiaService>();
+            builder.Services.AddTransient<INoticiaService, NoticiaService>();
             builder.Services.AddTransient<IOrientacoesService, OrientacoesService>();
             builder.Services.AddTransient<IColetaService, ColetaService>();
             builder.Services.AddTransient<IVendaService, VendaService>();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    public interface INoticiaServices
+    public interface INoticiaService
     {
         uint Create(Noticia noticia);
         void Update(Noticia noticia);

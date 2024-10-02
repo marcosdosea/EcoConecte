@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class NoticiaService : INoticiaServices
+    public class NoticiaService : INoticiaService
     {
         private readonly EcoConecteContext context;
         public NoticiaService (EcoConecteContext context)
