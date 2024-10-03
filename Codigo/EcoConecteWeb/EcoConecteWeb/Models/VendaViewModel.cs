@@ -17,10 +17,10 @@ namespace EcoConecteWeb.Models
         public string Tipo { get; set; } = null!;
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        public decimal Valor { get; set; }
+        public string Valor { get; set; } = null;
 
         [Required(ErrorMessage = "Campo obrigatório.")]
-        public decimal Quantidade { get; set; }
+        public string Quantidade { get; set; } = null!;
 
         [Required(ErrorMessage = "Campo obrigatório.")]
         public DateTime Data { get; set; }

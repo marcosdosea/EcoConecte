@@ -9,9 +9,9 @@ public partial class Vendamaterial
 
     public string Tipo { get; set; } = null!;
 
-    public decimal Valor { get; set; }
+    public string Valor { get; set; } = null!;
 
-    public decimal Quantidade { get; set; }
+    public string Quantidade { get; set; } = null!;
 
     public DateTime Data { get; set; }
 

@@ -10,9 +10,10 @@ namespace Core.Service
     {
         uint Create(Vendamaterial Venda);
 
-        void Update(Vendamaterial Venda);
+        void Edit(Vendamaterial Venda);
 
-        bool Delete(uint Id);
+        void Delete(uint Id);
+        Vendamaterial? Get(uint id);
 
         IEnumerable<Vendamaterial> GetAll();
 
