@@ -11,7 +11,7 @@ namespace EcoConecteWeb.Controllers.Tests
     [TestClass()]
     public class PessoaControllerTests
     {
-        private static PessoaController controller;
+        private static PessoaController controller = null!;
 
         [TestInitialize]
         public void Initialize()
@@ -57,17 +57,17 @@ namespace EcoConecteWeb.Controllers.Tests
             //Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<PessoaViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PessoaViewModel));
             PessoaViewModel pessoaModel = (PessoaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Carol", pessoaModel.Nome);
-            Assert.AreEqual("54786325484", pessoaModel.Cpf);
-            Assert.AreEqual("Longe", pessoaModel.Bairro);
-            Assert.AreEqual("Paulo Afonso", pessoaModel.Cidade);
-            Assert.AreEqual("Bahia", pessoaModel.Estado);
+            Assert.AreEqual("Matheus", pessoaModel.Nome);
+            Assert.AreEqual("31647924892", pessoaModel.Cpf);
+            Assert.AreEqual("Suiça", pessoaModel.Bairro);
+            Assert.AreEqual("Aracaju", pessoaModel.Cidade);
+            Assert.AreEqual("Sergipe", pessoaModel.Estado);
             Assert.AreEqual("Num sei", pessoaModel.Logradouro);
-            Assert.AreEqual("13", pessoaModel.Numero);
-            Assert.AreEqual("71624626655", pessoaModel.Telefone);
-            Assert.AreEqual("A", pessoaModel.Status);
+            Assert.AreEqual("22", pessoaModel.Numero);
+            Assert.AreEqual("47762145221", pessoaModel.Telefone);
+            Assert.AreEqual("I", pessoaModel.Status);
         }
 
         [TestMethod()]

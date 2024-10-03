@@ -19,13 +19,14 @@ namespace EcoConecteWeb.Controllers.Tests
     [TestClass()]
     public class AgendamentoControllerTests
     {
-        private static AgendamentoController controller;
+        private static AgendamentoController controller = null!;
 
         [TestInitialize]
         public void Initialize()
         {
             //Arrange
             var mockService = new Mock<IAgendamentoService>();
+            var mockPessoaService = new Mock<IPessoaService>();
 
             IMapper mapper = new MapperConfiguration(Cfg =>
                 Cfg.AddProfile(new AgendamentoProfile())).CreateMapper();
@@ -37,7 +38,9 @@ namespace EcoConecteWeb.Controllers.Tests
             mockService.Setup(service => service.Update(It.IsAny<Agendamento>()))
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Agendamento>()))
+                .Returns((Agendamento agendamento) => agendamento.Id)
                 .Verifiable();
+
             controller = new AgendamentoController(mockService.Object, mapper);
 
         }
@@ -66,15 +69,15 @@ namespace EcoConecteWeb.Controllers.Tests
             //Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<AgendamentoViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AgendamentoViewModel));
             AgendamentoViewModel agendamentoModel = (AgendamentoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("49555000", agendamentoModel.Cep);
+            Assert.AreEqual("49570000", agendamentoModel.Cep);
             Assert.AreEqual("Casa", agendamentoModel.Logradouro);
-            Assert.AreEqual("Centro", agendamentoModel.Bairro);
-            Assert.AreEqual("Salvador", agendamentoModel.Cidade);
-            Assert.AreEqual("Bahia", agendamentoModel.Estado);
-            Assert.AreEqual("665", agendamentoModel.Numero);
-            Assert.AreEqual("F", agendamentoModel.Status);
+            Assert.AreEqual("Suiça", agendamentoModel.Bairro);
+            Assert.AreEqual("Aracaju", agendamentoModel.Cidade);
+            Assert.AreEqual("Sergipe", agendamentoModel.Estado);
+            Assert.AreEqual("230", agendamentoModel.Numero);
+            Assert.AreEqual("A", agendamentoModel.Status);
         }
 
         [TestMethod()]
@@ -185,6 +188,8 @@ namespace EcoConecteWeb.Controllers.Tests
                 Cidade = "paquetá",
                 Estado = "Sergipe",
                 Status = "D",
+                IdPessoa = 1,
+
             };
         }
         private AgendamentoViewModel GetTargetAgendamentoModel()
@@ -200,6 +205,22 @@ namespace EcoConecteWeb.Controllers.Tests
                 Cidade = "amsterdam",
                 Estado = "piaui",
                 Status = "B",
+            };
+        }
+        private static Pessoa GetTargetPessoa()
+        {
+            return new Pessoa
+            {
+                Id = 1,
+                Cpf = "31647924892",
+                Nome = "Matheus",
+                Bairro = "Suiça",
+                Cidade = "Aracaju",
+                Estado = "Sergipe",
+                Logradouro = "Num sei",
+                Numero = "22",
+                Telefone = "47762145221",
+                Status = "I"
             };
         }
         private IEnumerable<Agendamento> GetTestAgendamentos()

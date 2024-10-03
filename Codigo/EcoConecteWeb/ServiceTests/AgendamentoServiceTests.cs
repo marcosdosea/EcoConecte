@@ -14,8 +14,8 @@ namespace Service.Tests
     [TestClass()]
     public class AgendamentoServiceTests
     {
-        private EcoConecteContext _context;
-        private IAgendamentoService _agendamentoService;
+        private EcoConecteContext _context = null!;
+        private IAgendamentoService _agendamentoService = null!;
 
         [TestInitialize]
         public void Initialize()
@@ -43,10 +43,12 @@ namespace Service.Tests
         public void CreateTest()
         {
             //act
-            _agendamentoService.Create(new Agendamento { Id = 1, Data = DateTime.Now, Cep = "49570000", Logradouro = "Casa", Numero = "230", Bairro = "Suiça", Cidade = "Aracaju", Estado = "Sergipe", Status = "A", });
+            var id = _agendamentoService.Create(new Agendamento {Data = DateTime.Now, Cep = "49570000", Logradouro = "Casa", Numero = "230", Bairro = "Suiça", Cidade = "Aracaju", Estado = "Sergipe", Status = "A", });
             //Assert
-            Assert.AreEqual(1, _agendamentoService.GetAll().Count());
+            Assert.AreEqual(4, _agendamentoService.GetAll().Count());
+            Assert.AreEqual((uint)4, id);
             var agendamento = _agendamentoService.GetById(1);
+            Assert.IsNotNull(agendamento);
             Assert.AreEqual("49570000", agendamento.Cep);
             Assert.AreEqual("Suiça", agendamento.Bairro);
             Assert.AreEqual("Aracaju", agendamento.Cidade);
@@ -72,6 +74,7 @@ namespace Service.Tests
         {
             //act
             var agendamento = _agendamentoService.GetById(1);
+            Assert.IsNotNull(agendamento);
             agendamento.Logradouro = "Logo ali";
             agendamento.Bairro = "É bem longe mesmo";
             agendamento.Numero = "11";
@@ -90,12 +93,12 @@ namespace Service.Tests
             var agendamento = _agendamentoService.GetById(2);
             Assert.IsNotNull(agendamento);
             Assert.AreEqual("49670000", agendamento.Cep);
-            Assert.AreEqual("Suiça", agendamento.Bairro);
-            Assert.AreEqual("Aracaju", agendamento.Cidade);
-            Assert.AreEqual("Sergipe", agendamento.Estado);
-            Assert.AreEqual("Num sei", agendamento.Logradouro);
-            Assert.AreEqual("22", agendamento.Numero);
-            Assert.AreEqual("I", agendamento.Status);
+            Assert.AreEqual("holanda", agendamento.Bairro);
+            Assert.AreEqual("amsterdam", agendamento.Cidade);
+            Assert.AreEqual("piaui", agendamento.Estado);
+            Assert.AreEqual("Prédio", agendamento.Logradouro);
+            Assert.AreEqual("100", agendamento.Numero);
+            Assert.AreEqual("B", agendamento.Status);
         }
         [TestMethod()]
         public void GetAllTest()
@@ -103,7 +106,7 @@ namespace Service.Tests
             //act
             var listaAgendamento = _agendamentoService.GetAll();
             //Assert
-            Assert.IsInstanceOfType(listaAgendamento, typeof(IEnumerable<Pessoa>));
+            Assert.IsInstanceOfType(listaAgendamento, typeof(IEnumerable<Agendamento>));
             Assert.IsNotNull(listaAgendamento);
             Assert.AreEqual(3, listaAgendamento.Count());
             Assert.AreEqual((uint)1, listaAgendamento.First().Id);

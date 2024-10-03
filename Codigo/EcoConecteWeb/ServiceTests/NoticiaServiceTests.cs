@@ -14,7 +14,7 @@ namespace Service.Tests
         public void Initialize()
         {
             var builder = new DbContextOptionsBuilder<EcoConecteContext>();
- //           builder.UseInMemoryDatabase("ecoconecte");
+            builder.UseInMemoryDatabase("ecoconecte");
             var options = builder.Options;
 
             _context = new EcoConecteContext(options);
@@ -37,14 +37,14 @@ namespace Service.Tests
         public void CreateTest()
         {
             //act
-            _NoticiaService.Create(new Noticia {Id = 4, Titulo = "TituloNoticia4", Conteudo = "Hoje é tudo nosso! 4", IdCooperativa = 4, Data = DateTime.Today});
+            _NoticiaService.Create(new Noticia { Id = 4, Titulo = "TituloNoticia4", Conteudo = "Hoje é tudo nosso! 4", IdCooperativa = 4, Data = DateTime.Today });
             //Assert
             Assert.AreEqual(4, _NoticiaService.GetAll().Count());
             var Noticia = _NoticiaService.GetById(4);
             Assert.AreEqual("TituloNoticia4", Noticia.Titulo);
             Assert.AreEqual("Hoje é tudo nosso! 4", Noticia.Conteudo);
-            //Assert.AreEqual(4, Noticia.IdCooperativa);
-            //Assert.AreEqual("02/102024 00:00:00", Noticia.Data);
+            Assert.AreEqual((uint)4, Noticia.IdCooperativa);
+            Assert.AreEqual(Noticia.Data, DateTime.Today);
         }
 
         [TestMethod()]
@@ -72,7 +72,7 @@ namespace Service.Tests
             Assert.IsNotNull(Noticia);
             Assert.AreEqual("Logo ali", Noticia.Titulo);
             Assert.AreEqual("É bem longe mesmo", Noticia.Conteudo);
-            //Assert.AreEqual("1", Noticia.IdCooperativa);
+            Assert.AreEqual((uint)1, Noticia.IdCooperativa);
         }
 
         [TestMethod()]
@@ -81,10 +81,10 @@ namespace Service.Tests
             //act
             var Noticia = _NoticiaService.GetById(2);
             Assert.IsNotNull(Noticia);
-            Assert.AreEqual("TituloNoticia", Noticia.Titulo);
-            Assert.AreEqual("Conteudo da Notica", Noticia.Conteudo);
-            //Assert.AreEqual("Suiça", Noticia.IdCooperativa);
-           //Assert.AreEqual("Aracaju", Noticia.Data);
+            Assert.AreEqual("TituloNoticia2", Noticia.Titulo);
+            Assert.AreEqual("Hoje é tudo nosso! 2", Noticia.Conteudo);
+            Assert.AreEqual((uint)2, Noticia.IdCooperativa);
+            Assert.AreEqual(DateTime.Today, Noticia.Data);
         }
 
         [TestMethod()]
@@ -104,11 +104,11 @@ namespace Service.Tests
         public void GetByNameTest()
         {
             //act
-            var Noticias = _NoticiaService.GetByTitulo("TituloNoticia");
+            var Noticias = _NoticiaService.GetByTitulo("TituloNoticia2");
             //Assert
             Assert.IsNotNull(Noticias);
             Assert.AreEqual(1, Noticias.Count());
-            Assert.AreEqual("TituloNoticia", Noticias.First().Titulo);
+            Assert.AreEqual("TituloNoticia2", Noticias.First().Titulo);
         }
     }
 }
