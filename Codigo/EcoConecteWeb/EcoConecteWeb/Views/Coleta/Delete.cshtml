@@ -62,7 +62,16 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Delete" class="btn " /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+<style>
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>

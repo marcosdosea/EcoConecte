@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<div class="container">
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+ <p>
+        <a class="btn" asp-action="Create">Create New</a>
+    </p>
 <table class="table">
     <thead>
         <tr>
@@ -75,3 +75,42 @@
 }
     </tbody>
 </table>
+</div>
+<style>
+    .container {
+        width: 100%;
+        background: #FAFAFA;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+    .link-action {
+        color: #007447;
+        text-decoration: none;
+    }
+
+        .link-action:hover {
+            text-decoration: underline;
+        }
+</style>
