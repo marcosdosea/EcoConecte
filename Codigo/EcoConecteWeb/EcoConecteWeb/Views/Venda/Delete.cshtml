@@ -4,9 +4,9 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Deletar Venda</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Selecione a venda qual deseja deletar</h3>
 <div>
     <h4>VendaViewModel</h4>
     <hr />
@@ -56,7 +56,25 @@
     </dl>
     
     <form asp-action="Delete">
+        <a class="btn" asp-action="Index">Voltar</a>
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
     </form>
 </div>
+
+<style>
+    .btn btn-primary {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>
