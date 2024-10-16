@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<EcoConecteWeb.Models.NoticiaViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "EcoConnect - Notícias";
 }
 
-<h1>Index</h1>
+<h1>NoTícias</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nova Notícia</a>
 </p>
 <table class="table">
     <thead>
@@ -49,11 +49,50 @@
                 @Html.DisplayFor(modelItem => item.Data)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "link-action" }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "link-action" }) |
+                    @Html.ActionLink("Apagar", "Delete", new { id = item.Id }, new { @class = "link-action" })
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<style>
+    .container {
+        width: 100%;
+        background: #FAFAFA;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+    .link-action {
+        color: #007447;
+        text-decoration: none;
+    }
+
+        .link-action:hover {
+            text-decoration: underline;
+        }
+</style>

@@ -1,12 +1,12 @@
 ﻿@model EcoConecteWeb.Models.NoticiaViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "EcoConecte - Apagar Notícia";
 }
 
-<h1>Delete</h1>
+<h1>Apagar</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Você deseja apagar a notícia?</h3>
 <div>
     <h4>NoticiaViewModel</h4>
     <hr />
@@ -44,7 +44,46 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
+        <a class="btn" asp-action="Index">Voltar</a>
     </form>
 </div>
+
+<style>
+    .container {
+        width: 100%;
+        background: #FAFAFA;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+    .link-action {
+        color: #007447;
+        text-decoration: none;
+    }
+
+        .link-action:hover {
+            text-decoration: underline;
+        }
+</style>

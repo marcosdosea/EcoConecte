@@ -1,13 +1,13 @@
 ﻿@model EcoConecteWeb.Models.OrientacoesViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "EcoConecte - Orientação Detalhes";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
-    <h4>OrientacoesViewModel</h4>
+    <h4>Orientação Detalhes</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -37,6 +37,45 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Editar", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a class="btn" asp-action="Index">Voltar</a>
 </div>
+
+<style>
+    .container {
+        width: 100%;
+        background: #FAFAFA;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+    .link-action {
+        color: #007447;
+        text-decoration: none;
+    }
+
+        .link-action:hover {
+            text-decoration: underline;
+        }
+</style>

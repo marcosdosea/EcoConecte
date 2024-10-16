@@ -1,12 +1,12 @@
 ﻿@model EcoConecteWeb.Models.OrientacoesViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "EcoConecte - Editar uma Orientação";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>OrientacoesViewModel</h4>
+<h4>Editar Orientação</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -33,16 +33,55 @@
                 <span asp-validation-for="IdCooperativa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn" asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<style>
+    .container {
+        width: 100%;
+        background: #FAFAFA;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family: 'Abril Fatface', sans-serif;
+    }
+
+    .btn {
+        background: #007447;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+    .link-action {
+        color: #007447;
+        text-decoration: none;
+    }
+
+        .link-action:hover {
+            text-decoration: underline;
+        }
+</style>
