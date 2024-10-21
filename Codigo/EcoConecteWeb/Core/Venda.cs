@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Core;
 
@@ -18,12 +19,11 @@ public partial class venda
     /// <summary>
     /// GET/SET Valor em real
     /// </summary>
-    public string Valor { get; set; } = null!;
-
+    public decimal Valor { get; set; }
     /// <summary>
     /// GET/SET Quantidade
     /// </summary>
-    public string Quantidade { get; set; } = null!;
+    public int Quantidade { get; set; }
 
     /// <summary>
     /// GET/SET Data da venda
@@ -39,4 +39,5 @@ public partial class venda
     /// GET/SET ID pessoa
     /// </summary>
     public uint IdPessoa { get; set; }
+    public Pessoa IdPessoaNavigation { get; set; } = null!;
 }

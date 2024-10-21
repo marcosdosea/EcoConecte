@@ -26,13 +26,13 @@ namespace EcoConecteWeb.Models
         /// GET/SET Valor em real
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
-        public string Valor { get; set; } = null;
+        public decimal Valor { get; set; }
 
         /// <summary>
         /// GET/SET Quantidade
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
-        public string Quantidade { get; set; } = null!;
+        public int Quantidade { get; set; }
 
         /// <summary>
         /// GET/SET Data

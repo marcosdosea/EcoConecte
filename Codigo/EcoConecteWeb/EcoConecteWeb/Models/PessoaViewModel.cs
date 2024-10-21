@@ -28,7 +28,7 @@ namespace EcoConecteWeb.Models
 
         public string? Estado { get; set; }
 
-        public uint IdCooperativa { get; set; }
+        public uint? IdCooperativa { get; set; }
 
         /// <summary>
         /// A - ATIVO
