@@ -6,8 +6,8 @@ VALUES
 
 INSERT INTO `ecoconecte`.`Cooperativa` (`nome`, `inscricaoEstadual`, `inscricaoMunicipal`, `cnpj`, `cep`, `logradouro`, `bairro`, `numero`, `telefone`, `email`, `idPessoaRepresentate`, `status`)
 VALUES 
-('Cooperativa Verde', '123456789', '987654321', '11222333444455', '01001000', 'Rua A', 'Centro', '123', '11999990000', 'cooperativa@verde.com', 1, 'A'),
-('Recicla Tudo', '987654321', '123456789', '99887766554433', '02002000', 'Av. B', 'Bairro Novo', '321', '11988880000', 'recicla@tudo.com', 2, 'A');
+('Cooperativa Verde', '123456789', '987654321', '11222333444455', '01001000', 'Rua A', 'Centro', '123', '1199999000', 'cooperativa@verde.com', 1, 'A'),
+('Recicla Tudo', '987654321', '123456789', '99887766554433', '02002000', 'Av. B', 'Bairro Novo', '321', '1198888000', 'recicla@tudo.com', 2, 'A');
 
 INSERT INTO `ecoconecte`.`Agendamento` (`data`, `cep`, `logradouro`, `numero`, `idPessoa`, `bairro`, `cidade`, `estado`, `status`)
 VALUES 
