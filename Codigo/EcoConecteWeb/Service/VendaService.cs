@@ -17,7 +17,7 @@ namespace Service
             this.context = context;
         }
 
-        public uint Create(Vendamaterial Venda)
+        public uint Create(venda Venda)
         {
             context.Add(Venda);
             context.SaveChanges();
@@ -36,17 +36,17 @@ namespace Service
             return true;
         }
 
-        public IEnumerable<Vendamaterial> GetAll()
+        public IEnumerable<venda> GetAll()
         {
             return context.Vendamaterials.AsNoTracking();
         }
 
-        public Vendamaterial? GetById(uint Id)
+        public venda? GetById(uint Id)
         {
             return context.Vendamaterials.Find(Id); 
         }
 
-        public void Update(Vendamaterial Venda)
+        public void Update(venda Venda)
         {
             context.Update(Venda);
             context.SaveChanges();

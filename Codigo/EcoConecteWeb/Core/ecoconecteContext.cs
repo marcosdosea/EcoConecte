@@ -27,7 +27,7 @@ public partial class EcoConecteContext : DbContext
 
     public virtual DbSet<Coleta> Coleta { get; set; }
 
-    public virtual DbSet<Vendamaterial> Vendamaterials { get; set; }
+    public virtual DbSet<venda> Vendamaterials { get; set; }
 
     public void Delete(uint id)
     {
@@ -251,7 +251,7 @@ public partial class EcoConecteContext : DbContext
             entity.Property(e => e.Numero).HasColumnName("numero");
         });
 
-        modelBuilder.Entity<Vendamaterial>(entity =>
+        modelBuilder.Entity<venda>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 

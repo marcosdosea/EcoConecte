@@ -8,15 +8,15 @@ namespace Core.Service
 {
     public interface IVendaService
     {
-        uint Create(Vendamaterial Venda);
+        uint Create(venda Venda);
 
-        void Update(Vendamaterial Venda);
+        void Update(venda Venda);
 
         bool Delete(uint Id);
         //Vendamaterial? Get(uint id);
 
-        IEnumerable<Vendamaterial> GetAll();
+        IEnumerable<venda> GetAll();
 
-        Vendamaterial? GetById(uint Id);
+        venda? GetById(uint Id);
     }
 }

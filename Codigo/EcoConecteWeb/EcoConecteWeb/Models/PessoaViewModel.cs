@@ -4,8 +4,11 @@ namespace EcoConecteWeb.Models
 {
     public class PessoaViewModel
     {
+        /// <summary>
+        /// GET ID
+        /// </summary>
         [Key]
-        public uint Id { get; set; }
+        public uint Id { get; }
         [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(11)]
         public string Cpf { get; set; } = null!;

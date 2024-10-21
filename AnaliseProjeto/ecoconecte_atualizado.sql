@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `ecoconecte`.`Pessoa` (
   `numero` VARCHAR(20) NULL,
   `cidade` VARCHAR(45) NULL,
   `estado` VARCHAR(2) NULL,
-  `idCooperativa` INT UNSIGNED NOT NULL,
+  `idCooperativa` INT UNSIGNED NULL,
   `status` ENUM('A', 'I') NOT NULL COMMENT 'A - ATIVO\nI - INATIVO',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) VISIBLE,
