@@ -25,19 +25,10 @@ public partial class EcoConecteContext : DbContext
 
     public virtual DbSet<Pessoa> Pessoas { get; set; }
 
-    public virtual DbSet<Coleta> Coleta { get; set; }
+    public virtual DbSet<Coleta> Coletas { get; set; }
 
-    public virtual DbSet<Vendamaterial> Vendamaterials { get; set; }
+    public virtual DbSet<venda> Vendamaterials { get; set; }
 
-    public void Delete(uint id)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -78,6 +69,11 @@ public partial class EcoConecteContext : DbContext
                 .HasComment("A - ATIVO\nC -CANCELADO")
                 .HasColumnType("enum('A','C')")
                 .HasColumnName("status");
+
+            entity.HasOne(d => d.IdPessoaNavigation).WithMany(p => p.Agendamentos)
+                .HasForeignKey(d => d.IdPessoa)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_Agendamento_Cidadao1_idx");
         });
 
         modelBuilder.Entity<Cooperativa>(entity =>
@@ -134,6 +130,11 @@ public partial class EcoConecteContext : DbContext
             entity.Property(e => e.Telefone)
                 .HasMaxLength(10)
                 .HasColumnName("telefone");
+
+            entity.HasOne(d => d.IdPessoaRepresentateNavigation).WithMany(p => p.Cooperativas)
+                .HasForeignKey(d => d.IdPessoaRepresentate)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_Cooperativa_Pessoa1");
         });
 
         modelBuilder.Entity<Noticia>(entity =>
@@ -251,7 +252,7 @@ public partial class EcoConecteContext : DbContext
             entity.Property(e => e.Numero).HasColumnName("numero");
         });
 
-        modelBuilder.Entity<Vendamaterial>(entity =>
+        modelBuilder.Entity<venda>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
@@ -276,6 +277,11 @@ public partial class EcoConecteContext : DbContext
             entity.Property(e => e.Valor)
                 .HasPrecision(10)
                 .HasColumnName("valor");
+
+            entity.HasOne(d => d.IdPessoaNavigation).WithMany(p => p.Vendamaterials)
+                .HasForeignKey(d => d.IdPessoa)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("fk_VendaMaterial_Pessoa1");
         });
 
         OnModelCreatingPartial(modelBuilder);

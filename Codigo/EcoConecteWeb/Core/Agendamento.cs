@@ -28,4 +28,6 @@ public partial class Agendamento
     /// C -CANCELADO
     /// </summary>
     public string? Status { get; set; }
+
+    public virtual Pessoa IdPessoaNavigation { get; set; } = null!;
 }

@@ -26,9 +26,9 @@ namespace EcoConecteWeb.Controllers.Tests
                 .Returns(GetTestVenda());
             mockService.Setup(service => service.Get(1))
                 .Returns(GetTargetVenda());
-            mockService.Setup(service => service.Edit(It.IsAny<Vendamaterial>()))
+            mockService.Setup(service => service.Edit(It.IsAny<venda>()))
                 .Verifiable();
-            mockService.Setup(service => service.Create(It.IsAny<Vendamaterial>()))
+            mockService.Setup(service => service.Create(It.IsAny<venda>()))
                 .Verifiable();
             controller = new VendaController(mockService.Object, mapper);
         }
@@ -149,9 +149,9 @@ namespace EcoConecteWeb.Controllers.Tests
         }
 
 
-        private static Vendamaterial GetTargetVenda()
+        private static venda GetTargetVenda()
         {
-            return new Vendamaterial
+            return new venda
             {
                 Id = 1,
                 Tipo = "Plastico",
@@ -179,25 +179,25 @@ namespace EcoConecteWeb.Controllers.Tests
                 Quantidade = "45 Kg",
             };
         }
-        private IEnumerable<Vendamaterial> GetTestVenda()
+        private IEnumerable<venda> GetTestVenda()
         {
-            return new List<Vendamaterial>
+            return new List<venda>
             {
-                new Vendamaterial
+                new venda
                 {
                 Id = 4,
                 Tipo = "Vidro",
                 Valor = "R$ 100",
                 Quantidade = "2 Kg",
                 },
-                new Vendamaterial
+                new venda
                 {
                 Id = 5,
                 Tipo = "Metal",
                 Valor = "R$ 300",
                 Quantidade = "10 Kg",
                 },
-                new Vendamaterial
+                new venda
                 {
                 Id = 6,
                 Tipo = "Plastico",

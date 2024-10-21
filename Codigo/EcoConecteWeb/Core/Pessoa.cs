@@ -23,11 +23,17 @@ public partial class Pessoa
 
     public string? Estado { get; set; }
 
-    public uint IdCooperativa { get; set; }
+    public uint? IdCooperativa { get; set; }
 
     /// <summary>
     /// A - ATIVO
     /// I - INATIVO
     /// </summary>
     public string Status { get; set; } = null!;
+
+    public virtual ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
+
+    public virtual ICollection<Cooperativa> Cooperativas { get; set; } = new List<Cooperativa>();
+
+    public virtual ICollection<venda> Vendamaterials { get; set; } = new List<venda>();
 }

@@ -34,4 +34,6 @@ public partial class Cooperativa
     /// I - INATIVO
     /// </summary>
     public string Status { get; set; } = null!;
+
+    public virtual Pessoa IdPessoaRepresentateNavigation { get; set; } = null!;
 }

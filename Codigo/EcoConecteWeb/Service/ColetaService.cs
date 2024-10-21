@@ -33,8 +33,12 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(uint id)
         {
-            context.Delete(id);
-            context.SaveChanges();
+            var coleta = context.Coletas.FirstOrDefault(c => c.Id == id);
+            if (coleta != null)
+            {
+                context.Coletas.Remove(coleta);
+                context.SaveChanges();
+            }
         }
         /// <summary>
         /// Editar uma coleta
@@ -52,7 +56,7 @@ namespace Service
         /// <returns></returns>
         public IEnumerable<Coleta> GetAll()
         {
-            return context.Coleta.AsNoTracking();
+            return context.Coletas.AsNoTracking();
         }
 
         /// <summary>
@@ -62,12 +66,12 @@ namespace Service
         /// <returns></returns>
         public Coleta? GetById(uint Id)
         {
-            return context.Coleta.Find(Id);
+            return context.Coletas.Find(Id);
         }
 
         public IEnumerable<Coleta> GetByLagradouro(string lagradouro)
         {
-            var query = from coleta in context.Coleta
+            var query = from coleta in context.Coletas
                         where coleta.Logradouro.StartsWith(lagradouro)
                         orderby coleta.Logradouro
                         select new Core.Coleta

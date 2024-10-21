@@ -33,8 +33,12 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(uint id)
         {
-            context.Delete(id);
-            context.SaveChanges();
+            var orientacao = context.Orientacoes.FirstOrDefault(o => o.Id == id);
+            if (orientacao != null)
+            {
+                context.Remove(orientacao);
+                context.SaveChanges();
+            }
         }
         /// <summary>
         /// Editar uma orientacoes

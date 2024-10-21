@@ -48,7 +48,7 @@ namespace EcoConecteWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var CriaVenda = _mapper.Map<Vendamaterial>(VendaModel);
+                var CriaVenda = _mapper.Map<venda>(VendaModel);
                 _vendaService.Create(CriaVenda);
             }
             return RedirectToAction(nameof(Index));
@@ -69,7 +69,7 @@ namespace EcoConecteWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var EditaVenda = _mapper.Map<Vendamaterial>(VendaModel);
+                var EditaVenda = _mapper.Map<venda>(VendaModel);
                 _vendaService.Update(EditaVenda);
             }
             return RedirectToAction(nameof(Index));
