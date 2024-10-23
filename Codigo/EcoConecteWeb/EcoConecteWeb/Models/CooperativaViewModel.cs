@@ -9,17 +9,17 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET ID
         /// </summary>
-        [Display(Name = "Código")]
+        [Display(Name = "Código Cooperativa")]
         [Key]
         [Required(ErrorMessage = "Campo requerido")]
-        public int Id { get; }
+        public int Id { get; set; }
 
         /// <summary>
         /// GET/SET Nome
         /// </summary>
         [Display(Name ="Nome da cooperativa")]
         [Required(ErrorMessage = "Campo requerido")]
-        [StringLength(40,MinimumLength =5,ErrorMessage = "Nome da cooperativa deve ter entre 5 e 40 caracteres")]
+        [StringLength(45,MinimumLength=5,ErrorMessage = "Nome da cooperativa deve ter entre 5 e 45 caracteres")]
         public string Nome { get; set; } = null!;
 
         /// <summary>
@@ -58,14 +58,14 @@ namespace EcoConecteWeb.Models
         /// GET/SET Lagradouro
         /// </summary>
         [Required(ErrorMessage = "Campo requerido")]
-        [StringLength(30)]
+        [StringLength(45)]
         public string? Logradouro { get; set; }
 
         /// <summary>
         /// GET/SET Bairro
         /// </summary>
         [Required(ErrorMessage = "Campo requerido")]
-        [StringLength(30)]
+        [StringLength(45)]
         public string? Bairro { get; set; }
 
         /// <summary>
@@ -91,8 +91,9 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET/SET ID representante cooperativa
         /// </summary>
-        [Display(Name ="Código do representante da cooperativa")]
+        [Display(Name ="Código Pessoa")]
         [Required(ErrorMessage = "Campo requerido")]
+        [Key]
         public uint IdPessoaRepresentate { get; set; }
 
         /// <summary>
@@ -100,9 +101,8 @@ namespace EcoConecteWeb.Models
         /// Status A - Ativo
         ///        C - Cancelado
         /// </summary>
-        [Required(ErrorMessage = "Campo requerido")]
+        [Required(ErrorMessage = "Campo Obrigatório, EX: A - Ativo ou I - Inativo")]
         public string Status { get; set; } = null!;
-
 
     }
 }

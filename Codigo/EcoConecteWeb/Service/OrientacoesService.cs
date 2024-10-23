@@ -69,6 +69,11 @@ namespace Service
             return context.Orientacoes.Find(Id);
         }
 
+        /// <summary>
+        /// Buscar orientaçoes pelo titulo
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <returns></returns>
         public IEnumerable<Orientacoes> GetByTitulo(string titulo)
         {
             var query = from orientacoes in context.Orientacoes
@@ -82,6 +87,11 @@ namespace Service
             return query;
         }
 
+        /// <summary>
+        /// Editar uma Orientaçao
+        /// </summary>
+        /// <param name="orientacoes"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Edit(Orientacoes orientacoes)
         {
             throw new NotImplementedException();

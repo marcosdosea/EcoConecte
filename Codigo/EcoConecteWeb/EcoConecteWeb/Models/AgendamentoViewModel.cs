@@ -9,12 +9,15 @@ namespace EcoConecteWeb.Models
         /// GET ID
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Código Agendamento")]
+        [Key]
         public uint Id { get; }
 
         /// <summary>
         /// GET/SET Data
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         public DateTime Data { get; set; }
 
         /// <summary>
@@ -28,6 +31,7 @@ namespace EcoConecteWeb.Models
         /// GET/SET Lagradouro
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [StringLength(45)]
         public string Logradouro { get; set; } = null!;
 
         /// <summary>
@@ -41,18 +45,21 @@ namespace EcoConecteWeb.Models
         /// GET/SET Bairro
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [StringLength(45)]
         public string Bairro { get; set; } = null!;
 
         /// <summary>
         /// GET/SET Cidade
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [StringLength(45)]
         public string Cidade { get; set; } = null!;
 
         /// <summary>
         /// GET/SET Estado ex: SE, BA, SP
         /// </summary>
-        [Required(ErrorMessage = "Campo Obrigatório")]
+        [Required(ErrorMessage = "Campo Obrigatório, EX: SP, SE, BA")]
+        [StringLength(2)]
         public string Estado { get; set; } = null!;
 
         /// <summary>
@@ -60,12 +67,16 @@ namespace EcoConecteWeb.Models
         /// Status A - Ativo
         ///        C - Cancelado
         /// </summary>
-        [AllowNull]
+        [Required(ErrorMessage = "Campo Obrigatório, EX: A - Ativo ou C - Cancelado")]
+        [StringLength(1)]
         public string? Status { get; set; }
 
         /// <summary>
         /// GET/SET ID Pessoa
         /// </summary>
+        [Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Código Pessoa")]
+        [Key]
         public uint IdPessoa { get; set; }
     }
 }
