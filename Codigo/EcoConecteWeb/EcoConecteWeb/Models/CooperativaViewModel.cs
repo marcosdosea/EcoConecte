@@ -28,7 +28,7 @@ namespace EcoConecteWeb.Models
         [Required(ErrorMessage = "Campo requerido")]
         [Display(Name ="Inscrição Estadual")]
         [StringLength(9,MinimumLength =9,ErrorMessage ="Inscrição estadual deve possuir 9 dígitos ")]
-        public string InscrcaoEstadual { get; set; } = null!;
+        public string InscricaoEstadual { get; set; } = null!;
 
         /// <summary>
         /// GET/SET Número inscriçao municipal

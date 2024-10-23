@@ -70,7 +70,6 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET/SET ID Cooperativa
         /// </summary>
-        [Required(ErrorMessage = "Campo obrigatório.")]
         [Display(Name = "Código Cooperativa")]
         [Key]
         public uint? IdCooperativa { get; set; }
