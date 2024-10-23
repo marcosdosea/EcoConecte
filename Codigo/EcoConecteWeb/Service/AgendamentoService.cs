@@ -19,6 +19,11 @@ namespace Service
             _EcoConecteContext = EcoConecteContext;
         }
 
+        /// <summary>
+        /// Criar agendamento
+        /// </summary>
+        /// <param name="agendamento"></param>
+        /// <returns></returns>
         public uint Create(Agendamento agendamento)
         {
             _EcoConecteContext.Add(agendamento);
@@ -26,6 +31,11 @@ namespace Service
             return agendamento.Id;
         }
 
+        /// <summary>
+        /// Deletar agendamento
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool Delete(uint id)
         {
             var agendamento = _EcoConecteContext.Agendamentos.Find(id);
@@ -38,16 +48,29 @@ namespace Service
             return true;
         }
 
+        /// <summary>
+        /// Listar agendamentos
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Agendamento> GetAll()
         {
             return _EcoConecteContext.Agendamentos.AsNoTracking();
         }
 
+        /// <summary>
+        /// Buscar agendamento por ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Agendamento? GetById(uint id)
         {
             return _EcoConecteContext.Agendamentos.Find(id);
         }
 
+        /// <summary>
+        /// Atualizar agendamento
+        /// </summary>
+        /// <param name="agendamento"></param>
         public void Update(Agendamento agendamento)
         {
             _EcoConecteContext.Agendamentos.Update(agendamento);

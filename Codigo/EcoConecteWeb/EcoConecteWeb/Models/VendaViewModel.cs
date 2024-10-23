@@ -8,12 +8,12 @@ namespace EcoConecteWeb.Models
     public class VendaViewModel
     {
         /// <summary>
-        /// GET ID
+        /// GET ID Vendas
         /// </summary>
         [Key]
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [Display(Name = "Código da venda")]
-        public uint Id { get; }
+        [Display(Name = "Código Venda")]
+        public uint Id { get; set; }
 
         /// <summary>
         /// GET/SET Nome
@@ -51,7 +51,7 @@ namespace EcoConecteWeb.Models
         /// GET/SET ID pessoa
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [Display(Name = "Código da pessoa")]
+        [Display(Name = "Código Pessoa")]
         public uint IdPessoa { get; set; }
     }
 }

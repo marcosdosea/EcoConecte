@@ -17,6 +17,11 @@ namespace Service
             this.context = context;
         }
 
+        /// <summary>
+        /// Criar uma venda
+        /// </summary>
+        /// <param name="Venda"></param>
+        /// <returns></returns>
         public uint Create(venda Venda)
         {
             context.Add(Venda);
@@ -24,6 +29,11 @@ namespace Service
             return Venda.Id;
         }
 
+        /// <summary>
+        /// Apagar uma venda
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public bool Delete(uint Id)
         {
             var Venda = context.Vendamaterials.Find(Id);
@@ -36,16 +46,29 @@ namespace Service
             return true;
         }
 
+        /// <summary>
+        /// Listar vendas
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<venda> GetAll()
         {
             return context.Vendamaterials.AsNoTracking();
         }
 
+        /// <summary>
+        /// Buscar venda pelo ID
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public venda? GetById(uint Id)
         {
             return context.Vendamaterials.Find(Id); 
         }
 
+        /// <summary>
+        /// Atualizar uma venda
+        /// </summary>
+        /// <param name="Venda"></param>
         public void Update(venda Venda)
         {
             context.Update(Venda);

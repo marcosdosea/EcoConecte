@@ -20,6 +20,11 @@ namespace Service
             this.context = context;
         }
         
+        /// <summary>
+        /// Criar uma cooperativa
+        /// </summary>
+        /// <param name="cooperativa"></param>
+        /// <returns></returns>
         public uint Create(Cooperativa cooperativa)
         {
             context.Add(cooperativa);
@@ -27,7 +32,10 @@ namespace Service
             return cooperativa.Id;
         }
 
-        
+        /// <summary>
+        /// Deletar uma cooperativa
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(uint id)
         {
             var cooperativa = context.Cooperativas.Find(id);
@@ -38,19 +46,30 @@ namespace Service
             }
         }
 
-       
+       /// <summary>
+       /// Atualizar dados cooperativa
+       /// </summary>
+       /// <param name="cooperativa"></param>
         public void Update(Cooperativa cooperativa)
         {
             context.Update(cooperativa);
             context.SaveChanges();
         }
 
-        
+        /// <summary>
+        /// Buscar cooperativa por ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Cooperativa? Get(uint id)
         {
             return context.Cooperativas.Find(id);
         }
 
+        /// <summary>
+        /// Listar cooperativas
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Cooperativa> GetAll()
         {
             return context.Cooperativas.AsNoTracking();

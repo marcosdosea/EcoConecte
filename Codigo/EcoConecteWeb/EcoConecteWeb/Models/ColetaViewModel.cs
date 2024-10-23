@@ -8,9 +8,10 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET ID
         /// </summary>
-        [Display(Name = "Código")]
+        [Display(Name = "Código Coleta")]
         [Required(ErrorMessage = "Campo Obrigatório")]
-        public uint Id { get; }
+        [Key]
+        public uint Id { get; set; }
 
         /// <summary>
         /// GET/SET CEP
@@ -23,19 +24,20 @@ namespace EcoConecteWeb.Models
         /// GET/SET Lagradouro
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [StringLength(45)]
         public string Logradouro { get; set; } = null!;
 
         /// <summary>
         /// GET/SET Número
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
-        [StringLength(4, MinimumLength = 4, ErrorMessage = "O Numero da casa deve conter 4 digitos")]
         public string Numero { get; set; } = null!;
 
         /// <summary>
         /// GET/SET Dia coleta
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         public DateTime DiaColeta { get; set; }
 
         /// <summary>
@@ -43,6 +45,7 @@ namespace EcoConecteWeb.Models
         /// </summary>
         [Display(Name = "Hora de Inicio da Coleta")]
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         public DateTime HorarioInicio { get; set; }
 
         /// <summary>
@@ -50,13 +53,15 @@ namespace EcoConecteWeb.Models
         /// </summary>
         [Display(Name = "Hora de Termino da Coleta")]
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         public DateTime HorarioTermino { get; set; }
 
         /// <summary>
         /// GET/SET ID cooperativa
         /// </summary>
-        [Display(Name = "Código")]
+        [Display(Name = "Código Cooperativa")]
         [Required(ErrorMessage = "Campo Obrigatório")]
+        [Key]
         public uint IdCooperativa { get; set; }
     }
 }

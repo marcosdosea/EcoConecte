@@ -8,28 +8,29 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET ID
         /// </summary>
-        [Display(Name = "Código")]
+        [Display(Name = "Código Notícia")]
         [Key]
-        [Required(ErrorMessage = "Campo obrigatório.")]
-        public uint Id { get; }
+        public uint Id { get; set; }
 
         /// <summary>
         /// GET/SET Titulo para a noticia
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [StringLength(30)]
+        [StringLength(100)]
         public string Titulo { get; set; } = null!;
 
         /// <summary>
         /// GET/SET Conteúdo notícia
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
+        [StringLength(2000)]
         public string Conteudo { get; set; } = null!;
 
         /// <summary>
         /// GET/SET ID Cooperativa
         /// </summary>
-        [Display(Name = "Código")]
+        [Key]
+        [Display(Name = "Código Cooperativa")]
         [Required(ErrorMessage = "Campo obrigatório.")]
         public string? IdCooperativa { get; set; } = null!;
 

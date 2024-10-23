@@ -69,6 +69,11 @@ namespace Service
             return context.Noticia.Find(Id);
         }
 
+        /// <summary>
+        /// Buscar notícia pelo titulo
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <returns></returns>
         public IEnumerable<Noticia> GetByTitulo(string titulo)
         {
             var query = from noticia in context.Noticia
