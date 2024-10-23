@@ -39,5 +39,9 @@ public partial class venda
     /// GET/SET ID pessoa
     /// </summary>
     public uint IdPessoa { get; set; }
+
+    /// <summary>
+    /// GET/SET ID Pessoa
+    /// </summary>
     public Pessoa IdPessoaNavigation { get; set; } = null!;
 }
