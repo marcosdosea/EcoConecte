@@ -18,7 +18,7 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET/SET Nome
         /// </summary>
-        [Required(ErrorMessage = "Campo obrigatório.")]
+        [Required(ErrorMessage = "Campo obrigatório. Tipo ex: M ou P")]
         [Display(Name = "Tipo do material")]
         public string Tipo { get; set; } = null!;
 
