@@ -20,11 +20,11 @@ namespace Service.Tests
             _context = new EcoConecteContext(options);
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
-            var venda = new List<venda>
+            var venda = new List<Venda>
             {
-                new venda {Id= 1, Tipo= "Plastico", Valor= "R$ 100", Quantidade="50 Kg"},
-                new venda {Id= 2, Tipo= "Metal", Valor= "R$ 500", Quantidade="25 Kg"},
-                new venda {Id= 3, Tipo= "Vidro", Valor= "R$ 1100", Quantidade="45 Kg"}
+                new Venda {Id= 1, Tipo= "Plastico", Valor= "R$ 100", Quantidade="50 Kg"},
+                new Venda {Id= 2, Tipo= "Metal", Valor= "R$ 500", Quantidade="25 Kg"},
+                new Venda {Id= 3, Tipo= "Vidro", Valor= "R$ 1100", Quantidade="45 Kg"}
             };
 
             _context.AddRange(venda);
@@ -37,7 +37,7 @@ namespace Service.Tests
         public void CreateTest()
         {
             //act
-            _vendaService.Create(new venda { Id = 4, Tipo = "Vidro", Valor = "R$ 100", Quantidade = "2 Kg", });
+            _vendaService.Create(new Venda { Id = 4, Tipo = "Vidro", Valor = "R$ 100", Quantidade = "2 Kg", });
             //Assert
             Assert.AreEqual(4, _vendaService.GetAll().Count());
             var venda = _vendaService.Get(4);
@@ -91,7 +91,7 @@ namespace Service.Tests
             //act
             var listaVenda = _vendaService.GetAll();
             //Assert
-            Assert.IsInstanceOfType(listaVenda, typeof(IEnumerable<venda>));
+            Assert.IsInstanceOfType(listaVenda, typeof(IEnumerable<Venda>));
             Assert.IsNotNull(listaVenda);
             Assert.AreEqual(3, listaVenda.Count());
             Assert.AreEqual((uint)1, listaVenda.First().Id);

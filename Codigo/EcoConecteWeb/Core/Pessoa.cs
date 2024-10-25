@@ -74,5 +74,5 @@ public partial class Pessoa
     /// <summary>
     /// GET/SET Vendas Material
     /// </summary>
-    public virtual ICollection<venda> Vendamaterials { get; set; } = new List<venda>();
+    public virtual ICollection<Venda> Vendamaterials { get; set; } = new List<Venda>();
 }

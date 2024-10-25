@@ -8,7 +8,7 @@ namespace EcoConecteWeb.Mapper
     {
         public VendaProfile() 
         {
-            CreateMap<VendaViewModel, venda>().ReverseMap();
+            CreateMap<VendaViewModel, Venda>().ReverseMap();
         }
     }
 }

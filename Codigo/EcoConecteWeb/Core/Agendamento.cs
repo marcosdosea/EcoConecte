@@ -57,5 +57,8 @@ public partial class Agendamento
     /// </summary>
     public string? Status { get; set; }
 
+    /// <summary>
+    /// GET/SET Pessoa Navigation
+    /// </summary>
     public virtual Pessoa IdPessoaNavigation { get; set; } = null!;
 }
