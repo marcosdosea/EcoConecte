@@ -30,9 +30,9 @@ namespace EcoConecteWeb.Controllers
         // GET: VendaController/Details/5
         public ActionResult Details(uint id)
         {
-           var Vendas = _vendaService.GetAll();
-           var VendasModel = _mapper.Map<List<VendaViewModel>>(Vendas);
-           return View(Vendas);
+            var venda = _vendaService.GetById(id);
+            var vendaModel = _mapper.Map<VendaViewModel>(venda);
+            return View(vendaModel);
         }
 
         // GET: VendaController/Create
@@ -48,7 +48,7 @@ namespace EcoConecteWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var CriaVenda = _mapper.Map<venda>(VendaModel);
+                var CriaVenda = _mapper.Map<Venda>(VendaModel);
                 _vendaService.Create(CriaVenda);
             }
             return RedirectToAction(nameof(Index));
@@ -69,7 +69,7 @@ namespace EcoConecteWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var EditaVenda = _mapper.Map<venda>(VendaModel);
+                var EditaVenda = _mapper.Map<Venda>(VendaModel);
                 _vendaService.Update(EditaVenda);
             }
             return RedirectToAction(nameof(Index));

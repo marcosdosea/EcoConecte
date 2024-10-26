@@ -14,13 +14,13 @@ namespace Core.Service
         /// </summary>
         /// <param name="Venda"></param>
         /// <returns></returns>
-        uint Create(venda Venda);
+        uint Create(Venda Venda);
 
         /// <summary>
         /// Atualiza dados de uma venda
         /// </summary>
         /// <param name="Venda"></param>
-        void Update(venda Venda);
+        void Update(Venda Venda);
 
         /// <summary>
         /// Deleta uma venda
@@ -34,13 +34,13 @@ namespace Core.Service
         /// Lista N vendas
         /// </summary>
         /// <returns></returns>
-        IEnumerable<venda> GetAll();
+        IEnumerable<Venda> GetAll();
 
         /// <summary>
         /// Busca venda pelo ID
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        venda? GetById(uint Id);
+        Venda? GetById(uint Id);
     }
 }

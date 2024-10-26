@@ -27,7 +27,7 @@ public partial class EcoConecteContext : DbContext
 
     public virtual DbSet<Coleta> Coletas { get; set; }
 
-    public virtual DbSet<venda> Vendamaterials { get; set; }
+    public virtual DbSet<Venda> Vendamaterials { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -78,7 +78,7 @@ public partial class EcoConecteContext : DbContext
 
         modelBuilder.Entity<Cooperativa>(entity =>
         {
-            entity.HasKey(e => new { e.Id, e.Status }).HasName("PRIMARY");
+            entity.HasKey(e => new { e.Id }).HasName("PRIMARY");
 
             entity.ToTable("cooperativa");
 
@@ -252,7 +252,7 @@ public partial class EcoConecteContext : DbContext
             entity.Property(e => e.Numero).HasColumnName("numero");
         });
 
-        modelBuilder.Entity<venda>(entity =>
+        modelBuilder.Entity<Venda>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 

@@ -44,22 +44,14 @@ namespace EcoConecteWeb.Controllers
         // POST: AgendamentoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AgendamentoViewModel agendamento)
+        public ActionResult Create(AgendamentoViewModel agendamentoModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var agendamentoBanco = mapper.Map<Agendamento>(agendamento);
-                var id = agendamentoService.Create(agendamentoBanco);
-                if(id == 0)
-                {
-                    return View(agendamento);
-                }
-                return RedirectToAction(nameof(Index));
+                var agendamento = mapper.Map<Agendamento>(agendamentoModel);
+                agendamentoService.Create(agendamento);
             }
-            catch
-            {
-                return View(agendamento);
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AgendamentoController/Edit/5

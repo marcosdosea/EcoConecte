@@ -72,7 +72,7 @@ public partial class Cooperativa
     public string Status { get; set; } = null!;
 
     /// <summary>
-    /// GET/SET ID Pessoa Representante
+    /// GET/SET ID Pessoa Representante Neigation
     /// </summary>
     public virtual Pessoa IdPessoaRepresentateNavigation { get; set; } = null!;
 }

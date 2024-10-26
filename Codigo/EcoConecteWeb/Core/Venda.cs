@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Core;
 
-public partial class venda
+public partial class Venda
 {
     /// <summary>
     /// GET/SET ID - auto incremente
@@ -41,7 +41,7 @@ public partial class venda
     public uint IdPessoa { get; set; }
 
     /// <summary>
-    /// GET/SET ID Pessoa
+    /// GET/SET ID Pessoa Navigation
     /// </summary>
     public Pessoa IdPessoaNavigation { get; set; } = null!;
 }

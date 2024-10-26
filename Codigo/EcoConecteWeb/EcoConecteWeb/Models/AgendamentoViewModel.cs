@@ -6,12 +6,21 @@ namespace EcoConecteWeb.Models
     public class AgendamentoViewModel
     {
         /// <summary>
-        /// GET ID
+        /// GET/SET ID Agendamento
         /// </summary>
         [Required(ErrorMessage = "Campo Obrigatório")]
         [Display(Name = "Código Agendamento")]
         [Key]
-        public uint Id { get; }
+        public uint Id { get; set; }
+
+
+        /// <summary>
+        /// GET/SET ID Pessoa
+        /// </summary>
+        [Required(ErrorMessage = "Campo Obrigatório")]
+        [Display(Name = "Código Pessoa")]
+        [Key]
+        public uint IdPessoa { get; set; }
 
         /// <summary>
         /// GET/SET Data
@@ -70,13 +79,5 @@ namespace EcoConecteWeb.Models
         [Required(ErrorMessage = "Campo Obrigatório, EX: A - Ativo ou C - Cancelado")]
         [StringLength(1)]
         public string? Status { get; set; }
-
-        /// <summary>
-        /// GET/SET ID Pessoa
-        /// </summary>
-        [Required(ErrorMessage = "Campo Obrigatório")]
-        [Display(Name = "Código Pessoa")]
-        [Key]
-        public uint IdPessoa { get; set; }
     }
 }

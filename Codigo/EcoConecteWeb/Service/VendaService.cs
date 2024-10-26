@@ -22,7 +22,7 @@ namespace Service
         /// </summary>
         /// <param name="Venda"></param>
         /// <returns></returns>
-        public uint Create(venda Venda)
+        public uint Create(Venda Venda)
         {
             context.Add(Venda);
             context.SaveChanges();
@@ -50,7 +50,7 @@ namespace Service
         /// Listar vendas
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<venda> GetAll()
+        public IEnumerable<Venda> GetAll()
         {
             return context.Vendamaterials.AsNoTracking();
         }
@@ -60,7 +60,7 @@ namespace Service
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public venda? GetById(uint Id)
+        public Venda? GetById(uint Id)
         {
             return context.Vendamaterials.Find(Id); 
         }
@@ -69,7 +69,7 @@ namespace Service
         /// Atualizar uma venda
         /// </summary>
         /// <param name="Venda"></param>
-        public void Update(venda Venda)
+        public void Update(Venda Venda)
         {
             context.Update(Venda);
             context.SaveChanges();
