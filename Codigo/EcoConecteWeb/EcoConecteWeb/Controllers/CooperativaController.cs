@@ -79,7 +79,7 @@ namespace EcoConecteWeb.Controllers
         {
             Cooperativa? cooperativa = _cooperativaService.Get(id);
             CooperativaViewModel cooperativaModel = _mapper.Map<CooperativaViewModel>(cooperativa);
-            return View(cooperativa);
+            return View(cooperativaModel);
         }
 
         // POST:Cooperativa_Controller/Delete/5

@@ -78,7 +78,7 @@ public partial class EcoConecteContext : DbContext
 
         modelBuilder.Entity<Cooperativa>(entity =>
         {
-            entity.HasKey(e => new { e.Id, e.Status }).HasName("PRIMARY");
+            entity.HasKey(e => new { e.Id }).HasName("PRIMARY");
 
             entity.ToTable("cooperativa");
 
