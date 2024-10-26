@@ -45,7 +45,7 @@ namespace EcoConecteWeb.Models
         /// </summary>
         [Display(Name = "Hora de Inicio da Coleta")]
         [Required(ErrorMessage = "Campo Obrigatório")]
-        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
+        [DataType(DataType.Time, ErrorMessage = "Data válida requerida")]
         public DateTime HorarioInicio { get; set; }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace EcoConecteWeb.Models
         /// </summary>
         [Display(Name = "Hora de Termino da Coleta")]
         [Required(ErrorMessage = "Campo Obrigatório")]
-        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
+        [DataType(DataType.Time, ErrorMessage = "Data válida requerida")]
         public DateTime HorarioTermino { get; set; }
 
         /// <summary>

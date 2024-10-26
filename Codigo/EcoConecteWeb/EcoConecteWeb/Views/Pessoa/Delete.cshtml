@@ -1,8 +1,14 @@
 ﻿@model EcoConecteWeb.Models.PessoaViewModel
 
-<h3>Tem certeza que deseja excluir esta pessoa?</h3>
+
+@{
+    ViewData["Title"] = "EcoConecte - Apagar Pessoa";
+}
+
+<h1>Apagar Pessoa</h1>
+
+<h3>Tem certeza?</h3>
 <div>
-    <h4>Excluir pessoa</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -74,7 +80,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
         <a asp-action="Index">Voltar</a>
     </form>
 </div>

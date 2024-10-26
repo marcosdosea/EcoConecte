@@ -1,7 +1,12 @@
 ﻿@model IEnumerable<EcoConecteWeb.Models.PessoaViewModel>
 
+@{
+    ViewData["Title"] = "EcoConecte - Pessoas";
+}
+
+<h1>Pessoas</h1>
 <p>
-    <a class="btn" asp-action="Create">Create New</a>
+    <a class="btn" asp-action="Create">Cadastrar nova pessoa</a>
 </p>
 <table class="table">
     <thead>
@@ -79,9 +84,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "link-action" }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "link-action" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "link-action" })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "link-action" }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "link-action" }) |
+                    @Html.ActionLink("Apagar", "Delete", new { id = item.Id }, new { @class = "link-action" })
             </td>
         </tr>
 }

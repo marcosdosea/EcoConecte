@@ -1,12 +1,12 @@
 ﻿@model EcoConecteWeb.Models.ColetaViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "EcoConecte - Cadastrar Coleta";
 }
 
-<h1>Create</h1>
+<h1>Cadastrar Coleta</h1>
 
-<h4>ColetaViewModel</h4>
+<h4>Preencha os dados</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -48,14 +48,14 @@
                 <span asp-validation-for="IdCooperativa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn" />
+                <input type="submit" value="Inserir" class="btn" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a  asp-action="Index">Back to List</a>
+    <a  asp-action="Index">Voltar</a>
 </div>
 <style>
     .btn {

@@ -1,6 +1,12 @@
 ﻿@model EcoConecteWeb.Models.PessoaViewModel
 
-<h4>Pessoa</h4>
+@{
+    ViewData["Title"] = "EcoConecte - Cadastrar Pessoa";
+}
+
+<h1>Cadastrar Pessoa</h1>
+
+<h4>Preencha os dados</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -58,7 +64,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" /> <a class="btn" asp-action="Index">Voltar</a>
+                <input type="submit" value="Inserir" class="btn btn-primary" /> <a class="btn" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<EcoConecteWeb.Models.CooperativaViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "EcoConecte - Cooperativas";
 }
 
-<h1>Index</h1>
+<h1>Cooperativas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Cadastrar nova cooperativa</a>
 </p>
 <table class="table">
     <thead>
@@ -97,9 +97,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id  }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id  })
+                @Html.ActionLink("Editar", "Edit", new {  id=item.Id }) |
+                @Html.ActionLink("Detalhes", "Details", new {  id=item.Id  }) |
+                @Html.ActionLink("Apagar", "Delete", new { id=item.Id  })
             </td>
         </tr>
 }

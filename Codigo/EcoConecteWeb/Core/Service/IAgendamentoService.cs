@@ -16,6 +16,12 @@ namespace Core.Service
         uint Create(Agendamento agendamento);
 
         /// <summary>
+        /// Editar um agendamento
+        /// </summary>
+        /// <param name="agendamento"></param>
+        void Edit(Agendamento agendamento);
+
+        /// <summary>
         /// Atualizar agendamento
         /// </summary>
         /// <param name="agendamento"></param>
@@ -26,7 +32,7 @@ namespace Core.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        bool Delete(uint id);
+        void Delete(uint id);
 
         /// <summary>
         /// Listar todos os agendamentos

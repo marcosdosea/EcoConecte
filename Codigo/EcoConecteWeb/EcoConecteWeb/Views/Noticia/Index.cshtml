@@ -7,7 +7,7 @@
 <h1>Notícias</h1>
 
 <p>
-    <a asp-action="Create">Nova Notícia</a>
+    <a asp-action="Create">Cadastrar nova notícia</a>
 </p>
 <table class="table">
     <thead>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Data)
             </td>
             <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "link-action" }) |
-                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "link-action" }) |
-                    @Html.ActionLink("Apagar", "Delete", new { id = item.Id }, new { @class = "link-action" })
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "link-action" }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "link-action" }) |
+                @Html.ActionLink("Apagar", "Delete", new { id = item.Id }, new { @class = "link-action" })
             </td>
         </tr>
 }

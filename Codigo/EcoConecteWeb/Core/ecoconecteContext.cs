@@ -171,13 +171,13 @@ public partial class EcoConecteContext : DbContext
             entity.HasIndex(e => e.Titulo, "titulo_idx");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Titulo)
+                .HasMaxLength(100)
+                .HasColumnName("titulo");
             entity.Property(e => e.Descricao)
                 .HasMaxLength(2000)
                 .HasColumnName("descricao");
             entity.Property(e => e.IdCooperativa).HasColumnName("idCooperativa");
-            entity.Property(e => e.Titulo)
-                .HasMaxLength(100)
-                .HasColumnName("titulo");
         });
 
         modelBuilder.Entity<Pessoa>(entity =>
