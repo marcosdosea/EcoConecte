@@ -36,16 +36,18 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(uint id)
+        public void Delete(uint id)
         {
             var agendamento = _EcoConecteContext.Agendamentos.Find(id);
-            if (agendamento == null)
-            {
-                return false;
-            }
-            _EcoConecteContext.Remove(agendamento);
+            if (agendamento != null)
+                _EcoConecteContext.Remove(agendamento);
+                _EcoConecteContext.SaveChanges();
+        }
+
+        public void Edit(Agendamento agendamento)
+        {
+            _EcoConecteContext.Update(agendamento);
             _EcoConecteContext.SaveChanges();
-            return true;
         }
 
         /// <summary>

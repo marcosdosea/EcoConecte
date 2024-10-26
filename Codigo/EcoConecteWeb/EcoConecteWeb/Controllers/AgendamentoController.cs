@@ -65,24 +65,22 @@ namespace EcoConecteWeb.Controllers
         // POST: AgendamentoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(uint id, AgendamentoViewModel agendamento)
+        public ActionResult Edit(uint id, AgendamentoViewModel agendamentoModel)
         {
-            try
-            {   
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                var agendamento = mapper.Map<Agendamento>(agendamentoModel);
+                agendamentoService.Edit(agendamento);
             }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AgendamentoController/Delete/5
         public ActionResult Delete(uint id)
         {
             var agendamento = agendamentoService.GetById(id);
-            var agendamentoViewModel = mapper.Map<AgendamentoViewModel>(agendamento);
-            return View(agendamentoViewModel);
+            var agendamentoModel = mapper.Map<AgendamentoViewModel>(agendamento);
+            return View(agendamentoModel);
         }
 
         // POST: AgendamentoController/Delete/5
@@ -90,14 +88,8 @@ namespace EcoConecteWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(uint id, AgendamentoViewModel agendamento)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            agendamentoService.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿@model EcoConecteWeb.Models.AgendamentoViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "EcoConecte - Agendamento Detalhes";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
     <hr />
@@ -66,8 +66,8 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", null, new { @class = "btn btn-primary" }) |
-    <a asp-action="Index" class="btn">Back to List</a>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Voltar</a>
 </div>
 
 <style>

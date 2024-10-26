@@ -1,14 +1,13 @@
 ﻿@model EcoConecteWeb.Models.CooperativaViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "EcoConecte - Apagar Cooperativa";
 }
 
-<h1>Delete</h1>
+<h1>Apagar Cooperativa</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza?</h3>
 <div>
-    <h4>CooperativaViewModel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -92,7 +91,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar</a>
     </form>
 </div>

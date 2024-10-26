@@ -94,7 +94,8 @@ namespace Service
         /// <exception cref="NotImplementedException"></exception>
         public void Edit(Orientacoes orientacoes)
         {
-            throw new NotImplementedException();
+            context.Update(orientacoes);
+            context.SaveChanges();
         }
     }
 }

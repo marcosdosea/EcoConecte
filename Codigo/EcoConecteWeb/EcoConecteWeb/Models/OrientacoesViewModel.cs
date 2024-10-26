@@ -9,8 +9,7 @@ namespace EcoConecteWeb.Models
         /// </summary>
         [Display(Name = "Código Orientaçao")]
         [Key]
-        [Required(ErrorMessage = "Campo obrigatório.")]
-        public uint Id { get; }
+        public uint Id { get; set; }
 
         /// <summary>
         /// GET/SET Título

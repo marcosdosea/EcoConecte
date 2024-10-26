@@ -1,14 +1,13 @@
 ﻿@model EcoConecteWeb.Models.VendaViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "EcoConecte - Apagar Venda";
 }
 
-<h1>Deletar Venda</h1>
+<h1>Apagar Venda</h1>
 
-<h3>Selecione a venda qual deseja deletar</h3>
+<h3>Tem certeza?</h3>
 <div>
-    <h4>VendaViewModel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -57,7 +56,7 @@
     
     <form asp-action="Delete">
         <a class="btn" asp-action="Index">Voltar</a>
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
     </form>
 </div>
 

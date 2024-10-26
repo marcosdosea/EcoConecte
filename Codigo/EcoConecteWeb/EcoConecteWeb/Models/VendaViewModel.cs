@@ -38,6 +38,7 @@ namespace EcoConecteWeb.Models
         /// GET/SET Data
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
+        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         public DateTime Data { get; set; }
 
         /// <summary>
