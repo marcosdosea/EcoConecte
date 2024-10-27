@@ -63,8 +63,8 @@ namespace EcoConecteWeb.Controllers.Tests
 
         [TestMethod()]
         public void DetailsTest_valido()
-        {
             //Act
+        {
             var result = controller.Details(1);
 
             //Assert
@@ -72,18 +72,18 @@ namespace EcoConecteWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(CooperativaViewModel));
             CooperativaViewModel cooperativaModel = (CooperativaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("49570000", cooperativaModel.Cep);
-            Assert.AreEqual("Suiça", cooperativaModel.Bairro);
-            Assert.AreEqual("Casa", cooperativaModel.Logradouro);
-            Assert.AreEqual("230", cooperativaModel.Numero);
-            Assert.AreEqual("A", cooperativaModel.Status);
-            Assert.AreEqual("cooperfarma@email.com", cooperativaModel.Email);
-            Assert.AreEqual("CooperFARMA", cooperativaModel.Nome);
-            Assert.AreEqual("12121212", cooperativaModel.InscricaoEstadual);
-            Assert.AreEqual("13131313", cooperativaModel.InscricaoMunicipal);
-            Assert.AreEqual("11111111111111", cooperativaModel.Cnpj);
-            Assert.AreEqual("99999999999", cooperativaModel.Telefone);
-            Assert.AreEqual(1u, cooperativaModel.IdPessoaRepresentate);
+            Assert.AreEqual("49580000", cooperativaModel.Cep);
+            Assert.AreEqual("Novo", cooperativaModel.Bairro);
+            Assert.AreEqual("Zona Rural", cooperativaModel.Logradouro);
+            Assert.AreEqual("430", cooperativaModel.Numero);
+            Assert.AreEqual("I", cooperativaModel.Status);
+            Assert.AreEqual("cooperita@email.com", cooperativaModel.Email);
+            Assert.AreEqual("CooperITA", cooperativaModel.Nome);
+            Assert.AreEqual("15151515", cooperativaModel.InscricaoEstadual);
+            Assert.AreEqual("14141414", cooperativaModel.InscricaoMunicipal);
+            Assert.AreEqual("12311111111111", cooperativaModel.Cnpj);
+            Assert.AreEqual("79996218534", cooperativaModel.Telefone);
+            Assert.AreEqual(2u, cooperativaModel.IdPessoaRepresentate);
         }
 
         [TestMethod()]
@@ -145,18 +145,18 @@ namespace EcoConecteWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(CooperativaViewModel));
             CooperativaViewModel cooperativaModel = (CooperativaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("49570000", cooperativaModel.Cep);
-            Assert.AreEqual("Suiça", cooperativaModel.Bairro);
-            Assert.AreEqual("Casa", cooperativaModel.Logradouro);
-            Assert.AreEqual("230", cooperativaModel.Numero);
-            Assert.AreEqual("A", cooperativaModel.Status);
-            Assert.AreEqual("cooperfarma@email.com", cooperativaModel.Email);
-            Assert.AreEqual("CooperFARMA", cooperativaModel.Nome);
-            Assert.AreEqual("12121212", cooperativaModel.InscricaoEstadual);
-            Assert.AreEqual("13131313", cooperativaModel.InscricaoMunicipal);
-            Assert.AreEqual("11111111111111", cooperativaModel.Cnpj);
-            Assert.AreEqual("99999999999", cooperativaModel.Telefone);
-            Assert.AreEqual(1u, cooperativaModel.IdPessoaRepresentate);
+            Assert.AreEqual("49580000", cooperativaModel.Cep);
+            Assert.AreEqual("Novo", cooperativaModel.Bairro);
+            Assert.AreEqual("Zona Rural", cooperativaModel.Logradouro);
+            Assert.AreEqual("430", cooperativaModel.Numero);
+            Assert.AreEqual("I", cooperativaModel.Status);
+            Assert.AreEqual("cooperita@email.com", cooperativaModel.Email);
+            Assert.AreEqual("CooperITA", cooperativaModel.Nome);
+            Assert.AreEqual("15151515", cooperativaModel.InscricaoEstadual);
+            Assert.AreEqual("14141414", cooperativaModel.InscricaoMunicipal);
+            Assert.AreEqual("12311111111111", cooperativaModel.Cnpj);
+            Assert.AreEqual("79996218534", cooperativaModel.Telefone);
+            Assert.AreEqual(2u, cooperativaModel.IdPessoaRepresentate);
         }
 
         [TestMethod()]
