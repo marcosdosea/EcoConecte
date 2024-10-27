@@ -42,7 +42,7 @@ namespace Service.Tests
             Assert.AreEqual(4, _OrientacoesService.GetAll().Count());
             var Orientacoes = _OrientacoesService.GetById(4);
             Assert.AreEqual("TituloOrientacoes4", Orientacoes.Titulo);
-            Assert.AreEqual("Hoje é tudo nosso! 4", Orientacoes.Descricao);
+            Assert.AreEqual("Orientacao 04 da classe", Orientacoes.Descricao);
             Assert.AreEqual((uint)4, Orientacoes.IdCooperativa);
         }
 
@@ -81,7 +81,7 @@ namespace Service.Tests
             var Orientacoes = _OrientacoesService.GetById(2);
             Assert.IsNotNull(Orientacoes);
             Assert.AreEqual("TituloOrientacoes2", Orientacoes.Titulo);
-            Assert.AreEqual("Hoje é tudo nosso! 2", Orientacoes.Descricao);
+            Assert.AreEqual("Orientacao 02 da classe", Orientacoes.Descricao);
             Assert.AreEqual((uint)2, Orientacoes.IdCooperativa);
         }
 

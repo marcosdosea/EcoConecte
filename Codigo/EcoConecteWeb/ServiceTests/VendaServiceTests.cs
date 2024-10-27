@@ -22,9 +22,9 @@ namespace Service.Tests
             _context.Database.EnsureCreated();
             var venda = new List<Venda>
             {
-                new Venda {Id= 1, Tipo= "Plastico", Valor= "R$ 100", Quantidade="50 Kg"},
-                new Venda {Id= 2, Tipo= "Metal", Valor= "R$ 500", Quantidade="25 Kg"},
-                new Venda {Id= 3, Tipo= "Vidro", Valor= "R$ 1100", Quantidade="45 Kg"}
+                new Venda {Id= 1, Tipo= "Plastico", Valor= 100, Quantidade=50},
+                new Venda {Id= 2, Tipo= "Metal", Valor= 500, Quantidade=25},
+                new Venda {Id= 3, Tipo= "Vidro", Valor= 1100, Quantidade=45}
             };
 
             _context.AddRange(venda);
@@ -37,13 +37,13 @@ namespace Service.Tests
         public void CreateTest()
         {
             //act
-            _vendaService.Create(new Venda { Id = 4, Tipo = "Vidro", Valor = "R$ 100", Quantidade = "2 Kg", });
+            _vendaService.Create(new Venda { Id = 4, Tipo = "Vidro", Valor =100, Quantidade = 2, });
             //Assert
             Assert.AreEqual(4, _vendaService.GetAll().Count());
-            var venda = _vendaService.Get(4);
+            var venda = _vendaService.GetById(4);
             Assert.AreEqual("Vidro", venda.Tipo);
-            Assert.AreEqual("R$ 100", venda.Valor);
-            Assert.AreEqual("2 Kg", venda.Quantidade);
+            Assert.AreEqual(100, venda.Valor);
+            Assert.AreEqual(2, venda.Quantidade);
         }
 
         [TestMethod()]
@@ -53,7 +53,7 @@ namespace Service.Tests
             _vendaService.Delete(2);
             //Assert
             Assert.AreEqual(2, _vendaService.GetAll().Count());
-            var venda = _vendaService.Get(2);
+            var venda = _vendaService.GetById(2);
             Assert.AreEqual(null, venda);
         }
 
@@ -61,28 +61,28 @@ namespace Service.Tests
         public void EditTest()
         {
             //act
-            var venda = _vendaService.Get(1);
+            var venda = _vendaService.GetById(1);
             venda.Tipo = "Metal";
-            venda.Valor = "R$ 550";
-            venda.Quantidade = "85 Kg";
-            _vendaService.Edit(venda);
+            venda.Valor = 550;
+            venda.Quantidade = 85;
+            _vendaService.Update(venda);
             //Assert
-            venda = _vendaService.Get(1);
+            venda = _vendaService.GetById(1);
             Assert.IsNotNull(venda);
             Assert.AreEqual("Metal", venda.Tipo);
-            Assert.AreEqual("R$ 550", venda.Valor);
-            Assert.AreEqual("85 Kg", venda.Quantidade);
+            Assert.AreEqual(550, venda.Valor);
+            Assert.AreEqual(85, venda.Quantidade);
         }
 
         [TestMethod()]
         public void GetTest()
         {
             //act
-            var venda = _vendaService.Get(2);
+            var venda = _vendaService.GetById(2);
             Assert.IsNotNull(venda);
-            Assert.AreEqual("Plastico", venda.Tipo);
-            Assert.AreEqual("R$ 754", venda.Valor);
-            Assert.AreEqual("47 Kg", venda.Quantidade);
+            Assert.AreEqual("Metal", venda.Tipo);
+            Assert.AreEqual(500, venda.Valor);
+            Assert.AreEqual(25, venda.Quantidade);
         }
 
         [TestMethod()]

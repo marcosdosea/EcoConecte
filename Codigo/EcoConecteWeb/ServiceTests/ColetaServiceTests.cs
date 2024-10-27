@@ -45,7 +45,6 @@ namespace Service.Tests
             //act
             var id = _ColetaService.Create(new Coleta
             {
-                Id = 1,
                 Cep = "49570000",
                 Logradouro = "Casa",
                 Numero = 230,
@@ -55,7 +54,7 @@ namespace Service.Tests
                 IdCooperativa = 1 });
             //Assert
             Assert.AreEqual(4, _ColetaService.GetAll().Count());
-                Assert.AreEqual((uint)1, id);
+                Assert.AreEqual((uint)4, id);
                 var Coleta = _ColetaService.GetById(1);
                 Assert.IsNotNull(Coleta);
                 Assert.AreEqual("49570000", Coleta.Cep);
