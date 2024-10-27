@@ -20,13 +20,13 @@ namespace EcoConecteWeb.Controllers.Tests
             var mockService = new Mock<IVendaService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new PessoaProfile())).CreateMapper();
+                cfg.AddProfile(new VendaProfile())).CreateMapper();
 
             mockService.Setup(service => service.GetAll())
                 .Returns(GetTestVenda());
-            mockService.Setup(service => service.Get(1))
+            mockService.Setup(service => service.GetById(1))
                 .Returns(GetTargetVenda());
-            mockService.Setup(service => service.Edit(It.IsAny<Venda>()))
+            mockService.Setup(service => service.Update(It.IsAny<Venda>()))
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Venda>()))
                 .Verifiable();
@@ -59,10 +59,10 @@ namespace EcoConecteWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(VendaViewModel));
             VendaViewModel vendaModel = (VendaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("1", vendaModel.Id);
+            Assert.AreEqual(1u, vendaModel.Id);
             Assert.AreEqual("Plastico", vendaModel.Tipo);
-            Assert.AreEqual("R$ 100", vendaModel.Valor);
-            Assert.AreEqual("50 Kg", vendaModel.Quantidade);
+            Assert.AreEqual(100, vendaModel.Valor);
+            Assert.AreEqual(50, vendaModel.Quantidade);
 
         }
 
@@ -107,7 +107,7 @@ namespace EcoConecteWeb.Controllers.Tests
         public void EditTest_Post_Valid()
         {
             // Act
-            var result = controller.Edit(GetTargetVendaModel().Id, GetTargetVendaModel());
+            var result = controller.Edit((int)GetTargetVendaModel().Id, GetTargetVendaModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -128,10 +128,10 @@ namespace EcoConecteWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(VendaViewModel));
             VendaViewModel vendaModel = (VendaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("1", vendaModel.Id);
+            Assert.AreEqual((uint)1, vendaModel.Id);
             Assert.AreEqual("Plastico", vendaModel.Tipo);
-            Assert.AreEqual("R$ 100", vendaModel.Valor);
-            Assert.AreEqual("50 Kg", vendaModel.Quantidade);
+            Assert.AreEqual(100, vendaModel.Valor);
+            Assert.AreEqual(50, vendaModel.Quantidade);
 
         }
 
@@ -155,8 +155,8 @@ namespace EcoConecteWeb.Controllers.Tests
             {
                 Id = 1,
                 Tipo = "Plastico",
-                Valor = "R$ 100",
-                Quantidade = "50 Kg",
+                Valor = 100,
+                Quantidade = 50,
             };
         }
         private VendaViewModel GetNewVenda()
@@ -165,8 +165,8 @@ namespace EcoConecteWeb.Controllers.Tests
             {
                 Id = 2,
                 Tipo = "Metal",
-                Valor = "R$ 500",
-                Quantidade = "25 Kg",
+                Valor = 500,
+                Quantidade = 25,
             };
         }
         private VendaViewModel GetTargetVendaModel()
@@ -175,8 +175,8 @@ namespace EcoConecteWeb.Controllers.Tests
             {
                 Id = 3,
                 Tipo = "Vidro",
-                Valor = "R$ 1100",
-                Quantidade = "45 Kg",
+                Valor = 1100,
+                Quantidade = 45,
             };
         }
         private IEnumerable<Venda> GetTestVenda()
@@ -187,22 +187,22 @@ namespace EcoConecteWeb.Controllers.Tests
                 {
                 Id = 4,
                 Tipo = "Vidro",
-                Valor = "R$ 100",
-                Quantidade = "2 Kg",
+                Valor = 100,
+                Quantidade = 2,
                 },
                 new Venda
                 {
                 Id = 5,
                 Tipo = "Metal",
-                Valor = "R$ 300",
-                Quantidade = "10 Kg",
+                Valor = 300,
+                Quantidade = 10,
                 },
                 new Venda
                 {
                 Id = 6,
                 Tipo = "Plastico",
-                Valor = "R$ 500",
-                Quantidade = "50 Kg",
+                Valor = 500,
+                Quantidade = 50,
                 }
             };
         }

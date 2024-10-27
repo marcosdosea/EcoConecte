@@ -59,9 +59,9 @@ namespace EcoConecteWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(OrientacoesViewModel));
             OrientacoesViewModel OrientacoesModel = (OrientacoesViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Orientcoes02", OrientacoesModel.Titulo);
+            Assert.AreEqual("Orientacoes02", OrientacoesModel.Titulo);
             Assert.AreEqual("Orientacao 02 da classe", OrientacoesModel.Descricao);
-            Assert.AreEqual("1", OrientacoesModel.IdCooperativa);
+            Assert.AreEqual("2", OrientacoesModel.IdCooperativa);
         }
 
         [TestMethod()]
@@ -126,7 +126,7 @@ namespace EcoConecteWeb.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(OrientacoesViewModel));
             OrientacoesViewModel OrientacoesModel = (OrientacoesViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual("Orientcoes02", OrientacoesModel.Titulo);
+            Assert.AreEqual("Orientacoes02", OrientacoesModel.Titulo);
             Assert.AreEqual("Orientacao 02 da classe", OrientacoesModel.Descricao);
             Assert.AreEqual("2", OrientacoesModel.IdCooperativa);
         }

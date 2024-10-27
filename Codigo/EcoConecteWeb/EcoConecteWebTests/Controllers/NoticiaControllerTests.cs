@@ -60,7 +60,7 @@ namespace EcoConecteWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(NoticiaViewModel));
             NoticiaViewModel NoticiaModel = (NoticiaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("TituloNoticia2", NoticiaModel.Titulo);
-            Assert.AreEqual("02/10/2024 00:00:00", NoticiaModel.Data);
+            Assert.AreEqual("26/10/2024 00:00:00", NoticiaModel.Data);
             Assert.AreEqual("1", NoticiaModel.IdCooperativa);
             Assert.AreEqual("Hoje é tudo nosso!", NoticiaModel.Conteudo);
         }
@@ -128,7 +128,7 @@ namespace EcoConecteWeb.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(NoticiaViewModel));
             NoticiaViewModel NoticiaModel = (NoticiaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual("TituloNoticia2", NoticiaModel.Titulo);
-            Assert.AreEqual("02/10/2024 00:00:00", NoticiaModel.Data);
+            Assert.AreEqual("26/10/2024 00:00:00", NoticiaModel.Data);
             Assert.AreEqual("1", NoticiaModel.IdCooperativa);
             Assert.AreEqual("Hoje é tudo nosso!", NoticiaModel.Conteudo);
         }
