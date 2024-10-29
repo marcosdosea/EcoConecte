@@ -18,6 +18,40 @@ namespace EcoConecteWeb.Controllers
             this._mapper = mapper;
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BuscarPorCep(string cep)
+        {
+            if (string.IsNullOrEmpty(cep))
+            {
+                ModelState.AddModelError("Cep", "O CEP é obrigatório.");
+                return View("Index");
+            }
+
+            var coletas = _coletaService.GetByCep(cep);
+            if (coletas == null || !coletas.Any())
+            {
+                ModelState.AddModelError("Cep", "Nenhuma coleta encontrada.");
+                return View("Index");
+            }
+
+            if (_mapper == null)
+            {
+                ModelState.AddModelError("", "Erro interno");
+                return View("Index");
+            }
+
+            var coletaViewModels = _mapper.Map<IEnumerable<ColetaViewModel>>(coletas);
+            return View("BuscarPorCep", coletaViewModels);
+        }
+
+        [HttpGet]
+        public IActionResult BuscarPorCep()
+        {
+            return View("Index");
+        }
+
+
         // GET: Coleta_Controller
         public ActionResult Index()
         {

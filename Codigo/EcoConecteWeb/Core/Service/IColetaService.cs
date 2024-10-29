@@ -52,5 +52,7 @@ namespace Core.Service
         /// <param name="lagradouro"></param>
         /// <returns></returns>
         IEnumerable<Coleta> GetByLagradouro(string lagradouro);
+
+        IEnumerable<Coleta> GetByCep(string cep);
     }
 }

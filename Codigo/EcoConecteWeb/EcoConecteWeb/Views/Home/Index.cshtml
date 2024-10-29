@@ -6,8 +6,10 @@
     <div class="intro-text">
         Conheça a EcoConecte!!<br />Coletamos seus resíduos sólidos e efetuamos o descarte adequado.
     </div>
-    <input type="text" class="cep-input" placeholder="Digite seu CEP" />
-    <button class="btn">Continuar</button>
+    <form asp-action="Buscarporcep" asp-controller="Coleta" method="post">
+    <input class="cep-input" type="text" name="cep" />
+    <button  class="btn" type="submit">Buscar</button>
+</form>
     <button class="btn">Cadastre-se</button>
     <div class="news-title">Notícias</div>
 </div>

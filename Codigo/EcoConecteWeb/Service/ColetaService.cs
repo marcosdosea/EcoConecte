@@ -90,5 +90,11 @@ namespace Service
             context.Update(coleta);
             context.SaveChanges();
         }
+
+        public IEnumerable<Coleta> GetByCep(string cep)
+        {
+            return context.Coletas.Where(c => c.Cep == cep).ToList();
+        }
+
     }
 }
