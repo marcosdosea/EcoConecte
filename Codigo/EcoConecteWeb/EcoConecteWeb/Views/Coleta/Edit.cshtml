@@ -4,65 +4,68 @@
     ViewData["Title"] = "EcoConecte - Editar Coleta";
 }
 
-<h1>Editar</h1>
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-edit"></i> Editar
+    </h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Cep" class="control-label"></label>
-                <input asp-for="Cep" class="form-control" />
-                <span asp-validation-for="Cep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Logradouro" class="control-label"></label>
-                <input asp-for="Logradouro" class="form-control" />
-                <span asp-validation-for="Logradouro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiaColeta" class="control-label"></label>
-                <input asp-for="DiaColeta" class="form-control" />
-                <span asp-validation-for="DiaColeta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HorarioInicio" class="control-label"></label>
-                <input asp-for="HorarioInicio" class="form-control" />
-                <span asp-validation-for="HorarioInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HorarioTermino" class="control-label"></label>
-                <input asp-for="HorarioTermino" class="form-control" />
-                <span asp-validation-for="HorarioTermino" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCooperativa" class="control-label"></label>
-                <input asp-for="IdCooperativa" class="form-control" />
-                <span asp-validation-for="IdCooperativa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn" />
-                <input type="submit" value="Voltar" class="btn " />
-            </div>
-        </form>
+ 
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <div class="form-group">
+                    <label asp-for="Cep" class="control-label"></label>
+                    <input asp-for="Cep" class="form-control" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Logradouro" class="control-label"></label>
+                    <input asp-for="Logradouro" class="form-control" />
+                    <span asp-validation-for="Logradouro" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Numero" class="control-label"></label>
+                    <input asp-for="Numero" class="form-control" />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="DiaColeta" class="control-label"></label>
+                    <input asp-for="DiaColeta" class="form-control" />
+                    <span asp-validation-for="DiaColeta" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="HorarioInicio" class="control-label"></label>
+                    <input asp-for="HorarioInicio" class="form-control" />
+                    <span asp-validation-for="HorarioInicio" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="HorarioTermino" class="control-label"></label>
+                    <input asp-for="HorarioTermino" class="form-control" />
+                    <span asp-validation-for="HorarioTermino" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="IdCooperativa" class="control-label"></label>
+                    <input asp-for="IdCooperativa" class="form-control" />
+                    <span asp-validation-for="IdCooperativa" class="text-danger"></span>
+                </div>
+
+                <div class="form-group button-group">
+                    <input type="submit" value="Salvar" class="icon-button" />
+                    <input type="button" value="Voltar" class="icon-button" onclick="window.history.back();" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<style>
-    .btn {
-        background: #007447;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-</style>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+
+
