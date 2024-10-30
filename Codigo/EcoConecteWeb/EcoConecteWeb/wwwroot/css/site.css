@@ -28,52 +28,77 @@ body {
     color: #333;
 }
 
-/* Ajusta o tamanho do header */
-header .navbar {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-
-    header .navbar img {
-        max-height: 80px; /* Reduz a altura do logo */
-        width: auto;
-    }
-
-/* Ajuste de altura para o footer */
-footer {
-    font-size: 0.9rem; /* Reduz o tamanho da fonte no footer */
-    padding: 0.5rem 0;
-}
-
-    footer .d-flex {
-        align-items: center;
-    }
-
-    /* Ícones menores e melhor espaçamento no footer */
-    footer ul li i {
-        font-size: 18px; /* Reduz o tamanho dos ícones */
-        margin-right: 0.5rem; /* Ajuste de espaço entre os ícones */
-    }
-
 /* Layout Responsivo */
 @media (max-width: 576px) {
     header .navbar .container-fluid {
-        flex-direction: column; /* Alinha o conteúdo do header verticalmente em telas pequenas */
+        flex-direction: column;
     }
 
-    header .navbar img {
-        max-height: 60px; /* Logo menor em dispositivos móveis */
+    header .navbar img.logo-img {
+        max-height: 60px;
+        width: auto;
+        margin-bottom: 1rem;
     }
 
-    footer .d-flex {
-        flex-direction: column; /* Alinha o conteúdo do footer verticalmente em telas pequenas */
-        text-align: center;
+    header .navbar-nav {
+        flex-direction: column;
     }
 
-    footer ul {
-        margin-top: 0.5rem;
+    header .nav-item {
+        margin-bottom: 0.5rem;
     }
 }
+
+/* Ajusta o tamanho do header */
+header .navbar {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+    header .navbar img.logo-img {
+        max-height: 80px;
+        width: auto;
+    }
+
+/* Adiciona margem inferior ao último item de navegação */
+header .navbar-nav .nav-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Ajusta o botão de toggle para telas menores */
+@media (min-width: 577px) {
+    header .navbar-toggler {
+        display: none;
+    }
+}
+
+
+footer {
+    background-color: #f8f9fa; /* Cor de fundo do footer */
+}
+
+    footer .container {
+        max-width: 1200px; /* Define o máximo de largura para o conteúdo do footer */
+    }
+
+    footer ul li {
+        font-size: 24px; /* Tamanho padrão dos ícones sociais */
+    }
+
+@media (max-width: 768px) {
+    footer ul li {
+        font-size: 18px; /* Reduz o tamanho dos ícones em telas menores */
+    }
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer ul {
+    margin-top: 0;
+}
+
 
 /* Ajustes para uma melhor experiência responsiva geral */
 .container {

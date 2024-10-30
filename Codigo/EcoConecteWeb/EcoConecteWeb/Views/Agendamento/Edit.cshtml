@@ -4,67 +4,75 @@
     ViewData["Title"] = "EcoConecte - Editar Agendamento";
 }
 
-<h1>Editar</h1>
+<h1 class="title">
+    <i class="fas fa-edit"></i> Editar Agendamento
+</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdPessoa" class="control-label"></label>
-                <input asp-for="IdPessoa" class="form-control" />
-                <span asp-validation-for="IdPessoa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Data" class="control-label"></label>
-                <input asp-for="Data" class="form-control" />
-                <span asp-validation-for="Data" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cep" class="control-label"></label>
-                <input asp-for="Cep" class="form-control" />
-                <span asp-validation-for="Cep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Logradouro" class="control-label"></label>
-                <input asp-for="Logradouro" class="form-control" />
-                <span asp-validation-for="Logradouro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bairro" class="control-label"></label>
-                <input asp-for="Bairro" class="form-control" />
-                <span asp-validation-for="Bairro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cidade" class="control-label"></label>
-                <input asp-for="Cidade" class="form-control" />
-                <span asp-validation-for="Cidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<div class="form-container text-left">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div>
-    <a asp-action="Index" class="btn">Voltar</a>
+        <div class="form-group">
+            <label asp-for="IdPessoa" class="control-label text-left"></label>
+            <input asp-for="IdPessoa" class="form-control" />
+            <span asp-validation-for="IdPessoa" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Data" class="control-label text-left"></label>
+            <input asp-for="Data" class="form-control" />
+            <span asp-validation-for="Data" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Cep" class="control-label text-left"></label>
+            <input asp-for="Cep" class="form-control" />
+            <span asp-validation-for="Cep" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Logradouro" class="control-label text-left"></label>
+            <input asp-for="Logradouro" class="form-control" />
+            <span asp-validation-for="Logradouro" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Numero" class="control-label text-left"></label>
+            <input asp-for="Numero" class="form-control" />
+            <span asp-validation-for="Numero" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Bairro" class="control-label text-left"></label>
+            <input asp-for="Bairro" class="form-control" />
+            <span asp-validation-for="Bairro" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Cidade" class="control-label text-left"></label>
+            <input asp-for="Cidade" class="form-control" />
+            <span asp-validation-for="Cidade" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Estado" class="control-label text-left"></label>
+            <input asp-for="Estado" class="form-control" />
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Status" class="control-label text-left"></label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+
+        <div class="button-group">
+            <input type="submit" value="Salvar" class="icon-button" />
+            <a class="icon-button" asp-action="Index">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
@@ -72,18 +80,3 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-<style>
-    .btn {
-        background: #007447;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-
-    .btn-primary {
-        background: #007447;
-        color: white;
-    }
-</style>
