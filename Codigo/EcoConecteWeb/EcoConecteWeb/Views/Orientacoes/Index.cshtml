@@ -4,50 +4,68 @@
     ViewData["Title"] = "EcoConnect - Orientações";
 }
 
-<h1>Orientações</h1>
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-info-circle"></i> Orientações
+    </h1>
 
-<p>
-    <a asp-action="Create">Cadastrar nova orientação</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCooperativa)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCooperativa)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "link-action" }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "link-action" }) |
-                @Html.ActionLink("Apagar", "Delete", new { id = item.Id }, new { @class = "link-action" })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p class="add-button">
+        <a class="icon-button" asp-action="Create">
+            <i class="fas fa-plus"></i> Cadastrar nova orientação
+        </a>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Titulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCooperativa)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCooperativa)
+                        </td>
+                        <td>
+                            <div class="button-group">
+                                <a class="icon-button" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <a class="icon-button" asp-action="Details" asp-route-id="@item.Id">
+                                    <i class="fas fa-eye"></i> Detalhes
+                                </a>
+                                <a class="icon-button" asp-action="Delete" asp-route-id="@item.Id">
+                                    <i class="fas fa-trash"></i> Apagar
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
