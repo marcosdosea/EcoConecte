@@ -4,71 +4,66 @@
     ViewData["Title"] = "EcoConecte - Coleta Detalhes";
 }
 
-<h1>Detalhes</h1>
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-info-circle"></i> Detalhes
+    </h1>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Logradouro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Logradouro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Numero)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiaColeta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiaColeta)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HorarioInicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HorarioInicio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HorarioTermino)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HorarioTermino)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCooperativa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCooperativa)
-        </dd>
-    </dl>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cep)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cep)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Logradouro)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Logradouro)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Numero)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Numero)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DiaColeta)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DiaColeta)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HorarioInicio)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HorarioInicio)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HorarioTermino)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HorarioTermino)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdCooperativa)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdCooperativa)
+            </dd>
+        </dl>
+    </div>
+    <div class="button-group">
+        @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = Model.Id })}'><i class='fas fa-edit'></i> Editar</a> ")
+        <input type="button" value="Voltar" class="icon-button" onclick="window.history.back();" />
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Editar", "Edit" , new { id = Model.Id }) |
-    <input type="submit" value="Voltar" class="btn " />
-</div>
-<style>
-    .btn {
-        background: #007447;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-</style>
+
