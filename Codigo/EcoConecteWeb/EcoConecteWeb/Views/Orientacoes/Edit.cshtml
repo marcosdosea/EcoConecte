@@ -4,77 +4,42 @@
     ViewData["Title"] = "EcoConecte - Editar Orientação";
 }
 
-<h1>Editar</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCooperativa" class="control-label"></label>
-                <input asp-for="IdCooperativa" class="form-control" />
-                <span asp-validation-for="IdCooperativa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-edit"></i> Editar Orientação
+    </h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Edit" class="form-container-expanded">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Titulo" class="control-label"></label>
+                    <input asp-for="Titulo" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <textarea asp-for="Descricao" class="form-control larger-textarea"></textarea>
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IdCooperativa" class="control-label"></label>
+                    <input asp-for="IdCooperativa" class="form-control" />
+                    <span asp-validation-for="IdCooperativa" class="text-danger"></span>
+                </div>
+
+                <div class="form-group button-group">
+                    <input type="submit" value="Salvar" class="icon-button" />
+                    <a class="icon-button" asp-action="Index">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a class="btn" asp-action="Index">Voltar</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-
-<style>
-    .container {
-        width: 100%;
-        background: #FAFAFA;
-        padding: 20px;
-    }
-
-    h1 {
-        font-family: 'Abril Fatface', sans-serif;
-    }
-
-    .btn {
-        background: #007447;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-    .link-action {
-        color: #007447;
-        text-decoration: none;
-    }
-
-        .link-action:hover {
-            text-decoration: underline;
-        }
-</style>

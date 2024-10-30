@@ -4,84 +4,40 @@
     ViewData["Title"] = "EcoConecte - Cadastrar Notícia";
 }
 
-<h1>Cadastrar Notícia</h1>
+<h1 class="title">
+    <i class="fas fa-plus-circle"></i> Cadastrar Notícia
+</h1>
 
-<h4>Preencha os dados</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Conteudo" class="control-label"></label>
-                <input asp-for="Conteudo" class="form-control" />
-                <span asp-validation-for="Conteudo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCooperativa" class="control-label"></label>
-                <input asp-for="IdCooperativa" class="form-control" />
-                <span asp-validation-for="IdCooperativa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Data" class="control-label"></label>
-                <input asp-for="Data" class="form-control" />
-                <span asp-validation-for="Data" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Inserir" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<h4 class="subheading"><strong>Preencha os dados</strong></h4>
+
+<div class="form-container">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Titulo" class="control-label"></label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Conteudo" class="control-label"></label>
+            <input asp-for="Conteudo" class="form-control" />
+            <span asp-validation-for="Conteudo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IdCooperativa" class="control-label"></label>
+            <input asp-for="IdCooperativa" class="form-control" />
+            <span asp-validation-for="IdCooperativa" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Data" class="control-label"></label>
+            <input asp-for="Data" class="form-control" />
+            <span asp-validation-for="Data" class="text-danger"></span>
+        </div>
+        <div class="button-group">
+            <input type="submit" value="Inserir" class="icon-button" />
+            <a class="icon-button" asp-action="Index">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </form>
 </div>
-
-<div>
-    <a class="btn" asp-action="Index">Voltar</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-
-<style>
-    .container {
-        width: 100%;
-        background: #FAFAFA;
-        padding: 20px;
-    }
-
-    h1 {
-        font-family: 'Abril Fatface', sans-serif;
-    }
-
-    .btn {
-        background: #007447;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-    .link-action {
-        color: #007447;
-        text-decoration: none;
-    }
-
-        .link-action:hover {
-            text-decoration: underline;
-        }
-</style>
