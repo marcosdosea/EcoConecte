@@ -5,7 +5,9 @@
     ViewData["Title"] = "EcoConecte - Apagar Pessoa";
 }
 
-<h1>Apagar Pessoa</h1>
+<h1 class="title">
+    <i class="fas fa-trash-alt"></i> Apagar Pessoa
+</h1>
 
 <h3>Tem certeza?</h3>
 <div>
@@ -79,8 +81,10 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
-        <input type="submit" value="Apagar" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar</a>
+    <form asp-action="Delete" method="post" class="button-group">
+        <input type="submit" value="Apagar" class="icon-button danger-button" />
+        <a href="@Url.Action("Index")" class="icon-button">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </a>
     </form>
 </div>
