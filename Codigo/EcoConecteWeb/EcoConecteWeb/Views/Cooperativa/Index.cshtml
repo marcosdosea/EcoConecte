@@ -4,12 +4,22 @@
     ViewData["Title"] = "EcoConecte - Cooperativas";
 }
 
-<h1>Cooperativas</h1>
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-hands-helping"></i> Cooperativas
+    </h1>
 
-<p>
-    <a asp-action="Create">Cadastrar nova cooperativa</a>
-</p>
-<table class="table">
+  
+
+    <p class="add-button">
+        <button class="icon-button">
+            <a href="@Url.Action("Create")">
+                <i class="fas fa-plus"></i> Cadastrar nova cooperativa
+            </a>
+        </button>
+    </p>
+
+<table class="table-responsive">
     <thead>
         <tr>
             <th>
@@ -19,39 +29,19 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InscricaoEstadual)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InscricaoMunicipal)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Cnpj)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cep)
-            </th>
+       
             <th>
                 @Html.DisplayNameFor(model => model.Logradouro)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bairro)
-            </th>
+        
             <th>
                 @Html.DisplayNameFor(model => model.Numero)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefone)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdPessoaRepresentate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -64,22 +54,10 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InscricaoEstadual)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InscricaoMunicipal)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Cnpj)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cep)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Logradouro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Numero)
@@ -88,18 +66,23 @@
                 @Html.DisplayFor(modelItem => item.Telefone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPessoaRepresentate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new {  id=item.Id }) |
-                @Html.ActionLink("Detalhes", "Details", new {  id=item.Id  }) |
-                @Html.ActionLink("Apagar", "Delete", new { id=item.Id  })
+              <div class="button-group">
+                <button class="icon-button">
+                  <a href="@Url.Action("Edit", new { id = item.Id })">
+                    <i class="fas fa-edit"></i> Editar
+                  </a>
+                </button>
+                <button class="icon-button">
+                  <a href="@Url.Action("Details", new { id = item.Id })">
+                    <i class="fas fa-info-circle"></i> Detalhes
+                  </a>
+                 </button>
+                 <button class="icon-button">
+                   <a href="@Url.Action("Delete", new { id = item.Id })">
+                     <i class="fas fa-trash"></i> Apagar
+                    </a>
+                  </button>
+               </div>
             </td>
         </tr>
 }
