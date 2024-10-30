@@ -4,11 +4,14 @@
     ViewData["Title"] = "EcoConecte - Apagar Cooperativa";
 }
 
-<h1>Apagar Cooperativa</h1>
+<h1 class="title">
+    <i class="fas fa-trash-alt"></i> Apagar Cooperativa
+</h1>
 
-<h3>Tem certeza?</h3>
+<h3>Tem certeza de que deseja apagar essa cooperativa?</h3>
+
 <div>
-    <hr />
+    
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
@@ -89,9 +92,11 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Apagar" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar</a>
+
+    <form asp-action="Delete" method="post" class="button-group">
+        <input type="submit" value="Apagar" class="icon-button danger-button" />
+        <a href="@Url.Action("Index")" class="icon-button">
+            <i class="fa fa-arrow-left"></i> Voltar
+        </a>
     </form>
 </div>

@@ -4,11 +4,12 @@
     ViewData["Title"] = "EcoConecte - Cooperativa Detalhes";
 }
 
-<h1>Detalhes</h1>
+<h1 class="title">
+    <i class="fas fa-info-circle"></i> Detalhes da Cooperativa
+</h1>
 
 <div>
-    <hr />
-    <dl class="row">
+     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
         </dt>
@@ -89,7 +90,11 @@
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Editar", "Edit", new {  id = Model.Id }) |
-    <a asp-action="Index">Voltar</a>
+<div class="button-group">
+    <a href="@Url.Action("Edit", new { id = Model.Id })" class="icon-button">
+        <i class="fas fa-edit"></i> Editar
+    </a>
+    <a class="icon-button" asp-action="Index">
+        <i class="fa fa-arrow-left"></i> Voltar
+    </a>
 </div>

@@ -4,45 +4,56 @@
 
 <div class="container text-center">
     <div class="intro-text">
-        Conheça a EcoConecte!!<br />Coletamos seus resíduos sólidos e efetuamos o descarte adequado.
+        <h1 class="display-4 font-weight-bold no-break">Conheça a EcoConecte!</h1>
+        <p class="lead font-weight-bold text-muted no-break">Coletamos seus resíduos sólidos e efetuamos o descarte adequado.</p>
     </div>
-    <form asp-action="Buscarporcep" asp-controller="Coleta" method="post">
-    <input class="cep-input" type="text" name="cep" />
-    <button  class="btn" type="submit">Buscar</button>
-</form>
-    <button class="btn">Cadastre-se</button>
-    <div class="news-title">Notícias</div>
+
+    <form asp-action="Buscarporcep" asp-controller="Coleta" method="post" class="mb-3">
+        <div class="form-group">
+            <input class="form-control cep-input" type="text" name="cep" placeholder="Digite seu CEP" maxlength="14" required />
+        </div>
+        <button class="btn icon-button" type="submit">Buscar</button>
+    </form>
+
+    <button class="btn icon-button mb-3">Cadastre-se</button>
+
+    <h2 class="display-4 font-weight-bold no-break">Notícias</h2>
 </div>
 
 <style>
     .container {
         width: 100%;
+        max-width: 600px;
         background: #FAFAFA;
         padding: 20px;
+        margin: 0 auto;
     }
 
     .intro-text {
-        width: 1348px;
-        margin: 128px auto 0;
+        margin-top: 80px;
         text-align: center;
         color: black;
         font-size: 22px;
         font-family: 'Abril Fatface', sans-serif;
     }
 
+    /* Mantém o texto em linha contínua, sem quebras */
+    .no-break {
+        white-space: nowrap;
+    }
+
     .cep-input {
-        width: 519px;
+        width: 100%;
         height: 63px;
         padding: 4px;
-        margin: 20px auto;
         background: white;
         border-radius: 8px;
         border: 1px #05AF16 solid;
-        display: block;
     }
 
     .btn {
-        width: 157px;
+        width: 100%;
+        max-width: 157px;
         height: 53px;
         background: #007447;
         color: white;
@@ -51,21 +62,12 @@
         text-align: center;
         line-height: 53px;
         margin: 10px auto;
-        display: block;
         font-family: 'Abril Fatface', sans-serif;
     }
 
-    .news-title {
-        width: 100%;
-        text-align: center;
-        color: black;
+    h2 {
         font-size: 32px;
         font-family: 'Abril Fatface', sans-serif;
         margin-top: 20px;
-    }
-
-    img {
-        width: 213px;
-        height: 106px;
     }
 </style>
