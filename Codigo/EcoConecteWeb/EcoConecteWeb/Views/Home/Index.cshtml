@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<NoticiaViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -18,6 +20,40 @@
     <button class="btn icon-button mb-3">Cadastre-se</button>
 
     <h2 class="display-4 font-weight-bold no-break">Notícias</h2>
+
+    <div id="noticiasCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @if (Model == null || !Model.Any())
+            {
+                <div class="carousel-item active">
+                    <div class="alert alert-info">Não há notícias disponíveis no momento.</div>
+                </div>
+            }
+            else
+            {
+                int index = 0;
+                foreach (var noticia in Model)
+                {
+                    <div class="carousel-item @(index == 0 ? "active" : "")">
+                        <div class="d-block w-100">
+                            <h5>@noticia.Titulo</h5>
+                            <p>@noticia.Conteudo</p>
+                        </div>
+                    </div>
+                    index++;
+                }
+            }
+        </div>
+
+        <a class="carousel-control-prev" href="#noticiasCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#noticiasCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+    </div>
 </div>
 
 <style>
@@ -37,7 +73,6 @@
         font-family: 'Abril Fatface', sans-serif;
     }
 
-    /* Mantém o texto em linha contínua, sem quebras */
     .no-break {
         white-space: nowrap;
     }
@@ -55,7 +90,7 @@
         width: 100%;
         max-width: 157px;
         height: 53px;
-        background: #007447;
+        background: #28a745; 
         color: white;
         border-radius: 15px;
         border: 1px #B7BABC solid;
@@ -70,4 +105,23 @@
         font-family: 'Abril Fatface', sans-serif;
         margin-top: 20px;
     }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.5); 
+        border-radius: 50%; 
+    }
+
+    .carousel-item {
+        transition: transform 0.5s ease, opacity 0.5s ease; 
+    }
 </style>
+
+<!-- Adicione os scripts do jQuery e Bootstrap no final do arquivo -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
