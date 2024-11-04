@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Buscar por CEP";
+    var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();
 }
 
 <!DOCTYPE html>
@@ -10,83 +11,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - EcoConecte</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
-        }
-
-        .routine-container {
-            border: 1px solid #008000;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .routine-item {
-            background-color: #008000;
-            color: #fff;
-            font-size: 18px;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .buttons-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .button {
-            background-color: #008000;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-            .button:hover {
-                background-color: #006400;
-            }
-
-     
-    </style>
+    <link rel="stylesheet" href="~/path/to/site.css">
 </head>
 <body>
 
+<div class="container">
+    <h1 class="title">Sua rotina de coleta</h1>
 
-    <div class="container">
-        <h1>Sua rotina de coleta</h1>
-        <div class="routine-container">
-            @foreach (var coleta in Model)
-            {
-                <div class="routine-item">
-                    <span>@coleta.DiaColeta.ToString("dddd, dd/MM")</span>
-                    <span>@coleta.HorarioInicio.ToString("HH:mm") - @coleta.HorarioTermino.ToString("HH:mm")</span>
-                </div>
-            }
-        </div>
-        <div class="buttons-container">
-            <button class="button">Agendar coleta</button>
-            <button class="button">Dicas</button>
-            <button class="button">Voltar</button>
-        </div>
+    <p class="add-button">
+        <a class="icon-button" asp-action="Create"><i class="fas fa-calendar-plus"></i> Agendar coleta</a>
+    </p>
+
+    <div class="table-responsive">
+        @if (!coletas.Any()) // Verifica se a lista está vazia
+        {
+            <div class="alert alert-danger" role="alert">
+                Ainda não existem coletas para a região buscada.
+            </div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Dia da Coleta</th>
+                        <th>Horário de Início</th>
+                        <th>Horário de Término</th>
+                        <th>Ações</th> <!-- Coluna para ações -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var coleta in coletas) {
+                        <tr>
+                            <td>@coleta.DiaColeta.ToString("dddd, dd/MM")</td>
+                            <td>@coleta.HorarioInicio.ToString("HH:mm")</td>
+                            <td>@coleta.HorarioTermino.ToString("HH:mm")</td>
+                            <td>
+                                <div class="button-group">
+                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = coleta.Id })}'><i class='fas fa-edit'></i> Editar</a>")
+                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Details", new { id = coleta.Id })}'><i class='fas fa-info-circle'></i> Detalhes</a>")
+                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Delete", new { id = coleta.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
+
+    <div class="button-group">
+        @Html.Raw($"<a class='icon-button' href='{Url.Action("Create")}'><i class='fas fa-calendar-plus'></i> Agendar coleta</a>")
+        @Html.Raw($"<a class='icon-button' href='{Url.Action("Tips")}'><i class='fas fa-lightbulb'></i> Dicas</a>")
+        @Html.Raw($"<a class='icon-button' href='{Url.Action("Index")}'><i class='fas fa-arrow-left'></i> Voltar</a>")
+    </div>
+</div>
 
 </body>
 </html>

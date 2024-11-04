@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "EcoConecte - Coletas";
+
+    // Garantir que o Model não seja nulo
+    var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();
 }
 
 <div class="container">
@@ -14,73 +17,82 @@
     </p>
 
     <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Cep)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Logradouro)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Numero)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DiaColeta)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.HorarioInicio)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.HorarioTermino)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdCooperativa)
-                    </th>
-                     <th>Ações</th> <!-- Adicionada coluna para ações -->
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model) {
+        @if (!coletas.Any()) // Verifica se a lista está vazia
+        {
+            <div class="alert alert-danger" role="alert">
+                Não foram encontradas coletas para o CEP informado. Verifique se o CEP está correto ou se já existem coletas cadastradas.
+            </div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cep)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Logradouro)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Numero)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DiaColeta)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HorarioInicio)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HorarioTermino)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdCooperativa)
-                        </td>
-                        <td>
-                            <div class="button-group">
-                                @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = item.Id })}'><i class='fas fa-edit'></i> Editar</a> ")
-                                @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Details", new { id = item.Id })}'><i class='fas fa-info-circle'></i> Detalhes</a> ")
-                                @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Delete", new { id = item.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
-                            </div>
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cep)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Logradouro)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Numero)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DiaColeta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HorarioInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HorarioTermino)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdCooperativa)
+                        </th>
+                        <th>Ações</th> <!-- Adicionada coluna para ações -->
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in coletas) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cep)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Logradouro)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Numero)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DiaColeta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HorarioInicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HorarioTermino)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdCooperativa)
+                            </td>
+                            <td>
+                                <div class="button-group">
+                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = item.Id })}'><i class='fas fa-edit'></i> Editar</a> ")
+                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Details", new { id = item.Id })}'><i class='fas fa-info-circle'></i> Detalhes</a> ")
+                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Delete", new { id = item.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
 </div>
