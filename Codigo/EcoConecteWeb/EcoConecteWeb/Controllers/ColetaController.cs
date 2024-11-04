@@ -32,8 +32,9 @@ namespace EcoConecteWeb.Controllers
             if (coletas == null || !coletas.Any())
             {
                 ModelState.AddModelError("Cep", "Nenhuma coleta encontrada.");
-                return View("Index");
+                return View("BuscarPorCep");
             }
+
 
             if (_mapper == null)
             {
