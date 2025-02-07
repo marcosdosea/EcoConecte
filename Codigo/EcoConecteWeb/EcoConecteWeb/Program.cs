@@ -76,6 +76,7 @@ namespace EcoConecteWeb
             builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddRazorPages();
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -90,8 +91,8 @@ namespace EcoConecteWeb
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.MapRazorPages();
 
             app.MapControllerRoute(
