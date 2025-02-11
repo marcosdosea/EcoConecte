@@ -184,10 +184,6 @@ CREATE TABLE IF NOT EXISTS `ecoconecte`.`Orientacoes` (
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
 
-INSERT INTO `ecoconecte`.`Cooperativa` (`nome`, `inscricaoEstadual`, `inscricaoMunicipal`, `cnpj`, `cep`, `logradouro`, `bairro`, `numero`, `telefone`, `email`, `idPessoaRepresentate`, `status`)
-VALUES 
-('Cooperativa Verde', '123456789', '987654321', '11222333444455', '01001000', 'Rua A', 'Centro', '123', '1199999000', 'cooperativa@verde.com', null, 'A');
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
