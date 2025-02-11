@@ -16,15 +16,7 @@
         <a class="icon-button" asp-action="Create"><i class="fas fa-plus"></i> Cadastrar nova coleta</a>
     </p>
 
-    <div class="table-responsive">
-        @if (!coletas.Any()) // Verifica se a lista está vazia
-        {
-            <div class="alert alert-danger" role="alert">
-                Não foram encontradas coletas para o CEP informado. Verifique se o CEP está correto ou se já existem coletas cadastradas.
-            </div>
-        }
-        else
-        {
+
             <table class="table">
                 <thead>
                     <tr>
@@ -93,6 +85,6 @@
                     }
                 </tbody>
             </table>
-        }
+        
     </div>
 </div>
