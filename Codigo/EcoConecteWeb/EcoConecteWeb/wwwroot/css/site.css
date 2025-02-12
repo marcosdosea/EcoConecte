@@ -217,3 +217,14 @@ th {
     min-height: 100px; /* Definido para pelo menos três linhas de altura */
     resize: vertical; /* Permite que o usuário ajuste a altura */
 }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para destacar os ícones */
+    border-radius: 50%; /* Deixa os botões arredondados */
+    padding: 10px; /* Ajusta o tamanho dos botões */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%; /* Garante que a área de clique seja visível */
+}
