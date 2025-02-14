@@ -2,12 +2,14 @@
 using Core;
 using Core.Service;
 using EcoConecteWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace EcoConecteWeb.Controllers
 {
+    [Authorize]
     public class NoticiaController : Controller
     {
         private readonly INoticiaService _noticiaService;
@@ -19,6 +21,7 @@ namespace EcoConecteWeb.Controllers
             this._mapper = mapper;
         }
 
+        [Authorize(Roles = "DEFAULTUSER")]
         // GET: Noticia_Controller
         public ActionResult Index()
         {

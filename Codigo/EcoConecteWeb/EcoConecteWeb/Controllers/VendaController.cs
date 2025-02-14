@@ -2,12 +2,14 @@
 using Core;
 using Core.Service;
 using EcoConecteWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace EcoConecteWeb.Controllers
 {
+    [Authorize]
     public class VendaController : Controller
     {
         private readonly IVendaService _vendaService;
