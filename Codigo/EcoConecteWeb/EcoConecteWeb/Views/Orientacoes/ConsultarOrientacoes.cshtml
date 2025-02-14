@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EcoConecteWeb.Views.Orientacoes.ConsultarOrientacoesModel>
+﻿@model IEnumerable<EcoConecteWeb.Models.OrientacoesViewModel>
 @{
     ViewData["Title"] = "Consultar Orientações";
     var orientacoes = Model ?? Enumerable.Empty<EcoConecteWeb.Models.OrientacoesViewModel>();
@@ -11,57 +11,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - EcoConecte</title>
     <link rel="stylesheet" href="~/path/to/site.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container mt-4">
+        <h1 class="title text-center mb-4">Como separar seu lixo corretamente</h1>
 
-    <div class="container">
-        <h1 class="title">Como separar seu lixo corretamente</h1>
+        @if (!orientacoes.Any())
+        {
+            <div class="alert alert-danger text-center" role="alert">
+                Ainda não existem orientações de coleta.
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var orientacao in orientacoes)
+                {
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title text-success">@orientacao.Titulo</h5>
+                                <p class="card-text">@orientacao.Descricao</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
 
-        <div class="table-responsive">
-            @if (!orientacoes.Any()) // Verifica se a lista está vazia
-            {
-                <div class="alert alert-danger" role="alert">
-                    Ainda não existem orientações de coleta.
-                </div>
-            }
-            else
-            {
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Dia da Coleta</th>
-                            <th>Horário de Início</th>
-                            <th>Horário de Término</th>
-                            <th>Ações</th> <!-- Coluna para ações -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var coleta in coletas)
-                        {
-                            <tr>
-                                <td>@coleta.DiaColeta.ToString("dddd, dd/MM")</td>
-                                <td>@coleta.HorarioInicio.ToString("HH:mm")</td>
-                                <td>@coleta.HorarioTermino.ToString("HH:mm")</td>
-                                <td>
-                                    <div class="button-group">
-                                        @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = coleta.Id })}'><i class='fas fa-edit'></i> Editar</a>")
-                                        @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Details", new { id = coleta.Id })}'><i class='fas fa-info-circle'></i> Detalhes</a>")
-                                        @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Delete", new { id = coleta.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-        </div>
-
-        <div class="button-group">
-            @Html.Raw($"<a class='icon-button' href='{Url.Action("Create")}'><i class='fas fa-calendar-plus'></i> Agendar coleta</a>")
-            @Html.Raw($"<a class='icon-button' href='{Url.Action("Tips")}'><i class='fas fa-lightbulb'></i> Dicas</a>")
-            @Html.Raw($"<a class='icon-button' href='{Url.Action("Index", "Home")}'><i class='fas fa-arrow-left'></i> Voltar</a>")
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fas fa-plus-circle"></i> Adicionar Orientação</a>
+            <a class="btn btn-secondary" href="@Url.Action("Index", "Home")"><i class="fas fa-arrow-left"></i> Voltar</a>
         </div>
     </div>
 
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
