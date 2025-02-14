@@ -26,22 +26,21 @@
         else
         {
             <div class="row">
-                @foreach (var orientacao in orientacoes)
+                @foreach (var item in Model)
                 {
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-6 mb-3">
                         <div class="card shadow-sm">
                             <div class="card-body">
-                                <h5 class="card-title text-success">@orientacao.Titulo</h5>
-                                <p class="card-text">@orientacao.Descricao</p>
+                                <h5 class="card-title">@item.Titulo</h5>
+                                <p class="card-text">@item.Descricao</p>
                             </div>
                         </div>
                     </div>
                 }
             </div>
-        }
 
+        }
         <div class="text-center mt-4">
-            <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fas fa-plus-circle"></i> Adicionar Orientação</a>
             <a class="btn btn-secondary" href="@Url.Action("Index", "Home")"><i class="fas fa-arrow-left"></i> Voltar</a>
         </div>
     </div>
