@@ -4,9 +4,11 @@ using Core;
 using EcoConecteWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EcoConecteWeb.Controllers
 {
+    //[Authorize(Roles = "ADMROOT")]
     public class CooperativaController : Controller
     {
         private readonly ICooperativaService _cooperativaService;
