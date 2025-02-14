@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EcoConecteWeb.Controllers
 {
-    //[Authorize(Roles = "ADMROOT")]
+    [Authorize(Roles = "ADMROOT")]
+    //[Authorize]
     public class CooperativaController : Controller
     {
         private readonly ICooperativaService _cooperativaService;

@@ -9,7 +9,7 @@ using Service;
 
 namespace EcoConecteWeb.Controllers
 {
-    //[Authorize(Roles = "ADMROOT")]
+    [Authorize]
     public class NoticiaController : Controller
     {
         private readonly INoticiaService _noticiaService;
@@ -21,6 +21,7 @@ namespace EcoConecteWeb.Controllers
             this._mapper = mapper;
         }
 
+        [Authorize(Roles = "DEFAULTUSER")]
         // GET: Noticia_Controller
         public ActionResult Index()
         {

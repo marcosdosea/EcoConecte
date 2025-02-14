@@ -9,7 +9,7 @@ using Service;
 
 namespace EcoConecteWeb.Controllers
 {
-    //[Authorize(Roles ="ADMROOT")]
+    [Authorize]
     public class VendaController : Controller
     {
         private readonly IVendaService _vendaService;
