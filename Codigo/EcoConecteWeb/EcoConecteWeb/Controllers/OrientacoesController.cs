@@ -4,6 +4,7 @@ using Core;
 using EcoConecteWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service;
 
 namespace EcoConecteWeb.Controllers
 {
@@ -20,6 +21,13 @@ namespace EcoConecteWeb.Controllers
 
         // GET: Orientcoes_Controller
         public ActionResult Index()
+        {
+            var listaOrientacoes = _orientacoesService.GetAll();
+            var listaOrientacoesModel = _mapper.Map<IEnumerable<OrientacoesViewModel>>(listaOrientacoes);
+            return View(listaOrientacoesModel);
+        }
+        // GET: Orientcoes_Controller/Details/5
+        public ActionResult ConsultarOrientacoes()
         {
             var listaOrientacoes = _orientacoesService.GetAll();
             var listaOrientacoesModel = _mapper.Map<IEnumerable<OrientacoesViewModel>>(listaOrientacoes);
