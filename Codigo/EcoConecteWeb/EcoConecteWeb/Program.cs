@@ -7,12 +7,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using EcoConecteWeb.Helpers;
+using System.Threading.Tasks;
+using System.Data;
 
 namespace EcoConecteWeb
 {
     public class Program
     {
-        public static void Main(string[] args)
+
+        private static readonly string[] Roles = ["ADMROOT", "DEFAULTUSER", "COOPERADO"];
+
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -50,7 +55,11 @@ namespace EcoConecteWeb
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
-            }).AddEntityFrameworkStores<IdentityContext>();
+            })
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
@@ -66,7 +75,7 @@ namespace EcoConecteWeb
 
             builder.Services.AddTransient<IAgendamentoService, AgendamentoService>();
             builder.Services.AddTransient<IPessoaService, PessoaService>();
-            builder.Services.AddTransient<ICooperativaService,CooperativaService>();
+            builder.Services.AddTransient<ICooperativaService, CooperativaService>();
             builder.Services.AddTransient<INoticiaService, NoticiaService>();
             builder.Services.AddTransient<IOrientacoesService, OrientacoesService>();
             builder.Services.AddTransient<IColetaService, ColetaService>();
@@ -78,6 +87,14 @@ namespace EcoConecteWeb
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddRazorPages();
             var app = builder.Build();
+
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                await CriarRoles(roleManager);
+            }
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -100,6 +117,17 @@ namespace EcoConecteWeb
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        private static async Task CriarRoles(RoleManager<IdentityRole> roleManager)
+        {
+            foreach (var role in Roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
+            }
         }
     }
 }

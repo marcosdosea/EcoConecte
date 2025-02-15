@@ -21,7 +21,7 @@ namespace EcoConecteWeb.Controllers
             this._mapper = mapper;
         }
 
-        [Authorize(Roles = "DEFAULTUSER")]
+        [Authorize(Roles = "DEFAULTUSER, ADMROOT")]
         // GET: Noticia_Controller
         public ActionResult Index()
         {

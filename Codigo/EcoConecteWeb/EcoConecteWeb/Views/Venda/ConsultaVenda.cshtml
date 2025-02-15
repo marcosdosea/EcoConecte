@@ -1,0 +1,52 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.VendaViewModel>
+@{
+    ViewData["Title"] = "Consultar Vendas";
+    var vendas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.VendaViewModel>();
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - EcoConecte</title>
+    <link rel="stylesheet" href="~/path/to/site.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="title text-center mb-4">Vendas</h1>
+
+        @if (!vendas.Any())
+        {
+            <div class="alert alert-danger text-center" role="alert">
+                Não foi possível localizar nenhuma venda.
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Tipo</h5>
+                                <p class="card-text">@item.Quantidade</p>
+                                <p class="card-text">@item.Valor</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        }
+        <div class="text-center mt-4">
+            <a class="btn btn-secondary" href="@Url.Action("Index", "Home")"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
