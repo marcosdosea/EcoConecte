@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EcoConecteWeb.Controllers
 {
-    [Authorize(Roles = "ADMROOT")]
-    //[Authorize]
     public class CooperativaController : Controller
     {
         private readonly ICooperativaService _cooperativaService;
@@ -28,7 +26,7 @@ namespace EcoConecteWeb.Controllers
             var listaCooperativasModel = _mapper.Map<List<CooperativaViewModel>>(listaCooperativas);
             return View(listaCooperativasModel);
         }
-
+        [Authorize(Roles = "ADMROOT")]
         // GET: Cooperativa_Controller/Details/5
         public ActionResult Details(uint id)
         {
