@@ -26,7 +26,7 @@ namespace EcoConecteWeb.Controllers
             var listaCooperativasModel = _mapper.Map<List<CooperativaViewModel>>(listaCooperativas);
             return View(listaCooperativasModel);
         }
-        [Authorize(Roles = "ADMROOT")]
+        [Authorize(Roles = "ADMROOT, COOPERADO")]
         // GET: Cooperativa_Controller/Details/5
         public ActionResult Details(uint id)
         {
