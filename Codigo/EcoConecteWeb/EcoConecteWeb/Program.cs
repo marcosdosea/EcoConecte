@@ -7,17 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using EcoConecteWeb.Helpers;
-using System.Threading.Tasks;
-using System.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EcoConecteWeb
 {
     public class Program
     {
-
-        private static readonly string[] Roles = ["ADMROOT", "DEFAULTUSER", "COOPERADO"];
-
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +28,7 @@ namespace EcoConecteWeb
                 options.UseMySQL(builder.Configuration.GetConnectionString("IdentityDatabase"));
             });
 
-            builder.Services.AddDefaultIdentity<UsuarioIdentity>(options =>
+            builder.Services.AddIdentity<UsuarioIdentity, IdentityRole>(options =>
             {
                 // SignIn settings
                 options.SignIn.RequireConfirmedAccount = false;
@@ -55,10 +51,7 @@ namespace EcoConecteWeb
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
-            })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<IdentityContext>();
-
+            }).AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
 
 
             builder.Services.ConfigureApplicationCookie(options =>
@@ -87,14 +80,6 @@ namespace EcoConecteWeb
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddRazorPages();
             var app = builder.Build();
-
-
-            using (var scope = app.Services.CreateScope())
-            {
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                await CriarRoles(roleManager);
-            }
-
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -117,17 +102,6 @@ namespace EcoConecteWeb
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
-        }
-
-        private static async Task CriarRoles(RoleManager<IdentityRole> roleManager)
-        {
-            foreach (var role in Roles)
-            {
-                if (!await roleManager.RoleExistsAsync(role))
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                }
-            }
         }
     }
 }
