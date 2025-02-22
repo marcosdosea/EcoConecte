@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Core;
 
 namespace EcoConecteWeb.Areas.Identity.Pages.Account
 {
@@ -30,13 +31,17 @@ namespace EcoConecteWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<UsuarioIdentity> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly EcoConecteContext _contextEcoconecte;
 
         public RegisterModel(
             UserManager<UsuarioIdentity> userManager,
             IUserStore<UsuarioIdentity> userStore,
             SignInManager<UsuarioIdentity> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            EcoConecteContext contextEcoconecte)
+            
+
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +49,7 @@ namespace EcoConecteWeb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _contextEcoconecte = contextEcoconecte;
         }
 
         /// <summary>
@@ -98,6 +104,56 @@ namespace EcoConecteWeb.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            /// <summary>
+            ///  CPF
+            /// </summary>
+            [Required]
+            [Display(Name = "CPF")]
+            public string Cpf { get; set; }
+
+            /// <summary>
+            /// Nome
+            /// </summary>
+            [Required]
+            [Display(Name = "Nome Completo")]
+            public string Nome { get; set; }
+
+            /// <summary>
+            /// Telefone
+            /// </summary>
+            [Display(Name = "Telefone")]
+            public string Telefone { get; set; }
+
+            /// <summary>
+            /// Lagradouro
+            /// </summary>
+            [Display(Name = "Endereço")]
+            public string Logradouro { get; set; }
+
+            /// <summary>
+            /// Número
+            /// </summary>
+            [Display(Name = "Número")]
+            public string Numero { get; set; }
+
+            /// <summary>
+            /// Bairro
+            /// </summary>
+            [Display(Name = "Bairro")]
+            public string Bairro { get; set; }
+
+            /// <summary>
+            /// Cidade
+            /// </summary>
+            [Display(Name = "Cidade")]
+            public string Cidade { get; set; }
+
+            /// <summary>
+            /// Estado
+            /// </summary>
+            [Display(Name = "Estado")]
+            public string Estado { get; set; }
         }
 
 
@@ -111,49 +167,92 @@ namespace EcoConecteWeb.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                if (result.Succeeded)
+                using var transaction = await _contextEcoconecte.Database.BeginTransactionAsync(); // Inicia a transação
+                try
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    var user = CreateUser();
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                    await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                    var result = await _userManager.CreateAsync(user, Input.Password);
 
-                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //$"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (result.Succeeded)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        _logger.LogInformation("User created a new account with password.");
+
+                        // Criar a pessoa no banco Ecoconecte
+                        var pessoa = new Pessoa
+                        {
+                            Cpf = Input.Cpf,
+                            Nome = Input.Nome,
+                            Telefone = Input.Telefone,
+                            Logradouro = Input.Logradouro,
+                            Numero = Input.Numero,
+                            Bairro = Input.Bairro,
+                            Cidade = Input.Cidade,
+                            Estado = Input.Estado,
+                            Status = "A"
+                        };
+
+                        _contextEcoconecte.Pessoas.Add(pessoa);
+                        var result2 = await _contextEcoconecte.SaveChangesAsync();
+
+                        // Vincular o usuário Identity à pessoa criada
+                        user.PessoaId = (int)pessoa.Id;
+                        await _userManager.UpdateAsync(user);
+
+                        // Confirmar a transação
+                        await transaction.CommitAsync();
+
+                        var userId = await _userManager.GetUserIdAsync(user);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        {
+                            return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
                     }
-                    else
+
+                    foreach (var error in result.Errors)
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
-                foreach (var error in result.Errors)
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    // Se algum erro ocorrer, reverter todas as operações
+                    await transaction.RollbackAsync();
+
+                    // Remover o usuário Identity se ele foi criado
+                    var userToDelete = await _userManager.FindByEmailAsync(Input.Email);
+                    if (userToDelete != null)
+                    {
+                        await _userManager.DeleteAsync(userToDelete);
+                    }
+
+                    _logger.LogError(ex, "Erro ao registrar usuário e criar pessoa associada.");
+                    ModelState.AddModelError(string.Empty, "Erro ao registrar usuário. Tente novamente.");
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Se falhar, retorna a página com os erros
             return Page();
         }
+
 
         private UsuarioIdentity CreateUser()
         {
