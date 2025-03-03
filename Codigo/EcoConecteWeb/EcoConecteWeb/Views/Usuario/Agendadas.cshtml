@@ -49,11 +49,6 @@
                                     </a>
                                 </button>
                                 <button class="icon-button">
-                                    <a href="@Url.Action("Details", new { id = item.Id })">
-                                        <i class="fas fa-info-circle"></i> Detalhes
-                                    </a>
-                                </button>
-                                <button class="icon-button">
                                     <a href="@Url.Action("Delete", new { id = item.Id })">
                                         <i class="fas fa-trash"></i> Apagar
                                     </a>
@@ -64,5 +59,8 @@
                 }
             </tbody>
         </table>
+        <div class="form-group button-group">
+            <a href="@Url.Action("Index", "Home")" class="btn icon-button">Voltar</a>
+        </div>
     </div>
 </div>

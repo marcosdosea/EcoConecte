@@ -59,8 +59,10 @@ namespace EcoConecteWeb.Controllers
             {
                 var agendamento = _mapper.Map<Agendamento>(agendamentoModel);
                 _agendamentoService.Create(agendamento);
+                var pessoaId = agendamento.IdPessoa;
+                return RedirectToAction("Agendadas", "Usuario", new { id = pessoaId });
             }
-            return RedirectToAction(nameof(Index));
+            return View(agendamentoModel);
         }
 
         public ActionResult Agendadas(uint id)
