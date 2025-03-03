@@ -83,6 +83,17 @@
       </a>
     </td>
   </tr>
+        <tr>
+    <td align="center">
+      <a href="https://github.com/LuizSouzaNeri" target="_blank">
+        <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/7561844?v=4" width="100px;" alt="Foto de Luiz Souza Neri no Github"/><br>
+        <sub>
+          <b>Luiz Souza Neri </b>
+          <p>Desenvolvedor</p>
+        </sub>
+      </a>
+    </td>
+  </tr>
 </table>
 <table align="center">
   <tr>
