@@ -1,4 +1,10 @@
-﻿@page
-@model EcoConecteWeb.Views.Usuario.IndexModel
-@{
+﻿@{
+    ViewData["Title"] = "Perfil do Usuário";
+    var pessoaId = ViewData["PessoaId"];
 }
+
+<h2>Perfil do Usuário</h2>
+<p>ID da Pessoa: @pessoaId</p>
+
+<!-- Botão para Editar Perfil (se necessário) -->
+<a class="btn btn-primary" asp-controller="Usuario" asp-action="Edit" asp-route-id="@pessoaId">Editar Perfil</a>
