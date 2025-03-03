@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 using EcoConecteWeb.Areas.Identity.Data;
 
 public class LoginModel : PageModel
@@ -47,22 +48,41 @@ public class LoginModel : PageModel
             // Obtém as roles do usuário
             var roles = await _userManager.GetRolesAsync(user);
 
-            // Redireciona para páginas específicas com base nas roles
+            // Se o usuário não tiver nenhuma role atribuída, ele será tratado como "CLIENTE"
+            if (!roles.Any())
+            {
+                roles = new List<string> { "CLIENTE" }; // Define a role padrão
+            }
+
+            // Adiciona o PessoaId como Claim
+            var pessoaId = user.PessoaId.ToString();
+            var claims = new List<Claim>
+            {
+                new Claim("PessoaId", pessoaId)
+            };
+
+            var userPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
+            var claimsIdentity = (ClaimsIdentity)userPrincipal.Identity;
+            claimsIdentity.AddClaims(claims);
+
+            await _signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims);
+
+            // Redirecionamento com base nas roles
             if (roles.Contains("ADMROOT"))
             {
-                return RedirectToAction("Index", "Cooperativa");
+                return RedirectToAction("Index", "Home");
             }
             else if (roles.Contains("COOPERADO"))
             {
-                return RedirectToAction("Index", "Pessoa");
+                return RedirectToAction("Index", "Home");
             }
-            else if (roles.Contains("USERDEFAULT"))
+            else if (roles.Contains("COOPERATIVA"))
             {
-                return RedirectToAction("Index", "Noticia");
+                return RedirectToAction("Index", "Home");
             }
 
-            // Se não houver role específica, redireciona para a página padrão
-            return RedirectToPage("/Index");
+            // Se não houver role específica, redireciona para a área padrão (Cliente)
+            return RedirectToAction("Index", "Home");
         }
         else
         {
