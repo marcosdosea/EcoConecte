@@ -39,7 +39,14 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="clienteDropdown">
                     <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Index" asp-route-id="@pessoaId">Perfil</a></li>
-                    <li><a class="dropdown-item" asp-controller="Opcao" asp-action="Index">Usuário</a></li>
+                    <li class="dropdown-submenu position-relative">
+                        <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown">Usuário</a>
+                        <ul class="dropdown-menu sub-dropdown">
+                            <li><a class="dropdown-item" asp-controller="coleta" asp-action="Agendadas">Coletas Agendadas</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Agendamento" asp-route-id="@pessoaId">Agendar Coleta</a></li>
+                        </ul>
+                    </li>
+
                     <li><a class="dropdown-item" asp-controller="Suporte" asp-action="Index">Suporte</a></li>
                 </ul>
             </li>
@@ -93,3 +100,52 @@
         </li>
     }
 </ul>
+
+@* Script para funcionamento do submenu *@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const usuarioMenu = document.getElementById("usuarioDropdown");
+        const submenu = usuarioMenu.nextElementSibling;
+
+        usuarioMenu.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Fecha outros submenus antes de abrir este
+            document.querySelectorAll(".dropdown-submenu .dropdown-menu").forEach(function (menu) {
+                if (menu !== submenu) {
+                    menu.classList.remove("show");
+                }
+            });
+
+            // Alterna a visibilidade do submenu
+            submenu.classList.toggle("show");
+        });
+
+        // Fecha os submenus ao clicar fora
+        document.addEventListener("click", function (event) {
+            if (!usuarioMenu.contains(event.target) && !submenu.contains(event.target)) {
+                submenu.classList.remove("show");
+            }
+        });
+    });
+</script>
+
+@* CSS para garantir que o submenu funcione *@
+<style>
+    .sub-dropdown {
+        position: absolute;
+        top: 100%; /* Faz com que apareça abaixo do item "Usuário" */
+        left: 0;
+        display: none; /* Esconde o submenu inicialmente */
+        z-index: 1050; /* Garante que fique sobre as outras opções */
+    }
+
+    .dropdown-submenu:hover .sub-dropdown {
+        display: block; /* Exibe o submenu ao passar o mouse */
+    }
+
+    .dropdown-submenu .dropdown-menu.show {
+        display: block;
+    }
+</style>
