@@ -58,23 +58,39 @@ namespace EcoConecteWeb.Controllers
         // GET: Pessoa_Controller/Edit/5
         public ActionResult Edit(uint id)
         {
-            Pessoa? pessoa = _pessoaService.Get(id);
-            PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            var pessoa = _pessoaService.Get(id);
+
+            if (pessoa == null)
+            {
+                return NotFound(); // Retorna erro 404 se não encontrar
+            }
+
+            var pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             return View(pessoaModel);
         }
 
         // POST: Pessoa_Controller/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult Edit(uint id, PessoaViewModel pessoaModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var pessoa = _mapper.Map<Pessoa>(pessoaModel);
-                _pessoaService.Edit(pessoa);
+                return View(pessoaModel);
             }
+
+            var pessoaExistente = _pessoaService.Get(id);
+
+            if (pessoaExistente == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(pessoaModel, pessoaExistente);
+            _pessoaService.Edit(pessoaExistente);
             return RedirectToAction(nameof(Index));
         }
+
 
         // GET: Pessoa_Controller/Delete/5
         public ActionResult Delete(uint id)
