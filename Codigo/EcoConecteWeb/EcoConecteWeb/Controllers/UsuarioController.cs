@@ -62,5 +62,25 @@ namespace EcoConecteWeb.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public ActionResult Agendadas(uint id)
+        {
+            ViewData["PessoaId"] = id; // Passa o ID para a View
+            return View();
+        }
+
+
+        // POST: AgendamentoController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(AgendamentoViewModel agendamentoModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var agendamento = _mapper.Map<Agendamento>(agendamentoModel);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

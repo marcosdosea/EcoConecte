@@ -1,0 +1,68 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.AgendamentoViewModel>
+
+@{
+    ViewData["Title"] = "EcoConecte - Agendamentos";
+    var pessoaId = ViewData["PessoaId"];
+}
+
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-calendar-alt"></i> Agendamentos
+    </h1>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdPessoa)</th>
+                    <th>@Html.DisplayNameFor(model => model.Data)</th>
+                    <th>@Html.DisplayNameFor(model => model.Cep)</th>
+                    <th>@Html.DisplayNameFor(model => model.Logradouro)</th>
+                    <th>@Html.DisplayNameFor(model => model.Numero)</th>
+                    <th>@Html.DisplayNameFor(model => model.Bairro)</th>
+                    <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+                    <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                    <th>@Html.DisplayNameFor(model => model.Status)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdPessoa)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Cep)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td>
+                            <div class="button-group">
+                                <button class="icon-button">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                </button>
+                                <button class="icon-button">
+                                    <a href="@Url.Action("Details", new { id = item.Id })">
+                                        <i class="fas fa-info-circle"></i> Detalhes
+                                    </a>
+                                </button>
+                                <button class="icon-button">
+                                    <a href="@Url.Action("Delete", new { id = item.Id })">
+                                        <i class="fas fa-trash"></i> Apagar
+                                    </a>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
