@@ -30,15 +30,16 @@ public partial class Pessoa
     /// </summary>
     public string? Logradouro { get; set; }
 
-    /// <summary>
-    /// GET/SET Bairro
-    /// </summary>
-    public string? Bairro { get; set; }
 
     /// <summary>
     /// GET/SET Número
     /// </summary>
     public string? Numero { get; set; }
+
+    /// <summary>
+    /// GET/SET Bairro
+    /// </summary>
+    public string? Bairro { get; set; }
 
     /// <summary>
     /// GET/SET Cidade

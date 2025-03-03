@@ -6,30 +6,26 @@
 }
 
 <h1 class="title">
-<i class="fas fa-plus-circle"></i> Cadastrar Agendamento</h1>
-<p>Pessoa ID: @pessoaId</p>
+    <i class="fas fa-plus-circle"></i> Cadastrar Agendamento
+</h1>
 
 <h4>Preencha os dados</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input asp-for="IdPessoa" type="hidden" />
-
             <div class="form-group">
-                <label asp-for="IdPessoa" class="control-label"></label>
-                <input asp-for="IdPessoa" class="form-control" value="@pessoaId" readonly />
+                <label asp-for="IdPessoa" class="control-label" style="display: none;"></label>
+                <input asp-for="IdPessoa" class="form-control" value="@pessoaId" readonly type="hidden" />
                 <span asp-validation-for="IdPessoa" class="text-danger"></span>
             </div>
 
-
-            <!--<div class="form-group">
-                <label asp-for="IdPessoa" class="control-label"></label>
-                <input asp-for="IdPessoa" class="form-control" />
-                <span asp-validation-for="IdPessoa" class="text-danger"></span>
-            </div>-->
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="Cep" class="control-label"></label>
@@ -68,8 +64,8 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <label asp-for="Status" class="control-label" style="display: none;"></label>
+                <input asp-for="Status" class="form-control" value="A" readonly type="hidden" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
@@ -79,13 +75,3 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index" class="icon-button">Voltar</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

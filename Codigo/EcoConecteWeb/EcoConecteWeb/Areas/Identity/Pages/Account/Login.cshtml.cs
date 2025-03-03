@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 using EcoConecteWeb.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
 
 public class LoginModel : PageModel
 {
@@ -23,7 +24,10 @@ public class LoginModel : PageModel
     public class InputModel
     {
         public string Email { get; set; }
+
         public string Password { get; set; }
+
+        [Display(Name = " Salvar seus dados de acesso?")]
         public bool RememberMe { get; set; }
     }
 

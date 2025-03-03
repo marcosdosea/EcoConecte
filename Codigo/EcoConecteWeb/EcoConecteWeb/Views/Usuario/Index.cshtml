@@ -1,11 +1,65 @@
-﻿@{
-    ViewData["Title"] = "Perfil do Usuário";
+﻿@model EcoConecteWeb.Models.PessoaViewModel
+
+@{
+    ViewData["Title"] = "EcoConecte - Perfil Cliente";
     var pessoaId = ViewData["PessoaId"];
 }
 
-<h2>Perfil do Usuário</h2>
-<p>ID da Pessoa: @pessoaId</p>
+<h1 class="title">
+    <i class="fas fa-info-circle"></i> Perfil de Cliente
+</h1>
 
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cpf)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cpf)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Logradouro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Logradouro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bairro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bairro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+    </dl>
+</div>
 <!-- Botão para Editar Perfil (se necessário) -->
-<a class="btn btn-primary" asp-controller="Usuario" asp-action="Edit" asp-route-id="@pessoaId">Editar Perfil</a>
-<a class="btn btn-primary" asp-controller="Usuario" asp-action="Agendamento">Criar Agendamento</a>
+<a class="btn btn-primary" asp-controller="Usuario" asp-action="Edit" asp-route-id="@pessoaId">Alterar Dados?</a>

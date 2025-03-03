@@ -41,17 +41,17 @@ namespace EcoConecteWeb.Models
         public string? Logradouro { get; set; }
 
         /// <summary>
+        /// GET/SET Número
+        /// </summary>
+        [Required(ErrorMessage = "Campo obrigatório.")]
+        public string? Numero { get; set; }
+
+        /// <summary>
         /// GET/SET Bairro
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(45)]
         public string? Bairro { get; set; }
-
-        /// <summary>
-        /// GET/SET Número
-        /// </summary>
-        [Required(ErrorMessage = "Campo obrigatório.")]
-        public string? Numero { get; set; }
 
         /// <summary>
         /// GET/SET Cidade
