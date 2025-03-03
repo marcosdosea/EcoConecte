@@ -77,22 +77,21 @@
       <a href="https://github.com/victorgabrielvieiraa" target="_blank">
         <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/88777214?v=4" width="100px;" alt="Foto de Victor Gabriel Vieira Santos no Github"/><br>
         <sub>
-          <b>Victor Gabriel Vieira Santos </b>
+          <b>Victor Gabriel Vieira Santos</b>
           <p>Desenvolvedor</p>
         </sub>
       </a>
-    </td>
-  </tr>   
+    </td> 
     <td align="center">
       <a href="https://github.com/LuizSouzaNeri" target="_blank">
         <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/7561844?v=4" width="100px;" alt="Foto de Luiz Souza Neri no Github"/><br>
         <sub>
-          <b>Luiz Souza Neri </b>
+          <b>Luiz Souza Neri</b>
           <p>Desenvolvedor</p>
         </sub>
       </a>
     </td>
-  
+  </tr>
 </table>
 <table align="center">
   <tr>
