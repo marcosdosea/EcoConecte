@@ -38,11 +38,11 @@
                     Área do Cliente
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="clienteDropdown">
-                    <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Index" asp-route-id="@pessoaId">Perfil</a></li>
+                    <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Index" asp-route-id="@pessoaId">Dados Cliente</a></li>
                     <li class="dropdown-submenu position-relative">
                         <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown">Usuário</a>
                         <ul class="dropdown-menu sub-dropdown">
-                            <li><a class="dropdown-item" asp-controller="coleta" asp-action="Agendadas">Coletas Agendadas</a></li>
+                            <li><a class="dropdown-item" asp-controller="coleta" asp-action="Agendadas" asp-route-id="@pessoaId">Coletas Agendadas</a></li>
                             <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Agendamento" asp-route-id="@pessoaId">Agendar Coleta</a></li>
                         </ul>
                     </li>
@@ -59,7 +59,18 @@
                     Área Administrativa
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                    <li><a class="dropdown-item" asp-controller="Opcao" asp-action="Index">Opções</a></li>
+                    <li class="dropdown-submenu position-relative">
+                        <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown">Ecoconecte</a>
+                        <ul class="dropdown-menu sub-dropdown">
+                            <li><a class="dropdown-item" asp-controller="Pessoa">Pessoa</a></li>
+                            <li><a class="dropdown-item" asp-controller="Cooperativa">Cooperativa</a></li>
+                            <li><a class="dropdown-item" asp-controller="Agendamento">Agendamentos</a></li>
+                            <li><a class="dropdown-item" asp-controller="Coleta">Coleta</a></li>
+                            <li><a class="dropdown-item" asp-controller="Noticia">Noticia</a></li>
+                            <li><a class="dropdown-item" asp-controller="Orientacoes">Orientações</a></li>
+                           
+                        </ul>
+                    </li>
                 </ul>
             </li>
         }

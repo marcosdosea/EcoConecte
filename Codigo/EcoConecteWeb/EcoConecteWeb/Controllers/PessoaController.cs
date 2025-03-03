@@ -4,6 +4,8 @@ using Core.Service;
 using EcoConecteWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Service;
 
 namespace EcoConecteWeb.Controllers
 {

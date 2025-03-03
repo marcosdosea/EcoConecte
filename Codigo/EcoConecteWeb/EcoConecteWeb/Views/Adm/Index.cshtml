@@ -1,11 +1,11 @@
 ﻿@model EcoConecteWeb.Models.CooperativaViewModel
 
 @{
-    ViewData["Title"] = "EcoConecte - Cooperativa Detalhes";
+    ViewData["Title"] = "EcoConecte - Perfil Cooperativa";
     var pessoaId = ViewData["PessoaId"];
 }
 <h1 class="title">
-    <i class="fas fa-info-circle"></i> Detalhes da Cooperativa
+    <i class="fas fa-info-circle"></i> Perfil da Cooperativa
 </h1>
 
 <div>
@@ -73,4 +73,4 @@
     </dl>
 </div>
 <!-- Botão para Editar Perfil (se necessário) -->
-<a class="btn btn-primary" asp-controller="Adm" asp-action="Edit" asp-route-id="@pessoaId">Editar Dados Cooperativa</a>
+<a class="btn btn-primary" asp-controller="Adm" asp-action="Edit" asp-route-id="@pessoaId">Alterar Dados?</a>

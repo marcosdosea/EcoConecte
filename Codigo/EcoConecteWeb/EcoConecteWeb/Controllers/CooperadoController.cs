@@ -8,14 +8,14 @@ using Service;
 
 namespace EcoConecteWeb.Controllers
 {
-    public class UsuarioController : Controller
+    public class CooperadoController : Controller
     {
         private readonly IPessoaService _pessoaService;
         private readonly IAgendamentoService _agendamentoService;
         private readonly IMapper _mapper;
 
 
-        public UsuarioController(IPessoaService pessoaService, IAgendamentoService agendamentoService, IMapper mapper)
+        public CooperadoController(IPessoaService pessoaService, IAgendamentoService agendamentoService, IMapper mapper)
         {
             _agendamentoService = agendamentoService;
             _pessoaService = pessoaService;
@@ -40,27 +40,6 @@ namespace EcoConecteWeb.Controllers
             Pessoa? pessoa = _pessoaService.Get(id);
             PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             return View(pessoaModel);
-        }
-
-        public ActionResult Agendamento(uint id)
-        {
-            ViewData["PessoaId"] = id; // Passa o ID para a View
-            return View();
-        }
-
-
-        // POST: AgendamentoController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(AgendamentoViewModel agendamentoModel)
-        {
-
-            if (ModelState.IsValid)
-            {
-                var agendamento = _mapper.Map<Agendamento>(agendamentoModel);
-                _agendamentoService.Create(agendamento);
-            }
-            return RedirectToAction(nameof(Index));
         }
     }
 }
