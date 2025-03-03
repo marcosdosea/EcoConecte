@@ -34,12 +34,40 @@ namespace EcoConecteWeb.Controllers
             PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             return View(pessoaModel);
         }
+        // GET: Usuario_Controller/Edit/5
         public ActionResult Edit(uint id)
         {
-            ViewData["PessoaId"] = id; // Passa o ID para a View
-            Pessoa? pessoa = _pessoaService.Get(id);
-            PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            var pessoa = _pessoaService.Get(id);
+
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
+            var pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             return View(pessoaModel);
+        }
+
+        // POST: Usuario_Controller/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(uint id, PessoaViewModel pessoaModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(pessoaModel);
+            }
+
+            var pessoaExistente = _pessoaService.Get(id);
+
+            if (pessoaExistente == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(pessoaModel, pessoaExistente);
+            _pessoaService.Edit(pessoaExistente);
+            return RedirectToAction("Index", new { id = id });
         }
 
         public ActionResult Agendamento(uint id)
@@ -59,6 +87,45 @@ namespace EcoConecteWeb.Controllers
             {
                 var agendamento = _mapper.Map<Agendamento>(agendamentoModel);
                 _agendamentoService.Create(agendamento);
+                var pessoaId = agendamento.IdPessoa;
+                return RedirectToAction("Agendadas", "Usuario", new { id = pessoaId });
+            }
+            return View(agendamentoModel);
+        }
+
+        public ActionResult Agendadas(uint id)
+        {
+            ViewData["PessoaId"] = id; // Passa o ID para a View
+            var agendamentos = _agendamentoService.GetAll()
+       .Where(a => a.IdPessoa == id)
+       .Select(a => new AgendamentoViewModel
+       {
+           Id = a.Id,
+           IdPessoa = a.IdPessoa,
+           Data = a.Data,
+           Cep = a.Cep,
+           Logradouro = a.Logradouro,
+           Numero = a.Numero,
+           Bairro = a.Bairro,
+           Cidade = a.Cidade,
+           Estado = a.Estado,
+           Status = a.Status
+       }).ToList();
+
+            return View(agendamentos);
+        }
+
+
+        // POST: AgendamentoController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(AgendamentoViewModel agendamentoModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var agendamento = _mapper.Map<Agendamento>(agendamentoModel);
+                _agendamentoService.GetAll();
             }
             return RedirectToAction(nameof(Index));
         }
