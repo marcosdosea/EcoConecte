@@ -66,7 +66,23 @@ namespace EcoConecteWeb.Controllers
         public ActionResult Agendadas(uint id)
         {
             ViewData["PessoaId"] = id; // Passa o ID para a View
-            return View();
+            var agendamentos = _agendamentoService.GetAll()
+       .Where(a => a.IdPessoa == id)
+       .Select(a => new AgendamentoViewModel
+       {
+           Id = a.Id,
+           IdPessoa = a.IdPessoa,
+           Data = a.Data,
+           Cep = a.Cep,
+           Logradouro = a.Logradouro,
+           Numero = a.Numero,
+           Bairro = a.Bairro,
+           Cidade = a.Cidade,
+           Estado = a.Estado,
+           Status = a.Status
+       }).ToList();
+
+            return View(agendamentos);
         }
 
 
@@ -79,6 +95,7 @@ namespace EcoConecteWeb.Controllers
             if (ModelState.IsValid)
             {
                 var agendamento = _mapper.Map<Agendamento>(agendamentoModel);
+                _agendamentoService.GetAll();
             }
             return RedirectToAction(nameof(Index));
         }
