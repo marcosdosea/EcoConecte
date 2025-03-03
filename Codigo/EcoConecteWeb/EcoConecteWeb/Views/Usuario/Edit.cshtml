@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "EcoConecte - Editar Perfil Cliente";
-    var pessoaId = ViewData["PessoaId"];
 }
 
 <h1 class="title">
@@ -34,14 +33,14 @@
                 <span asp-validation-for="Logradouro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Bairro" class="control-label"></label>
-                <input asp-for="Bairro" class="form-control" />
-                <span asp-validation-for="Bairro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Numero" class="control-label"></label>
                 <input asp-for="Numero" class="form-control" />
                 <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bairro" class="control-label"></label>
+                <input asp-for="Bairro" class="form-control" />
+                <span asp-validation-for="Bairro" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cidade" class="control-label"></label>
@@ -54,13 +53,13 @@
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCooperativa" class="control-label" style="display: none;></label>
-                <input asp-for="IdCooperativa" class="form-control" readonly />
+                <label asp-for="IdCooperativa" class="control-label" style="display: none;"></label>
+                <input asp-for="IdCooperativa" class="form-control" readonly hidden />
                 <span asp-validation-for="IdCooperativa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label" style="display: none;></label>
-                <input asp-for="Status" class="form-control" readonly />
+                <label asp-for="Status" class="control-label" style="display: none;"></label>
+                <input asp-for="Status" class="form-control" readonly hidden />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group button-group">
@@ -69,4 +68,3 @@
         </form>
     </div>
 </div>
-

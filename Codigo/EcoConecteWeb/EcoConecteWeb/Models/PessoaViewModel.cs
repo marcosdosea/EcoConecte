@@ -30,7 +30,7 @@ namespace EcoConecteWeb.Models
         /// GET/SET Telefone
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
-        [StringLength(9, ErrorMessage = "Telefone deve ter 9 digitos.")]
+        [StringLength(11, ErrorMessage = "Telefone deve ter 11 digitos.")]
         public string? Telefone { get; set; }
 
         /// <summary>
