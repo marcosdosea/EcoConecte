@@ -4,8 +4,11 @@ using Core.Service;
 using EcoConecteWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Service;
+using EcoConecteWeb.Areas.Identity.Data;
 
 namespace EcoConecteWeb.Controllers
 {
@@ -13,14 +16,25 @@ namespace EcoConecteWeb.Controllers
     {
         private readonly IPessoaService _pessoaService;
         private readonly IMapper _mapper;
+        private readonly UserManager<UsuarioIdentity> _userManager;
+        private readonly EcoConecteContext _contextEcoconecte;
+        private readonly ILogger<PessoaController> _logger;
 
-        public PessoaController(IPessoaService pessoaService, IMapper mapper)
+        public PessoaController(
+            IPessoaService pessoaService,
+            IMapper mapper,
+            UserManager<UsuarioIdentity> userManager,
+            EcoConecteContext contextEcoconecte,
+            ILogger<PessoaController> logger)
         {
             _pessoaService = pessoaService;
             _mapper = mapper;
+            _userManager = userManager;
+            _contextEcoconecte = contextEcoconecte;
+            _logger = logger;
         }
 
-        // GET: Pessoa_Controller
+        // GET: Pessoa
         public ActionResult Index()
         {
             var listaPessoas = _pessoaService.GetAll();
@@ -28,21 +42,26 @@ namespace EcoConecteWeb.Controllers
             return View(listaPessoasModel);
         }
 
-        // GET: Pessoa_Controller/Details/5
+        // GET: Pessoa/Details/5
         public ActionResult Details(uint id)
         {
-            Pessoa? pessoa = _pessoaService.Get(id);
-            PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            var pessoa = _pessoaService.Get(id);
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
+            var pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             return View(pessoaModel);
         }
 
-        // GET: Pessoa_Controller/Create
+        // GET: Pessoa/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Pessoa_Controller/Create
+        // POST: Pessoa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PessoaViewModel pessoaModel)
@@ -51,28 +70,27 @@ namespace EcoConecteWeb.Controllers
             {
                 var pessoa = _mapper.Map<Pessoa>(pessoaModel);
                 _pessoaService.Create(pessoa);
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            return View(pessoaModel);
         }
 
-        // GET: Pessoa_Controller/Edit/5
+        // GET: Pessoa/Edit/5
         public ActionResult Edit(uint id)
         {
             var pessoa = _pessoaService.Get(id);
-
             if (pessoa == null)
             {
-                return NotFound(); // Retorna erro 404 se não encontrar
+                return NotFound();
             }
 
             var pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             return View(pessoaModel);
         }
 
-        // POST: Pessoa_Controller/Edit/5
+        // POST: Pessoa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [HttpPost]
         public ActionResult Edit(uint id, PessoaViewModel pessoaModel)
         {
             if (!ModelState.IsValid)
@@ -81,32 +99,69 @@ namespace EcoConecteWeb.Controllers
             }
 
             var pessoaExistente = _pessoaService.Get(id);
-
             if (pessoaExistente == null)
             {
                 return NotFound();
             }
+
             _mapper.Map(pessoaModel, pessoaExistente);
             _pessoaService.Edit(pessoaExistente);
             return RedirectToAction(nameof(Index));
         }
 
-
-        // GET: Pessoa_Controller/Delete/5
+        // GET: Pessoa/Delete/5
         public ActionResult Delete(uint id)
         {
-            Pessoa? pessoa = _pessoaService.Get(id);
-            PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            var pessoa = _pessoaService.Get(id);
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
+            var pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             return View(pessoaModel);
         }
 
-        // POST: Pessoa_Controller/Delete/5
+        // POST: Pessoa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(uint id, PessoaViewModel pessoaModel)
+        public async Task<IActionResult> DeleteConfirmed(uint id)
         {
-            _pessoaService.Delete(id);
-            return RedirectToAction(nameof(Index));
+            var pessoa = _pessoaService.Get(id);
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
+            var usuario = await _userManager.Users.FirstOrDefaultAsync(u => u.PessoaId == id);
+
+            using var transaction = await _contextEcoconecte.Database.BeginTransactionAsync();
+            try
+            {
+                // Excluir a pessoa do banco EcoConecte
+                _pessoaService.Delete(id);
+                await _contextEcoconecte.SaveChangesAsync();
+
+                // Se houver um usuário no Identity, excluir também
+                if (usuario != null)
+                {
+                    var result = await _userManager.DeleteAsync(usuario);
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception("Erro ao excluir o usuário no Identity.");
+                    }
+                }
+
+                await transaction.CommitAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                _logger.LogError(ex, "Erro ao excluir Pessoa e Usuário Identity.");
+                ModelState.AddModelError(string.Empty, "Erro ao excluir o cadastro. Tente novamente.");
+                return View(pessoa);
+            }
         }
     }
 }
