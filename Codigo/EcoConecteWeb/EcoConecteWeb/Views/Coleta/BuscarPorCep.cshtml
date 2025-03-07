@@ -18,16 +18,13 @@
 <div class="container">
     <h1 class="title">Sua rotina de coleta</h1>
 
-    <p class="add-button">
-        <a class="icon-button" asp-action="Create"><i class="fas fa-calendar-plus"></i> Agendar coleta</a>
-    </p>
-
     <div class="table-responsive">
         @if (!coletas.Any()) // Verifica se a lista está vazia
         {
             <div class="alert alert-danger" role="alert">
                 Ainda não existem coletas para a região buscada.
             </div>
+                <p class="lead">Cadastre-se para agendar uma coleta no seu endereço.</p>
         }
         else
         {
@@ -37,7 +34,6 @@
                         <th>Dia da Coleta</th>
                         <th>Horário de Início</th>
                         <th>Horário de Término</th>
-                        <th>Ações</th> <!-- Coluna para ações -->
                     </tr>
                 </thead>
                 <tbody>
@@ -46,13 +42,6 @@
                             <td>@coleta.DiaColeta.ToString("dddd, dd/MM")</td>
                             <td>@coleta.HorarioInicio.ToString("HH:mm")</td>
                             <td>@coleta.HorarioTermino.ToString("HH:mm")</td>
-                            <td>
-                                <div class="button-group">
-                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = coleta.Id })}'><i class='fas fa-edit'></i> Editar</a>")
-                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Details", new { id = coleta.Id })}'><i class='fas fa-info-circle'></i> Detalhes</a>")
-                                    @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Delete", new { id = coleta.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
-                                </div>
-                            </td>
                         </tr>
                     }
                 </tbody>
@@ -61,9 +50,8 @@
     </div>
 
     <div class="button-group">
-        @Html.Raw($"<a class='icon-button' href='{Url.Action("Create")}'><i class='fas fa-calendar-plus'></i> Agendar coleta</a>")
-        @Html.Raw($"<a class='icon-button' href='{Url.Action("Tips")}'><i class='fas fa-lightbulb'></i> Dicas</a>")
-        @Html.Raw($"<a class='icon-button' href='{Url.Action("Index", "Home")}'><i class='fas fa-arrow-left'></i> Voltar</a>")
+            @Html.Raw($"<a class='icon-button' href='{Url.Action("ConsultarOrientacoes", "Orientacoes")}'><i class='fas fa-lightbulb'></i> Orientações e Dicas</a>")
+            @Html.Raw($"<a class='icon-button' href='{Url.Action("Index", "Home")}'><i class='fas fa-arrow-left'></i> Voltar</a>")
     </div>
 </div>
 
