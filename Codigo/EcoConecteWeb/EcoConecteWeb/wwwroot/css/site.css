@@ -217,14 +217,55 @@ th {
     min-height: 100px; /* Definido para pelo menos três linhas de altura */
     resize: vertical; /* Permite que o usuário ajuste a altura */
 }
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para destacar os ícones */
-    border-radius: 50%; /* Deixa os botões arredondados */
-    padding: 10px; /* Ajusta o tamanho dos botões */
+/* Hero Section */
+.hero-section {
+    background-color: #66bb6a; /* Fundo verde */
+    padding: 50px 0;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-    width: 5%; /* Garante que a área de clique seja visível */
+    .hero-section h1 {
+        font-size: 3em;
+        font-weight: bold;
+    }
+
+    .hero-section p {
+        font-size: 1.25em;
+        font-weight: 300;
+    }
+
+/* Ajustes nos botões */
+.icon-button {
+    background-color: #66bb6a; /* Cor de fundo dos botões */
+    color: white;
+    border-radius: 30px; /* Botões com bordas arredondadas */
+    padding: 12px 30px; /* Aumentando o tamanho do botão */
+    transition: all 0.3s ease-in-out; /* Efeito suave no hover */
+}
+
+    .icon-button:hover {
+        background-color: #57a65e; /* Cor de fundo ao passar o mouse */
+        transform: scale(1.05); /* Pequeno zoom no botão */
+    }
+
+/* Ajustes no carrossel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+/* Ajuste no texto da seção de notícias */
+.carousel-inner h5 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.carousel-inner p {
+    font-size: 1em;
+    color: #555;
 }
