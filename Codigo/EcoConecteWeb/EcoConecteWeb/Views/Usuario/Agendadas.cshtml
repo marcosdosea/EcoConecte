@@ -44,7 +44,7 @@
                         <td>
                             <div class="button-group">
                                 <button class="icon-button">
-                                    <a href="@Url.Action("Edit", new { id = item.Id })">
+                                    <a asp-controller="Usuario" asp-action="AgendamentoEdit" asp-route-id="@item.Id">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
                                 </button>

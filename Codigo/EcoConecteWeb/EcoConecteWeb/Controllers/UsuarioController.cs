@@ -129,5 +129,26 @@ namespace EcoConecteWeb.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public ActionResult AgendamentoEdit(uint id)
+        {
+            ViewData["PessoaId"] = id; // Passa o ID para a View
+            var agendamento = _agendamentoService.GetById(id);
+            var agendamentoViewModel = _mapper.Map<AgendamentoViewModel>(agendamento);
+            return View(agendamentoViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgendamentoEditPost(uint id, AgendamentoViewModel agendamentoModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var agendamento = _mapper.Map<Agendamento>(agendamentoModel);
+                _agendamentoService.Edit(agendamento);
+            }
+            return RedirectToAction("Agendadas", "Usuario", new { id = agendamentoModel.IdPessoa });
+        }
+
     }
 }

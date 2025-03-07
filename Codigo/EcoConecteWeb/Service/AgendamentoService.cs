@@ -46,9 +46,19 @@ namespace Service
 
         public void Edit(Agendamento agendamento)
         {
-            _EcoConecteContext.Update(agendamento);
+            var existente = _EcoConecteContext.Agendamentos.Find(id);
+
+            if (existente == null)
+            {
+                throw new Exception("Agendamento não encontrado.");
+            }
+
+            // Atualiza apenas os campos editáveis, sem recriar o objeto
+            _EcoConecteContext.Entry(existente).CurrentValues.SetValues(agendamento);
+
             _EcoConecteContext.SaveChanges();
         }
+
 
         /// <summary>
         /// Listar agendamentos
