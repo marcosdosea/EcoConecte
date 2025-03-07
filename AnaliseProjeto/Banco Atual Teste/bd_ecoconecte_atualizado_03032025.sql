@@ -119,7 +119,7 @@ CREATE TABLE `noticia` (
 
 LOCK TABLES `noticia` WRITE;
 /*!40000 ALTER TABLE `noticia` DISABLE KEYS */;
-INSERT INTO `noticia` VALUES (1,'teste','teste',1,'2025-03-03 00:00:00'),(2,'Nova iniciativa sustentável','Lançamos um novo programa de reciclagem na cidade.',1,'2025-03-01 00:00:00'),(3,'Coleta seletiva expandida','Agora atendemos mais bairros com coleta seletiva.',1,'2025-02-28 00:00:00'),(4,'Feira de sustentabilidade','Evento reúne especialistas para discutir reciclagem.',1,'2025-02-20 00:00:00'),(5,'Projeto EcoJovem','Educação ambiental para jovens nas escolas.',1,'2025-02-18 00:00:00'),(6,'Aplicativo de coleta','Novo app facilita solicitação de coleta domiciliar.',1,'2025-02-15 00:00:00'),(7,'Parceria com ONGs','Apoio de ONGs fortalece ações ecológicas.',1,'2025-02-10 00:00:00'),(8,'Incentivo fiscal','Empresas podem obter incentivos por reciclagem.',1,'2025-02-05 00:00:00'),(9,'Redução de resíduos','Meta de reduzir 30% dos resíduos até 2030.',1,'2025-02-01 00:00:00'),(10,'Reciclagem de eletrônicos','Pontos de coleta para eletrônicos criados.',1,'2025-01-25 00:00:00'),(11,'Nova legislação ambiental','Regras mais rígidas para o descarte de lixo.',1,'2025-01-15 00:00:00');
+INSERT INTO `noticia` VALUES (1,'EcoConecte','Seja Bem Vindo! Aqui você encontra tecnologia!',1,'2025-03-03 00:00:00'),(2,'Nova iniciativa sustentável','Lançamos um novo programa de reciclagem na cidade.',1,'2025-03-01 00:00:00'),(3,'Coleta seletiva expandida','Agora atendemos mais bairros com coleta seletiva.',1,'2025-02-28 00:00:00'),(4,'Feira de sustentabilidade','Evento reúne especialistas para discutir reciclagem.',1,'2025-02-20 00:00:00'),(5,'Projeto EcoJovem','Educação ambiental para jovens nas escolas.',1,'2025-02-18 00:00:00'),(6,'Aplicativo de coleta','Novo app facilita solicitação de coleta domiciliar.',1,'2025-02-15 00:00:00'),(7,'Parceria com ONGs','Apoio de ONGs fortalece ações ecológicas.',1,'2025-02-10 00:00:00'),(8,'Incentivo fiscal','Empresas podem obter incentivos por reciclagem.',1,'2025-02-05 00:00:00'),(9,'Redução de resíduos','Meta de reduzir 30% dos resíduos até 2030.',1,'2025-02-01 00:00:00'),(10,'Reciclagem de eletrônicos','Pontos de coleta para eletrônicos criados.',1,'2025-01-25 00:00:00'),(11,'Nova legislação ambiental','Regras mais rígidas para o descarte de lixo.',1,'2025-01-15 00:00:00');
 /*!40000 ALTER TABLE `noticia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +185,7 @@ CREATE TABLE `pessoa` (
 
 LOCK TABLES `pessoa` WRITE;
 /*!40000 ALTER TABLE `pessoa` DISABLE KEYS */;
-INSERT INTO `pessoa` VALUES (2,'01346906564','Luiz Souza Neri','79999020585','Av Antônio Torres','Conjunto Josefa Vilma','55','Pinhao','SE',NULL,'A'),(4,'01346906502','Carol','79999020585','Rua C','Centro','11','Itabaiana','SE',1,'A');
+INSERT INTO `pessoa` VALUES (2,'11111111111','Luiz','11111111111','Av Antônio Torres','Conjunto Josefa Vilma','55','Pinhao','SE',NULL,'A'),(4,'22222222222','Carol','22222222222','Rua C','Centro','11','Itabaiana','SE',1,'A');
 /*!40000 ALTER TABLE `pessoa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,6 +253,10 @@ LOCK TABLES `vendamaterial` WRITE;
 INSERT INTO `vendamaterial` VALUES (2,'M',150.00,20.00,'2025-03-01 10:30:00',1,2),(3,'P',75.50,15.00,'2025-02-28 14:20:00',1,4),(4,'M',200.00,30.00,'2025-02-25 09:45:00',1,2),(5,'P',50.00,10.00,'2025-02-22 16:00:00',1,4),(6,'M',180.00,25.00,'2025-02-20 11:15:00',1,2),(7,'P',90.00,18.00,'2025-02-18 08:40:00',1,4),(8,'M',220.00,35.00,'2025-02-15 13:55:00',1,2),(9,'P',60.00,12.00,'2025-02-10 17:30:00',1,4),(10,'M',140.00,22.00,'2025-02-05 12:10:00',1,2),(11,'P',85.00,16.00,'2025-02-01 09:00:00',1,4);
 /*!40000 ALTER TABLE `vendamaterial` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'ecoconecte'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -263,4 +267,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-03 22:57:19
+-- Dump completed on 2025-03-05  5:55:25
