@@ -69,10 +69,12 @@
 
         <div class="button-group">
             <input type="submit" value="Salvar" class="icon-button" />
-            <a asp-controller="Usuario" asp-action="Agendadas" asp-route-id="@pessoaId" class="icon-button">
+            <a asp-controller="Usuario" asp-action="Agendadas" asp-route-id="@ViewData["PessoaId"]" class="icon-button">
                 <i class="fa fa-arrow-left"></i> Voltar
             </a>
+
         </div>
+
     </form>
 </div>
 

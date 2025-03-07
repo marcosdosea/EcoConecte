@@ -133,6 +133,8 @@ namespace EcoConecteWeb.Controllers
         {
             var agendamento = _agendamentoService.GetById(id);
             var agendamentoViewModel = _mapper.Map<AgendamentoViewModel>(agendamento);
+            // Adiciona o ID da pessoa no ViewData para que a View tenha acesso
+            ViewData["PessoaId"] = agendamentoViewModel.IdPessoa;
             return View(agendamentoViewModel);
         }
 
@@ -163,8 +165,9 @@ namespace EcoConecteWeb.Controllers
         public ActionResult AgendamentoDelete(uint id, AgendamentoViewModel agendamento)
         {
             _agendamentoService.Delete(id);
-            return RedirectToAction();
+            return RedirectToAction("Agendadas", "Usuario", new { id = agendamento.IdPessoa });
         }
+
 
     }
 }
