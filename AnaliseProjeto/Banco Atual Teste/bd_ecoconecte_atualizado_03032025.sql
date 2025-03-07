@@ -36,7 +36,6 @@ CREATE TABLE `agendamento` (
   `estado` varchar(2) NOT NULL,
   `status` enum('A','C') DEFAULT NULL COMMENT 'A - ATIVO\nC -CANCELADO',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `cep_UNIQUE` (`cep`),
   KEY `fk_Agendamento_Cidadao1_idx` (`idPessoa`),
   CONSTRAINT `fk_Agendamento_Cidadao1_idx` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
@@ -48,7 +47,7 @@ CREATE TABLE `agendamento` (
 
 LOCK TABLES `agendamento` WRITE;
 /*!40000 ALTER TABLE `agendamento` DISABLE KEYS */;
-INSERT INTO `agendamento` VALUES (5,'2025-03-05 08:00:00','49500001','Rua A','100',2,'Centro','Cidade A','SE','A'),(6,'2025-03-06 09:30:00','49500002','Rua B','200',4,'Bairro B','Cidade B','SE','A'),(7,'2025-03-07 07:45:00','49500003','Rua C','300',2,'Centro','Cidade C','SE','A'),(8,'2025-03-08 10:15:00','49500004','Rua D','400',4,'Bairro D','Cidade D','SE','A'),(9,'2025-03-09 11:00:00','49500005','Rua E','500',2,'Centro','Cidade E','SE','A'),(10,'2025-03-10 13:00:00','49500006','Rua F','600',4,'Bairro F','Cidade F','SE','A'),(11,'2025-03-11 15:30:00','49500007','Rua G','700',2,'Centro','Cidade G','SE','A'),(12,'2025-03-12 16:45:00','49500008','Rua H','800',4,'Bairro H','Cidade H','SE','A'),(13,'2025-03-13 18:00:00','49500009','Rua I','900',2,'Centro','Cidade I','SE','A'),(14,'2025-03-14 19:15:00','49500010','Rua J','1000',4,'Bairro J','Cidade J','SE','A');
+INSERT INTO `agendamento` VALUES (5,'2025-03-05 08:00:00','49500001','Rua A','100',2,'Centro','Cidade A','SE','A'),(6,'2025-03-06 09:30:00','49500002','Rua B','200',4,'Bairro B','Cidade B','SE','A'),(7,'2025-03-07 07:45:00','49500003','Rua C','300',2,'Centro','Cidade C','SE','A'),(8,'2025-03-08 10:15:00','49500004','Rua D','400',4,'Bairro D','Cidade D','SE','A'),(9,'2025-03-09 11:00:00','49500005','Rua E','500',2,'Centro','Cidade E','SE','A'),(10,'2025-03-10 13:00:00','49500006','Rua F','600',4,'Bairro F','Cidade F','SE','A'),(11,'2025-03-11 15:30:00','49500007','Rua G','700',2,'Centro','Cidade G','SE','A'),(12,'2025-03-12 16:45:00','49500008','Rua H','800',4,'Bairro H','Cidade H','SE','A'),(13,'2025-03-13 00:00:00','49500009','Rua I','900',2,'Centro','Cidade AJU','SE','A'),(14,'2025-03-14 19:15:00','49500010','Rua J','1000',4,'Bairro J','Cidade J','SE','A');
 /*!40000 ALTER TABLE `agendamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,4 +266,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-05  5:55:25
+-- Dump completed on 2025-03-07  2:31:24

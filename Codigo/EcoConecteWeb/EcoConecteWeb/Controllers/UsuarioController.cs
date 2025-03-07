@@ -14,7 +14,6 @@ namespace EcoConecteWeb.Controllers
         private readonly IAgendamentoService _agendamentoService;
         private readonly IMapper _mapper;
 
-
         public UsuarioController(IPessoaService pessoaService, IAgendamentoService agendamentoService, IMapper mapper)
         {
             _agendamentoService = agendamentoService;
@@ -132,15 +131,15 @@ namespace EcoConecteWeb.Controllers
 
         public ActionResult AgendamentoEdit(uint id)
         {
-            ViewData["PessoaId"] = id; // Passa o ID para a View
             var agendamento = _agendamentoService.GetById(id);
             var agendamentoViewModel = _mapper.Map<AgendamentoViewModel>(agendamento);
             return View(agendamentoViewModel);
         }
 
+        // POST: AgendamentoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AgendamentoEditPost(uint id, AgendamentoViewModel agendamentoModel)
+        public ActionResult AgendamentoEdit(uint id, AgendamentoViewModel agendamentoModel)
         {
             if (ModelState.IsValid)
             {
@@ -148,6 +147,23 @@ namespace EcoConecteWeb.Controllers
                 _agendamentoService.Edit(agendamento);
             }
             return RedirectToAction("Agendadas", "Usuario", new { id = agendamentoModel.IdPessoa });
+        }
+
+        // GET: AgendamentoController/Delete/5
+        public ActionResult AgendamentoDelete(uint id)
+        {
+            var agendamento = _agendamentoService.GetById(id);
+            var agendamentoModel = _mapper.Map<AgendamentoViewModel>(agendamento);
+            return View(agendamentoModel);
+        }
+
+        // POST: AgendamentoController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgendamentoDelete(uint id, AgendamentoViewModel agendamento)
+        {
+            _agendamentoService.Delete(id);
+            return RedirectToAction();
         }
 
     }

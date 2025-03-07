@@ -10,14 +10,14 @@
 </h1>
 
 <div class="form-container text-left">
-    <form asp-action="AgendamentoEditPost" asp-controller="Usuario" method="post">
+    <form asp-action="AgendamentoEdit" asp-controller="Usuario" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-       <div class="form-group">
+        <div class="form-group">
             <label asp-for="IdPessoa" class="control-label"></label>
-            <input asp-for="IdPessoa" class="form-control"/>
+            <input asp-for="IdPessoa" class="form-control" />
             <span asp-validation-for="IdPessoa" class="text-danger"></span>
-         </div>
+        </div>
 
         <div class="form-group">
             <label asp-for="Data" class="control-label text-left"></label>
@@ -73,7 +73,6 @@
                 <i class="fa fa-arrow-left"></i> Voltar
             </a>
         </div>
-
     </form>
 </div>
 
