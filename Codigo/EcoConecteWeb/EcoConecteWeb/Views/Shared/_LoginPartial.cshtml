@@ -105,23 +105,27 @@
                         <a class="dropdown-item" asp-controller="Cooperado" asp-action="Index" asp-route-id="@pessoaId">Dados do Cooperado</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" asp-controller="ListaVendas" asp-action="Index">Minhas Vendas</a>
+                        <a class="dropdown-item" asp-controller="Venda" asp-action="ConsultaVenda" asp-route-id="@pessoaId">Minhas Vendas</a>
                     </li>
                     <li class="dropdown-submenu position-relative">
                         <a class="dropdown-item dropdown-toggle" href="#" id="AgendamentosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Meus Agendamentos
+                            Agendamentos
                         </a>
                         <ul class="dropdown-menu sub-dropdown">
                             <li>
-                                <a class="dropdown-item" asp-controller="Cooperado" asp-action="Agendadas" asp-route-id="@pessoaId">Agendamentos Cliente</a>
+                                <a class="dropdown-item" asp-controller="Usuario" asp-action="Agendamento" asp-route-id="@pessoaId">Agendar Coleta</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" asp-controller="Cooperado" asp-action="AgendamentoCoop" asp-route-id="@pessoaId">Agendamentos Cooperado</a>
+                                <a class="dropdown-item" asp-controller="Usuario" asp-action="Agendadas" asp-route-id="@pessoaId">Meus Agendamentos</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Coleta" asp-action="AgendamentoCoop" asp-route-id="@pessoaId">Coletas</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </li>
+
 
         }
     }

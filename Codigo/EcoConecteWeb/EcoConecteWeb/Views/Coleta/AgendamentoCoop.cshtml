@@ -1,0 +1,77 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.ColetaViewModel>
+
+@{
+    ViewData["Title"] = "EcoConecte - Coletas";
+    var pessoaId = ViewData["PessoaId"];  // Pega o ID da pessoa logada
+    var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();// Garantir que o Model não seja nulo
+}
+
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-recycle"></i> Coletas
+    </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cep)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Logradouro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Numero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaColeta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioTermino)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdCooperativa)
+                </th>
+                <th>Ações</th> <!-- Adicionada coluna para ações -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in coletas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cep)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Logradouro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaColeta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorarioInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorarioTermino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCooperativa)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

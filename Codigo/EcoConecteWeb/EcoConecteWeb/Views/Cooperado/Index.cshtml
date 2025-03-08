@@ -62,4 +62,9 @@
     </dl>
 </div>
 <!-- Botão para Editar Perfil (se necessário) -->
-<a class="btn btn-primary" asp-controller="Cooperado" asp-action="Edit" asp-route-id="@pessoaId">Alterar Dados?</a>
+<div class="form-group button-group">
+    <a class="btn btn-primary" asp-controller="Cooperado" asp-action="Edit" asp-route-id="@pessoaId">Alterar Dados?</a>
+</div>
+<div class="form-group button-group">
+    <a href="@Url.Action("Index", "Home")" class="btn icon-button">Voltar</a>
+</div>

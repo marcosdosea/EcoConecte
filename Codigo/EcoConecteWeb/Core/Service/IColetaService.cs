@@ -54,5 +54,8 @@ namespace Core.Service
         IEnumerable<Coleta> GetByLagradouro(string lagradouro);
 
         IEnumerable<Coleta> GetByCep(string cep);
+
+        public IEnumerable<Coleta> GetByCooperativaId(uint idCooperativa);
+        
     }
 }

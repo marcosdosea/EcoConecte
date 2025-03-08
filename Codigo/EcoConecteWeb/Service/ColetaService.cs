@@ -96,5 +96,13 @@ namespace Service
             return context.Coletas.Where(c => c.Cep == cep).ToList();
         }
 
+        public IEnumerable<Coleta> GetByCooperativaId(uint idCooperativa)
+        {
+            return context.Coletas
+                .AsNoTracking()
+                .Where(c => c.IdCooperativa == idCooperativa)
+                .ToList();
+        }
+
     }
 }
