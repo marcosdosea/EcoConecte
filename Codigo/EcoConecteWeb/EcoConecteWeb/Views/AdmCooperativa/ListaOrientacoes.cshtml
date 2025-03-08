@@ -1,0 +1,57 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.OrientacoesViewModel>
+
+@{
+    ViewData["Title"] = "EcoConnect - Orientações";
+    var pessoaId = ViewData["PessoaId"];
+}
+
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-info-circle"></i> Orientações
+    </h1>
+
+    <p class="add-button">
+        <a class="icon-button" asp-action="Create">
+            <i class="fas fa-plus"></i> Cadastrar nova orientação
+        </a>
+    </p>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Titulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th>Ações</th> <!-- Adicionada coluna para ações -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            <div class="button-group">
+                                <a class="icon-button" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <a class="icon-button" asp-action="Delete" asp-route-id="@item.Id">
+                                    <i class="fas fa-trash"></i> Apagar
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
