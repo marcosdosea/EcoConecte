@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EcoConecteWeb.Views.Cooperado
+namespace EcoConecteWeb.Views.Coleta
 {
     public class AgendamentoCoopModel : PageModel
     {
