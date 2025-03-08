@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
+using System.Security.Claims;
 
 namespace EcoConecteWeb.Controllers
 {
@@ -29,20 +30,35 @@ namespace EcoConecteWeb.Controllers
         }
 
         // GET: VendaController
-        public ActionResult ConsultaVenda()
+        // Ação para consultar as vendas
+        public ActionResult ConsultaVenda(uint id)
         {
-            var ConsultaVenda = _vendaService.GetAll();
-            var ListaVendasModel = _mapper.Map<IEnumerable<VendaViewModel>>(ConsultaVenda);
+            // Supondo que o id logado seja o id de pessoa ou algo similar
+            var userId = User.Identity.Name; // ou User.Identity.GetUserId() dependendo do seu método de autenticação
+
+            // Recupera as vendas filtradas para o id da pessoa logada
+            var vendas = _vendaService.GetAll()
+                .Where(v => v.IdPessoa == id)  // Filtra pelas vendas da pessoa logada
+                .ToList();
+
+            // Mapeia para o ViewModel
+            var ListaVendasModel = _mapper.Map<IEnumerable<VendaViewModel>>(vendas);
+
+            // Passa o ID da pessoa logada para a View
+            ViewData["PessoaId"] = userId;
+
             return View(ListaVendasModel);
         }
 
         // GET: VendaController
         public ActionResult ConsultaVendaPessoa(uint id)
         {
-            var ConsultaVendaPessoa = _vendaService.GetAll();
-            var ListaVendasModel = _mapper.Map<IEnumerable<VendaViewModel>>(ConsultaVendaPessoa);
+            var vendas = _vendaService.GetById(id);
+            var ListaVendasModel = _mapper.Map<IEnumerable<VendaViewModel>>(vendas);
             return View(ListaVendasModel);
         }
+
+
 
         // GET: VendaController/Details/5
         public ActionResult Details(uint id)
