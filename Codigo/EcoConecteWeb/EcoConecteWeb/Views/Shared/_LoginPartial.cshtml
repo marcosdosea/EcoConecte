@@ -41,7 +41,7 @@
                     <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Index" asp-route-id="@pessoaId">Minhas Informações</a></li>
                     <li><a class="dropdown-item" asp-controller="Suporte" asp-action="Index">Suporte</a></li>
                     <li class="dropdown-submenu position-relative">
-                        <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown">Opções</a>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown"> Menu Opções</a>
                         <ul class="dropdown-menu sub-dropdown">
                             <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Agendadas" asp-route-id="@pessoaId">Coletas Agendadas</a></li>
                             <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Agendamento" asp-route-id="@pessoaId">Agendar Coleta</a></li>
@@ -67,6 +67,7 @@
                             <li><a class="dropdown-item" asp-controller="Coleta">Coleta</a></li>
                             <li><a class="dropdown-item" asp-controller="Noticia">Noticia</a></li>
                             <li><a class="dropdown-item" asp-controller="Orientacoes">Orientações</a></li>
+                            <li><a class="dropdown-item" asp-controller="Venda">Vendas</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -81,14 +82,14 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="coopDropdown">
                     <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="Index" asp-route-id="@pessoaId">Dados da Cooperativa</a></li>
-                    <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown">Opções</a>
+                    <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown">Menu Opções</a>
                     <ul class="dropdown-menu sub-dropdown">
-                        <li><a class="dropdown-item" asp-controller="Cooperativa" asp-action="Cooperados">Cooperados</a></li>
-                        <li><a class="dropdown-item" asp-controller="Cooperativa" asp-action="Agendamentos">Agendamentos</a></li>
-                        <li><a class="dropdown-item" asp-controller="Cooperativa" asp-action="Coletas">Coletas</a></li>
-                        <li><a class="dropdown-item" asp-controller="Cooperativa" asp-action="Noticias">Noticias</a></li>
-                        <li><a class="dropdown-item" asp-controller="Cooperativa" asp-action="Orientações">Orientações</a></li>
-                        <li><a class="dropdown-item" asp-controller="Cooperativa" asp-action="Vendas">Vendas</a></li>
+                        <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="ListaCooperados" asp-route-id="@pessoaId">Cooperados</a></li>
+                        <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="ListaAgendamentos" asp-route-id="@pessoaId">Agendamentos</a></li>
+                        <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="ListaColetas" asp-route-id="@pessoaId">Coletas</a></li>
+                        <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="ListaNoticias" asp-route-id="@pessoaId">Noticias</a></li>
+                        <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="ListaOrientacoes" asp-route-id="@pessoaId">Orientações</a></li>
+                        <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="ListaVenda" asp-route-id="@pessoaId">Vendas</a></li>
                     </ul>
                 </ul>
             </li>

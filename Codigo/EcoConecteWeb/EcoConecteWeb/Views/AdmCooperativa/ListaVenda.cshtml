@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.VendaViewModel>
+
+@{
+    ViewData["Title"] = "EcoConecte - Vendas";
+    var pessoaId = ViewData["PessoaId"];
+}
+
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-shopping-cart"></i> Vendas
+    </h1>
+
+    <p class="add-button">
+        <button class="icon-button">
+            <a href="@Url.Action("Create")">
+                <i class="fas fa-plus"></i> Cadastrar nova venda
+            </a>
+        </button>
+    </p>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Tipo)</th>
+                    <th>@Html.DisplayNameFor(model => model.Valor)</th>
+                    <th>@Html.DisplayNameFor(model => model.Quantidade)</th>
+                    <th>@Html.DisplayNameFor(model => model.Data)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdPessoa)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Valor)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdPessoa)</td>
+                        <td>
+                            <div class="button-group">
+                                <button class="icon-button">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                </button>
+                                <button class="icon-button">
+                                    <a href="@Url.Action("Delete", new { id = item.Id })">
+                                        <i class="fas fa-trash"></i> Apagar
+                                    </a>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

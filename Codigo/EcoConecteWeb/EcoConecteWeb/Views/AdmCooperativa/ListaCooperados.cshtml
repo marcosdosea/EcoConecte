@@ -1,0 +1,87 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.PessoaViewModel>
+
+@{
+    ViewData["Title"] = "EcoConecte - Cooperados";
+    var pessoaId = ViewData["PessoaId"];
+}
+
+<h1 class="title">
+    <i class="fas fa-user"></i> Cooperados
+</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCooperativa)
+            </th>
+             <th>Ações</th> <!-- Adicionada coluna para ações -->
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cpf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logradouro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCooperativa)
+            </td>
+                <td>
+                    <div class="button-group">
+                        <button class="icon-button">
+                            <a href="@Url.Action("Edit", new { id = item.Id })">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                        </button>
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

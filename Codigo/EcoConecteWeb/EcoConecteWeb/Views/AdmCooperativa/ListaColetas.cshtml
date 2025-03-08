@@ -1,0 +1,79 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.ColetaViewModel>
+
+@{
+    ViewData["Title"] = "EcoConecte - Coletas";
+    var pessoaId = ViewData["PessoaId"];
+
+    // Garantir que o Model não seja nulo
+    var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();
+}
+
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-recycle"></i> Coletas
+    </h1>
+
+    <p class="add-button">
+        <a class="icon-button" asp-action="Create"><i class="fas fa-plus"></i> Cadastrar nova coleta</a>
+    </p>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cep)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Logradouro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Numero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaColeta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioTermino)
+                </th>
+                <th>Ações</th> <!-- Adicionada coluna para ações -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in coletas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cep)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Logradouro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaColeta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorarioInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorarioTermino)
+                    </td>
+                    <td>
+                        <div class="button-group">
+                            @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = item.Id })}'><i class='fas fa-edit'></i> Editar</a> ")
+                            @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Delete", new { id = item.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+</div>
