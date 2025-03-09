@@ -46,5 +46,12 @@ namespace Core.Service
         /// <param name="id"></param>
         /// <returns></returns>
         Agendamento ? GetById(uint id);
+
+        Task<Agendamento?> ObterPorIdAsync(uint id);
+        Task ExcluirAsync(uint id);
+
+        Task<Agendamento> GetByIdAsync(uint id);
+
+        Task<bool> UpdateAsync(Agendamento agendamento);
     }
 }

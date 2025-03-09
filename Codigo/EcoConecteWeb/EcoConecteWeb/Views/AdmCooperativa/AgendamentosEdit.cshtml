@@ -1,0 +1,45 @@
+﻿@model EcoConecteWeb.Models.AgendamentoViewModel
+
+@{
+    ViewData["Title"] = "EcoConecte - Editar Agendamento";
+    var idCoop = ViewData["idCoop"];
+}
+
+<h1 class="title">
+    <i class="fas fa-edit"></i> Editar Agendamento
+</h1>
+
+<div class="form-container text-left">
+    <form asp-action="AgendamentosEdit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Campo oculto para enviar o ID do cooperativa -->
+        <input type="hidden" name="idCoop" value="@idCoop" />
+
+        <div class="form-group">
+            <label asp-for="Data" class="control-label text-left"></label>
+            <input asp-for="Data" class="form-control" />
+            <span asp-validation-for="Data" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Status" class="control-label text-left"></label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+
+        <div class="button-group">
+            <input type="submit" value="Salvar" class="icon-button" />
+            <a asp-controller="AdmCooperativa" asp-action="ListaAgendamentos" asp-route-id="@idCoop" class="icon-button">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

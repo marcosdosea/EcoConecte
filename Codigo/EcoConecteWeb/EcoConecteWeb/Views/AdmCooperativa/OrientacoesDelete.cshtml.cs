@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EcoConecteWeb.Views.AdmCooperativa
 {
-    public class ListaAgendamentos : PageModel
+    public class OrientacoesDeleteModel : PageModel
     {
         public void OnGet()
         {

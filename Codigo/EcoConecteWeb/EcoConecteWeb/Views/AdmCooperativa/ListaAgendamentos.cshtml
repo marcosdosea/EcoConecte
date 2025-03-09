@@ -2,21 +2,13 @@
 
 @{
     ViewData["Title"] = "EcoConecte - Agendamentos";
-    var pessoaId = ViewData["PessoaId"];
+    var IdCoop = ViewData["idCoop"];
 }
 
 <div class="container">
     <h1 class="title">
         <i class="fas fa-calendar-alt"></i> Agendamentos
     </h1>
-
-    <p class="add-button">
-        <button class="icon-button">
-            <a href="@Url.Action("Create")">
-                <i class="fas fa-plus"></i> Cadastrar novo agendamento
-            </a>
-        </button>
-    </p>
 
     <div class="table-responsive">
         <table class="table">
@@ -48,15 +40,16 @@
                         <td>
                             <div class="button-group">
                                 <button class="icon-button">
-                                    <a href="@Url.Action("Edit", new { id = item.Id })">
+                                    <a href="@Url.Action("AgendamentosEdit", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
                                 </button>
                                 <button class="icon-button">
-                                    <a href="@Url.Action("Delete", new { id = item.Id })">
+                                    <a href="@Url.Action("AgendamentosDelete", "AdmCooperativa", new { id = item.Id, CepCoop =  item.Cep})">
                                         <i class="fas fa-trash"></i> Apagar
                                     </a>
                                 </button>
+
                             </div>
                         </td>
                     </tr>

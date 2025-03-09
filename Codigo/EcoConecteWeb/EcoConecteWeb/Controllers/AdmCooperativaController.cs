@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Core;
 using Core.Service;
+using EcoConecteWeb.Migrations;
 using EcoConecteWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Service;
 
 namespace EcoConecteWeb.Controllers
@@ -66,7 +68,19 @@ namespace EcoConecteWeb.Controllers
                 var cooperativa = _mapper.Map<Cooperativa>(cooperativaModel);
                 _cooperativaService.Update(cooperativa);
             }
-            return RedirectToAction("Index", "Adm", new { id = id });
+            return RedirectToAction("Index", "AdmCooperativa", new { id = id });
+        }
+
+        /// <summary>
+        /// Busca Cooperativas pelo CEP
+        /// </summary>
+        /// <param name="CepCoop"></param>
+        /// <returns></returns>
+        public int buscaCoopCep(string CepCoop)
+        {
+            var listaCooperativa = _cooperativaService.GetAll().Where(a => a.Cep == CepCoop).ToList();
+            var idCoop = listaCooperativa[0].Id;
+            return (int)idCoop;
         }
 
         public ActionResult ListaCooperados(int id)
@@ -76,9 +90,9 @@ namespace EcoConecteWeb.Controllers
                                               .Where(p => p.IdCooperativa == id && p.Status != "I")
                                               .ToList();
 
+            ViewData["PessoaId"] = id; // Passa o ID para a View
             // Mapeia para a ViewModel
             var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
-
             return View(listaPessoasModel);
         }
 
@@ -99,10 +113,74 @@ namespace EcoConecteWeb.Controllers
                                                        .Where(a => a.Cep == cepCooperativa)
                                                        .ToList();
 
+            ViewData["PessoaId"] = id; // Passa o ID para a View
             // Mapear para a ViewModel
             var listaAgendamentosModel = _mapper.Map<List<AgendamentoViewModel>>(listaAgendamentos);
 
             return View(listaAgendamentosModel);
+        }
+
+        public async Task<IActionResult> AgendamentosEdit(uint id, string CepCoop)
+        {
+            var agendamento = await _agendamentoService.GetByIdAsync(id);
+            if (agendamento == null)
+            {
+                return NotFound();
+            }
+            var idCoop = buscaCoopCep(CepCoop);
+            ViewData["idCoop"] = idCoop;
+            var ViewModel = _mapper.Map<AgendamentoViewModel>(agendamento);
+            return View(ViewModel);
+        }
+
+        // POST: Agendamento/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AgendamentosEdit(AgendamentoViewModel ViewModel, int idCoop)
+        {
+            var agendamentoAtual = await _agendamentoService.GetByIdAsync(ViewModel.Id);
+
+            // Atualiza os campos necessários
+            agendamentoAtual.Data = ViewModel.Data;
+            agendamentoAtual.Status = ViewModel.Status;
+            
+            var sucesso = await _agendamentoService.UpdateAsync(agendamentoAtual);
+            if (sucesso == false)
+            {
+                return NotFound("Agendamento não foi atualizado!.");
+            }
+            return RedirectToAction("ListaAgendamentos", "AdmCooperativa", new { id = idCoop });
+
+        }
+
+
+        // GET: Confirmação de Exclusão
+        public async Task<IActionResult> AgendamentosDelete(uint id, string CepCoop)
+        {
+            var agendamento = await _agendamentoService.ObterPorIdAsync(id);
+            if (agendamento == null)
+            {
+                return NotFound();
+            }
+            var idCoop = buscaCoopCep(CepCoop);
+            ViewData["idCoop"] = idCoop;
+            var viewModel = _mapper.Map<AgendamentoViewModel>(agendamento);
+            return View(viewModel);
+        }
+
+        // POST: Exclusão do Agendamento
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(uint id, int idCoop)
+        {
+            var agendamento = await _agendamentoService.ObterPorIdAsync(id);
+            if (agendamento == null)
+            {
+                return NotFound();
+            }
+
+            await _agendamentoService.ExcluirAsync(id);
+            return RedirectToAction("ListaAgendamentos", "AdmCooperativa", new { id = idCoop });
         }
 
         public ActionResult ListaColetas(int id)
