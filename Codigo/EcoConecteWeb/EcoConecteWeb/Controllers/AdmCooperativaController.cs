@@ -268,5 +268,46 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("ListaColetas", "AdmCooperativa", new { id = idCoop });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ColetaEdit(uint id)
+        {
+            var coleta = await _coletaService.GetByIdAsync(id);
+            if (coleta == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = _mapper.Map<ColetaViewModel>(coleta);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ColetaEdit(uint id, ColetaViewModel model)
+        {
+            var coleta = await _coletaService.GetByIdAsync(model.Id);
+            if (coleta == null)
+            {
+                return NotFound();
+            }
+
+            // Atualiza os dados da coleta
+            coleta.Logradouro = model.Logradouro;
+            coleta.Numero = int.Parse(model.Numero);
+            coleta.DiaColeta = model.DiaColeta;
+            coleta.HorarioInicio = model.HorarioInicio;
+            coleta.HorarioTermino = model.HorarioTermino;
+
+            var sucesso = await _coletaService.UpdateAsync(coleta);
+            if (!sucesso)
+            {
+                ModelState.AddModelError("", "Erro ao atualizar a coleta.");
+                return View(model);
+            }
+
+            return RedirectToAction("ListaColetas", "AdmCooperativa", new { id = coleta.IdCooperativa });
+        }
+
+
     }
 }

@@ -62,6 +62,8 @@ namespace Core.Service
 
         Task<bool> DeleteAsync(uint id);
 
+        Task<bool> UpdateAsync(Coleta coleta);
+
 
     }
 }

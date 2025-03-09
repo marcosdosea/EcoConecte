@@ -41,13 +41,13 @@
                 
                 <div class="form-group">
                     <label asp-for="HorarioInicio" class="control-label"></label>
-                    <input asp-for="HorarioInicio" class="form-control" />
+                    <input asp-for="HorarioInicio" class="form-control" value="@Model.HorarioInicio.ToString("HH:mm")" />
                     <span asp-validation-for="HorarioInicio" class="text-danger"></span>
                 </div>
-                
+
                 <div class="form-group">
                     <label asp-for="HorarioTermino" class="control-label"></label>
-                    <input asp-for="HorarioTermino" class="form-control" />
+                    <input asp-for="HorarioTermino" class="form-control" value="@Model.HorarioTermino.ToString("HH:mm")" />
                     <span asp-validation-for="HorarioTermino" class="text-danger"></span>
                 </div>
                 
