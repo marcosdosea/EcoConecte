@@ -241,5 +241,32 @@ namespace EcoConecteWeb.Controllers
             return View(listaVendasModel);
         }
 
+        // GET: Confirmar Exclusão da Coleta
+        public async Task<IActionResult> ColetaDelete(uint id)
+        {
+            var coleta = await _coletaService.GetByIdAsync(id);
+            if (coleta == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = _mapper.Map<ColetaViewModel>(coleta);
+            return View(viewModel);
+        }
+
+        // POST: Excluir Coleta
+        [HttpPost, ActionName("ColetaDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ColetaDeleteConfirmed(uint id, int idCoop)
+        {
+            var coleta = await _coletaService.GetByIdAsync(id);
+            if (coleta != null)
+            {
+                await _coletaService.DeleteAsync(id);
+            }
+
+            return RedirectToAction("ListaColetas", "AdmCooperativa", new { id = idCoop });
+        }
+
     }
 }

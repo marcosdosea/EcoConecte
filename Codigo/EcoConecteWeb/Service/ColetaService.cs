@@ -104,5 +104,38 @@ namespace Service
                 .ToList();
         }
 
+        public async Task DeleteAsync(uint id)
+        {
+            var coleta = await context.Coletas.FindAsync(id);
+            if (coleta != null)
+            {
+                context.Coletas.Remove(coleta);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<Coleta> GetByIdAsync(uint id)
+        {
+            return await context.Coletas.FindAsync(id);
+        }
+
+        public async Task<bool> UpdateAsync(Coleta coletas)
+        {
+            context.Coletas.Update(coletas);
+            return await context.SaveChangesAsync() > 0;
+        }
+
+        async Task<bool> IColetaService.DeleteAsync(uint id)
+        {
+            var coleta = await context.Coletas.FindAsync(id);
+            if (coleta == null)
+            {
+                return false; // Retorna falso se a coleta não for encontrada
+            }
+
+            context.Coletas.Remove(coleta);
+            await context.SaveChangesAsync();
+            return true; // Retorna verdadeiro se a exclusão for bem-sucedida
+        }
     }
 }
