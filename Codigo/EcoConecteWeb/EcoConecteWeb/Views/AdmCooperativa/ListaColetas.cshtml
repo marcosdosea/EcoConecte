@@ -66,8 +66,8 @@
                     </td>
                     <td>
                         <div class="button-group">
-                            @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = item.Id })}'><i class='fas fa-edit'></i> Editar</a> ")
-                            @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Delete", new { id = item.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
+                            @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("ColetaEdit", new { id = item.Id })}'><i class='fas fa-edit'></i> Editar</a> ")
+                            @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("ColetaDelete", new { id = item.Id })}'><i class='fas fa-trash'></i> Apagar</a>")
                         </div>
                     </td>
                 </tr>

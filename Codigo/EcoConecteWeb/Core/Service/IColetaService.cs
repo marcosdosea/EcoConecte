@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,13 @@ namespace Core.Service
         IEnumerable<Coleta> GetByCep(string cep);
 
         public IEnumerable<Coleta> GetByCooperativaId(uint idCooperativa);
-        
+
+        Task<Coleta> GetByIdAsync(uint id);
+
+        Task<bool> DeleteAsync(uint id);
+
+        Task<bool> UpdateAsync(Coleta coleta);
+
+
     }
 }

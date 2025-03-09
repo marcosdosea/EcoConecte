@@ -79,5 +79,35 @@ namespace Service
             _EcoConecteContext.Agendamentos.Update(agendamento);
             _EcoConecteContext.SaveChanges();
         }
+
+        // Método para obter um agendamento pelo ID
+        public async Task<Agendamento?> ObterPorIdAsync(uint id)
+        {
+            return await _EcoConecteContext.Agendamentos
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
+
+        // Método para excluir um agendamento pelo ID
+        public async Task ExcluirAsync(uint id)
+        {
+            var agendamento = await _EcoConecteContext.Agendamentos.FindAsync(id);
+            if (agendamento != null)
+            {
+                _EcoConecteContext.Agendamentos.Remove(agendamento);
+                await _EcoConecteContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<Agendamento> GetByIdAsync(uint id)
+        {
+            return await _EcoConecteContext.Agendamentos.FindAsync(id);
+        }
+
+        public async Task<bool> UpdateAsync(Agendamento agendamento)
+        {
+            _EcoConecteContext.Agendamentos.Update(agendamento);
+            return await _EcoConecteContext.SaveChangesAsync() > 0;
+        }
     }
 }
