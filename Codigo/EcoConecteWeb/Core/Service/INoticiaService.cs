@@ -56,5 +56,9 @@ namespace Core.Service
         Task<Noticia> GetNoticiaForEditAsync(int id);
 
         Task<bool> EditNoticiaAsync(Noticia model);
+
+       Task<Noticia> ObterPorIdAsync(int id);
+       Task<bool> ApagarNoticiaAsync(int id);
+
     }
 }

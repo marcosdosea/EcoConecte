@@ -131,5 +131,32 @@ namespace Service
 
             return true;
         }
+
+        public async Task<Noticia> ObterPorIdAsync(int id)
+        {
+            var noticia = await context.Noticia
+                .Where(n => n.Id == id)
+                .Select(n => new Noticia
+                {
+                    Id = n.Id,
+                    Titulo = n.Titulo,
+                    Conteudo = n.Conteudo,
+                    Data = n.Data
+                })
+                .FirstOrDefaultAsync();
+
+            return noticia;
+        }
+
+        public async Task<bool> ApagarNoticiaAsync(int id)
+        {
+            var noticia = await context.Noticia.FirstOrDefaultAsync(n => n.Id == id);
+            if (noticia == null)
+                return false;
+
+            context.Remove(noticia);
+            await context.SaveChangesAsync();
+            return true;
+        }
     }
 }
