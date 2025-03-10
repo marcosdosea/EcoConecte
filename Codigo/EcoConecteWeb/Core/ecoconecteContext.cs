@@ -2,6 +2,7 @@
 
 namespace Core;
 
+
 public partial class EcoConecteContext : DbContext
 {
     public EcoConecteContext()

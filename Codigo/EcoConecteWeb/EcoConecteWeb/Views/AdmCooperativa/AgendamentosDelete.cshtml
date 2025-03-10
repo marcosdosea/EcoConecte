@@ -39,7 +39,7 @@
         <dd class="col-sm-10">@Html.DisplayFor(model => model.Status)</dd>
     </dl>
 
-    <form asp-action="DeleteConfirmed" method="post">
+    <form asp-action="AgendamentoDeleteConfirmed" method="post">
         <input type="hidden" name="Id" value="@Model.Id" /> <!-- Passando o Id -->
         <input type="hidden" name="IdCoop" value="@IdCoop" /> <!-- Passando o IdCoop -->
         <div class="button-group">

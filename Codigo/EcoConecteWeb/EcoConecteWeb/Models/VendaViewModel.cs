@@ -39,6 +39,7 @@ namespace EcoConecteWeb.Models
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
         [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
 
         /// <summary>

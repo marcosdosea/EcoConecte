@@ -1,4 +1,50 @@
-﻿@page
-@model EcoConecteWeb.Views.AdmCooperativa.NoticiasEditModel
+﻿@model EcoConecteWeb.Models.NoticiaViewModel
+
 @{
+    ViewData["Title"] = "EcoConecte - Editar Notícia";
+    var idCoop = ViewData["idCoop"];
 }
+
+<h1 class="title">
+    <i class="fas fa-edit"></i> Editar Notícia
+</h1>
+
+<div class="form-container text-left">
+    <form asp-action="NoticiasEdit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Campo oculto para enviar o ID do cooperativa -->
+        <input type="hidden" name="idCoop" value="@idCoop" />
+
+        <div class="form-group">
+            <label asp-for="Titulo" class="control-label text-left"></label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Conteudo" class="control-label text-left"></label>
+            <textarea asp-for="Conteudo" class="form-control larger-textarea"></textarea>
+            <span asp-validation-for="Conteudo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Data" class="control-label text-left"></label>
+            <input asp-for="Data" class="form-control" />
+            <span asp-validation-for="Data" class="text-danger"></span>
+        </div>
+
+        <div class="form-group" style="display: none">
+            <label asp-for="IdCooperativa" class="control-label text-left"></label>
+            <input hidden asp-for="IdCooperativa" class="form-control" value="@idCoop" />
+            <span asp-validation-for="IdCooperativa" class="text-danger"></span>
+        </div>
+
+        <div class="button-group">
+            <input type="submit" value="Salvar" class="icon-button" />
+            <a asp-controller="AdmCooperativa" asp-action="ListaNoticias" asp-route-id="@idCoop" class="icon-button">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </form>
+</div>

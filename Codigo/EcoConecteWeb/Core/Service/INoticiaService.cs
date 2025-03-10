@@ -53,5 +53,12 @@ namespace Core.Service
         /// <returns></returns>
         IEnumerable<Noticia> GetByTitulo(string titulo);
 
+        Task<Noticia> GetNoticiaForEditAsync(int id);
+
+        Task<bool> EditNoticiaAsync(Noticia model);
+
+       Task<Noticia> ObterPorIdAsync(int id);
+       Task<bool> ApagarNoticiaAsync(int id);
+
     }
 }

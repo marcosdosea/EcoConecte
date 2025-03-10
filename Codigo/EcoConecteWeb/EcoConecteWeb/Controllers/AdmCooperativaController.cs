@@ -171,7 +171,7 @@ namespace EcoConecteWeb.Controllers
         // POST: Exclusão do Agendamento
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(uint id, int idCoop)
+        public async Task<IActionResult> AgendamentoDeleteConfirmed(uint id, int idCoop)
         {
             var agendamento = await _agendamentoService.ObterPorIdAsync(id);
             if (agendamento == null)
@@ -308,6 +308,74 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("ListaColetas", "AdmCooperativa", new { id = coleta.IdCooperativa });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> NoticiasEdit(int id)
+        {
+            var noticia = await _noticiaService.GetNoticiaForEditAsync(id);
+            if (noticia == null)
+            {
+                return NotFound();
+            }
+
+            // Mapeia o Core.Noticia para NoticiaViewModel
+            var noticiaViewModel = _mapper.Map<NoticiaViewModel>(noticia);
+
+            ViewData["idCoop"] = id;
+            return View(noticiaViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NoticiasEdit(NoticiaViewModel model, int idCoop)
+        {
+            if (ModelState.IsValid)
+            {
+                // Mapeia o NoticiaViewModel para Noticia
+                var noticia = _mapper.Map<Noticia>(model);
+
+                var isEdited = await _noticiaService.EditNoticiaAsync(noticia);
+                if (isEdited)
+                {
+                    return RedirectToAction("ListaNoticias", "AdmCooperativa", new { id = idCoop });
+                }
+
+                ModelState.AddModelError("", "Erro ao editar a notícia.");
+            }
+
+            ViewData["idCoop"] = idCoop;
+            return View(model);
+        }
+
+        public async Task<IActionResult> NoticiasDelete(int id, int idCoop)
+        {
+            var noticia = await _noticiaService.ObterPorIdAsync(id);
+
+            if (noticia == null)
+                return NotFound();
+
+            // Conversão manual de Noticia para NoticiaViewModel
+            var noticiaViewModel = new NoticiaViewModel
+            {
+                Id = noticia.Id,
+                Titulo = noticia.Titulo,
+                Conteudo = noticia.Conteudo,
+                Data = noticia.Data.ToString("dd/MM/yyyy")
+            };
+
+            ViewData["idCoop"] = idCoop;
+            return View(noticiaViewModel);
+        }
+
+        // Confirma e processa a exclusão
+        [HttpPost]
+        public async Task<IActionResult> NoticiaDeleteConfirmed(int id, int idCoop)
+        {
+            var sucesso = await _noticiaService.ApagarNoticiaAsync(id);
+            if (!sucesso)
+                return NotFound();
+
+            // Redireciona para a lista de notícias da cooperativa
+            return RedirectToAction("ListaNoticias", "AdmCooperativa", new { id = idCoop });
+        }
 
     }
 }
