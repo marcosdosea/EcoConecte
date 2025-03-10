@@ -308,6 +308,42 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("ListaColetas", "AdmCooperativa", new { id = coleta.IdCooperativa });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> NoticiasEdit(int id)
+        {
+            var noticia = await _noticiaService.GetNoticiaForEditAsync(id);
+            if (noticia == null)
+            {
+                return NotFound();
+            }
+
+            // Mapeia o Core.Noticia para NoticiaViewModel
+            var noticiaViewModel = _mapper.Map<NoticiaViewModel>(noticia);
+
+            ViewData["idCoop"] = id;
+            return View(noticiaViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NoticiasEdit(NoticiaViewModel model, int idCoop)
+        {
+            if (ModelState.IsValid)
+            {
+                // Mapeia o NoticiaViewModel para Noticia
+                var noticia = _mapper.Map<Noticia>(model);
+
+                var isEdited = await _noticiaService.EditNoticiaAsync(noticia);
+                if (isEdited)
+                {
+                    return RedirectToAction("ListaNoticias", "AdmCooperativa", new { id = idCoop });
+                }
+
+                ModelState.AddModelError("", "Erro ao editar a notícia.");
+            }
+
+            ViewData["idCoop"] = idCoop;
+            return View(model);
+        }
 
     }
 }

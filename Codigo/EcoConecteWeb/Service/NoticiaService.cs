@@ -95,5 +95,41 @@ namespace Service
             context.Update(noticia);
             context.SaveChanges();
         }
+
+        public async Task<Noticia> GetNoticiaForEditAsync(int id)
+        {
+            var noticia = await context.Noticia
+                .Where(n => n.Id == id)
+                .Select(n => new Noticia
+                {
+                    Id = n.Id,
+                    Titulo = n.Titulo,
+                    Conteudo = n.Conteudo,
+                    Data = n.Data
+                })
+                .FirstOrDefaultAsync();
+
+            return noticia;
+        }
+
+        public async Task<bool> EditNoticiaAsync(Noticia model)
+        {
+            var noticia = await context.Noticia.FindAsync(model.Id);
+            if (noticia == null)
+            {
+                return false;
+            }
+
+            // Atualizando os campos do objeto Noticia com os dados do NoticiaViewModel
+            noticia.Titulo = model.Titulo;
+            noticia.Conteudo = model.Conteudo;
+            noticia.Data = model.Data;
+
+            // Salvando as mudanças no banco de dados
+            context.Noticia.Update(noticia);
+            await context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
