@@ -377,5 +377,88 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("ListaNoticias", "AdmCooperativa", new { id = idCoop });
         }
 
+        // GET: Exibe a view de edição
+        public async Task<IActionResult> OrientacoesEdit(uint id)
+        {
+            var orientacao = await _orientacoesService.ObterPorIdAsync(id);
+            if (orientacao == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new OrientacoesViewModel
+            {
+                Id = orientacao.Id,
+                Titulo = orientacao.Titulo,
+                Descricao = orientacao.Descricao
+            };
+
+            ViewData["idCoop"] = orientacao.IdCooperativa;
+            return View(viewModel);
+        }
+
+        // POST: Salva a edição
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OrientacoesEdit(OrientacoesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Erro ao editar a orientação."); ;
+            }
+
+            var orientacao = new Core.Orientacoes
+            {
+                Id = model.Id,
+                Titulo = model.Titulo,
+                Descricao = model.Descricao,
+                IdCooperativa = uint.Parse(model.IdCooperativa)
+            };
+
+            var sucesso = await _orientacoesService.AtualizarAsync(orientacao);
+
+            if (!sucesso)
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao atualizar a orientação.");
+                return View(model);
+            }
+
+            return RedirectToAction("ListaOrientacoes", new { id = model.IdCooperativa });
+        }
+
+        // Exibe a tela de confirmação da exclusão
+        [HttpGet]
+        public async Task<IActionResult> OrientacoesDelete(uint id)
+        {
+            var orientacao = await _orientacoesService.ObterPorIdAsync(id);
+            if (orientacao == null) return NotFound();
+
+            // Converter manualmente para ViewModel
+            var model = new OrientacoesViewModel
+            {
+                Id = orientacao.Id,
+                Titulo = orientacao.Titulo,
+                Descricao = orientacao.Descricao,
+                IdCooperativa = orientacao.IdCooperativa.ToString()
+            };
+
+            return View(model);
+        }
+
+        // Confirma e executa a exclusão
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OrientacaoDeleteConfirmed(uint id, int idCoop)
+        {
+            var sucesso = await _orientacoesService.ExcluirAsync(id);
+            if (!sucesso)
+            {
+                ModelState.AddModelError("", "Erro ao excluir a orientação.");
+                return View("OrientacaoDelete", await _orientacoesService.ObterPorIdAsync(id));
+            }
+
+            return RedirectToAction("ListaOrientacoes", "AdmCooperativa", new { id = idCoop });
+        }
+
     }
 }
