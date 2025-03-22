@@ -53,5 +53,19 @@ namespace Core.Service
         /// <returns></returns>
         IEnumerable<Orientacoes> GetByTitulo(string titulo);
 
+        /// <summary>
+        /// Obtém uma orientação pelo ID.
+        /// </summary>
+        /// <param name="id">ID da orientação.</param>
+        /// <returns>Retorna um ViewModel contendo os dados da orientação.</returns>
+        Task<Orientacoes> ObterPorIdAsync(uint id);
+
+        /// <summary>
+        /// Atualiza uma orientação existente.
+        /// </summary>
+        /// <param name="model">ViewModel contendo os dados atualizados da orientação.</param>
+        /// <returns>Retorna verdadeiro se a atualização for bem-sucedida, falso caso contrário.</returns>
+        Task<bool> AtualizarAsync(Orientacoes model);
+
     }
 }

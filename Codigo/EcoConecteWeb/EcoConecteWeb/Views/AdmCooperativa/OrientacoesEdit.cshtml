@@ -1,4 +1,42 @@
-﻿@page
-@model EcoConecteWeb.Views.AdmCooperativa.OrientacoesEditModel
+﻿@model EcoConecteWeb.Models.OrientacoesViewModel
+
 @{
+    ViewData["Title"] = "EcoConecte - Editar Orientação";
+    var idCoop = ViewData["idCoop"];
 }
+
+<div class="container">
+    <h1 class="title">
+        <i class="fas fa-edit"></i> Editar Orientação
+    </h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="OrientacoesEdit" class="form-container-expanded">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Titulo" class="control-label"></label>
+                    <input asp-for="Titulo" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <textarea asp-for="Descricao" class="form-control larger-textarea"></textarea>
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="IdCooperativa" value=@idCoop />
+
+                <div class="button-group">
+                    <input type="submit" value="Salvar" class="icon-button" />
+                    <a asp-controller="AdmCooperativa" asp-action="ListaOrientacoes" asp-route-id="@idCoop" class="icon-button">
+                        <i class="fa fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

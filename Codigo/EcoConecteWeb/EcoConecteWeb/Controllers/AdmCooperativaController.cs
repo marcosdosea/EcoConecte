@@ -377,5 +377,54 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("ListaNoticias", "AdmCooperativa", new { id = idCoop });
         }
 
+        // GET: Exibe a view de edição
+        public async Task<IActionResult> OrientacoesEdit(uint id)
+        {
+            var orientacao = await _orientacoesService.ObterPorIdAsync(id);
+            if (orientacao == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new OrientacoesViewModel
+            {
+                Id = orientacao.Id,
+                Titulo = orientacao.Titulo,
+                Descricao = orientacao.Descricao
+            };
+
+            ViewData["idCoop"] = orientacao.IdCooperativa;
+            return View(viewModel);
+        }
+
+        // POST: Salva a edição
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OrientacoesEdit(OrientacoesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Erro ao editar a orientação."); ;
+            }
+
+            var orientacao = new Core.Orientacoes
+            {
+                Id = model.Id,
+                Titulo = model.Titulo,
+                Descricao = model.Descricao,
+                IdCooperativa = uint.Parse(model.IdCooperativa)
+            };
+
+            var sucesso = await _orientacoesService.AtualizarAsync(orientacao);
+
+            if (!sucesso)
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao atualizar a orientação.");
+                return View(model);
+            }
+
+            return RedirectToAction("ListaOrientacoes", new { id = model.IdCooperativa });
+        }
+
     }
 }

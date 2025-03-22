@@ -11,7 +11,7 @@
     </h1>
 
     <p class="add-button">
-        <a class="icon-button" asp-action="Create">
+        <a class="icon-button" asp-action="OrientacoesCreate">
             <i class="fas fa-plus"></i> Cadastrar nova orientação
         </a>
     </p>
@@ -41,10 +41,10 @@
                         </td>
                         <td>
                             <div class="button-group">
-                                <a class="icon-button" asp-action="Edit" asp-route-id="@item.Id">
+                                <a class="icon-button" asp-action="OrientacoesEdit" asp-route-id="@item.Id">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
-                                <a class="icon-button" asp-action="Delete" asp-route-id="@item.Id">
+                                <a class="icon-button" asp-action="OrientacoesDelete" asp-route-id="@item.Id">
                                     <i class="fas fa-trash"></i> Apagar
                                 </a>
                             </div>

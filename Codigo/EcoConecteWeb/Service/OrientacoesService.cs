@@ -97,5 +97,32 @@ namespace Service
             context.Update(orientacoes);
             context.SaveChanges();
         }
+
+        public async Task<Orientacoes> ObterPorIdAsync(uint id)
+        {
+            var orientacao = await context.Orientacoes.FindAsync(id);
+            if (orientacao == null) return null;
+
+            return new Orientacoes
+            {
+                Id = orientacao.Id,
+                Titulo = orientacao.Titulo,
+                Descricao = orientacao.Descricao,
+                IdCooperativa = orientacao.IdCooperativa
+            };
+        }
+
+        public async Task<bool> AtualizarAsync(Orientacoes model)
+        {
+            var orientacao = await context.Orientacoes.FindAsync(model.Id);
+            if (orientacao == null) return false;
+
+            orientacao.Titulo = model.Titulo;
+            orientacao.Descricao = model.Descricao;
+
+            context.Orientacoes.Update(orientacao);
+            return await context.SaveChangesAsync() > 0;
+        }
+
     }
 }
