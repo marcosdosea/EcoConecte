@@ -124,5 +124,14 @@ namespace Service
             return await context.SaveChangesAsync() > 0;
         }
 
+        public async Task<bool> ExcluirAsync(uint id)
+        {
+            var orientacao = await context.Orientacoes.FindAsync(id);
+            if (orientacao == null) return false;
+
+            context.Remove(orientacao);
+            return await context.SaveChangesAsync() > 0;
+        }
+
     }
 }

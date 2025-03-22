@@ -67,5 +67,10 @@ namespace Core.Service
         /// <returns>Retorna verdadeiro se a atualização for bem-sucedida, falso caso contrário.</returns>
         Task<bool> AtualizarAsync(Orientacoes model);
 
+        /// <summary>
+        /// Exclui uma orientação pelo ID.
+        /// </summary>
+        Task<bool> ExcluirAsync(uint id);
+
     }
 }

@@ -426,5 +426,39 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("ListaOrientacoes", new { id = model.IdCooperativa });
         }
 
+        // Exibe a tela de confirmação da exclusão
+        [HttpGet]
+        public async Task<IActionResult> OrientacoesDelete(uint id)
+        {
+            var orientacao = await _orientacoesService.ObterPorIdAsync(id);
+            if (orientacao == null) return NotFound();
+
+            // Converter manualmente para ViewModel
+            var model = new OrientacoesViewModel
+            {
+                Id = orientacao.Id,
+                Titulo = orientacao.Titulo,
+                Descricao = orientacao.Descricao,
+                IdCooperativa = orientacao.IdCooperativa.ToString()
+            };
+
+            return View(model);
+        }
+
+        // Confirma e executa a exclusão
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OrientacaoDeleteConfirmed(uint id, int idCoop)
+        {
+            var sucesso = await _orientacoesService.ExcluirAsync(id);
+            if (!sucesso)
+            {
+                ModelState.AddModelError("", "Erro ao excluir a orientação.");
+                return View("OrientacaoDelete", await _orientacoesService.ObterPorIdAsync(id));
+            }
+
+            return RedirectToAction("ListaOrientacoes", "AdmCooperativa", new { id = idCoop });
+        }
+
     }
 }
