@@ -4,18 +4,21 @@ using Core.Service;
 using EcoConecteWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service;
 
 namespace EcoConecteWeb.Controllers
 {
     public class ColetaController : Controller
     {
+        private readonly IPessoaService _pessoaService;
         private readonly IColetaService _coletaService;
         private readonly IMapper _mapper;
 
-        public ColetaController(IColetaService coletaService, IMapper mapper)
+        public ColetaController(IColetaService coletaService, IMapper mapper, IPessoaService pessoaService)
         {
             this._coletaService = coletaService;
             this._mapper = mapper;
+            _pessoaService = pessoaService;
         }
 
         [HttpPost]
@@ -70,17 +73,19 @@ namespace EcoConecteWeb.Controllers
             }
 
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Unauthorized(); // Retorna erro 401 caso não consiga recuperar o ID
-            }
 
-            var listaColeta = _coletaService.GetByCooperativaId(id);
+            // Buscar a pessoa pelo ID
+            var pessoa = _pessoaService.Get(id);
+           
+            // buscar as coletas da cooperativa desse cooperado
+            var listaColeta = _coletaService.GetByCooperativaId(pessoa.IdCooperativa.Value);
             var listaColetaModel = _mapper.Map<IEnumerable<ColetaViewModel>>(listaColeta);
 
-            ViewData["PessoaId"] = userId; // Passa o ID do usuário logado para a View
+            ViewData["PessoaId"] = userId; // Mantendo o ID do usuário na View
             return View(listaColetaModel);
         }
+
+
 
 
 
