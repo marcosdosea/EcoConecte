@@ -14,7 +14,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
+                <th style="display: none;">
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
@@ -35,17 +35,16 @@
                 <th>
                     @Html.DisplayNameFor(model => model.HorarioTermino)
                 </th>
-                <th>
+                <th style="display: none;">
                     @Html.DisplayNameFor(model => model.IdCooperativa)
                 </th>
-                <th>Ações</th> <!-- Adicionada coluna para ações -->
             </tr>
         </thead>
         <tbody>
             @foreach (var item in coletas)
             {
                 <tr>
-                    <td>
+                    <td style="display: none;">
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>
@@ -66,12 +65,15 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.HorarioTermino)
                     </td>
-                    <td>
+                    <td style="display: none;">
                         @Html.DisplayFor(modelItem => item.IdCooperativa)
                     </td>
+
                 </tr>
             }
         </tbody>
     </table>
-
+    <div class="form-group button-group">
+        <a href="@Url.Action("Index", "Home")" class="btn icon-button">Voltar</a>
+    </div>
 </div>
