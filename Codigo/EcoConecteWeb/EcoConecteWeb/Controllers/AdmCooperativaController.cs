@@ -460,5 +460,57 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("ListaOrientacoes", "AdmCooperativa", new { id = idCoop });
         }
 
+        public async Task<IActionResult> VendaEdit(uint id, int idCoop)
+        {
+            var venda = await _vendaService.ObterPorIdAsync(id);
+            if (venda == null) return NotFound();
+
+            var vendaViewModel = new VendaViewModel
+            {
+                Id = venda.Id,
+                Tipo = venda.Tipo,
+                Valor = venda.Valor,
+                Quantidade = venda.Quantidade,
+                Data = venda.Data,
+                IdPessoa = venda.IdPessoa
+            };
+
+            ViewData["idCoop"] = idCoop;
+            return View(vendaViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VendaEdit(VendaViewModel vendaViewModel, int idCoop)
+        {
+            ModelState.Remove("IdPessoaNavigation"); // Se houver erro de validação nesse campo, ele será ignorado
+            if (!ModelState.IsValid)
+            {
+                return View(vendaViewModel);
+            }
+
+            try
+            {
+                var venda = new Venda
+                {
+                    Id = vendaViewModel.Id,
+                    Tipo = vendaViewModel.Tipo,
+                    Valor = vendaViewModel.Valor,
+                    Quantidade = vendaViewModel.Quantidade,
+                    Data = vendaViewModel.Data,
+                    IdCooperativa = (uint)idCoop,
+                    IdPessoa = vendaViewModel.IdPessoa,
+                };
+
+                await _vendaService.AtualizarAsync(venda);
+                return RedirectToAction("ListaVenda", "AdmCooperativa", new { id = idCoop });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Erro ao atualizar a venda: " + ex.Message);
+                return View(vendaViewModel);
+            }
+        }
+
+
     }
 }
