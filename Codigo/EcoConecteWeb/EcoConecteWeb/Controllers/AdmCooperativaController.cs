@@ -511,6 +511,27 @@ namespace EcoConecteWeb.Controllers
             }
         }
 
+        public async Task<IActionResult> VendaDelete(uint id, int idCoop)
+        {
+            var venda = await _vendaService.ObterPorIdAsync(id);
+            if (venda == null) return NotFound();
 
+            var vendaViewModel = _mapper.Map<VendaViewModel>(venda);
+            ViewData["idCoop"] = idCoop;
+            return View(vendaViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VendaDeleteConfirmed(uint id, int idCoop)
+        {
+            var sucesso = await _vendaService.ExcluirAsync(id);
+            if (!sucesso)
+            {
+                ModelState.AddModelError("", "Erro ao excluir a venda.");
+                return View();
+            }
+            ViewData["idCoop"] = idCoop;
+            return RedirectToAction("ListaVenda", "AdmCooperativa", new { id = idCoop });
+        }
     }
 }
