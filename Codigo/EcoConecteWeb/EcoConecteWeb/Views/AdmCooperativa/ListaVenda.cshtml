@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "EcoConecte - Vendas";
-    var pessoaId = ViewData["PessoaId"];
+    var PessoaId = ViewData["PessoaId"];
 }
 
 <div class="container">
@@ -12,7 +12,7 @@
 
     <p class="add-button">
         <button class="icon-button">
-            <a href="@Url.Action("Create")">
+            <a href="@Url.Action("VendaCreate")">
                 <i class="fas fa-plus"></i> Cadastrar nova venda
             </a>
         </button>
@@ -42,16 +42,12 @@
                         <td>@Html.DisplayFor(modelItem => item.IdPessoa)</td>
                         <td>
                             <div class="button-group">
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Edit", new { id = item.Id })">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                </button>
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Delete", new { id = item.Id })">
-                                        <i class="fas fa-trash"></i> Apagar
-                                    </a>
-                                </button>
+                                <a href="@Url.Action("VendaEdit", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })" class="icon-button">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <a href="@Url.Action("VendaDelete", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })" class="icon-button">
+                                    <i class="fas fa-trash"></i> Apagar
+                                </a>
                             </div>
                         </td>
                     </tr>

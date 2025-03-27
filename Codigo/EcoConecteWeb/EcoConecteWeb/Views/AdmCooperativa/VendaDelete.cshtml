@@ -1,4 +1,66 @@
-﻿@page
-@model EcoConecteWeb.Views.AdmCooperativa.VendaDeleteModel
+﻿@model EcoConecteWeb.Models.VendaViewModel
+
 @{
+    ViewData["Title"] = "EcoConecte - Apagar Venda";
+    var idCoop = ViewData["idCoop"];
+}
+
+<h1 class="title">
+    <i class="fas fa-trash-alt"></i> Apagar Venda
+</h1>
+
+<h3 class="subheading"><strong>Tem certeza de que deseja apagar esta venda?</strong></h3>
+
+<div class="form-container">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdPessoa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdPessoa)
+        </dd>
+    </dl>
+
+    <form asp-action="VendaDeleteConfirmed" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" /> <!-- Passando o Id -->
+        <input type="hidden" name="IdCoop" value=@idCoop /> <!-- Passando o IdCoop -->
+        <div class="button-group">
+            <button type="submit" class="icon-button">
+                <i class="fas fa-trash-alt"></i> Apagar
+            </button>
+            <button type="button" class="icon-button" onclick="window.location.href='@Url.Action("ListaVenda", "AdmCooperativa", new { id = idCoop })'">
+                <i class="fas fa-undo"></i> Voltar
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

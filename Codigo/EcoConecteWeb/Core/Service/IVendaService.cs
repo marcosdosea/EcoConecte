@@ -42,5 +42,26 @@ namespace Core.Service
         /// <param name="Id"></param>
         /// <returns></returns>
         Venda? GetById(uint Id);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<Venda> ObterPorIdAsync(uint id);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="venda"></param>
+        /// <returns></returns>
+        Task<bool> AtualizarAsync(Venda venda);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<bool> ExcluirAsync(uint id);
     }
 }
