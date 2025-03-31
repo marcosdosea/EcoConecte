@@ -1,0 +1,116 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<string>
+
+@{
+    ViewData["Title"] = "Ecoconecte - Funções de Usuário";
+    var userId = ViewData["UserId"] as string;
+}
+
+<h1>Função</h1>
+
+<div class="row">
+    @foreach (var role in Model.Select((value, index) => new { value, index }))
+    {
+        if (role.index % 2 == 0)
+        {
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Função</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@role.value</td>
+                            <td>
+                                <form method="post" asp-action="RemoveRoleFromUser">
+                                    <input type="hidden" name="userId" value="@userId" />
+                                    <input type="hidden" name="roleName" value="@role.value" />
+                                    <button type="submit" class="btn btn-danger">Remover</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Função</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@role.value</td>
+                            <td>
+                                <form method="post" asp-action="RemoveRoleFromUser">
+                                    <input type="hidden" name="userId" value="@userId" />
+                                    <input type="hidden" name="roleName" value="@role.value" />
+                                    <button type="submit" class="btn btn-danger">Remover</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+</div>
+
+<h2>Selecione a Função</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-action="AssignRoleToUser">
+            <input type="hidden" name="userId" value="@userId" />
+            <div class="form-group">
+                <label for="roleName"></label>
+                <div id="roleName">
+                    <button type="button" class="btn btn-secondary btn-sm role-button" data-role="ADMROOT">ADMROOT</button>
+                    <button type="button" class="btn btn-secondary btn-sm role-button" data-role="COOPERATIVA">COOPERATIVA</button>
+                    <button type="button" class="btn btn-secondary btn-sm role-button" data-role="COOPERADO">COOPERADO</button>
+                </div>
+            </div>
+            <input type="hidden" name="roleName" id="selectedRoleName" />
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+
+        <!-- Exibir a mensagem de erro -->
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger mt-2">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+    </div>
+
+    <div class="col-md-6">
+    </div>
+</div>
+
+<!-- Script para lidar com a seleção de função -->
+<script>
+    // Lidar com a seleção de uma função
+    document.querySelectorAll('.role-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Definir a função selecionada no campo oculto
+            var selectedRole = button.getAttribute('data-role');
+            document.getElementById('selectedRoleName').value = selectedRole;
+
+            // Adicionar estilo para indicar que o botão foi selecionado
+            document.querySelectorAll('.role-button').forEach(function(b) {
+                b.classList.remove('btn-success');  // Remove cor verde
+                b.classList.add('btn-secondary');   // Volta para a cor original
+            });
+
+            // Aplicar cor verde (btn-success) no botão selecionado
+            button.classList.add('btn-success');
+        });
+    });
+</script>
