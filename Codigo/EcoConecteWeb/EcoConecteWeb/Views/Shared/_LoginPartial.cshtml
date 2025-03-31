@@ -58,8 +58,19 @@
                     Área Administrativa
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                    <li>
+                        <div class="text-center">
+                            <a href="/Identity/Account/Manage/ChangePassword" style="color: black; text-decoration: none;">
+                                <i class="fas fa-key"></i> Alterar Senha
+                            </a>
+                            <br />
+                            <a href="/Identity/Account/Manage/Email" style="color: black; text-decoration: none;">
+                                <i class="fas fa-envelope"></i> Alterar E-mail
+                            </a>
+                        </div>
+                    </li>
                     <li class="dropdown-submenu position-relative">
-                        <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown">Sistema Ecoconecte</a>
+                        <a class="dropdown-item dropdown-toggle" href="#" id="usuarioDropdown"> Sistema Ecoconecte </a>
                         <ul class="dropdown-menu sub-dropdown">
                             <li><a class="dropdown-item" asp-controller="Pessoa">Pessoa</a></li>
                             <li><a class="dropdown-item" asp-controller="Cooperativa">Cooperativa</a></li>
