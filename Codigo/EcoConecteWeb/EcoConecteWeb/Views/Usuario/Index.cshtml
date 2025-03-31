@@ -9,57 +9,55 @@
     <i class="fas fa-info-circle"></i> Perfil de Cliente
 </h1>
 
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cpf)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cpf)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Logradouro)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Logradouro)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bairro)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bairro)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Numero)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cpf)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cpf)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Nome)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nome)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Telefone)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Telefone)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Logradouro)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Logradouro)</dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Bairro)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Bairro)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Numero)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Numero)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cidade)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cidade)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Estado)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
+            </dl>
+        </div>
+    </div>
 </div>
-<!-- Botão para Editar Perfil (se necessário) -->
-<a class="btn btn-primary" asp-controller="Usuario" asp-action="Edit" asp-route-id="@pessoaId">Alterar Dados?</a>
+
+<!-- Seção de Botões -->
+<div class="text-center mt-4">
+    <a class="btn btn-primary" asp-controller="Usuario" asp-action="Edit" asp-route-id="@pessoaId">
+        <i class="fas fa-edit"></i> Alterar Dados
+    </a>
+    <a class="btn btn-warning" href="/Identity/Account/Manage/ChangePassword">
+        <i class="fas fa-key"></i> Alterar Senha
+    </a>
+    <a class="btn btn-info" href="/Identity/Account/Manage/Email">
+        <i class="fas fa-envelope"></i> Alterar E-mail
+    </a>
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">
+        <i class="fas fa-home"></i> Voltar ao Início
+    </a>
+</div>
+
+

@@ -5,78 +5,117 @@
     var pessoaId = ViewData["PessoaId"];
 }
 
-<
 <div class="container">
     <h1 class="title">
         <i class="fas fa-edit"></i> Editar Dados Cooperativa
     </h1>
 
-    <div class="col-md-8">
-        <form asp-action="Edit" class="form-container-expanded">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" readonly />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+    <div class="row">
+        <!-- Primeira Coluna -->
+        <div class="col-md-6">
+            <form asp-action="Edit" class="form-container-expanded">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" readonly />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InscricaoEstadual" class="control-label"></label>
+                    <input asp-for="InscricaoEstadual" class="form-control" readonly />
+                    <span asp-validation-for="InscricaoEstadual" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InscricaoMunicipal" class="control-label"></label>
+                    <input asp-for="InscricaoMunicipal" class="form-control" readonly />
+                    <span asp-validation-for="InscricaoMunicipal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cnpj" class="control-label"></label>
+                    <input asp-for="Cnpj" class="form-control" readonly />
+                    <span asp-validation-for="Cnpj" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cep" class="control-label"></label>
+                    <input asp-for="Cep" class="form-control" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Segunda Coluna -->
+        <div class="col-md-6">
+            <form asp-action="Edit" class="form-container-expanded">
+                <div class="form-group">
+                    <label asp-for="Logradouro" class="control-label"></label>
+                    <input asp-for="Logradouro" class="form-control" />
+                    <span asp-validation-for="Logradouro" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Bairro" class="control-label"></label>
+                    <input asp-for="Bairro" class="form-control" />
+                    <span asp-validation-for="Bairro" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Numero" class="control-label"></label>
+                    <input asp-for="Numero" class="form-control" />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefone" class="control-label"></label>
+                    <input asp-for="Telefone" class="form-control" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdPessoaRepresentate" class="control-label" style="display: none;"></label>
+                    <input asp-for="IdPessoaRepresentate" class="form-control" readonly type="hidden" />
+                    <span asp-validation-for="IdPessoaRepresentate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label" style="display: none;"></label>
+                    <input asp-for="Status" class="form-control" readonly type="hidden" />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+            </form>
+            <div class="container">
+                <div class="row" style="border: none; margin: 0; padding: 0;">
+                    <!-- Coluna 1 -->
+                    <div class="col-md-4" style="padding: 0;">
+                        <div class="card" style="background: none; border: none;">
+                            <div class="card-body" style="background: none; border: none;">
+                                <!-- Conteúdo da Coluna 1 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna 2 -->
+                    <div class="col-md-4" style="padding: 0;">
+                        <div class="card" style="background: none; border: none;">
+                            <div class="card-body" style="background: none; border: none;">
+                                <div class="form-group button-group">
+                                    <input type="submit" value="Salvar" class="icon-button" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna 3 -->
+                    <div class="col-md-4" style="padding: 0;">
+                        <div class="card" style="background: none; border: none;">
+                            <div class="card-body" style="background: none; border: none;">
+                                <!-- Conteúdo da Coluna 3 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="InscricaoEstadual" class="control-label"></label>
-                <input asp-for="InscricaoEstadual" class="form-control" readonly />
-                <span asp-validation-for="InscricaoEstadual" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InscricaoMunicipal" class="control-label"></label>
-                <input asp-for="InscricaoMunicipal" class="form-control" readonly />
-                <span asp-validation-for="InscricaoMunicipal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cnpj" class="control-label"></label>
-                <input asp-for="Cnpj" class="form-control" readonly />
-                <span asp-validation-for="Cnpj" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cep" class="control-label"></label>
-                <input asp-for="Cep" class="form-control" />
-                <span asp-validation-for="Cep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Logradouro" class="control-label"></label>
-                <input asp-for="Logradouro" class="form-control" />
-                <span asp-validation-for="Logradouro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bairro" class="control-label"></label>
-                <input asp-for="Bairro" class="form-control" />
-                <span asp-validation-for="Bairro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone" class="control-label"></label>
-                <input asp-for="Telefone" class="form-control" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdPessoaRepresentate" class="control-label" style="display: none;"></label>
-                <input asp-for="IdPessoaRepresentate" class="form-control" readonly type="hidden" />
-                <span asp-validation-for="IdPessoaRepresentate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label" style="display: none;"></label>
-                <input asp-for="Status" class="form-control" readonly type="hidden" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group button-group">
-                <input type="submit" value="Salvar" class="icon-button" />
-            </div>
-        </form>
+
+        </div>
     </div>
 </div>
