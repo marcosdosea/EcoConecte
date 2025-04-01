@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "Ecoconecte - Listar Função do Sistema";
+}
+
+<h1>Lista das Funções</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome da Função</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

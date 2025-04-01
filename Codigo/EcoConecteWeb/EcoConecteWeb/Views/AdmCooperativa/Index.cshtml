@@ -4,73 +4,66 @@
     ViewData["Title"] = "EcoConecte - Perfil Cooperativa";
     var pessoaId = ViewData["PessoaId"];
 }
+
 <h1 class="title">
     <i class="fas fa-info-circle"></i> Perfil da Cooperativa
 </h1>
 
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InscricaoEstadual)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InscricaoEstadual)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InscricaoMunicipal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InscricaoMunicipal)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cnpj)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cnpj)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cep)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Logradouro)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Logradouro)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bairro)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bairro)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Numero)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
+<div class="container mt-4">
+    <div class="row">
+        <!-- Primeira Coluna -->
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Nome)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nome)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.InscricaoEstadual)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.InscricaoEstadual)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.InscricaoMunicipal)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.InscricaoMunicipal)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cnpj)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cnpj)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cep)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cep)</dd>
+            </dl>
+        </div>
+
+        <!-- Segunda Coluna -->
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Logradouro)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Logradouro)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Bairro)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Bairro)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Numero)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Numero)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Telefone)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Telefone)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Email)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+            </dl>
+        </div>
+    </div>
+    <!-- Seção de Botões -->
+    <div class="text-center mt-4">
+        <a class="btn btn-primary" asp-controller="AdmCooperativa" asp-action="Edit" asp-route-id="@pessoaId">
+            <i class="fas fa-edit"></i> Alterar Dados
+        </a>
+        <a class="btn btn-warning" href="/Identity/Account/Manage/ChangePassword">
+            <i class="fas fa-key"></i> Alterar Senha
+        </a>
+        <a class="btn btn-info" href="/Identity/Account/Manage/Email">
+            <i class="fas fa-envelope"></i> Alterar E-mail
+        </a>
+        <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">
+            <i class="fas fa-home"></i> Voltar ao Início
+        </a>
+    </div>
 </div>
-<!-- Botão para Editar Perfil (se necessário) -->
-<a class="btn btn-primary" asp-controller="AdmCooperativa" asp-action="Edit" asp-route-id="@pessoaId">Alterar Dados?</a>

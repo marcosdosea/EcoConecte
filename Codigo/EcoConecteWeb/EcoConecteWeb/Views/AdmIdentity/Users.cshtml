@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EcoConecteWeb.Areas.Identity.Data.UsuarioIdentity>
+
+@{
+    ViewData["Title"] = "Ecoconecte - Administrar Usuários";
+}
+
+<h1>Usuários do sistema</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Função</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+				<td>
+                    <a href="@Url.Action("UserRoles", "AdmIdentity", new { userId = user.Id })">Função</a>
+                </td>
+                <td>
+                    <!-- Link para editar o usuário -->
+                    <a href="@Url.Action("Edit", "AdmIdentity", new { userId = user.Id })">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
