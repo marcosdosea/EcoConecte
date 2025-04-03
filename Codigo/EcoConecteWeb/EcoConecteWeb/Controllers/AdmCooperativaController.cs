@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Service;
+using System.Security.Claims;
 
 namespace EcoConecteWeb.Controllers
 {
@@ -459,6 +460,33 @@ namespace EcoConecteWeb.Controllers
 
             return RedirectToAction("ListaOrientacoes", "AdmCooperativa", new { id = idCoop });
         }
+
+        public ActionResult Create()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Obtém o ID do usuário logado
+            ViewData["PessoaId"] = userId;
+            return View();
+        }
+
+
+        // POST: Orientcoes_Controller/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOrientacoes(OrientacoesViewModel orientacoesModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                orientacoesModel.PessoaId = userId; // Atribui o ID do usuário logado
+
+                var orientacoes = _mapper.Map<Orientacoes>(orientacoesModel);
+                _orientacoesService.Create(orientacoes);
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(orientacoesModel);
+        }
+
 
         public async Task<IActionResult> VendaEdit(uint id, int idCoop)
         {
