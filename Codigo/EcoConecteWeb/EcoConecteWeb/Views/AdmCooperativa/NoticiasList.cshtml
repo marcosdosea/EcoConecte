@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "EcoConnect - Notícias";
     var IdCoop = ViewData["idCoop"];
+    var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
 }
 
 <div class="container">
@@ -11,11 +12,9 @@
     </h1>
 
     <p class="add-button">
-        <button class="icon-button">
-            <a href="@Url.Action("NoticiasCreate")">
-                <i class="fas fa-plus"></i> Cadastrar nova notícia
-            </a>
-        </button>
+        <a class="icon-button" asp-controller="AdmCooperativa" asp-action="NoticiasCreate" asp-route-pessoaId="@idCoop">
+            <i class="fas fa-plus"></i> Cadastrar nova noticia
+        </a>
     </p>
 
     <div class="table-responsive">

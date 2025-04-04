@@ -2,7 +2,8 @@
 
 @{
     ViewData["Title"] = "EcoConnect - Orientações";
-    var pessoaId = ViewData["PessoaId"];
+    var pessoaId = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
+
 }
 
 <div class="container">
@@ -11,10 +12,11 @@
     </h1>
 
     <p class="add-button">
-        <a class="icon-button" asp-action="OrientacoesCreate">
+        <a class="icon-button" asp-controller="AdmCooperativa" asp-action="OrientacoesCreate" asp-route-pessoaId="@pessoaId">
             <i class="fas fa-plus"></i> Cadastrar nova orientação
         </a>
     </p>
+
 
     <div class="table-responsive">
         <table class="table">

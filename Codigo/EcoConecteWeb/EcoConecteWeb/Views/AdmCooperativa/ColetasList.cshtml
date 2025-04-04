@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "EcoConecte - Coletas";
     var pessoaId = ViewData["PessoaId"];
+    var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
+
 
     // Garantir que o Model não seja nulo
     var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();
@@ -14,7 +16,9 @@
     </h1>
 
     <p class="add-button">
-        <a class="icon-button" asp-action="ColetasCreate"><i class="fas fa-plus"></i> Cadastrar nova coleta</a>
+        <a class="icon-button" asp-controller="AdmCooperativa" asp-action="ColetasCreate" asp-route-pessoaId="@idCoop">
+            <i class="fas fa-plus"></i> Cadastrar nova coleta
+        </a>
     </p>
 
 

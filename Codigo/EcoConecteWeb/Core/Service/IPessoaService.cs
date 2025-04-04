@@ -47,5 +47,6 @@ namespace Core.Service
         /// <param name="name"></param>
         /// <returns></returns>
         IEnumerable<PessoaDto> GetByName(string name);
+
     }
 }

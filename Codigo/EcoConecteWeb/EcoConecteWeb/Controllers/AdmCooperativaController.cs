@@ -22,7 +22,7 @@ namespace EcoConecteWeb.Controllers
         private readonly IVendaService _vendaService;
         private readonly IMapper _mapper;
 
-        public AdmCooperativaController(IAgendamentoService agendamentoService, IPessoaService pessoaService, 
+        public AdmCooperativaController(IAgendamentoService agendamentoService, IPessoaService pessoaService,
                                         ICooperativaService cooperativaService, IMapper mapper,
                                         IColetaService coletaService, INoticiaService noticiaService,
                                         IOrientacoesService orientacoesService, IVendaService vendaService)
@@ -84,7 +84,7 @@ namespace EcoConecteWeb.Controllers
             return (int)idCoop;
         }
 
-        public ActionResult ListaCooperados(int id)
+        public ActionResult CooperadosList(int id)
         {
             // Filtra as pessoas pelo IdCooperativa e apenas com Status diferente de "I"
             var listaPessoas = _pessoaService.GetAll()
@@ -97,7 +97,7 @@ namespace EcoConecteWeb.Controllers
             return View(listaPessoasModel);
         }
 
-        public ActionResult ListaAgendamentos(int id)
+        public ActionResult AgendamentosList(int id)
         {
             // Buscar a cooperativa pelo ID
             var cooperativa = _cooperativaService.Get((uint)id);
@@ -109,16 +109,15 @@ namespace EcoConecteWeb.Controllers
             // Obter o CEP da cooperativa
             string cepCooperativa = cooperativa.Cep;
 
-            // Filtrar os agendamentos cujo CEP seja igual ao da cooperativa
-            var listaAgendamentos = _agendamentoService.GetAll()
+            var AgendamentosList = _agendamentoService.GetAll()
                                                        .Where(a => a.Cep == cepCooperativa)
                                                        .ToList();
 
             ViewData["PessoaId"] = id; // Passa o ID para a View
             // Mapear para a ViewModel
-            var listaAgendamentosModel = _mapper.Map<List<AgendamentoViewModel>>(listaAgendamentos);
+            var AgendamentosListModel = _mapper.Map<List<AgendamentoViewModel>>(AgendamentosList);
 
-            return View(listaAgendamentosModel);
+            return View(AgendamentosListModel);
         }
 
         public async Task<IActionResult> AgendamentosEdit(uint id, string CepCoop)
@@ -144,13 +143,13 @@ namespace EcoConecteWeb.Controllers
             // Atualiza os campos necessários
             agendamentoAtual.Data = ViewModel.Data;
             agendamentoAtual.Status = ViewModel.Status;
-            
+
             var sucesso = await _agendamentoService.UpdateAsync(agendamentoAtual);
             if (sucesso == false)
             {
                 return NotFound("Agendamento não foi atualizado!.");
             }
-            return RedirectToAction("ListaAgendamentos", "AdmCooperativa", new { id = idCoop });
+            return RedirectToAction("AgendamentosList", "AdmCooperativa", new { id = idCoop });
 
         }
 
@@ -181,49 +180,49 @@ namespace EcoConecteWeb.Controllers
             }
 
             await _agendamentoService.ExcluirAsync(id);
-            return RedirectToAction("ListaAgendamentos", "AdmCooperativa", new { id = idCoop });
+            return RedirectToAction("AgendamentosList", "AdmCooperativa", new { id = idCoop });
         }
 
-        public ActionResult ListaColetas(int id)
+        public ActionResult ColetasList(int id)
         {
             // Filtrar as coletas apenas da cooperativa informada
-            var listaColetas = _coletaService.GetAll()
+            var ColetasList = _coletaService.GetAll()
                                              .Where(c => c.IdCooperativa == id)
                                              .ToList();
 
             // Mapear para a ViewModel
-            var listaColetasModel = _mapper.Map<List<ColetaViewModel>>(listaColetas);
+            var ColetasListModel = _mapper.Map<List<ColetaViewModel>>(ColetasList);
 
-            return View(listaColetasModel);
+            return View(ColetasListModel);
         }
 
-        public ActionResult ListaNoticias(int id)
+        public ActionResult NoticiasList(int id)
         {
             // Filtrar as notícias pela cooperativa informada
-            var listaNoticias = _noticiaService.GetAll()
+            var NoticiasList = _noticiaService.GetAll()
                                                .Where(n => n.IdCooperativa == id)
                                                .ToList();
 
             // Mapear para a ViewModel
-            var listaNoticiasModel = _mapper.Map<List<NoticiaViewModel>>(listaNoticias);
+            var NoticiasListModel = _mapper.Map<List<NoticiaViewModel>>(NoticiasList);
 
-            return View(listaNoticiasModel);
+            return View(NoticiasListModel);
         }
 
-        public ActionResult ListaOrientacoes(int id)
+        public ActionResult OrientacoesList(int id)
         {
             // Filtrar as orientações pela cooperativa informada
-            var listaOrientacoes = _orientacoesService.GetAll()
+            var OrientacoesList = _orientacoesService.GetAll()
                                                       .Where(o => o.IdCooperativa == id)
                                                       .ToList();
 
             // Mapear para a ViewModel
-            var listaOrientacoesModel = _mapper.Map<List<OrientacoesViewModel>>(listaOrientacoes);
+            var OrientacoesListModel = _mapper.Map<List<OrientacoesViewModel>>(OrientacoesList);
 
-            return View(listaOrientacoesModel);
+            return View(OrientacoesListModel);
         }
 
-        public ActionResult ListaVenda(int id)
+        public ActionResult VendasList(int id)
         {
             // Obter todas as pessoas da cooperativa informada
             var pessoasDaCooperativa = _pessoaService.GetAll()
@@ -232,14 +231,14 @@ namespace EcoConecteWeb.Controllers
                                                      .ToList();
 
             // Filtrar as vendas pelas pessoas que pertencem à cooperativa
-            var listaVendas = _vendaService.GetAll()
+            var VendasList = _vendaService.GetAll()
                                            .Where(v => pessoasDaCooperativa.Contains(v.IdPessoa))
                                            .ToList();
 
             // Mapear para a ViewModel
-            var listaVendasModel = _mapper.Map<List<VendaViewModel>>(listaVendas);
+            var VendasListModel = _mapper.Map<List<VendaViewModel>>(VendasList);
 
-            return View(listaVendasModel);
+            return View(VendasListModel);
         }
 
         // GET: Confirmar Exclusão da Coleta
@@ -266,7 +265,7 @@ namespace EcoConecteWeb.Controllers
                 await _coletaService.DeleteAsync(id);
             }
 
-            return RedirectToAction("ListaColetas", "AdmCooperativa", new { id = idCoop });
+            return RedirectToAction("ColetasList", "AdmCooperativa", new { id = idCoop });
         }
 
         [HttpGet]
@@ -306,7 +305,7 @@ namespace EcoConecteWeb.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("ListaColetas", "AdmCooperativa", new { id = coleta.IdCooperativa });
+            return RedirectToAction("ColetasList", "AdmCooperativa", new { id = coleta.IdCooperativa });
         }
 
         [HttpGet]
@@ -336,7 +335,7 @@ namespace EcoConecteWeb.Controllers
                 var isEdited = await _noticiaService.EditNoticiaAsync(noticia);
                 if (isEdited)
                 {
-                    return RedirectToAction("ListaNoticias", "AdmCooperativa", new { id = idCoop });
+                    return RedirectToAction("NoticiasList", "AdmCooperativa", new { id = idCoop });
                 }
 
                 ModelState.AddModelError("", "Erro ao editar a notícia.");
@@ -375,7 +374,7 @@ namespace EcoConecteWeb.Controllers
                 return NotFound();
 
             // Redireciona para a lista de notícias da cooperativa
-            return RedirectToAction("ListaNoticias", "AdmCooperativa", new { id = idCoop });
+            return RedirectToAction("NoticiasList", "AdmCooperativa", new { id = idCoop });
         }
 
         // GET: Exibe a view de edição
@@ -424,7 +423,7 @@ namespace EcoConecteWeb.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("ListaOrientacoes", new { id = model.IdCooperativa });
+            return RedirectToAction("OrientacoesList", new { id = model.IdCooperativa });
         }
 
         // Exibe a tela de confirmação da exclusão
@@ -458,37 +457,33 @@ namespace EcoConecteWeb.Controllers
                 return View("OrientacaoDelete", await _orientacoesService.ObterPorIdAsync(id));
             }
 
-            return RedirectToAction("ListaOrientacoes", "AdmCooperativa", new { id = idCoop });
+            return RedirectToAction("OrientacoesList", "AdmCooperativa", new { id = idCoop });
         }
 
-        public ActionResult Create()
+        public ActionResult OrientacoesCreate(int pessoaId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Obtém o ID do usuário logado
-            ViewData["PessoaId"] = userId;
+            ViewData["PessoaId"] = pessoaId;
             return View();
         }
 
-
-        // POST: Orientcoes_Controller/Create
+        // POST: AdmCooperativa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOrientacoes(OrientacoesViewModel orientacoesModel)
+        public ActionResult OrientacoesCreate(OrientacoesViewModel orientacoesModel)
         {
             if (ModelState.IsValid)
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                orientacoesModel.PessoaId = userId; // Atribui o ID do usuário logado
-
                 var orientacoes = _mapper.Map<Orientacoes>(orientacoesModel);
                 _orientacoesService.Create(orientacoes);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("OrientacoesList", "AdmCooperativa", new { id = orientacoesModel.IdCooperativa });
             }
+            ViewData["PessoaId"] = orientacoesModel.IdCooperativa;
+            ViewData["Erro"] = "Não foi possível criar a orientação. Verifique os campos e tente novamente.";
             return View(orientacoesModel);
         }
 
-
-        public async Task<IActionResult> VendaEdit(uint id, int idCoop)
+        public async Task<IActionResult> VendasEdit(uint id, int idCoop)
         {
             var venda = await _vendaService.ObterPorIdAsync(id);
             if (venda == null) return NotFound();
@@ -508,7 +503,7 @@ namespace EcoConecteWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> VendaEdit(VendaViewModel vendaViewModel, int idCoop)
+        public async Task<IActionResult> VendasEdit(VendaViewModel vendaViewModel, int idCoop)
         {
             ModelState.Remove("IdPessoaNavigation"); // Se houver erro de validação nesse campo, ele será ignorado
             if (!ModelState.IsValid)
@@ -530,7 +525,7 @@ namespace EcoConecteWeb.Controllers
                 };
 
                 await _vendaService.AtualizarAsync(venda);
-                return RedirectToAction("ListaVenda", "AdmCooperativa", new { id = idCoop });
+                return RedirectToAction("VendasList", "AdmCooperativa", new { id = idCoop });
             }
             catch (Exception ex)
             {
@@ -539,7 +534,7 @@ namespace EcoConecteWeb.Controllers
             }
         }
 
-        public async Task<IActionResult> VendaDelete(uint id, int idCoop)
+        public async Task<IActionResult> VendasDelete(uint id, int idCoop)
         {
             var venda = await _vendaService.ObterPorIdAsync(id);
             if (venda == null) return NotFound();
@@ -550,7 +545,7 @@ namespace EcoConecteWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> VendaDeleteConfirmed(uint id, int idCoop)
+        public async Task<IActionResult> VendasDeleteConfirmed(uint id, int idCoop)
         {
             var sucesso = await _vendaService.ExcluirAsync(id);
             if (!sucesso)
@@ -559,7 +554,139 @@ namespace EcoConecteWeb.Controllers
                 return View();
             }
             ViewData["idCoop"] = idCoop;
-            return RedirectToAction("ListaVenda", "AdmCooperativa", new { id = idCoop });
+            return RedirectToAction("VendasList", "AdmCooperativa", new { id = idCoop });
         }
+
+        public IActionResult ColetasCreate(int pessoaId)
+        {
+            ViewData["PessoaId"] = pessoaId;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ColetasCreate(ColetaViewModel coletaViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var coleta = _mapper.Map<Coleta>(coletaViewModel);
+                _coletaService.Create(coleta);
+
+                // Redireciona de volta para a listagem da cooperativa
+                return RedirectToAction("ColetasList", new { id = coletaViewModel.IdCooperativa });
+            }
+
+            // Caso haja erro, mantém o PessoaId e exibe uma mensagem
+            ViewData["PessoaId"] = coletaViewModel.IdCooperativa;
+            ViewData["Erro"] = "Não foi possível cadastrar a coleta. Verifique os campos.";
+            return View(coletaViewModel);
+        }
+
+        public IActionResult NoticiasCreate(int pessoaId)
+        {
+            ViewData["PessoaId"] = pessoaId;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NoticiasCreate(NoticiaViewModel noticiaModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var noticia = _mapper.Map<Noticia>(noticiaModel);
+                    _noticiaService.Create(noticia);
+
+                    // Redireciona para a lista de notícias, passando o id da cooperativa
+                    return RedirectToAction("NoticiasList", new { id = noticia.IdCooperativa });
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Não foi possível cadastrar a notícia. Erro: " + ex.Message);
+                }
+            }
+
+            ViewData["PessoaId"] = noticiaModel.IdCooperativa; // Garante que o valor seja mantido ao retornar a view
+            return View(noticiaModel);
+        }
+
+        public IActionResult VendasCreate(int pessoaId)
+        {
+            ViewData["PessoaId"] = pessoaId;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult VendasCreate(VendaViewModel vendaModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var venda = _mapper.Map<Venda>(vendaModel);
+                    _vendaService.Create(venda);
+
+                    // Redireciona para a lista de vendas da cooperativa
+                    return RedirectToAction("VendasList", new { id = venda.IdCooperativa });
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Não foi possível cadastrar a venda. Erro: " + ex.Message);
+                }
+            }
+
+            // Garante que o IdCooperativa continue visível após erro de validação
+            ViewData["PessoaId"] = vendaModel.IdCooperativa;
+
+            return View(vendaModel);
+        }
+
+        // GET: Pessoa/Edit/5
+        public ActionResult CooperadosEdit(uint id)
+        {
+            var pessoa = _pessoaService.Get(id);
+            if (pessoa == null)
+            {
+                return NotFound();
+            }
+
+            var pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            return View(pessoaModel);
+        }
+
+        // POST: Pessoa/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CooperadosEdit(uint id, PessoaViewModel pessoaModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var pessoaExistente = _pessoaService.Get(id);
+                    if (pessoaExistente == null)
+                    {
+                        return NotFound();
+                    }
+
+                    _mapper.Map(pessoaModel, pessoaExistente);
+                    _pessoaService.Edit(pessoaExistente);
+
+                    return RedirectToAction("CooperadosList", new { id = pessoaExistente.IdCooperativa });
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Não foi possível atualizar pessoa. Erro: " + ex.Message);
+                }
+            }
+
+            // Retorna a View com os dados preenchidos em caso de erro
+            return View(pessoaModel);
+        }
+
+
     }
 }

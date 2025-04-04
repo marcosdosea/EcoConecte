@@ -45,14 +45,14 @@
         </dd>
     </dl>
 
-    <form asp-action="VendaDeleteConfirmed" method="post">
+    <form asp-action="VendasDeleteConfirmed" method="post">
         <input type="hidden" name="Id" value="@Model.Id" /> <!-- Passando o Id -->
         <input type="hidden" name="IdCoop" value=@idCoop /> <!-- Passando o IdCoop -->
         <div class="button-group">
             <button type="submit" class="icon-button">
                 <i class="fas fa-trash-alt"></i> Apagar
             </button>
-            <button type="button" class="icon-button" onclick="window.location.href='@Url.Action("ListaVenda", "AdmCooperativa", new { id = idCoop })'">
+            <button type="button" class="icon-button" onclick="window.location.href='@Url.Action("VendasList", "AdmCooperativa", new { id = idCoop })'">
                 <i class="fas fa-undo"></i> Voltar
             </button>
         </div>

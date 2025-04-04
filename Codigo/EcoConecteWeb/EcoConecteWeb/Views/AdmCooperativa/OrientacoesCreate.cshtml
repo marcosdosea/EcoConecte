@@ -1,10 +1,11 @@
-﻿@page
-@model EcoConecteWeb.Models.OrientacoesViewModel
+﻿@model EcoConecteWeb.Models.OrientacoesViewModel
 
 @{
-    ViewData["Title"] = "EcoConnect - Orientações";
-    var pessoaId = ViewData["PessoaId"];
+    ViewData["Title"] = "EcoConecte - Cadastrar Orientação";
+    var pessoaId = Convert.ToInt32(ViewData["PessoaId"] ?? 0);
+
 }
+
 <div class="container">
     <h1 class="title">
         <i class="fas fa-plus"></i> Cadastrar Orientação
@@ -15,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create" class="form-container-expanded">
+            <form asp-action="OrientacoesCreate" class="form-container-expanded">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -30,18 +31,18 @@
                     <span asp-validation-for="Descricao" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="IdCooperativa" class="control-label"></label>
-                    <input asp-for="IdCooperativa" class="form-control" />
-                    <span asp-validation-for="IdCooperativa" class="text-danger"></span>
+                <div class="form-group" style="display: none;">
+                    <input type="hidden" asp-for="IdCooperativa" value="@ViewData["PessoaId"]" />
                 </div>
 
                 <div class="form-group button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
                     <input type="submit" value="Inserir" class="icon-button" style="flex: 1; margin-right: 10px;" />
-                    <a class="icon-button" asp-action="Index" style="flex: 1; text-align: center;">
-                        <i class="fas fa-arrow-left"></i> Voltar
-                    </a>
+
+                    <button type="button" class="icon-button" style="flex: 1;" onclick="window.location.href='@Url.Action("OrientacoesList", "AdmCooperativa", new { id = pessoaId })'">
+                        <i class="fas fa-undo"></i> Voltar
+                    </button>
                 </div>
+
             </form>
         </div>
     </div>

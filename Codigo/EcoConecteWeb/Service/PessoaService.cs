@@ -81,13 +81,13 @@ namespace Service
         public IEnumerable<PessoaDto> GetByName(string name)
         {
             var query = from pessoa in context.Pessoas
-                         where pessoa.Nome.StartsWith(name)
-                         orderby pessoa.Nome
-                         select new Core.Dto.PessoaDto
-                         {
-                             IdPessoa = pessoa.Id,
-                             Nome = pessoa.Nome
-                         };
+                        where pessoa.Nome.StartsWith(name)
+                        orderby pessoa.Nome
+                        select new Core.Dto.PessoaDto
+                        {
+                            IdPessoa = pessoa.Id,
+                            Nome = pessoa.Nome
+                        };
             return query;
         }
     }
