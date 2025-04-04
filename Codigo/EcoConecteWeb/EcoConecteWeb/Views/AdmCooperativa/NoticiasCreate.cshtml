@@ -1,0 +1,45 @@
+﻿@model EcoConecteWeb.Models.NoticiaViewModel
+
+@{
+    ViewData["Title"] = "EcoConecte - Cadastrar Notícia";
+    var pessoaId = Convert.ToInt32(ViewData["PessoaId"] ?? 0);
+}
+
+<h1 class="title">
+    <i class="fas fa-plus-circle"></i> Cadastrar Notícia
+</h1>
+
+<h4 class="subheading"><strong>Preencha os dados</strong></h4>
+
+<div class="form-container">
+    <form asp-action="NoticiasCreate">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Titulo" class="control-label"></label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Conteudo" class="control-label"></label>
+            <input asp-for="Conteudo" class="form-control" />
+            <span asp-validation-for="Conteudo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Data" class="control-label"></label>
+            <input asp-for="Data" class="form-control" />
+            <span asp-validation-for="Data" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="display: none;">
+            <input type="hidden" asp-for="IdCooperativa" value="@ViewData["PessoaId"]" />
+        </div>
+
+
+        <div class="form-group button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <input type="submit" value="Inserir" class="icon-button" style="flex: 1; margin-right: 10px;" />
+
+            <button type="button" class="icon-button" style="flex: 1;" onclick="window.location.href='@Url.Action("NoticiasList", "AdmCooperativa", new { id = pessoaId })'">
+                <i class="fas fa-undo"></i> Voltar
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,50 +1,61 @@
 ﻿@model EcoConecteWeb.Models.VendaViewModel
 
 @{
-    ViewData["Title"] = "EcoConecte - Editar Venda";
-    var idCoop = ViewData["idCoop"];
+    ViewData["Title"] = "EcoConecte - Cadastrar Venda";
+    var pessoaId = Convert.ToInt32(ViewData["PessoaId"] ?? 0);
 }
 
 <h1 class="title">
-    <i class="fas fa-edit"></i> Editar Venda
+    <i class="fas fa-plus-circle"></i> Cadastrar Venda
 </h1>
 
-<div class="form-container text-left">
-    <form asp-action="VendaEdit">
+<h4 class="subheading"><strong>Preencha os dados</strong></h4>
+
+<div class="form-container">
+    <form asp-action="VendasCreate">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <input type="hidden" name="idCoop" value="@ViewData["idCoop"]" />
-
-        <div class="form-group">
+        <div class="form-group text-left">
             <label asp-for="Tipo" class="control-label"></label>
             <input asp-for="Tipo" class="form-control" />
             <span asp-validation-for="Tipo" class="text-danger"></span>
         </div>
-        <div class="form-group">
+
+        <div class="form-group text-left">
             <label asp-for="Valor" class="control-label"></label>
             <input asp-for="Valor" class="form-control" />
             <span asp-validation-for="Valor" class="text-danger"></span>
         </div>
-        <div class="form-group">
+
+        <div class="form-group text-left">
             <label asp-for="Quantidade" class="control-label"></label>
             <input asp-for="Quantidade" class="form-control" />
             <span asp-validation-for="Quantidade" class="text-danger"></span>
         </div>
-        <div class="form-group">
+
+        <div class="form-group text-left">
             <label asp-for="Data" class="control-label"></label>
             <input asp-for="Data" class="form-control" />
             <span asp-validation-for="Data" class="text-danger"></span>
         </div>
-        <div class="form-group">
+
+        <div class="form-group text-left">
             <label asp-for="IdPessoa" class="control-label"></label>
             <input asp-for="IdPessoa" class="form-control" />
             <span asp-validation-for="IdPessoa" class="text-danger"></span>
         </div>
-        <div class="button-group">
-            <input type="submit" value="Salvar" class="icon-button" />
-            <a asp-controller="AdmCooperativa" asp-action="ListaVenda" asp-route-id="@idCoop" class="icon-button">
-                <i class="fa fa-arrow-left"></i> Voltar
-            </a>
+
+        <div class="form-group" style="display: none;">
+            <input type="hidden" asp-for="IdCooperativa" value="@ViewData["PessoaId"]" />
+        </div>
+
+
+        <div class="form-group button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <input type="submit" value="Inserir" class="icon-button" style="flex: 1; margin-right: 10px;" />
+
+            <button type="button" class="icon-button" style="flex: 1;" onclick="window.location.href='@Url.Action("VendasList", "AdmCooperativa", new { id = pessoaId })'">
+                <i class="fas fa-undo"></i> Voltar
+            </button>
         </div>
     </form>
 </div>

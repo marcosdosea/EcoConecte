@@ -1,58 +1,64 @@
 ﻿@model EcoConecteWeb.Models.ColetaViewModel
 
 @{
-    ViewData["Title"] = "EcoConecte - Editar Coleta";
+    ViewData["Title"] = "EcoConecte - Cadastrar Coleta";
+    var pessoaId = Convert.ToInt32(ViewData["PessoaId"] ?? 0);
 }
 
 <div class="container">
     <h1 class="title">
-        <i class="fas fa-edit"></i> Editar
+        <i class="fas fa-plus-circle"></i> Cadastrar Coleta
     </h1>
-
-
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="ColetaEdit">
+            <form asp-action="ColetasCreate">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                <div class="form-group">
+                    <label asp-for="Cep" class="control-label"></label>
+                    <input asp-for="Cep" class="form-control" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Logradouro" class="control-label"></label>
                     <input asp-for="Logradouro" class="form-control" />
                     <span asp-validation-for="Logradouro" class="text-danger"></span>
                 </div>
-
                 <div class="form-group">
                     <label asp-for="Numero" class="control-label"></label>
                     <input asp-for="Numero" class="form-control" />
                     <span asp-validation-for="Numero" class="text-danger"></span>
                 </div>
-
                 <div class="form-group">
                     <label asp-for="DiaColeta" class="control-label"></label>
                     <input asp-for="DiaColeta" class="form-control" />
                     <span asp-validation-for="DiaColeta" class="text-danger"></span>
                 </div>
-
                 <div class="form-group">
                     <label asp-for="HorarioInicio" class="control-label"></label>
-                    <input asp-for="HorarioInicio" class="form-control" value="@Model.HorarioInicio.ToString("HH:mm")" />
+                    <input asp-for="HorarioInicio" class="form-control" />
                     <span asp-validation-for="HorarioInicio" class="text-danger"></span>
                 </div>
-
                 <div class="form-group">
                     <label asp-for="HorarioTermino" class="control-label"></label>
-                    <input asp-for="HorarioTermino" class="form-control" value="@Model.HorarioTermino.ToString("HH:mm")" />
+                    <input asp-for="HorarioTermino" class="form-control" />
                     <span asp-validation-for="HorarioTermino" class="text-danger"></span>
                 </div>
+                <div class="form-group" style="display: none;">
+                    <input type="hidden" asp-for="IdCooperativa" value="@ViewData["PessoaId"]" />
+                </div>
 
-                <div class="button-group">
-                    <input type="submit" value="Salvar" class="icon-button" />
-                    <a asp-controller="AdmCooperativa" asp-action="ColetasList" asp-route-id="@Model.IdCooperativa" class="icon-button">
-                        <i class="fa fa-arrow-left"></i> Voltar
-                    </a>
+
+                <div class="form-group button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <input type="submit" value="Inserir" class="icon-button" style="flex: 1; margin-right: 10px;" />
+
+                    <button type="button" class="icon-button" style="flex: 1;" onclick="window.location.href='@Url.Action("ColetasList", "AdmCooperativa", new { id = pessoaId })'">
+                        <i class="fas fa-undo"></i> Voltar
+                    </button>
                 </div>
 
             </form>
         </div>
     </div>
 </div>
+
+

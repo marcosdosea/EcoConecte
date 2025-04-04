@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "EcoConecte - Vendas";
     var PessoaId = ViewData["PessoaId"];
+    var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
 }
 
 <div class="container">
@@ -11,11 +12,9 @@
     </h1>
 
     <p class="add-button">
-        <button class="icon-button">
-            <a href="@Url.Action("VendaCreate")">
-                <i class="fas fa-plus"></i> Cadastrar nova venda
-            </a>
-        </button>
+        <a class="icon-button" asp-controller="AdmCooperativa" asp-action="VendasCreate" asp-route-pessoaId="@idCoop">
+            <i class="fas fa-plus"></i> Cadastrar nova venda
+        </a>
     </p>
 
     <div class="table-responsive">
@@ -42,10 +41,10 @@
                         <td>@Html.DisplayFor(modelItem => item.IdPessoa)</td>
                         <td>
                             <div class="button-group">
-                                <a href="@Url.Action("VendaEdit", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })" class="icon-button">
+                                <a href="@Url.Action("VendasEdit", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })" class="icon-button">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
-                                <a href="@Url.Action("VendaDelete", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })" class="icon-button">
+                                <a href="@Url.Action("VendasDelete", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })" class="icon-button">
                                     <i class="fas fa-trash"></i> Apagar
                                 </a>
                             </div>
