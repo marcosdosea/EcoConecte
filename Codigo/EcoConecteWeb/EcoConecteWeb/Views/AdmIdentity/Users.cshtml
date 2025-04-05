@@ -1,32 +1,185 @@
 ﻿@model IEnumerable<EcoConecteWeb.Areas.Identity.Data.UsuarioIdentity>
 
 @{
-    ViewData["Title"] = "Ecoconecte - Administrar Usuários";
+    ViewData["Title"] = "Usuários do Sistema";
 }
 
-<h1>Usuários do sistema</h1>
+<div class="admin-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card admin-card">
+                    <div class="card-header admin-header">
+                        <h1 class="admin-title">
+                            <i class="bi bi-people me-2"></i>Gerenciar Usuários
+                        </h1>
+                        <p class="text-muted mb-0">Lista de usuários registrados no sistema</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        @if(!Model.Any())
+                        {
+                            <div class="empty-state text-center py-5">
+                                <div class="empty-icon mb-3">
+                                    <i class="bi bi-person-x"></i>
+                                </div>
+                                <h4>Nenhum usuário encontrado</h4>
+                                <p class="text-muted">Não há usuários registrados no sistema.</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Usuário</th>
+                                            <th scope="col" class="text-center">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var user in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="user-cell">
+                                                        <div class="user-icon">
+                                                            <i class="bi bi-person"></i>
+                                                        </div>
+                                                        <div>@user.Email</div>
+                                                    </div>
+                                                </td>
+                                                <td>@user.UserName</td>
+                                                <td>
+                                                    <div class="d-flex justify-content-center gap-2">
+                                                        <a href="@Url.Action("UserRoles", "AdmIdentity", new { userId = user.Id })" class="btn btn-sm btn-outline-info action-btn">
+                                                            <i class="bi bi-shield-lock"></i>
+                                                            <span class="action-text">Funções</span>
+                                                        </a>
+                                                        <a href="@Url.Action("Edit", "AdmIdentity", new { userId = user.Id })" class="btn btn-sm btn-outline-primary action-btn">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                            <span class="action-text">Editar</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="card-footer p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-light">
+                                <i class="bi bi-arrow-left me-2"></i>Voltar
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("Roles", "AdmIdentity")" class="btn btn-eco">
+                                <i class="bi bi-shield me-2"></i>Gerenciar Funções
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Email</th>
-            <th>Função</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.Email</td>
-				<td>
-                    <a href="@Url.Action("UserRoles", "AdmIdentity", new { userId = user.Id })">Função</a>
-                </td>
-                <td>
-                    <!-- Link para editar o usuário -->
-                    <a href="@Url.Action("Edit", "AdmIdentity", new { userId = user.Id })">Editar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<style>
+    .admin-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .admin-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .admin-header {
+        background-color: #f8f9fa;
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.25rem;
+    }
+    
+    .admin-table {
+        margin-bottom: 0;
+    }
+    
+    .admin-table th {
+        font-weight: 600;
+        background-color: #f8f9fa;
+        color: #4A5568;
+        border-top: none;
+        padding: 0.75rem 1rem;
+    }
+    
+    .admin-table td {
+        padding: 0.75rem 1rem;
+        vertical-align: middle;
+    }
+    
+    .user-cell {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .user-icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #EBF8FF;
+        border-radius: 50%;
+        color: #3182CE;
+    }
+    
+    .action-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: all 0.2s ease;
+    }
+    
+    .action-btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .empty-state {
+        padding: 3rem 0;
+    }
+    
+    .empty-icon {
+        font-size: 3rem;
+        color: #CBD5E0;
+    }
+</style>

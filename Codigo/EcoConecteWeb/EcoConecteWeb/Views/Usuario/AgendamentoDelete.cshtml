@@ -1,58 +1,239 @@
 ﻿@model EcoConecteWeb.Models.AgendamentoViewModel
 @{
-    ViewData["Title"] = "EcoConecte - Apagar Agendamento";
-        var pessoaId = ViewData["PessoaId"];
+    ViewData["Title"] = "Excluir Agendamento";
+    var pessoaId = ViewData["PessoaId"];
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-trash-alt"></i> Apagar Agendamento
-    </h1>
-
-    <h3>Tem certeza?</h3>
-    <hr />
-
-    <dl class="row">
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Id)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Id)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Data)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Data)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Cep)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Cep)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Logradouro)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Logradouro)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Numero)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Numero)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Bairro)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Bairro)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Cidade)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Cidade)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Estado)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Estado)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Status)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Status)</dd>
-    </dl>
-
-
-
-<form asp-action="AgendamentoDelete">
-        <input type="hidden" name="IdPessoa" value="@Model.IdPessoa" />
-    <div class="button-group">
-        <button type="submit" class="icon-button">
-            <i class="fas fa-trash-alt"></i> Apagar
-        </button>
-            <button type="button" class="icon-button" onclick="window.location.href='@Url.Action("Agendadas", "Usuario", new { id = Model.IdPessoa })'">
-                <i class="fas fa-undo"></i> Voltar
-            </button>
-
+<div class="confirmation-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card confirmation-card">
+                    <div class="card-header confirmation-header">
+                        <div class="confirmation-icon mb-3">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <h1 class="confirmation-title">Excluir Agendamento</h1>
+                        <p class="text-muted mb-0">Tem certeza que deseja excluir este agendamento de coleta?</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Esta ação não poderá ser desfeita.
+                        </div>
+                        
+                        <div class="detail-card mt-4">
+                            <h5 class="section-title text-eco-dark mb-3">
+                                <i class="bi bi-info-circle me-2"></i>Detalhes do Agendamento
+                            </h5>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="bi bi-calendar-date me-2"></i>Data e Hora
+                                        </span>
+                                        <span class="detail-value">@Model.Data.ToString("dd/MM/yyyy HH:mm")</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="bi bi-tag me-2"></i>Status
+                                        </span>
+                                        <span class="status-badge @(Model.Status == "A" ? "status-scheduled" : Model.Status == "C" ? "status-confirmed" : Model.Status == "R" ? "status-completed" : "status-default")">
+                                            @(Model.Status == "A" ? "Agendado" : Model.Status == "C" ? "Confirmado" : Model.Status == "R" ? "Concluído" : Model.Status)
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h5 class="section-title text-eco-dark mb-3">
+                                <i class="bi bi-geo-alt me-2"></i>Endereço
+                            </h5>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="bi bi-signpost me-2"></i>Logradouro
+                                        </span>
+                                        <span class="detail-value">@Model.Logradouro, @Model.Numero</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="bi bi-map me-2"></i>Bairro
+                                        </span>
+                                        <span class="detail-value">@Model.Bairro</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="bi bi-mailbox me-2"></i>CEP
+                                        </span>
+                                        <span class="detail-value">@Model.Cep</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="bi bi-geo-alt me-2"></i>Cidade/Estado
+                                        </span>
+                                        <span class="detail-value">@Model.Cidade - @Model.Estado</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form asp-action="AgendamentoDelete" class="card-footer confirmation-actions p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <input type="hidden" name="IdPessoa" value="@Model.IdPessoa" />
+                        <div>
+                            <a href="@Url.Action("Agendadas", "Usuario", new { id = Model.IdPessoa })" class="btn btn-light">
+                                <i class="bi bi-arrow-left me-2"></i>Voltar
+                            </a>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-danger px-4 py-2">
+                                <i class="bi bi-trash me-2"></i>Confirmar Exclusão
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
+
+<style>
+    .confirmation-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .confirmation-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .confirmation-header {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .confirmation-icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FEB2B2;
+        color: #E53E3E;
+        border-radius: 50%;
+        font-size: 2rem;
+    }
+    
+    .confirmation-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.5rem;
+    }
+    
+    .detail-card {
+        background-color: #f8f9fa;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .detail-item {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.5rem;
+    }
+    
+    .detail-label {
+        font-size: 0.875rem;
+        color: #718096;
+        margin-bottom: 0.25rem;
+    }
+    
+    .detail-value {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #2D3748;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .status-scheduled {
+        background-color: #E6FFFA;
+        color: #38B2AC;
+    }
+    
+    .status-confirmed {
+        background-color: #EBF8FF;
+        color: #3182CE;
+    }
+    
+    .status-completed {
+        background-color: #F0FFF4;
+        color: #38A169;
+    }
+    
+    .status-default {
+        background-color: #EDF2F7;
+        color: #718096;
+    }
+    
+    .text-eco-dark {
+        color: #2F855A;
+    }
+    
+    .confirmation-actions {
+        background-color: #f8f9fa;
+    }
+    
+    @@media (max-width: 768px) {
+        .confirmation-header {
+            padding: 1.25rem 1rem;
+        }
+        
+        .confirmation-title {
+            font-size: 1.25rem;
+        }
+        
+        .confirmation-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.75rem;
+        }
+    }
+</style>
 

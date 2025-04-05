@@ -439,3 +439,33 @@ a:hover {
 .shadow-eco {
     box-shadow: 0 4px 14px rgba(56, 161, 105, 0.15);
 }
+
+/* Estilos de media query para as páginas administrativas */
+@media (max-width: 992px) {
+    .action-text {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .role-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .role-button {
+        margin-bottom: 0.5rem;
+    }
+    
+    .role-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-header {
+        padding: 1.25rem 1rem;
+    }
+    
+    .admin-title {
+        font-size: 1.25rem;
+    }
+}

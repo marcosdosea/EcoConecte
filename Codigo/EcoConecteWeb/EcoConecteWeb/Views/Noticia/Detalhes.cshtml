@@ -1,27 +1,58 @@
-@model Core.Noticia
+@model EcoConecteWeb.Models.NoticiaViewModel
 
 @{
-    ViewData["Title"] = "Detalhes da Notícia";
+    ViewData["Title"] = Model.Titulo;
 }
 
-<div class="container py-4">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <div class="mb-4">
-                <a asp-action="Index" class="btn btn-outline-success mb-3">
-                    <i class="bi bi-arrow-left"></i> Voltar
-                </a>
+<div class="article-container">
+    <div class="article-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Noticia" asp-action="ListaPublica">Notícias</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Artigo</li>
+                        </ol>
+                    </nav>
+                    <h1 class="article-title mb-3">@Model.Titulo</h1>
+                    <div class="article-meta mb-4">
+                        <span><i class="bi bi-calendar-date me-2"></i>@Html.DisplayFor(model => model.Data)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="article-image-container mb-5 bg-light d-flex align-items-center justify-content-center">
+                    <i class="bi bi-newspaper text-eco-light"></i>
+                </div>
                 
-                <div class="card shadow-sm">
-                    <div class="card-body p-4">
-                        <h2 class="card-title mb-3">@Model.Titulo</h2>
-                        <p class="text-muted mb-4">
-                            <i class="bi bi-calendar me-2"></i> 
-                            @Html.DisplayFor(model => model.Data)
-                        </p>
-                        
-                        <div class="card-text news-content">
-                            @Html.Raw(Model.Conteudo)
+                <article class="article-content mb-5">
+                    @Html.Raw(Model.Conteudo)
+                </article>
+                
+                <div class="article-footer">
+                    <hr class="my-5" />
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <a asp-controller="Noticia" asp-action="ListaPublica" class="btn btn-outline-eco mb-3 mb-sm-0">
+                            <i class="bi bi-arrow-left me-2"></i> Voltar para notícias
+                        </a>
+                        <div class="social-share">
+                            <span class="me-3">Compartilhar:</span>
+                            <a href="#" class="social-icon me-2" aria-label="Compartilhar no Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#" class="social-icon me-2" aria-label="Compartilhar no Twitter">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Compartilhar no WhatsApp">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -31,8 +62,105 @@
 </div>
 
 <style>
-    .news-content {
-        line-height: 1.8;
+    .text-eco {
+        color: #38A169;
+    }
+    
+    .text-eco-light {
+        color: rgba(56, 161, 105, 0.2);
+    }
+    
+    .article-container {
+        overflow-x: hidden;
+    }
+    
+    .article-header {
+        padding: 3rem 0;
+        background-color: #F9FAFB;
+        border-bottom: 1px solid #EDF2F7;
+    }
+    
+    .article-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2D3748;
+    }
+    
+    .article-meta {
+        color: #718096;
+        font-size: 0.95rem;
+    }
+    
+    .article-image-container {
+        height: 400px;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+    
+    .article-image-container i {
+        font-size: 8rem;
+    }
+    
+    .article-content {
         font-size: 1.1rem;
+        line-height: 1.8;
+        color: #4A5568;
+    }
+    
+    .article-content p {
+        margin-bottom: 1.5rem;
+    }
+    
+    .breadcrumb {
+        background-color: transparent;
+        padding: 0;
+    }
+    
+    .breadcrumb-item a {
+        color: #38A169;
+        text-decoration: none;
+    }
+    
+    .breadcrumb-item.active {
+        color: #718096;
+    }
+    
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        color: #718096;
+        background-color: #EDF2F7;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        color: white;
+        background-color: #38A169;
+        transform: translateY(-3px);
+    }
+    
+    .btn-outline-eco {
+        color: #38A169;
+        border-color: #38A169;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-eco:hover {
+        background-color: #38A169;
+        color: white;
+    }
+    
+    @@media (max-width: 768px) {
+        .article-title {
+            font-size: 2rem;
+        }
+        
+        .article-image-container {
+            height: 250px;
+        }
     }
 </style> 

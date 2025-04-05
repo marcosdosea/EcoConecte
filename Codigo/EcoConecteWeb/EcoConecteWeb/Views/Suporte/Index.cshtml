@@ -1,0 +1,378 @@
+@{
+    ViewData["Title"] = "Suporte";
+}
+
+<div class="support-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card support-card">
+                    <div class="card-header support-header text-center">
+                        <div class="support-icon mb-3">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h1 class="support-title">Central de Suporte</h1>
+                        <p class="text-muted">Estamos aqui para ajudar você com qualquer dúvida ou problema</p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6 mb-4 mb-md-0">
+                                <div class="contact-info-card">
+                                    <h3 class="section-title text-eco-dark mb-4">
+                                        <i class="bi bi-info-circle me-2"></i>Informações de Contato
+                                    </h3>
+                                    
+                                    <div class="contact-info-item">
+                                        <div class="contact-icon">
+                                            <i class="bi bi-telephone-fill"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h5>Telefone</h5>
+                                            <p>(79) 3432-8200</p>
+                                            <p class="text-muted small">Segunda a Sexta, 8h às 18h</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="contact-info-item">
+                                        <div class="contact-icon">
+                                            <i class="bi bi-envelope-fill"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h5>E-mail</h5>
+                                            <p>suporte@ecoconecte.com.br</p>
+                                            <p class="text-muted small">Respondemos em até 24 horas</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="contact-info-item">
+                                        <div class="contact-icon">
+                                            <i class="bi bi-geo-alt-fill"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h5>Endereço</h5>
+                                            <p>Av. Ver. Olímpio Grande, s/n - Porto, Itabaiana - SE, 49500-000</p>
+                                            <p class="text-muted small">Atendimento presencial com agendamento</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="contact-form-card">
+                                    <h3 class="section-title text-eco-dark mb-4">
+                                        <i class="bi bi-chat-dots me-2"></i>Envie sua Mensagem
+                                    </h3>
+                                    
+                                    <form id="contactForm" class="needs-validation" novalidate>
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Nome</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                                <input type="text" class="form-control" id="name" placeholder="Seu nome completo" required>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Por favor, informe seu nome.
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">E-mail</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                                <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Por favor, informe um e-mail válido.
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="subject" class="form-label">Assunto</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-tag"></i></span>
+                                                <select class="form-select" id="subject" required>
+                                                    <option value="" selected disabled>Selecione o assunto</option>
+                                                    <option value="duvida">Dúvidas sobre coletas</option>
+                                                    <option value="agendamento">Problemas com agendamento</option>
+                                                    <option value="conta">Questões sobre minha conta</option>
+                                                    <option value="sugestao">Sugestões</option>
+                                                    <option value="outro">Outro assunto</option>
+                                                </select>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Por favor, selecione um assunto.
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Mensagem</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-chat-text"></i></span>
+                                                <textarea class="form-control" id="message" rows="4" placeholder="Descreva sua dúvida ou problema em detalhes" required></textarea>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Por favor, escreva sua mensagem.
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-eco py-2">
+                                                <i class="bi bi-send me-2"></i>Enviar Mensagem
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer support-footer p-4">
+                        <h4 class="faq-title">Perguntas Frequentes</h4>
+                        
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Como agendar uma coleta?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="faqOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Para agendar uma coleta, faça login na sua conta e acesse a área "Agendar Coleta" no menu do cliente. Preencha o formulário com a data desejada e o endereço para coleta. Você receberá uma confirmação assim que a coleta for aprovada.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Como alterar a data de uma coleta agendada?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Para alterar a data de uma coleta já agendada, acesse "Coletas Agendadas" no menu do cliente, localize a coleta desejada e clique em "Editar". Você pode modificar a data desde que a coleta ainda não tenha sido confirmada pela cooperativa.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Quais materiais são aceitos para reciclagem?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Aceitamos diversos materiais recicláveis como papel, papelão, plástico, vidro, metal e eletrônicos. Para mais detalhes sobre itens específicos e como prepará-los para coleta, consulte a seção "Orientações" no menu principal ou entre em contato com nosso suporte.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Como recuperar minha senha?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Na tela de login, clique em "Esqueceu sua senha?" e siga as instruções para redefinir sua senha. Um e-mail com instruções será enviado para o endereço cadastrado. Se não receber o e-mail, verifique sua pasta de spam ou entre em contato com nosso suporte.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .support-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .support-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .support-header {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .support-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #38A169;
+        color: white;
+        border-radius: 50%;
+        font-size: 2.5rem;
+    }
+    
+    .support-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2D3748;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .contact-info-card, .contact-form-card {
+        height: 100%;
+    }
+    
+    .contact-info-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #E6FFFA;
+        color: #38A169;
+        border-radius: 50%;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    
+    .contact-details h5 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    
+    .contact-details p {
+        margin-bottom: 0.25rem;
+    }
+    
+    .text-eco-dark {
+        color: #2F855A;
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .support-footer {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+    }
+    
+    .faq-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        color: #2D3748;
+        text-align: center;
+    }
+    
+    .accordion-item {
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 0.5rem;
+        margin-bottom: 0.75rem;
+        overflow: hidden;
+    }
+    
+    .accordion-button {
+        font-weight: 500;
+        padding: 1rem 1.25rem;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: #F0FFF4;
+        color: #38A169;
+    }
+    
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: rgba(56, 161, 105, 0.25);
+    }
+    
+    .input-group-text {
+        background-color: #F9FAFB;
+        border-right: none;
+    }
+    
+    .input-group .form-control, .input-group .form-select {
+        border-left: none;
+    }
+    
+    @@media (max-width: 768px) {
+        .support-icon {
+            width: 65px;
+            height: 65px;
+            font-size: 2rem;
+        }
+        
+        .support-title {
+            font-size: 1.5rem;
+        }
+        
+        .support-header, .support-footer {
+            padding: 1.25rem 1rem;
+        }
+    }
+</style>
+
+<script>
+    // Validação do formulário de contato
+    (function() {
+        'use strict'
+        
+        var forms = document.querySelectorAll('.needs-validation')
+        
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    } else {
+                        event.preventDefault()
+                        // Simular envio bem-sucedido
+                        alert('Mensagem enviada com sucesso! Em breve entraremos em contato.')
+                        form.reset()
+                    }
+                    
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script> 
