@@ -21,251 +21,421 @@ html {
     min-height: 100%;
 }
 
+/* Estilos Gerais Atualizados */
 body {
-    margin: 0; /* Remover margens padrão */
-    padding: 20px; /* Padding dentro do body */
-    background-color: #f9f9f9;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8fafc;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Estilos do Header */
+.eco-header {
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.brand-text {
+    font-weight: 600;
+    color: #2F855A;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 8px;
+    position: relative;
+}
+
+.navbar-nav .nav-link {
+    color: #4A5568;
+    font-weight: 500;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #2F855A;
+    background-color: rgba(56, 161, 105, 0.06);
+}
+
+.navbar-nav .nav-link i {
+    margin-right: 5px;
+}
+
+/* Container principal */
+.main-container {
+    flex: 1 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Estilos do Footer */
+.eco-footer {
+    background-color: #1C2434;
+    color: #E2E8F0;
+    margin-top: auto;
+}
+
+.footer-heading {
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-heading:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #38A169;
+    border-radius: 2px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: #38A169;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #CBD5E0;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #38A169;
+    padding-left: 5px;
+}
+
+.footer-contact {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-contact li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.footer-contact li i {
+    color: #38A169;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.eco-footer hr {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
 }
 
 /* Layout Responsivo */
 @media (max-width: 576px) {
-    header .navbar .container-fluid {
-        flex-direction: column;
+    header .navbar .container {
+        padding: 10px 15px;
     }
 
-    header .navbar img.logo-img {
-        max-height: 60px;
-        width: auto;
-        margin-bottom: 1rem;
+    .logo-img {
+        height: 40px;
     }
 
-    header .navbar-nav {
-        flex-direction: column;
+    .brand-text {
+        font-size: 1.2rem;
     }
-
-    header .nav-item {
-        margin-bottom: 0.5rem;
+    
+    .footer-heading {
+        margin-top: 10px;
     }
 }
 
-/* Ajusta o tamanho do header */
-header .navbar {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-}
-
-    header .navbar img.logo-img {
-        max-height: 80px;
-        width: auto;
-    }
-
-/* Adiciona margem inferior ao último item de navegação */
-header .navbar-nav .nav-item:last-child {
-    margin-bottom: 0;
-}
-
-/* Ajusta o botão de toggle para telas menores */
-@media (min-width: 577px) {
-    header .navbar-toggler {
-        display: none;
-    }
-}
-
-
-footer {
-    background-color: #f8f9fa; /* Cor de fundo do footer */
-}
-
-    footer .container {
-        max-width: 1200px; /* Define o máximo de largura para o conteúdo do footer */
-    }
-
-    footer ul li {
-        font-size: 24px; /* Tamanho padrão dos ícones sociais */
-    }
-
-@media (max-width: 768px) {
-    footer ul li {
-        font-size: 18px; /* Reduz o tamanho dos ícones em telas menores */
-    }
-}
-
-footer p {
-    margin-bottom: 0.5rem;
-}
-
-footer ul {
-    margin-top: 0;
-}
-
-
-/* Ajustes para uma melhor experiência responsiva geral */
-.container {
-    max-width: 1200px; /* Largura máxima do contêiner */
-    margin: 0 auto; /* Centraliza o contêiner */
-    padding: 20px; /* Padding dentro do contêiner */
-}
-
-/* Customização */
-body {
-    font-family: Arial, sans-serif;
-}
-
+/* CustomizaÃ§Ã£o dos botÃµes e elementos da UI */
 .title {
-    text-align: left; /* Alinha o texto do título à esquerda */
-    color: black; /* Título preto */
-    font-size: 3em; /* Aumenta o tamanho da fonte para destaque */
-    font-weight: bold; /* Negrito para dar mais destaque */
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
-    border-bottom: 2px solid #66bb6a; /* Linha embaixo do título para destaque */
-    padding-bottom: 10px; /* Espaçamento interno abaixo do título */
+    text-align: left;
+    color: #2D3748; 
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #38A169;
+    padding-bottom: 10px;
 }
 
 .add-button {
-    text-align: left; /* Alinhamento à esquerda */
+    text-align: left;
     margin: 20px 0;
 }
 
 .table-responsive {
-    overflow-x: auto; /* Permite rolagem horizontal em telas menores */
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 table {
-    width: 100%; /* Tabela ocupa toda a largura do contêiner */
+    width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 thead {
-    background-color: #66bb6a; /* Verde para o cabeçalho */
+    background-color: #38A169;
 }
 
 th,
 td {
-    padding: 12px; /* Aumentando o espaçamento nas células */
+    padding: 12px 16px;
     text-align: left;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #E2E8F0;
 }
 
 th {
-    color: #fff; /* Texto do cabeçalho em branco */
-    font-weight: bold; /* Negrito para cabeçalho da tabela */
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+tr:hover {
+    background-color: rgba(237, 242, 247, 0.7);
 }
 
 .button-group {
-    display: flex; /* Usar flexbox para os botões */
-    gap: 5px; /* Espaçamento entre os botões */
+    display: flex;
+    gap: 8px;
 }
 
 .icon-button {
-    background-color: #66bb6a; /* Cor dos botões */
+    background-color: #38A169;
     color: white;
     border: none;
-    padding: 10px 15px; /* Padding dos botões */
-    border-radius: 5px;
+    padding: 10px 15px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
-    text-align: center; /* Alinha texto ao centro */
-    flex-grow: 1; /* Faz os botões ocuparem o mesmo espaço */
+    font-size: 15px;
+    text-align: center;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-    .icon-button a {
-        color: white; /* Texto dos links nos botões */
-        text-decoration: none; /* Remove sublinhado */
-    }
+.icon-button a {
+    color: white;
+    text-decoration: none;
+}
 
-    .icon-button:hover {
-        background-color: #57a65e; /* Cor de fundo ao passar o mouse */
-    }
+.icon-button:hover {
+    background-color: #2F855A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+}
 
-    .icon-button i {
-        margin-right: 5px; /* Espaçamento entre ícone e texto */
-    }
+.icon-button i {
+    margin-right: 8px;
+}
 
-/* Estilo específico para Edit.cshtml */
+/* Estilos para formulÃ¡rios */
 .form-container-expanded {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    align-items: flex-start;
     text-align: left;
-    width: 90%; /* Aumenta a largura total do formulário */
-    max-width: 900px; /* Limita a largura máxima */
+    width: 100%;
+    max-width: 900px;
     margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 .form-group {
-    width: 100%; /* Mantém a largura completa dos campos */
-    margin-bottom: 20px; /* Espaçamento entre os grupos de formulário */
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .form-control {
-    border: 1px solid #ccc; /* Borda padrão */
-    border-radius: 4px; /* Bordas arredondadas */
-    padding: 10px; /* Padding interno */
-    font-size: 16px; /* Aumenta o tamanho da fonte */
-    width: 100%; /* Garante que os campos ocupem 100% do espaço disponível */
+    border-radius: 6px;
+    border: 1px solid #CBD5E0;
+    padding: 10px 15px;
+    transition: all 0.2s ease;
 }
 
-    .form-control:focus {
-        border-color: #66bb6a; /* Cor da borda ao focar */
-        box-shadow: 0 0 5px rgba(102, 187, 106, 0.5); /* Sombra ao focar */
-    }
-
-.larger-textarea {
-    width: 100%;
-    min-height: 100px; /* Definido para pelo menos três linhas de altura */
-    resize: vertical; /* Permite que o usuário ajuste a altura */
+.form-control:focus {
+    border-color: #38A169;
+    box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.2);
 }
-/* Hero Section */
+
+.control-label {
+    font-weight: 500;
+    color: #4A5568;
+    margin-bottom: 8px;
+}
+
+/* Efeitos de hover e foco melhorados */
+a {
+    color: #38A169;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #2F855A;
+}
+
+/* Estilos para cards e sections */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #38A169;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 15px 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Hero Section para pÃ¡gina inicial */
 .hero-section {
-    background-color: #66bb6a; /* Fundo verde */
-    padding: 50px 0;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #E6FFFA;
+    background-image: linear-gradient(135deg, rgba(56, 161, 105, 0.1) 0%, rgba(56, 178, 172, 0.1) 100%);
+    padding: 60px 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-    .hero-section h1 {
-        font-size: 3em;
-        font-weight: bold;
-    }
-
-    .hero-section p {
-        font-size: 1.25em;
-        font-weight: 300;
-    }
-
-/* Ajustes nos botões */
-.icon-button {
-    background-color: #66bb6a; /* Cor de fundo dos botões */
-    color: white;
-    border-radius: 30px; /* Botões com bordas arredondadas */
-    padding: 12px 30px; /* Aumentando o tamanho do botão */
-    transition: all 0.3s ease-in-out; /* Efeito suave no hover */
+.hero-section h1 {
+    color: #2D3748;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
-    .icon-button:hover {
-        background-color: #57a65e; /* Cor de fundo ao passar o mouse */
-        transform: scale(1.05); /* Pequeno zoom no botão */
-    }
-
-/* Ajustes no carrossel */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 10px;
+.hero-section p {
+    color: #4A5568;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* Ajuste no texto da seção de notícias */
-.carousel-inner h5 {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #333;
+/* Estilo para componentes de alerta/feedback */
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.carousel-inner p {
-    font-size: 1em;
-    color: #555;
+.alert-success {
+    background-color: #D4EDDA;
+    color: #155724;
+    border-left: 4px solid #38A169;
+}
+
+.alert-danger {
+    background-color: #F8D7DA;
+    color: #721C24;
+    border-left: 4px solid #E53E3E;
+}
+
+.alert-info {
+    background-color: #D1ECF1;
+    color: #0C5460;
+    border-left: 4px solid #3182CE;
+}
+
+/* Componentes para busca e filtros */
+.search-box {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.search-box .form-control {
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+}
+
+.search-box .btn {
+    border-radius: 0 6px 6px 0;
+}
+
+/* AnimaÃ§Ãµes e transiÃ§Ãµes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Classes de utilidade */
+.text-eco {
+    color: #38A169;
+}
+
+.bg-eco {
+    background-color: #38A169;
+}
+
+.border-eco {
+    border-color: #38A169;
+}
+
+.shadow-eco {
+    box-shadow: 0 4px 14px rgba(56, 161, 105, 0.15);
 }

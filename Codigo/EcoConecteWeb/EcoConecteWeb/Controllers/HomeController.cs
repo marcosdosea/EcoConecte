@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Core.Service; // Namespace correto para INoticiaService
-using AutoMapper; // Adicione este namespace se não estiver presente
+using AutoMapper; // Adicione este namespace se nï¿½o estiver presente
 
 namespace EcoConecteWeb.Controllers
 {
@@ -22,14 +22,19 @@ namespace EcoConecteWeb.Controllers
 
         public IActionResult Index()
         {
-            // Recuperando todas as notícias
+            // Recuperando todas as notï¿½cias
             var noticias = _noticiaService.GetAll();
             var noticiasModel = _mapper.Map<IEnumerable<NoticiaViewModel>>(noticias);
 
-            return View(noticiasModel); // Passando a lista de notícias para a View
+            return View(noticiasModel); // Passando a lista de notï¿½cias para a View
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Sobre()
         {
             return View();
         }

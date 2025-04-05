@@ -1,0 +1,155 @@
+@{
+    ViewData["Title"] = "Sobre o EcoConecte";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="section-title mb-4">Sobre o EcoConecte</h1>
+            
+            <div class="card shadow-sm mb-5">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4 text-eco">Nossa Missão</h5>
+                    <p class="lead">
+                        O EcoConecte surgiu com a missão de facilitar a conexão entre pessoas, cooperativas de reciclagem e o meio ambiente,
+                        promovendo a coleta seletiva e a reciclagem de resíduos de forma simples e acessível.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mb-5">
+                <h3 class="mb-4">Como Funcionamos</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 bg-light border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon bg-eco-light rounded-circle mb-3 mx-auto">
+                                    <span class="h2 text-eco">1</span>
+                                </div>
+                                <h5 class="card-title">Cadastro</h5>
+                                <p class="card-text">Cadastre-se gratuitamente na plataforma como pessoa física ou cooperativa.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 bg-light border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon bg-eco-light rounded-circle mb-3 mx-auto">
+                                    <span class="h2 text-eco">2</span>
+                                </div>
+                                <h5 class="card-title">Agendamento</h5>
+                                <p class="card-text">Agende uma coleta informando seu endereço e os materiais disponíveis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 bg-light border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon bg-eco-light rounded-circle mb-3 mx-auto">
+                                    <span class="h2 text-eco">3</span>
+                                </div>
+                                <h5 class="card-title">Coleta</h5>
+                                <p class="card-text">A cooperativa mais próxima realizará a coleta no dia e horário agendados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-5">
+                <h3 class="mb-4">Nossos Objetivos</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="bi bi-recycle text-eco fs-1"></i>
+                            </div>
+                            <div>
+                                <h5>Aumentar a Reciclagem</h5>
+                                <p>Promover o aumento da reciclagem de materiais diversos, reduzindo o impacto ambiental.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="bi bi-people text-eco fs-1"></i>
+                            </div>
+                            <div>
+                                <h5>Fortalecer Cooperativas</h5>
+                                <p>Apoiar cooperativas de reciclagem, gerando renda e oportunidades de trabalho.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="bi bi-lightbulb text-eco fs-1"></i>
+                            </div>
+                            <div>
+                                <h5>Educação Ambiental</h5>
+                                <p>Conscientizar a população sobre a importância da separação e descarte correto dos resíduos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="bi bi-globe-americas text-eco fs-1"></i>
+                            </div>
+                            <div>
+                                <h5>Impacto Positivo</h5>
+                                <p>Contribuir para a redução da poluição e para a preservação do meio ambiente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-light p-4 rounded-3">
+                <h3 class="mb-4">Junte-se a Nós</h3>
+                <p>
+                    Faça parte desta iniciativa e contribua para um mundo mais sustentável. 
+                    Cadastre-se agora e comece a fazer a diferença!
+                </p>
+                <div class="mt-3">
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn icon-button">
+                        <i class="bi bi-person-plus"></i> Cadastre-se
+                    </a>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-success ms-2">
+                        <i class="bi bi-house"></i> Página Inicial
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-eco-light {
+        background-color: rgba(56, 161, 105, 0.1);
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .section-title {
+        position: relative;
+        color: #2D3748;
+        font-weight: 700;
+        padding-bottom: 12px;
+    }
+    
+    .section-title:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #38A169;
+        border-radius: 2px;
+    }
+</style> 

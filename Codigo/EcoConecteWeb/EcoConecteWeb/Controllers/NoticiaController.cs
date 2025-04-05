@@ -93,5 +93,15 @@ namespace EcoConecteWeb.Controllers
             _noticiaService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Detalhes(uint id)
+        {
+            var noticia = _noticiaService.GetById(id);
+            if (noticia == null)
+            {
+                return NotFound();
+            }
+            return View(noticia);
+        }
     }
 }
