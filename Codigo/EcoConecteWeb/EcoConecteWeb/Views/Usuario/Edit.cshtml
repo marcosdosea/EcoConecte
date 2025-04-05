@@ -1,102 +1,235 @@
 ﻿@model EcoConecteWeb.Models.PessoaViewModel
 
 @{
-    ViewData["Title"] = "EcoConecte - Editar Perfil Cliente";
+    ViewData["Title"] = "Editar Perfil";
 }
 
-<h1 class="title">
-    <i class="fas fa-edit"></i> Editar Perfil Cliente
-</h1>
-
-<div class="container mt-4">
-    <form asp-action="Edit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-        <div class="row">
-            <!-- Primeira Coluna -->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Cpf" class="control-label"></label>
-                    <input asp-for="Cpf" class="form-control" readonly />
-                    <span asp-validation-for="Cpf" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nome" class="control-label"></label>
-                    <input asp-for="Nome" class="form-control" readonly />
-                    <span asp-validation-for="Nome" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Telefone" class="control-label"></label>
-                    <input asp-for="Telefone" class="form-control" />
-                    <span asp-validation-for="Telefone" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Logradouro" class="control-label"></label>
-                    <input asp-for="Logradouro" class="form-control" />
-                    <span asp-validation-for="Logradouro" class="text-danger"></span>
-                </div>
-            </div>
-
-            <!-- Segunda Coluna -->
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Numero" class="control-label"></label>
-                    <input asp-for="Numero" class="form-control" />
-                    <span asp-validation-for="Numero" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Bairro" class="control-label"></label>
-                    <input asp-for="Bairro" class="form-control" />
-                    <span asp-validation-for="Bairro" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Cidade" class="control-label"></label>
-                    <input asp-for="Cidade" class="form-control" />
-                    <span asp-validation-for="Cidade" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Estado" class="control-label"></label>
-                    <input asp-for="Estado" class="form-control" />
-                    <span asp-validation-for="Estado" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <!-- Campos Ocultos -->
-        <input asp-for="IdCooperativa" type="hidden" />
-        <input asp-for="Status" type="hidden" />
-
-        <div class="container">
-            <div class="row" style="border: none; margin: 0; padding: 0;">
-                <!-- Coluna 1 -->
-                <div class="col-md-4" style="padding: 0;">
-                    <div class="card" style="background: none; border: none;">
-                        <div class="card-body" style="background: none; border: none;">
-                            <!-- Conteúdo da Coluna 1 -->
-                        </div>
+<div class="profile-edit-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card profile-edit-card">
+                    <div class="card-header form-header">
+                        <h1 class="form-title">
+                            <i class="bi bi-person-gear me-2"></i>Editar Perfil
+                        </h1>
+                        <p class="text-muted mb-0">Atualize seus dados cadastrais</p>
                     </div>
-                </div>
-
-                <!-- Coluna 2 -->
-                <div class="col-md-4" style="padding: 0;">
-                    <div class="card" style="background: none; border: none;">
-                        <div class="card-body" style="background: none; border: none;">
-                            <div class="form-group button-group">
-                                <input type="submit" value="Salvar" class="icon-button" />
+                    
+                    <div class="card-body p-4">
+                        <form asp-action="Edit" class="needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                            
+                            <!-- Campos Ocultos -->
+                            <input asp-for="IdCooperativa" type="hidden" />
+                            <input asp-for="Status" type="hidden" />
+                            
+                            <div class="row">
+                                <div class="col-md-12 mb-4">
+                                    <h5 class="section-title text-eco-dark mb-3">
+                                        <i class="bi bi-person-vcard me-2"></i>Dados Pessoais
+                                    </h5>
+                                    
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Cpf" class="form-label">CPF</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                                                    <input asp-for="Cpf" class="form-control" readonly />
+                                                </div>
+                                                <span asp-validation-for="Cpf" class="text-danger"></span>
+                                                <div class="form-text">O CPF não pode ser alterado</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Nome" class="form-label">Nome</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                                    <input asp-for="Nome" class="form-control" readonly />
+                                                </div>
+                                                <span asp-validation-for="Nome" class="text-danger"></span>
+                                                <div class="form-text">O nome não pode ser alterado</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Telefone" class="form-label">Telefone</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                                    <input asp-for="Telefone" class="form-control" placeholder="(00) 00000-0000" required />
+                                                </div>
+                                                <span asp-validation-for="Telefone" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coluna 3 -->
-                <div class="col-md-4" style="padding: 0;">
-                    <div class="card" style="background: none; border: none;">
-                        <div class="card-body" style="background: none; border: none;">
-                            <!-- Conteúdo da Coluna 3 -->
-                        </div>
+                            
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    <h5 class="section-title text-eco-dark mb-3">
+                                        <i class="bi bi-geo-alt me-2"></i>Endereço
+                                    </h5>
+                                    
+                                    <div class="row g-3">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="Logradouro" class="form-label">Logradouro</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-signpost"></i></span>
+                                                    <input asp-for="Logradouro" class="form-control" placeholder="Rua, Avenida, etc" required />
+                                                </div>
+                                                <span asp-validation-for="Logradouro" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Numero" class="form-label">Número</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-house-door"></i></span>
+                                                    <input asp-for="Numero" class="form-control" placeholder="123" required />
+                                                </div>
+                                                <span asp-validation-for="Numero" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Bairro" class="form-label">Bairro</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-map"></i></span>
+                                                    <input asp-for="Bairro" class="form-control" placeholder="Seu bairro" required />
+                                                </div>
+                                                <span asp-validation-for="Bairro" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Cidade" class="form-label">Cidade</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                                    <input asp-for="Cidade" class="form-control" placeholder="Sua cidade" required />
+                                                </div>
+                                                <span asp-validation-for="Cidade" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Estado" class="form-label">Estado</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-geo"></i></span>
+                                                    <input asp-for="Estado" class="form-control" placeholder="UF" required />
+                                                </div>
+                                                <span asp-validation-for="Estado" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer form-actions p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                <div>
+                                    <a asp-controller="Usuario" asp-action="Index" class="btn btn-light">
+                                        <i class="bi bi-arrow-left me-2"></i>Voltar
+                                    </a>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-eco px-4 py-2">
+                                        <i class="bi bi-check-circle me-2"></i>Salvar Alterações
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-    </form>
+    </div>
 </div>
+
+<style>
+    .profile-edit-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .profile-edit-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .form-header {
+        background-color: #f8f9fa;
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.25rem;
+    }
+    
+    .section-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .text-eco-dark {
+        color: #2F855A;
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .input-group-text {
+        background-color: #F9FAFB;
+        border-right: none;
+    }
+    
+    .input-group .form-control {
+        border-left: none;
+    }
+    
+    .form-actions {
+        background-color: #f8f9fa;
+    }
+    
+    @@media (max-width: 768px) {
+        .form-header {
+            padding: 1.25rem 1rem;
+        }
+        
+        .form-title {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

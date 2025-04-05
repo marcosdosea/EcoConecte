@@ -1,75 +1,256 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Registrar nova conta";
+    ViewData["Title"] = "Cadastro";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+<div class="auth-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="auth-card">
+                    <div class="auth-header text-center mb-4">
+                        <div class="mb-3">
+                            <i class="bi bi-person-plus-fill auth-icon"></i>
+                        </div>
+                        <h1 class="auth-title">Criar Conta</h1>
+                        <p class="text-muted">Preencha os dados abaixo para criar sua conta</p>
+                    </div>
+                    
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Input.Nome" class="form-label">Nome Completo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input asp-for="Input.Nome" class="form-control" autocomplete="name" aria-required="true" placeholder="Seu nome completo" />
+                                    </div>
+                                    <span asp-validation-for="Input.Nome" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Input.Cpf" class="form-label">CPF</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                                        <input asp-for="Input.Cpf" class="form-control" autocomplete="cpf" aria-required="true" placeholder="000.000.000-00" />
+                                    </div>
+                                    <span asp-validation-for="Input.Cpf" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Input.Telefone" class="form-label">Telefone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                        <input asp-for="Input.Telefone" class="form-control" autocomplete="tel" aria-required="true" placeholder="(00) 00000-0000" />
+                                    </div>
+                                    <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Input.Email" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                        <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="seu@email.com" />
+                                    </div>
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Input.Password" class="form-label">Senha</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Sua senha" />
+                                    </div>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label asp-for="Input.ConfirmPassword" class="form-label">Confirmar Senha</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Repita sua senha" />
+                                    </div>
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <h5 class="section-title text-eco-dark mb-3">
+                                    <i class="bi bi-geo-alt me-2"></i>Endereço
+                                </h5>
+                                
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Input.Logradouro" class="form-label">Logradouro</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-signpost"></i></span>
+                                                <input asp-for="Input.Logradouro" class="form-control" aria-required="true" placeholder="Rua / Avenida" />
+                                            </div>
+                                            <span asp-validation-for="Input.Logradouro" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Input.Numero" class="form-label">Número</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-house-door"></i></span>
+                                                <input asp-for="Input.Numero" class="form-control" aria-required="true" placeholder="Nº" />
+                                            </div>
+                                            <span asp-validation-for="Input.Numero" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Input.Bairro" class="form-label">Bairro</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-map"></i></span>
+                                                <input asp-for="Input.Bairro" class="form-control" aria-required="true" placeholder="Seu bairro" />
+                                            </div>
+                                            <span asp-validation-for="Input.Bairro" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label asp-for="Input.Cidade" class="form-label">Cidade</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                                <input asp-for="Input.Cidade" class="form-control" aria-required="true" placeholder="Sua cidade" />
+                                            </div>
+                                            <span asp-validation-for="Input.Cidade" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Input.Estado" class="form-label">Estado</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                                <input asp-for="Input.Estado" class="form-control" aria-required="true" placeholder="UF" />
+                                            </div>
+                                            <span asp-validation-for="Input.Estado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 mt-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    Concordo com os <a href="/Home/Privacy" class="text-eco">Termos de Uso</a> e <a href="/Home/Privacy" class="text-eco">Política de Privacidade</a>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <button id="registerSubmit" type="submit" class="btn btn-eco w-100 py-2">
+                                <i class="bi bi-person-plus me-2"></i>Criar Conta
+                            </button>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="mb-0">
+                                Já tem uma conta? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-eco fw-semibold">Entrar</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Senha</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirmar Senha</label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Cpf" class="form-control" autocomplete="cpf" aria-required="true" placeholder="cpf" />
-                <label asp-for="Input.Cpf">CPF</label>
-                <span asp-validation-for="Input.Cpf" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Nome" class="form-control" autocomplete="Nome" aria-required="true" placeholder="Nome" />
-                <label asp-for="Input.Nome">Nome</label>
-                <span asp-validation-for="Input.Nome" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Telefone" class="form-control" autocomplete="Telefone" aria-required="true" placeholder="Telefone" />
-                <label asp-for="Input.Telefone">Telefone</label>
-                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Logradouro" class="form-control" autocomplete="Lagradouro" aria-required="true" placeholder="Lagradouro" />
-                <label asp-for="Input.Logradouro">Lagradouro</label>
-                <span asp-validation-for="Input.Logradouro" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Numero" class="form-control" autocomplete="Número" aria-required="true" placeholder="Número" />
-                <label asp-for="Input.Numero">Número</label>
-                <span asp-validation-for="Input.Numero" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Bairro" class="form-control" autocomplete="Bairro" aria-required="true" placeholder="Bairro" />
-                <label asp-for="Input.Bairro">Bairro</label>
-                <span asp-validation-for="Input.Bairro" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Cidade" class="form-control" autocomplete="Cidade" aria-required="true" placeholder="Cidade" />
-                <label asp-for="Input.Cidade">Cidade</label>
-                <span asp-validation-for="Input.Cidade" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Estado" class="form-control" autocomplete="Estado" aria-required="true" placeholder="Estado" />
-                <label asp-for="Input.Estado">Estado</label>
-                <span asp-validation-for="Input.Estado" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registrar</button>
-        </form>
+        </div>
     </div>
 </div>
+
+<style>
+    .auth-container {
+        min-height: calc(100vh - 300px);
+    }
+    
+    .auth-card {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .auth-icon {
+        font-size: 3.5rem;
+        color: #38A169;
+    }
+    
+    .auth-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #2D3748;
+    }
+    
+    .text-eco {
+        color: #38A169;
+    }
+    
+    .text-eco-dark {
+        color: #2F855A;
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .input-group-text {
+        background-color: #F9FAFB;
+        border-right: none;
+    }
+    
+    .input-group .form-control {
+        border-left: none;
+    }
+    
+    .section-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    @@media (max-width: 768px) {
+        .auth-card {
+            padding: 1.5rem;
+        }
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

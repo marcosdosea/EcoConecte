@@ -1,60 +1,239 @@
 ﻿@model IEnumerable<EcoConecteWeb.Models.AgendamentoViewModel>
 
 @{
-    ViewData["Title"] = "EcoConecte - Agendamentos";
+    ViewData["Title"] = "Agendamentos";
     var IdCoop = ViewData["idCoop"];
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-calendar-alt"></i> Agendamentos
-    </h1>
-
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Data)</th>
-                    <th>@Html.DisplayNameFor(model => model.Cep)</th>
-                    <th>@Html.DisplayNameFor(model => model.Logradouro)</th>
-                    <th>@Html.DisplayNameFor(model => model.Numero)</th>
-                    <th>@Html.DisplayNameFor(model => model.Bairro)</th>
-                    <th>@Html.DisplayNameFor(model => model.Cidade)</th>
-                    <th>@Html.DisplayNameFor(model => model.Estado)</th>
-                    <th>@Html.DisplayNameFor(model => model.Status)</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Data)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Cep)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Numero)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Estado)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                        <td>
-                            <div class="button-group">
-                                <button class="icon-button">
-                                    <a href="@Url.Action("AgendamentosEdit", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                </button>
-                                <button class="icon-button">
-                                    <a href="@Url.Action("AgendamentosDelete", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })">
-                                        <i class="fas fa-trash"></i> Apagar
-                                    </a>
-                                </button>
-
+<div class="admin-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="card admin-card">
+                    <div class="card-header admin-header">
+                        <h1 class="admin-title">
+                            <i class="bi bi-calendar2-event me-2"></i>Gerenciar Agendamentos
+                        </h1>
+                        <p class="text-muted mb-0">Lista de agendamentos para sua cooperativa</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        @if(!Model.Any())
+                        {
+                            <div class="empty-state text-center py-5">
+                                <div class="empty-icon mb-3">
+                                    <i class="bi bi-calendar-x"></i>
+                                </div>
+                                <h4>Nenhum agendamento encontrado</h4>
+                                <p class="text-muted">Não há agendamentos registrados para esta cooperativa.</p>
                             </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Data</th>
+                                            <th scope="col">Endereço</th>
+                                            <th scope="col">Cidade/Estado</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" class="text-center">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="date-cell">
+                                                        <div class="date-icon">
+                                                            <i class="bi bi-calendar-date"></i>
+                                                        </div>
+                                                        <div>@item.Data.ToString("dd/MM/yyyy HH:mm")</div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="address-cell">
+                                                        <div class="fw-semibold">@item.Logradouro, @item.Numero</div>
+                                                        <div class="text-muted small">@item.Bairro | CEP: @item.Cep</div>
+                                                    </div>
+                                                </td>
+                                                <td>@item.Cidade - @item.Estado</td>
+                                                <td>
+                                                    @{
+                                                        string statusClass = item.Status switch
+                                                        {
+                                                            "Agendado" => "status-scheduled",
+                                                            "Confirmado" => "status-confirmed",
+                                                            "Concluído" => "status-completed",
+                                                            "Cancelado" => "status-canceled",
+                                                            _ => "status-default"
+                                                        };
+                                                    }
+                                                    <span class="status-badge @statusClass">@item.Status</span>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex justify-content-center gap-2">
+                                                        <a href="@Url.Action("AgendamentosEdit", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })" class="btn btn-sm btn-outline-primary action-btn">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                            <span class="action-text">Editar</span>
+                                                        </a>
+                                                        <a href="@Url.Action("AgendamentosDelete", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })" class="btn btn-sm btn-outline-danger action-btn">
+                                                            <i class="bi bi-trash"></i>
+                                                            <span class="action-text">Excluir</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="card-footer p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <a href="@Url.Action("Index", "AdmCooperativa")" class="btn btn-light">
+                                <i class="bi bi-arrow-left me-2"></i>Voltar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .admin-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .admin-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .admin-header {
+        background-color: #f8f9fa;
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.25rem;
+    }
+    
+    .admin-table {
+        margin-bottom: 0;
+    }
+    
+    .admin-table th {
+        font-weight: 600;
+        background-color: #f8f9fa;
+        color: #4A5568;
+        border-top: none;
+        padding: 0.75rem 1rem;
+    }
+    
+    .admin-table td {
+        padding: 0.75rem 1rem;
+        vertical-align: middle;
+    }
+    
+    .date-cell {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .date-icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #EBF4FF;
+        border-radius: 50%;
+        color: #3182CE;
+    }
+    
+    .address-cell {
+        line-height: 1.4;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .status-scheduled {
+        background-color: #E6FFFA;
+        color: #38B2AC;
+    }
+    
+    .status-confirmed {
+        background-color: #EBF8FF;
+        color: #3182CE;
+    }
+    
+    .status-completed {
+        background-color: #F0FFF4;
+        color: #38A169;
+    }
+    
+    .status-canceled {
+        background-color: #FFF5F5;
+        color: #E53E3E;
+    }
+    
+    .status-default {
+        background-color: #EDF2F7;
+        color: #718096;
+    }
+    
+    .action-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: all 0.2s ease;
+    }
+    
+    .action-btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .empty-state {
+        padding: 3rem 0;
+    }
+    
+    .empty-icon {
+        font-size: 3rem;
+        color: #CBD5E0;
+    }
+</style>

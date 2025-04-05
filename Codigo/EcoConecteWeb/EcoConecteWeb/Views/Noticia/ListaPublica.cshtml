@@ -1,0 +1,170 @@
+@model IEnumerable<EcoConecteWeb.Models.NoticiaViewModel>
+
+@{
+    ViewData["Title"] = "Notícias e Atualizações";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="mb-5 text-center">
+                <h1 class="display-4 fw-bold mb-3">Notícias e <span class="text-eco">Atualizações</span></h1>
+                <p class="lead text-muted">Fique por dentro das novidades sobre reciclagem, sustentabilidade e nossas iniciativas</p>
+            </div>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-newspaper text-eco" style="font-size: 5rem;"></i>
+            </div>
+            <h3 class="mb-3">Nenhuma notícia disponível no momento</h3>
+            <p class="text-muted">Volte em breve para conferir as últimas novidades.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <!-- Notícia em destaque -->
+            @{
+                var noticiaDestaque = Model.OrderByDescending(n => n.Data).FirstOrDefault();
+                var outrasnoticias = Model.OrderByDescending(n => n.Data).Skip(1).ToList();
+            }
+
+            @if (noticiaDestaque != null)
+            {
+                <div class="col-12 mb-5">
+                    <div class="card news-card-featured border-0 shadow-sm h-100 overflow-hidden">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="p-5 d-flex flex-column h-100 justify-content-center">
+                                    <div class="mb-2">
+                                        <span class="badge bg-eco text-white">Destaque</span>
+                                        <span class="text-muted ms-2">
+                                            <i class="bi bi-calendar me-1"></i> @Html.DisplayFor(model => noticiaDestaque.Data)
+                                        </span>
+                                    </div>
+                                    <h2 class="card-title mb-3">@noticiaDestaque.Titulo</h2>
+                                    <p class="card-text mb-4">
+                                        @(noticiaDestaque.Conteudo?.Length > 200 ? noticiaDestaque.Conteudo.Substring(0, 200) + "..." : noticiaDestaque.Conteudo)
+                                    </p>
+                                    <div class="mt-auto">
+                                        <a asp-controller="Noticia" asp-action="Detalhes" asp-route-id="@noticiaDestaque.Id" class="btn btn-eco stretched-link">
+                                            Ler notícia completa <i class="bi bi-arrow-right ms-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 bg-light featured-image d-flex align-items-center justify-content-center">
+                                <i class="bi bi-newspaper text-eco-light" style="font-size: 8rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Lista de outras notícias -->
+            @foreach (var noticia in outrasnoticias)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card news-card h-100 border-0 shadow-sm">
+                        <div class="card-img-top news-card-img-container bg-light d-flex align-items-center justify-content-center">
+                            <i class="bi bi-newspaper text-eco-light"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <span class="text-muted small">
+                                    <i class="bi bi-calendar me-1"></i> @Html.DisplayFor(modelItem => noticia.Data)
+                                </span>
+                            </div>
+                            <h4 class="card-title mb-3">@noticia.Titulo</h4>
+                            <p class="card-text">
+                                @(noticia.Conteudo?.Length > 150 ? noticia.Conteudo.Substring(0, 150) + "..." : noticia.Conteudo)
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0 pt-0">
+                            <a asp-controller="Noticia" asp-action="Detalhes" asp-route-id="@noticia.Id" class="btn btn-sm btn-outline-eco stretched-link">
+                                Ler mais <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .text-eco {
+        color: #38A169;
+    }
+    
+    .text-eco-light {
+        color: rgba(56, 161, 105, 0.2);
+    }
+    
+    .bg-eco {
+        background-color: #38A169;
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        padding: 0.6rem 1.5rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .btn-outline-eco {
+        color: #38A169;
+        border-color: #38A169;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-eco:hover {
+        background-color: #38A169;
+        color: white;
+    }
+    
+    .news-card {
+        transition: all 0.3s ease;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+    
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .news-card-img-container {
+        height: 200px;
+    }
+    
+    .news-card-img-container i {
+        font-size: 5rem;
+    }
+    
+    .news-card-featured {
+        border-radius: 1rem;
+    }
+    
+    .featured-image {
+        min-height: 300px;
+    }
+    
+    @@media (max-width: 992px) {
+        .featured-image {
+            min-height: 250px;
+        }
+    }
+</style> 

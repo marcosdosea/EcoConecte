@@ -1,6 +1,265 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Política de Privacidade";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="privacy-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card privacy-card">
+                    <div class="card-header privacy-header">
+                        <h1 class="privacy-title">Política de Privacidade</h1>
+                        <p class="text-muted mb-0">Última atualização: @DateTime.Now.ToString("dd/MM/yyyy")</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="privacy-section">
+                            <h2 class="section-title text-eco-dark">
+                                <i class="bi bi-shield-check me-2"></i>Introdução
+                            </h2>
+                            <p>
+                                A EcoConecte valoriza a privacidade e a proteção dos dados pessoais de nossos usuários. 
+                                Esta política descreve como coletamos, usamos e protegemos suas informações quando você 
+                                utiliza nossa plataforma de coleta de resíduos recicláveis.
+                            </p>
+                        </div>
+                        
+                        <div class="privacy-section">
+                            <h2 class="section-title text-eco-dark">
+                                <i class="bi bi-database me-2"></i>Dados que Coletamos
+                            </h2>
+                            <p>
+                                Coletamos informações necessárias para fornecer nossos serviços de coleta, incluindo:
+                            </p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">
+                                    <i class="bi bi-person text-eco me-2"></i>
+                                    Informações pessoais (nome, email, telefone)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-geo-alt text-eco me-2"></i>
+                                    Endereços para coleta de materiais
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-calendar-date text-eco me-2"></i>
+                                    Datas e horários de agendamentos
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-receipt text-eco me-2"></i>
+                                    Histórico de coletas realizadas
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="privacy-section">
+                            <h2 class="section-title text-eco-dark">
+                                <i class="bi bi-gear me-2"></i>Como Utilizamos seus Dados
+                            </h2>
+                            <p>
+                                Utilizamos suas informações para:
+                            </p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">
+                                    <i class="bi bi-truck text-eco me-2"></i>
+                                    Processar e gerenciar seus agendamentos de coleta
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-chat-dots text-eco me-2"></i>
+                                    Comunicar-nos com você sobre seus agendamentos e serviços
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-bar-chart text-eco me-2"></i>
+                                    Melhorar nossos serviços e analisar padrões de coleta
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-bell text-eco me-2"></i>
+                                    Enviar notificações sobre atualizações ou novos serviços
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="privacy-section">
+                            <h2 class="section-title text-eco-dark">
+                                <i class="bi bi-lock me-2"></i>Proteção de Dados
+                            </h2>
+                            <p>
+                                Implementamos medidas técnicas e organizacionais apropriadas para proteger seus dados contra 
+                                acesso não autorizado, alteração, divulgação ou destruição. Seus dados são armazenados em 
+                                servidores seguros e acessados apenas por pessoal autorizado.
+                            </p>
+                        </div>
+                        
+                        <div class="privacy-section">
+                            <h2 class="section-title text-eco-dark">
+                                <i class="bi bi-question-circle me-2"></i>Seus Direitos
+                            </h2>
+                            <p>
+                                Você tem o direito de:
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="right-card">
+                                        <div class="right-icon">
+                                            <i class="bi bi-eye"></i>
+                                        </div>
+                                        <h5>Acessar seus Dados</h5>
+                                        <p>Solicitar informações sobre quais dados pessoais mantemos sobre você.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="right-card">
+                                        <div class="right-icon">
+                                            <i class="bi bi-pencil"></i>
+                                        </div>
+                                        <h5>Retificar seus Dados</h5>
+                                        <p>Solicitar a correção de informações imprecisas ou incompletas.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="right-card">
+                                        <div class="right-icon">
+                                            <i class="bi bi-trash"></i>
+                                        </div>
+                                        <h5>Apagar seus Dados</h5>
+                                        <p>Solicitar a exclusão de seus dados pessoais em determinadas circunstâncias.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="right-card">
+                                        <div class="right-icon">
+                                            <i class="bi bi-x-circle"></i>
+                                        </div>
+                                        <h5>Opor-se ao Processamento</h5>
+                                        <p>Contestar o processamento de seus dados em determinadas situações.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="privacy-section mb-0">
+                            <h2 class="section-title text-eco-dark">
+                                <i class="bi bi-envelope me-2"></i>Contato
+                            </h2>
+                            <p>
+                                Se você tiver dúvidas sobre nossa política de privacidade ou quiser exercer seus direitos, 
+                                entre em contato conosco através do email: 
+                                <a href="mailto:privacidade@ecoconecte.com.br" class="text-eco">privacidade@ecoconecte.com.br</a>.
+                            </p>
+                            <div class="alert alert-success mt-3">
+                                <i class="bi bi-info-circle-fill me-2"></i>
+                                Estamos comprometidos com a proteção dos seus dados e responderemos a todas as solicitações dentro de 30 dias.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .privacy-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .privacy-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+    
+    .privacy-header {
+        background-color: #f8f9fa;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .privacy-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.5rem;
+    }
+    
+    .privacy-section {
+        margin-bottom: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .text-eco {
+        color: #38A169;
+    }
+    
+    .text-eco-dark {
+        color: #2F855A;
+    }
+    
+    .list-group-item {
+        padding: 0.75rem 1.25rem;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .right-card {
+        background-color: #f8f9fa;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .right-card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transform: translateY(-5px);
+    }
+    
+    .right-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #E6FFFA;
+        color: #38A169;
+        border-radius: 50%;
+        font-size: 1.25rem;
+    }
+    
+    .right-card h5 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #2D3748;
+    }
+    
+    .right-card p {
+        font-size: 0.9rem;
+        color: #718096;
+        margin-bottom: 0;
+    }
+    
+    @@media (max-width: 768px) {
+        .privacy-header {
+            padding: 1.5rem 1rem;
+        }
+        
+        .privacy-title {
+            font-size: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+        }
+    }
+</style>

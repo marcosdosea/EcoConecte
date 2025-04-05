@@ -2,115 +2,258 @@
 @model IEnumerable<string>
 
 @{
-    ViewData["Title"] = "Ecoconecte - Funções de Usuário";
+    ViewData["Title"] = "Gerenciar Funções de Usuário";
     var userId = ViewData["UserId"] as string;
+    var userName = ViewData["UserName"] as string;
 }
 
-<h1>Função</h1>
-
-<div class="row">
-    @foreach (var role in Model.Select((value, index) => new { value, index }))
-    {
-        if (role.index % 2 == 0)
-        {
-            <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome Função</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@role.value</td>
-                            <td>
-                                <form method="post" asp-action="RemoveRoleFromUser">
+<div class="admin-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="card admin-card">
+                    <div class="card-header admin-header">
+                        <h1 class="admin-title">
+                            <i class="bi bi-shield-lock me-2"></i>Gerenciar Funções do Usuário
+                        </h1>
+                        <p class="text-muted mb-0">
+                            @if (!string.IsNullOrEmpty(userName))
+                            {
+                                <span>Atribuir funções para o usuário: <strong>@userName</strong></span>
+                            }
+                            else
+                            {
+                                <span>Atribuir funções para o usuário selecionado</span>
+                            }
+                        </p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5 class="section-title text-eco-dark mb-3">
+                                    <i class="bi bi-check-circle me-2"></i>Funções Atribuídas
+                                </h5>
+                                
+                                @if (!Model.Any())
+                                {
+                                    <div class="alert alert-info">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        O usuário não possui nenhuma função atribuída.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="role-badges">
+                                        @foreach (var role in Model)
+                                        {
+                                            <div class="role-badge">
+                                                <div class="role-badge-content">
+                                                    <i class="bi bi-shield-check me-2"></i>
+                                                    <span>@role</span>
+                                                </div>
+                                                <form method="post" asp-action="RemoveRoleFromUser" class="role-action">
+                                                    <input type="hidden" name="userId" value="@userId" />
+                                                    <input type="hidden" name="roleName" value="@role" />
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger role-remove-btn">
+                                                        <i class="bi bi-x-circle"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="section-title text-eco-dark mb-3">
+                                    <i class="bi bi-plus-circle me-2"></i>Adicionar Nova Função
+                                </h5>
+                                
+                                <form method="post" asp-action="AssignRoleToUser" class="role-assign-form">
                                     <input type="hidden" name="userId" value="@userId" />
-                                    <input type="hidden" name="roleName" value="@role.value" />
-                                    <button type="submit" class="btn btn-danger">Remover</button>
+                                    <div class="mb-3">
+                                        <label class="form-label">Selecione a função para atribuir ao usuário:</label>
+                                        <div class="role-buttons">
+                                            <button type="button" class="btn btn-outline-secondary role-button" data-role="ADMROOT">
+                                                <i class="bi bi-gear me-2"></i>ADMROOT
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary role-button" data-role="COOPERATIVA">
+                                                <i class="bi bi-building me-2"></i>COOPERATIVA
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary role-button" data-role="COOPERADO">
+                                                <i class="bi bi-person me-2"></i>COOPERADO
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary role-button" data-role="USUARIO">
+                                                <i class="bi bi-people me-2"></i>USUARIO
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="roleName" id="selectedRoleName" />
+                                    <button type="submit" class="btn btn-eco mt-3">
+                                        <i class="bi bi-plus-circle me-2"></i>Adicionar Função
+                                    </button>
                                 </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        }
-        else
-        {
-            <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome Função</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@role.value</td>
-                            <td>
-                                <form method="post" asp-action="RemoveRoleFromUser">
-                                    <input type="hidden" name="userId" value="@userId" />
-                                    <input type="hidden" name="roleName" value="@role.value" />
-                                    <button type="submit" class="btn btn-danger">Remover</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        }
-    }
-</div>
-
-<h2>Selecione a Função</h2>
-<div class="row">
-    <div class="col-md-6">
-        <form method="post" asp-action="AssignRoleToUser">
-            <input type="hidden" name="userId" value="@userId" />
-            <div class="form-group">
-                <label for="roleName"></label>
-                <div id="roleName">
-                    <button type="button" class="btn btn-secondary btn-sm role-button" data-role="ADMROOT">ADMROOT</button>
-                    <button type="button" class="btn btn-secondary btn-sm role-button" data-role="COOPERATIVA">COOPERATIVA</button>
-                    <button type="button" class="btn btn-secondary btn-sm role-button" data-role="COOPERADO">COOPERADO</button>
+                                
+                                @if (TempData["ErrorMessage"] != null)
+                                {
+                                    <div class="alert alert-danger mt-3">
+                                        <i class="bi bi-exclamation-triangle me-2"></i>
+                                        @TempData["ErrorMessage"]
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer p-4 d-flex justify-content-between align-items-center">
+                        <a href="@Url.Action("Users", "AdmIdentity")" class="btn btn-light">
+                            <i class="bi bi-arrow-left me-2"></i>Voltar para Usuários
+                        </a>
+                    </div>
                 </div>
             </div>
-            <input type="hidden" name="roleName" id="selectedRoleName" />
-            <button type="submit" class="btn btn-primary">Salvar</button>
-        </form>
-
-        <!-- Exibir a mensagem de erro -->
-        @if (TempData["ErrorMessage"] != null)
-        {
-            <div class="alert alert-danger mt-2">
-                @TempData["ErrorMessage"]
-            </div>
-        }
-    </div>
-
-    <div class="col-md-6">
+        </div>
     </div>
 </div>
 
-<!-- Script para lidar com a seleção de função -->
+<style>
+    .admin-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .admin-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .admin-header {
+        background-color: #f8f9fa;
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.25rem;
+    }
+    
+    .section-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .text-eco-dark {
+        color: #2F855A;
+    }
+    
+    .role-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    .role-badge {
+        display: flex;
+        align-items: center;
+        background-color: #F0FFF4;
+        border-radius: 2rem;
+        padding: 0.5rem 0.75rem 0.5rem 1rem;
+        border: 1px solid #C6F6D5;
+        transition: all 0.2s ease;
+    }
+    
+    .role-badge:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+    }
+    
+    .role-badge-content {
+        display: flex;
+        align-items: center;
+        color: #38A169;
+        font-weight: 500;
+    }
+    
+    .role-action {
+        margin-left: 0.5rem;
+    }
+    
+    .role-remove-btn {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin-left: 0.5rem;
+        border-radius: 50%;
+    }
+    
+    .role-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+    }
+    
+    .role-button {
+        transition: all 0.2s ease;
+        border-radius: 0.5rem;
+    }
+    
+    .role-button:hover {
+        transform: translateY(-2px);
+    }
+    
+    .role-button.active {
+        background-color: #38A169;
+        color: white;
+        border-color: #38A169;
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+</style>
+
 <script>
     // Lidar com a seleção de uma função
-    document.querySelectorAll('.role-button').forEach(function(button) {
-        button.addEventListener('click', function() {
-            // Definir a função selecionada no campo oculto
-            var selectedRole = button.getAttribute('data-role');
-            document.getElementById('selectedRoleName').value = selectedRole;
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.role-button').forEach(function(button) {
+            button.addEventListener('click', function() {
+                // Definir a função selecionada no campo oculto
+                var selectedRole = button.getAttribute('data-role');
+                document.getElementById('selectedRoleName').value = selectedRole;
 
-            // Adicionar estilo para indicar que o botão foi selecionado
-            document.querySelectorAll('.role-button').forEach(function(b) {
-                b.classList.remove('btn-success');  // Remove cor verde
-                b.classList.add('btn-secondary');   // Volta para a cor original
+                // Adicionar estilo para indicar que o botão foi selecionado
+                document.querySelectorAll('.role-button').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+
+                // Aplicar classe active no botão selecionado
+                button.classList.add('active');
             });
-
-            // Aplicar cor verde (btn-success) no botão selecionado
-            button.classList.add('btn-success');
         });
     });
 </script>

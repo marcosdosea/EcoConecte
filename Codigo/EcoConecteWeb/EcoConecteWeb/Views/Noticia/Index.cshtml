@@ -1,85 +1,106 @@
 ﻿@model IEnumerable<EcoConecteWeb.Models.NoticiaViewModel>
 
 @{
-    ViewData["Title"] = "EcoConnect - Notícias";
+    ViewData["Title"] = "Notícias";
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-file-alt"></i> Notícia
-    </h1>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="section-title mb-0">
+            <i class="bi bi-newspaper me-2"></i> Notícias
+        </h1>
+        <a asp-action="Create" class="btn icon-button">
+            <i class="bi bi-plus-circle"></i> Nova Notícia
+        </a>
+    </div>
 
-    <p class="add-button">
-        <button class="icon-button">
-            <a href="@Url.Action("Create")">
-                <i class="fas fa-plus"></i> Cadastrar nova notícia
-            </a>
-        </button>
-    </p>
-
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Titulo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Conteudo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdCooperativa)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Data)
-                    </th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Titulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Conteudo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdCooperativa)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data)
-                        </td>
-                        <td>
-                            <div class="button-group">
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Edit", new { id = item.Id })">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                </button>
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Details", new { id = item.Id })">
-                                        <i class="fas fa-info-circle"></i> Detalhes
-                                    </a>
-                                </button>
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Delete", new { id = item.Id })">
-                                        <i class="fas fa-trash"></i> Apagar
-                                    </a>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th class="px-4">
+                                @Html.DisplayNameFor(model => model.Titulo)
+                            </th>
+                            <th class="px-4">
+                                Data de Publicação
+                            </th>
+                            <th class="px-4">
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="px-4">
+                                    @Html.DisplayFor(modelItem => item.Titulo)
+                                </td>
+                                <td class="px-4">
+                                    @Html.DisplayFor(modelItem => item.Data)
+                                </td>
+                                <td class="px-4">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-sm btn-outline-success">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .section-title {
+        position: relative;
+        color: #2D3748;
+        font-weight: 700;
+        padding-bottom: 12px;
+    }
+    
+    .section-title:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #38A169;
+        border-radius: 2px;
+    }
+    
+    .table thead th {
+        background-color: #38A169;
+        color: white;
+        font-weight: 600;
+        border: none;
+    }
+    
+    .btn-outline-success {
+        color: #38A169;
+        border-color: #38A169;
+    }
+    
+    .btn-outline-success:hover {
+        background-color: #38A169;
+        color: white;
+    }
+    
+    .btn-group .btn {
+        padding: 0.25rem 0.5rem;
+        margin-right: 3px;
+    }
+</style>

@@ -1,62 +1,203 @@
 ﻿@model IEnumerable<NoticiaViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Início";
 }
 
-<div class="container text-center">
-    <div class="hero-section">
-        <h1 class="display-4 font-weight-bold">Junte-se ao EcoConecte!</h1>
-        <p class="lead">Ajudamos a coletar e dar o destino correto aos seus resíduos recicláveis.</p>
-        <p class="lead">Inserindo seu CEP no campo abaixo você confere se já existe coleta seletiva na sua região, ou cadastre-se
-         para agendar uma coleta em seu endereço. </p>
-    </div>
-
-    <form asp-action="Buscarporcep" asp-controller="Coleta" method="post" class="form-inline justify-content-center mb-4">
-        <div class="form-group">
-            <input class="form-control cep-input" type="text" name="cep" placeholder="Digite seu CEP" maxlength="14" required />
+<div class="hero-section">
+    <div class="container">
+        <h1 class="display-4 mb-3">Junte-se ao <span class="text-eco">EcoConecte!</span></h1>
+        <p class="lead mb-4">Ajudamos a coletar e dar o destino correto aos seus resíduos recicláveis, contribuindo para um planeta mais sustentável.</p>
+        <p class="mb-4">Insira seu CEP no campo abaixo para verificar se já existe coleta seletiva na sua região, ou cadastre-se para agendar uma coleta em seu endereço.</p>
+        
+        <div class="col-lg-6 mx-auto">
+            <form asp-action="Buscarporcep" asp-controller="Coleta" method="post" class="search-box mb-0">
+                <input class="form-control cep-input" type="text" name="cep" placeholder="Digite seu CEP" maxlength="9" required />
+                <button class="icon-button" type="submit">
+                    <i class="bi bi-search"></i> Buscar
+                </button>
+            </form>
         </div>
-        <button class="btn icon-button" type="submit">
-            <i class="fa fa-search"></i> Buscar
-        </button>
-    </form>
-
-    <h2 class="display-4 font-weight-bold">Últimas Notícias</h2>
-
-    <div id="noticiasCarousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            @if (Model == null || !Model.Any())
-            {
-                <div class="carousel-item active">
-                    <div class="alert alert-info">Não há notícias disponíveis no momento.</div>
-                </div>
-            }
-            else
-            {
-                int index = 0;
-                foreach (var noticia in Model)
-                {
-                    <div class="carousel-item @(index == 0 ? "active" : "")">
-                        <div class="d-block w-100">
-                            <h5>@noticia.Titulo</h5>
-                            <p>@noticia.Conteudo</p>
-                        </div>
-                    </div>
-                    index++;
-                }
-            }
-        </div>
-
-        <a class="carousel-control-prev" href="#noticiasCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#noticiasCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Próximo</span>
-        </a>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Seção de Orientações para Reciclagem -->
+<div class="container mb-5 mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="eco-tip-box p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center mb-3 mb-md-0">
+                        <i class="bi bi-recycle eco-tip-icon"></i>
+                    </div>
+                    <div class="col-md-7 mb-3 mb-md-0">
+                        <h3 class="mb-2">Não sabe como separar seu lixo?</h3>
+                        <p class="mb-0">Aprenda como separar corretamente seus resíduos e contribua para um meio ambiente mais saudável.</p>
+                    </div>
+                    <div class="col-md-3 text-center text-md-end">
+                        <a asp-controller="Orientacoes" asp-action="ConsultarOrientacoes" class="btn icon-button">
+                            <i class="bi bi-lightbulb"></i> Ver Orientações
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-eco">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon bg-eco-light rounded-circle mb-3 mx-auto">
+                        <i class="bi bi-recycle text-eco fs-1"></i>
+                    </div>
+                    <h5 class="card-title">Coleta Seletiva</h5>
+                    <p class="card-text">Agendamos a coleta dos seus resíduos recicláveis diretamente em sua residência.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-eco">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon bg-eco-light rounded-circle mb-3 mx-auto">
+                        <i class="bi bi-people text-eco fs-1"></i>
+                    </div>
+                    <h5 class="card-title">Cooperativas</h5>
+                    <p class="card-text">Conectamos você a cooperativas de reciclagem que darão o destino adequado aos materiais.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-eco">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon bg-eco-light rounded-circle mb-3 mx-auto">
+                        <i class="bi bi-globe-americas text-eco fs-1"></i>
+                    </div>
+                    <h5 class="card-title">Impacto Ambiental</h5>
+                    <p class="card-text">Ajude a preservar o meio ambiente e contribua para um futuro mais sustentável.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="section-title mb-4">Últimas Notícias</h2>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i> Não há notícias disponíveis no momento.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var noticia in Model.Take(3))
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 fade-in news-card">
+                        <div class="card-body">
+                            <h5 class="card-title">@noticia.Titulo</h5>
+                            <p class="card-text text-muted small">
+                                <i class="bi bi-calendar me-1"></i> @Html.DisplayFor(modelItem => noticia.Data)
+                            </p>
+                            <p class="card-text">@(noticia.Conteudo?.Length > 150 ? noticia.Conteudo.Substring(0, 150) + "..." : noticia.Conteudo)</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <a asp-controller="Noticia" asp-action="Detalhes" asp-route-id="@noticia.Id" class="btn btn-sm btn-outline-success">
+                                Ler mais <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-3">
+            <a asp-controller="Noticia" asp-action="ListaPublica" class="btn icon-button">
+                <i class="bi bi-newspaper"></i> Ver todas as notícias
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .bg-eco-light {
+        background-color: rgba(56, 161, 105, 0.1);
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .feature-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover .feature-icon {
+        transform: scale(1.1);
+    }
+    
+    .section-title {
+        position: relative;
+        color: #2D3748;
+        font-weight: 700;
+        padding-bottom: 12px;
+    }
+    
+    .section-title:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #38A169;
+        border-radius: 2px;
+    }
+    
+    .news-card {
+        transition: all 0.3s ease;
+    }
+    
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .eco-tip-box {
+        background-color: #E6FFFA;
+        border-radius: 12px;
+        border-left: 5px solid #38A169;
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.1);
+    }
+    
+    .eco-tip-icon {
+        font-size: 4rem;
+        color: #38A169;
+    }
+    
+    @@media (max-width: 768px) {
+        .eco-tip-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Máscara para o campo CEP
+        $('.cep-input').on('input', function() {
+            let value = $(this).val().replace(/\D/g, '');
+            if (value.length > 5) {
+                value = value.substring(0, 5) + '-' + value.substring(5, 8);
+            }
+            $(this).val(value);
+        });
+    });
+</script>

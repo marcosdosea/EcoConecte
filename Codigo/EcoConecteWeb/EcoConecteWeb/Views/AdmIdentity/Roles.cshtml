@@ -1,23 +1,198 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
 @{
-    ViewData["Title"] = "Ecoconecte - Listar Função do Sistema";
+    ViewData["Title"] = "Funções do Sistema";
 }
 
-<h1>Lista das Funções</h1>
+<div class="admin-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card admin-card">
+                    <div class="card-header admin-header">
+                        <h1 class="admin-title">
+                            <i class="bi bi-shield me-2"></i>Gerenciar Funções
+                        </h1>
+                        <p class="text-muted mb-0">Lista de funções disponíveis no sistema</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        @if(!Model.Any())
+                        {
+                            <div class="empty-state text-center py-5">
+                                <div class="empty-icon mb-3">
+                                    <i class="bi bi-shield-x"></i>
+                                </div>
+                                <h4>Nenhuma função encontrada</h4>
+                                <p class="text-muted">Não há funções registradas no sistema.</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="role-list">
+                                @foreach (var role in Model)
+                                {
+                                    <div class="role-card">
+                                        <div class="role-icon">
+                                            <i class="bi bi-shield-check"></i>
+                                        </div>
+                                        <div class="role-info">
+                                            <h5 class="role-name">@role.Name</h5>
+                                            <div class="role-id text-muted small">ID: @role.Id</div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="card-footer p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <a href="@Url.Action("Users", "AdmIdentity")" class="btn btn-light">
+                                <i class="bi bi-arrow-left me-2"></i>Voltar
+                            </a>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-eco" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+                                <i class="bi bi-plus-circle me-2"></i>Nova Função
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome da Função</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var role in Model)
-        {
-            <tr>
-                <td>@role.Name</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<!-- Modal para adicionar nova função -->
+<div class="modal fade" id="addRoleModal" tabindex="-1" aria-labelledby="addRoleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRoleModalLabel">
+                    <i class="bi bi-shield-plus me-2"></i>Adicionar Nova Função
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <form asp-action="CreateRole" asp-controller="AdmIdentity" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="roleName" class="form-label">Nome da Função</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-shield"></i></span>
+                            <input type="text" class="form-control" id="roleName" name="roleName" placeholder="Digite o nome da função" required>
+                        </div>
+                        <div class="form-text">O nome da função deve ser único no sistema.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-eco">
+                        <i class="bi bi-check-circle me-2"></i>Salvar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .admin-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .admin-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .admin-header {
+        background-color: #f8f9fa;
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.25rem;
+    }
+    
+    .role-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .role-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+    
+    .role-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .role-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #EBF8FF;
+        border-radius: 50%;
+        color: #3182CE;
+        font-size: 1.25rem;
+    }
+    
+    .role-info {
+        flex: 1;
+    }
+    
+    .role-name {
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .empty-state {
+        padding: 3rem 0;
+    }
+    
+    .empty-icon {
+        font-size: 3rem;
+        color: #CBD5E0;
+    }
+    
+    .input-group-text {
+        background-color: #F9FAFB;
+        border-right: none;
+    }
+    
+    .input-group .form-control {
+        border-left: none;
+    }
+</style>
