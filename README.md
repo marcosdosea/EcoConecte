@@ -35,7 +35,7 @@
 
   <a href="https://youtube.com/shorts/bv3gKJrubx4?feature=share" target="_blank">1 - Vídeo de Apresentação </a>
 
-  <a href="" target="_blank">2 - Manual de Uso </a>
+  <a href="https://github.com/marcosdosea/EcoConecte/blob/main/Gerenciamento/Manual%20de%20Uso%20-%20EcoConecte.pdf" target="_blank">2 - Manual de Uso </a>
   <h2 id="equipe">5. Equipe :busts_in_silhouette::busts_in_silhouette: :bust_in_silhouette:</h2>
 
   <table align="center">
