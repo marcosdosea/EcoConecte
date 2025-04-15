@@ -1,69 +1,132 @@
 ﻿@model EcoConecteWeb.Models.ColetaViewModel
 
 @{
-    ViewData["Title"] = "EcoConecte - Coleta Detalhes";
+    ViewData["Title"] = "Detalhes da Coleta";
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-info-circle"></i> Detalhes
-    </h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-eco text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-info-circle me-2"></i>Detalhes da Coleta
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="section-title text-eco-dark mb-3">
+                                <i class="bi bi-geo-alt me-2"></i>Informações da Coleta
+                            </h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cep)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cep)</dd>
 
-    <div>
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Id)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Cep)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Cep)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Logradouro)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Logradouro)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Numero)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Numero)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DiaColeta)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DiaColeta)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HorarioInicio)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HorarioInicio)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HorarioTermino)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HorarioTermino)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdCooperativa)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdCooperativa)
-            </dd>
-        </dl>
-    </div>
-    <div class="button-group">
-        @Html.Raw($"<a class='icon-button link-action' href='{Url.Action("Edit", new { id = Model.Id })}'><i class='fas fa-edit'></i> Editar</a> ")
-        <input type="button" value="Voltar" class="icon-button" onclick="window.history.back();" />
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Logradouro)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Logradouro)</dd>
+
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Numero)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Numero)</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="section-title text-eco-dark mb-3">
+                                <i class="bi bi-clock me-2"></i>Horário da Coleta
+                            </h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DiaColeta)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.DiaColeta)</dd>
+
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.HorarioInicio)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.HorarioInicio)</dd>
+
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.HorarioTermino)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.HorarioTermino)</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="card-footer form-actions p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <a class="btn btn-light" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-arrow-left me-2"></i>Voltar
+                            </a>
+                        </div>
+                        <div>
+                            <a class="btn btn-eco" href="@Url.Action("Edit", new { id = Model.Id })">
+                                <i class="bi bi-pencil-square me-2"></i>Editar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .bg-eco {
+        background-color: #38A169;
+    }
+
+    .text-eco-dark {
+        color: #2F855A;
+    }
+
+    .section-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        color: #2D3748;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-light:hover {
+        background-color: #e2e6ea;
+        color: #2D3748;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    dt {
+        color: #4A5568;
+        font-weight: 600;
+    }
+
+    dd {
+        color: #2D3748;
+    }
+</style>
 

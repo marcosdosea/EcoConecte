@@ -1,27 +1,66 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Perfil";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
-                <label asp-for="Username" class="form-label"></label>
+<div class="profile-edit-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card profile-edit-card">
+                    <div class="card-header form-header">
+                        <h1 class="form-title">
+                            <i class="bi bi-person-fill me-2"></i>@ViewData["Title"]
+                        </h1>
+                        <p class="text-muted mb-0">Gerencie suas informações pessoais</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <partial name="_StatusMessage" for="StatusMessage" />
+                        
+                        <form id="profile-form" method="post" class="needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Username" class="form-label">Nome de Usuário</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                            <input asp-for="Username" class="form-control" placeholder="Nome de usuário" disabled />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Input.PhoneNumber" class="form-label">Telefone</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Digite seu número de telefone"/>
+                                        </div>
+                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer form-actions p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                <div>
+                                    <a href="javascript:history.back()" class="btn btn-light">
+                                        <i class="bi bi-arrow-left me-2"></i>Voltar
+                                    </a>
+                                </div>
+                                <div>
+                                    <button id="update-profile-button" type="submit" class="btn btn-eco px-4 py-2">
+                                        <i class="bi bi-check-circle me-2"></i>Salvar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
+        </div>
     </div>
 </div>
 

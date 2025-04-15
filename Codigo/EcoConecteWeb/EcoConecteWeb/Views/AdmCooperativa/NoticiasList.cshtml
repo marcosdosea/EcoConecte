@@ -6,63 +6,146 @@
     var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-file-alt"></i> Notícia
-    </h1>
-
-    <p class="add-button">
-        <a class="icon-button" asp-controller="AdmCooperativa" asp-action="NoticiasCreate" asp-route-pessoaId="@idCoop">
-            <i class="fas fa-plus"></i> Cadastrar nova noticia
-        </a>
-    </p>
-
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Titulo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Conteudo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Data)
-                    </th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Titulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Conteudo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data)
-                        </td>
-                        <td>
-                            <div class="button-group">
-                                <button class="icon-button">
-                                    <a href="@Url.Action("NoticiasEdit", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                </button>
-                                <button class="icon-button">
-                                    <a href="@Url.Action("NoticiasDelete", "AdmCooperativa", new { id = item.Id, IdCoop =  item.IdCooperativa})">
-                                        <i class="fas fa-trash"></i> Apagar
-                                    </a>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-eco text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">
+                    <i class="bi bi-newspaper me-2"></i>Notícias
+                </h4>
+                <a class="btn btn-eco-outline-light" asp-controller="AdmCooperativa" asp-action="NoticiasCreate" asp-route-pessoaId="@idCoop">
+                    <i class="bi bi-plus-lg me-2"></i>Nova Notícia
+                </a>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Conteudo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Data)
+                            </th>
+                            <th class="text-center" style="width: 200px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Titulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Conteudo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data)
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-eco-outline btn-sm" href="@Url.Action("NoticiasEdit", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa })">
+                                            <i class="bi bi-pencil-square me-1"></i>Editar
+                                        </a>
+                                        <a class="btn btn-danger-outline btn-sm" href="@Url.Action("NoticiasDelete", "AdmCooperativa", new { id = item.Id, IdCoop = item.IdCooperativa})">
+                                            <i class="bi bi-trash me-1"></i>Apagar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-start p-3">
+            <a class="btn btn-light" asp-controller="Home" asp-action="Index">
+                <i class="bi bi-arrow-left me-2"></i>Voltar
+            </a>
+        </div>
     </div>
 </div>
+
+<style>
+    .bg-eco {
+        background-color: #38A169;
+    }
+
+    .btn-eco-outline-light {
+        color: #fff;
+        border-color: #fff;
+        border: 1px solid;
+        transition: all 0.3s ease;
+    }
+
+    .btn-eco-outline-light:hover {
+        background-color: #fff;
+        color: #38A169;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-eco-outline {
+        background-color: transparent;
+        color: #38A169;
+        border: 1px solid #38A169;
+        transition: all 0.3s ease;
+    }
+
+    .btn-eco-outline:hover {
+        background-color: #38A169;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+
+    .btn-danger-outline {
+        background-color: transparent;
+        color: #e3342f;
+        border: 1px solid #e3342f;
+        transition: all 0.3s ease;
+    }
+
+    .btn-danger-outline:hover {
+        background-color: #e3342f;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        color: #2D3748;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-light:hover {
+        background-color: #e2e6ea;
+        color: #2D3748;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .table th {
+        font-weight: 600;
+        color: #2D3748;
+    }
+</style>

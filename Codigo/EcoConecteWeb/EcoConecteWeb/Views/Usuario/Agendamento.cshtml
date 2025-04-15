@@ -26,7 +26,7 @@
                             
                             <div class="row">
                                 <div class="col-md-12 mb-4">
-                                    <h5 class="section-title text-eco-dark mb-3">
+                                    <h5 class="form-section-title text-eco-dark mb-3">
                                         <i class="bi bi-calendar-date me-2"></i>Data e Hora
                                     </h5>
                                     
@@ -44,7 +44,7 @@
                             
                             <div class="row">
                                 <div class="col-12 mb-4">
-                                    <h5 class="section-title text-eco-dark mb-3">
+                                    <h5 class="form-section-title text-eco-dark mb-3">
                                         <i class="bi bi-geo-alt me-2"></i>Endereço para Coleta
                                     </h5>
                                     
@@ -137,82 +137,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .schedule-form-container {
-        min-height: calc(100vh - 350px);
-    }
-    
-    .schedule-form-card {
-        border: none;
-        border-radius: 1rem;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-        overflow: hidden;
-    }
-    
-    .form-header {
-        background-color: #f8f9fa;
-        padding: 1.75rem 1.5rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .form-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #2D3748;
-        margin-bottom: 0.25rem;
-    }
-    
-    .section-title {
-        font-size: 1.15rem;
-        font-weight: 600;
-        margin-bottom: 1.25rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .text-eco-dark {
-        color: #2F855A;
-    }
-    
-    .btn-eco {
-        background-color: #38A169;
-        color: white;
-        border: none;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-eco:hover {
-        background-color: #2F855A;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-    }
-    
-    .input-group-text {
-        background-color: #F9FAFB;
-        border-right: none;
-    }
-    
-    .input-group .form-control {
-        border-left: none;
-    }
-    
-    .form-actions {
-        background-color: #f8f9fa;
-    }
-    
-    @@media (max-width: 768px) {
-        .form-header {
-            padding: 1.25rem 1rem;
-        }
-        
-        .form-title {
-            font-size: 1.25rem;
-        }
-    }
-</style>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
