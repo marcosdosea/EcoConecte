@@ -1,73 +1,136 @@
 ﻿@model EcoConecteWeb.Models.ColetaViewModel
 
 @{
-    ViewData["Title"] = "EcoConecte - Apagar Coleta";
+    ViewData["Title"] = "Apagar Coleta";
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-trash-alt"></i> Apagar Coleta
-    </h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-trash me-2"></i>Apagar Coleta
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-warning mb-4" role="alert">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <strong>Atenção!</strong> Tem certeza que deseja apagar esta coleta? Esta ação não pode ser desfeita.
+                    </div>
 
-    <h3>Tem certeza?</h3>
-    <div>
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Id)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Cep)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Cep)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Logradouro)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Logradouro)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Numero)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Numero)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DiaColeta)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DiaColeta)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HorarioInicio)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HorarioInicio)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.HorarioTermino)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.HorarioTermino)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.IdCooperativa)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdCooperativa)
-            </dd>
-        </dl>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="section-title text-danger mb-3">
+                                <i class="bi bi-geo-alt me-2"></i>Informações da Coleta
+                            </h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cep)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cep)</dd>
 
-        <form asp-action="Delete">
-            <div class="button-group">
-                <input type="submit" value="Apagar" class="icon-button" />
-                <input type="button" value="Voltar" class="icon-button" onclick="window.history.back();" />
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Logradouro)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Logradouro)</dd>
+
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Numero)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.Numero)</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="section-title text-danger mb-3">
+                                <i class="bi bi-clock me-2"></i>Horário da Coleta
+                            </h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DiaColeta)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.DiaColeta)</dd>
+
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.HorarioInicio)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.HorarioInicio)</dd>
+
+                                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.HorarioTermino)</dt>
+                                <dd class="col-sm-8">@Html.DisplayFor(model => model.HorarioTermino)</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="IdCooperativa" />
+                        
+                        <div class="card-footer form-actions p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                            <div>
+                                <a class="btn btn-light" asp-controller="Home" asp-action="Index">
+                                    <i class="bi bi-arrow-left me-2"></i>Voltar
+                                </a>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-danger px-4 py-2">
+                                    <i class="bi bi-trash me-2"></i>Confirmar Exclusão
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+
+<style>
+    .section-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        color: #2D3748;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-light:hover {
+        background-color: #e2e6ea;
+        color: #2D3748;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-danger {
+        background-color: #e3342f;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+        background-color: #cc1f1a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    dt {
+        color: #4A5568;
+        font-weight: 600;
+    }
+
+    dd {
+        color: #2D3748;
+    }
+
+    .text-danger {
+        color: #e3342f !important;
+    }
+</style>
 

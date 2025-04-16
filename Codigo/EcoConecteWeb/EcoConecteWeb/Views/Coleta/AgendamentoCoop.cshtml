@@ -6,12 +6,14 @@
     var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();// Garantir que o Model não seja nulo
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-recycle"></i> Coletas
-    </h1>
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="title">
+            <i class="bi bi-recycle me-2"></i>Coletas
+        </h1>
+    </div>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th style="display: none;">
@@ -68,12 +70,35 @@
                     <td style="display: none;">
                         @Html.DisplayFor(modelItem => item.IdCooperativa)
                     </td>
-
                 </tr>
             }
         </tbody>
     </table>
-    <div class="form-group button-group">
-        <a href="@Url.Action("Index", "Home")" class="btn icon-button">Voltar</a>
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-light"><i class="bi bi-arrow-left me-2"></i>Voltar</a>
     </div>
 </div>
+
+<style>
+    .title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2D3748;
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        color: #2D3748;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-light:hover {
+        background-color: #e2e6ea;
+        color: #2D3748;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+</style>

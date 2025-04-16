@@ -6,8 +6,10 @@
     var vendas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.VendaViewModel>();  // Caso o Model seja nulo, evita erro
 }
 
-<div class="container mt-4">
-    <h1 class="title text-center mb-4">Minhas Vendas</h1>
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="title">Minhas Vendas</h1>
+    </div>
 
     @if (!vendas.Any())
     {
@@ -20,8 +22,8 @@
         <div class="row">
             @foreach (var item in vendas)
             {
-                <div class="col-md-6 mb-3">
-                    <div class="card shadow-sm">
+                <div class="col-md-6 mb-4">
+                    <div class="card venda-card shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">@item.Tipo</h5>
                             <p class="card-text">Quantidade: @item.Quantidade</p>
@@ -34,6 +36,36 @@
     }
 
     <div class="text-center mt-4">
-        <a class="btn btn-secondary" href="@Url.Action("Index", "Home")"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <a class="btn btn-light" href="@Url.Action("Index", "Home")"><i class="bi bi-arrow-left me-2"></i>Voltar</a>
     </div>
 </div>
+
+<style>
+    .venda-card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2D3748;
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        color: #2D3748;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-light:hover {
+        background-color: #e2e6ea;
+        color: #2D3748;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+</style>

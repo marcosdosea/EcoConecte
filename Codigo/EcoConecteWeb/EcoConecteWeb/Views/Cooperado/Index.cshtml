@@ -1,64 +1,205 @@
 ﻿@model EcoConecteWeb.Models.PessoaViewModel
 
 @{
-    ViewData["Title"] = "EcoConecte - Perfil Cooperado";
+    ViewData["Title"] = "Perfil do Cooperado";
     var pessoaId = ViewData["PessoaId"];
 }
 
-<h1 class="title">
-    <i class="fas fa-info-circle"></i> Perfil do Cooperado
-</h1>
-
-<div class="container mt-4">
-    <div class="row">
-        <!-- Primeira Coluna -->
-        <div class="col-md-6">
-            <dl class="row">
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cpf)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cpf)</dd>
-
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Nome)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nome)</dd>
-
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Telefone)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Telefone)</dd>
-
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Logradouro)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Logradouro)</dd>
-            </dl>
-        </div>
-
-        <!-- Segunda Coluna -->
-        <div class="col-md-6">
-            <dl class="row">
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Bairro)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Bairro)</dd>
-
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Numero)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Numero)</dd>
-
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cidade)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cidade)</dd>
-
-                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Estado)</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
-            </dl>
+<div class="profile-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card profile-card">
+                    <div class="card-header profile-header">
+                        <div class="profile-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <h1 class="profile-title">Perfil do Cooperado</h1>
+                        <p class="text-muted">Informações da sua conta no EcoConecte</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="row gx-5">
+                            <div class="col-md-6 mb-4 mb-md-0">
+                                <h5 class="section-title text-eco-dark mb-3">
+                                    <i class="bi bi-person-vcard me-2"></i>Dados Pessoais
+                                </h5>
+                                <div class="info-group">
+                                    <div class="info-item">
+                                        <span class="info-label">@Html.DisplayNameFor(model => model.Cpf)</span>
+                                        <span class="info-value">@Html.DisplayFor(model => model.Cpf)</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">@Html.DisplayNameFor(model => model.Nome)</span>
+                                        <span class="info-value">@Html.DisplayFor(model => model.Nome)</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">@Html.DisplayNameFor(model => model.Telefone)</span>
+                                        <span class="info-value">@Html.DisplayFor(model => model.Telefone)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="section-title text-eco-dark mb-3">
+                                    <i class="bi bi-geo-alt me-2"></i>Endereço
+                                </h5>
+                                <div class="info-group">
+                                    <div class="info-item">
+                                        <span class="info-label">@Html.DisplayNameFor(model => model.Logradouro)</span>
+                                        <span class="info-value">@Html.DisplayFor(model => model.Logradouro), @Html.DisplayFor(model => model.Numero)</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">@Html.DisplayNameFor(model => model.Bairro)</span>
+                                        <span class="info-value">@Html.DisplayFor(model => model.Bairro)</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">@Html.DisplayNameFor(model => model.Cidade) / @Html.DisplayNameFor(model => model.Estado)</span>
+                                        <span class="info-value">@Html.DisplayFor(model => model.Cidade) - @Html.DisplayFor(model => model.Estado)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer profile-actions p-4">
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            <a class="btn btn-eco" asp-controller="Cooperado" asp-action="Edit" asp-route-id="@pessoaId">
+                                <i class="bi bi-pencil-square me-2"></i>Alterar Dados
+                            </a>
+                            <a class="btn btn-eco-outline" href="/Identity/Account/Manage/ChangePassword">
+                                <i class="bi bi-key me-2"></i>Alterar Senha
+                            </a>
+                            <a class="btn btn-eco-outline" href="/Identity/Account/Manage/Email">
+                                <i class="bi bi-envelope me-2"></i>Alterar E-mail
+                            </a>
+                            <a class="btn btn-light" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door me-2"></i>Voltar ao Início
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Seção de Botões -->
-<div class="text-center mt-4">
-    <a class="btn btn-primary" asp-controller="Cooperado" asp-action="Edit" asp-route-id="@pessoaId">
-        <i class="fas fa-edit"></i> Alterar Dados
-    </a>
-    <a class="btn btn-warning" href="/Identity/Account/Manage/ChangePassword">
-        <i class="fas fa-key"></i> Alterar Senha
-    </a>
-    <a class="btn btn-info" href="/Identity/Account/Manage/Email">
-        <i class="fas fa-envelope"></i> Alterar E-mail
-    </a>
-    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">
-        <i class="fas fa-home"></i> Voltar ao Início
-    </a>
-</div>
+<style>
+    .profile-container {
+        min-height: calc(100vh - 350px);
+    }
+    
+    .profile-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .profile-header {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .profile-avatar {
+        margin: 0 auto 1rem;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #38A169;
+        color: white;
+    }
+    
+    .profile-avatar i {
+        font-size: 3.5rem;
+    }
+    
+    .profile-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #2D3748;
+        margin-bottom: 0.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .info-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .info-item {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .info-label {
+        font-size: 0.875rem;
+        color: #718096;
+        margin-bottom: 0.25rem;
+    }
+    
+    .info-value {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #2D3748;
+    }
+    
+    .profile-actions {
+        background-color: #f8f9fa;
+    }
+    
+    .text-eco-dark {
+        color: #2F855A;
+    }
+    
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    .btn-eco-outline {
+        background-color: transparent;
+        color: #38A169;
+        border: 1px solid #38A169;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-eco-outline:hover {
+        background-color: #38A169;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
+    
+    @@media (max-width: 768px) {
+        .profile-header {
+            padding: 2rem 1rem;
+        }
+    }
+</style>
