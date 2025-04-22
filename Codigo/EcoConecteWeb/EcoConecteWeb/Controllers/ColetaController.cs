@@ -25,13 +25,15 @@ namespace EcoConecteWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BuscarPorCep(string cep)
         {
-            if (string.IsNullOrEmpty(cep))
+            // Tratando cep para remover o hifen
+            var cepLimpo = cep.Replace("-", "").Trim();
+
+            if (string.IsNullOrEmpty(cepLimpo))
             {
                 ModelState.AddModelError("Cep", "O CEP é obrigatório.");
                 return View("Index");
             }
-
-            var coletas = _coletaService.GetByCep(cep);
+            var coletas = _coletaService.GetByCep(cepLimpo);
             if (coletas == null || !coletas.Any())
             {
                 ModelState.AddModelError("Cep", "Nenhuma coleta encontrada.");

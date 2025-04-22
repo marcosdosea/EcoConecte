@@ -24,6 +24,7 @@ namespace EcoConecteWeb.Models
         /// </summary>
         [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(2000)]
+        [Display(Name = "Conteúdo")]
         public string Conteudo { get; set; } = null!;
 
         /// <summary>

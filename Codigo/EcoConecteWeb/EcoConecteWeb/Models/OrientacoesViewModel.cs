@@ -21,6 +21,7 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET/SET Descriçao
         /// </summary>
+        [Display(Name = "Descrição")]
         [Required(ErrorMessage = "Campo obrigatório.")]
         [StringLength(2000)]
         public string Descricao { get; set; } = null!;
