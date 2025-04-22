@@ -5,55 +5,60 @@
     var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();
 }
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - EcoConecte</title>
-    <link rel="stylesheet" href="~/path/to/site.css">
-</head>
-<body>
-
-<div class="container">
-    <h1 class="title">Sua rotina de coleta</h1>
-
-    <div class="table-responsive">
-        @if (!coletas.Any()) // Verifica se a lista está vazia
-        {
-            <div class="alert alert-danger" role="alert">
-                Ainda não existem coletas para a região buscada.
-            </div>
-                <p class="lead">Cadastre-se para agendar uma coleta no seu endereço.</p>
-        }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Dia da Coleta</th>
-                        <th>Horário de Início</th>
-                        <th>Horário de Término</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var coleta in coletas) {
-                        <tr>
-                            <td>@coleta.DiaColeta.ToString("dddd, dd/MM")</td>
-                            <td>@coleta.HorarioInicio.ToString("HH:mm")</td>
-                            <td>@coleta.HorarioTermino.ToString("HH:mm")</td>
-                        </tr>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-eco text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-calendar-check me-2"></i>Rotina de Coleta para o CEP
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    @if (!coletas.Any())
+                    {
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            Ainda não existem coletas programadas para a região buscada.
+                        </div>
+                        <p class="mt-3">Cadastre-se para agendar uma coleta no seu endereço ou verifique as orientações de reciclagem.</p>
                     }
-                </tbody>
-            </table>
-        }
-    </div>
-
-    <div class="button-group">
-            @Html.Raw($"<a class='icon-button' href='{Url.Action("ConsultarOrientacoes", "Orientacoes")}'><i class='fas fa-lightbulb'></i> Orientações e Dicas</a>")
-            @Html.Raw($"<a class='icon-button' href='{Url.Action("Index", "Home")}'><i class='fas fa-arrow-left'></i> Voltar</a>")
+                    else
+                    {
+                        <h5 class="section-title text-eco-dark mb-3">
+                            <i class="bi bi-calendar-week me-2"></i>Dias e Horários de Coleta
+                        </h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4">Dia da Coleta</th>
+                                        <th class="px-4">Horário de Início</th>
+                                        <th class="px-4">Horário de Término</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var coleta in coletas) {
+                                        <tr>
+                                            <td class="px-4">@coleta.DiaColeta.ToString("dddd, dd/MM")</td>
+                                            <td class="px-4">@coleta.HorarioInicio.ToString("HH:mm")</td>
+                                            <td class="px-4">@coleta.HorarioTermino.ToString("HH:mm")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer form-actions p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-light">
+                        <i class="bi bi-arrow-left me-2"></i>Voltar
+                    </a>
+                    <a href="@Url.Action("ConsultarOrientacoes", "Orientacoes")" class="btn btn-outline-eco">
+                        <i class="bi bi-lightbulb me-2"></i>Orientações e Dicas
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-</body>
-</html>
