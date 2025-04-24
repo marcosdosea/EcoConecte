@@ -15,17 +15,17 @@
                         </h1>
                         <p class="text-muted mb-0">Altere os dados do usuário selecionado</p>
                     </div>
-                    
+
                     <div class="card-body p-4">
                         <form asp-action="Edit" method="post">
                             <input type="hidden" asp-for="Id" />
-                            
+
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <h5 class="section-title text-eco-dark mb-3">
                                         <i class="bi bi-person-badge me-2"></i>Informações do Usuário
                                     </h5>
-                                    
+
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -37,7 +37,7 @@
                                                 <span asp-validation-for="Email" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label asp-for="UserName" class="form-label">Nome de Usuário</label>
@@ -48,7 +48,7 @@
                                                 <span asp-validation-for="UserName" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label asp-for="PhoneNumber" class="form-label">Telefone</label>
@@ -59,7 +59,7 @@
                                                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Status da Conta</label>
@@ -69,16 +69,58 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Observação em vermelho -->
+                                        <div class="col-md-12 mb-3">
+                                            <div class="alert alert-danger">
+                                                <strong>Atenção!</strong> Com a opção a seguir é possível tornar este login: ADM Geral do sistema,
+                                                inserindo o valor "0" ao campo ou inserindo o ID de uma Cooperativa cadastrada,
+                                                torna este login ADM desta Cooperativa.
+                                            </div>
+                                        </div>
+
+                                        <!-- Checkbox para alteração -->
+                                        <div class="col-md-12">
+                                            <div class="form-group mb-3 p-3 border rounded shadow-sm bg-light-highlight">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="togglePessoaId" />
+                                                    <label class="form-check-label fw-bold text-eco-dark" for="togglePessoaId">
+                                                        <i class="bi bi-pencil-square me-2"></i>Alterar tipo login?
+                                                    </label>
+                                                </div>
+                                                <small class="text-muted ms-1">
+                                                    Marque se quiser alterar.
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Campo PessoaId que aparece condicionalmente -->
+                                        <div class="col-md-6" id="pessoaIdField" style="display: none;">
+                                            <div class="form-group">
+                                                <label asp-for="PessoaId" class="form-label">Novo ID</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-person-vcard"></i></span>
+                                                    <input asp-for="PessoaId" class="form-control" id="pessoaId" />
+                                                </div>
+                                                <span asp-validation-for="PessoaId" class="text-danger"></span>
+                                            </div>
+
+                                            <!-- Mensagem de alteração do campo -->
+                                            <div id="pessoaIdAlteredMessage" class="text-danger" style="display: none;">
+                                                <small><i class="bi bi-check-circle me-2"></i>Atribua função ao usuário após salvar</small>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-12 mb-3">
                                     <h5 class="section-title text-eco-dark mb-3">
                                         <i class="bi bi-key me-2"></i>Redefinir Senha
                                     </h5>
-                                    
+
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -89,7 +131,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="confirmPassword" class="form-label">Confirmar Senha</label>
@@ -105,7 +147,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="card-footer form-actions p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
                                 <div>
                                     <a href="@Url.Action("Users", "AdmIdentity")" class="btn btn-light">
@@ -130,27 +172,27 @@
     .admin-container {
         min-height: calc(100vh - 350px);
     }
-    
+
     .admin-card {
         border: none;
         border-radius: 1rem;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         overflow: hidden;
     }
-    
+
     .admin-header {
         background-color: #f8f9fa;
         padding: 1.75rem 1.5rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
-    
+
     .admin-title {
         font-size: 1.5rem;
         font-weight: 700;
         color: #2D3748;
         margin-bottom: 0.25rem;
     }
-    
+
     .section-title {
         font-size: 1.15rem;
         font-weight: 600;
@@ -158,11 +200,11 @@
         padding-bottom: 0.75rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
-    
+
     .text-eco-dark {
         color: #2F855A;
     }
-    
+
     .btn-eco {
         background-color: #38A169;
         color: white;
@@ -170,33 +212,87 @@
         font-weight: 500;
         transition: all 0.3s ease;
     }
-    
-    .btn-eco:hover {
-        background-color: #2F855A;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-    }
-    
+
+        .btn-eco:hover {
+            background-color: #2F855A;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
     .input-group-text {
         background-color: #F9FAFB;
         border-right: none;
     }
-    
+
     .input-group .form-control {
         border-left: none;
     }
-    
+
     .form-actions {
         background-color: #f8f9fa;
     }
-    
+
     .form-check-input:checked {
         background-color: #38A169;
         border-color: #38A169;
     }
+
+    .bg-light-highlight {
+        background-color: #f0fdf4;
+        border-left: 4px solid #38A169;
+    }
+
+    /* Animação de Fade In/Out para o campo PessoaId */
+    .fade {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .fade-out {
+        opacity: 0;
+        display: none;
+    }
+
+    .fade-in {
+        opacity: 1;
+    }
 </style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.getElementById('togglePessoaId').addEventListener('change', function () {
+            const field = document.getElementById('pessoaIdField');
+            const message = document.getElementById('pessoaIdAlteredMessage');
+
+            if (this.checked) {
+                field.classList.remove('fade-out');
+                field.classList.add('fade-in');
+                field.style.display = 'block';
+            } else {
+                field.classList.remove('fade-in');
+                field.classList.add('fade-out');
+                setTimeout(function () {
+                    field.style.display = 'none';
+                }, 300);
+            }
+
+            // Reset the message when toggle is unchecked
+            message.style.display = 'none';
+        });
+
+        document.getElementById('pessoaId').addEventListener('input', function () {
+            const message = document.getElementById('pessoaIdAlteredMessage');
+
+            // Display message if field is changed
+            if (this.value) {
+                message.style.display = 'block';
+            } else {
+                message.style.display = 'none';
+            }
+        });
+    </script>
 }
