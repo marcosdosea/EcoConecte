@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EcoConecteWeb.Models.PessoaViewModel>
+
+<h1>Lista Cooperados</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pessoa in Model)
+        {
+            <tr>
+                <td>@pessoa.Nome</td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="selecionarPessoa(@pessoa.Id)">Selecionar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function selecionarPessoa(idPessoa) {
+        if (window.opener && !window.opener.closed) {
+            window.opener.selecionarPessoa(idPessoa);
+            window.close();
+        }
+    }
+</script>

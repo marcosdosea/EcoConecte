@@ -10,44 +10,61 @@
 </h1>
 
 <div class="form-container text-left">
-    <form asp-action="VendaEdit">
+    <form asp-action="VendasEdit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <input type="hidden" name="idCoop" value="@ViewData["idCoop"]" />
 
-        <div class="form-group">
-            <label asp-for="Tipo" class="control-label">Tipo do Material</label>
-            <select asp-for="Tipo" class="form-control" title="Clique para selecionar o tipo do material">
-                <option value="" disabled selected hidden>🔽 Selecione...</option>
-                <option value="M">M</option>
-                <option value="P">P</option>
-            </select>
-            <span asp-validation-for="Tipo" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Tipo" class="control-label">Tipo do Material</label>
+                    <select asp-for="Tipo" class="form-control" title="Clique para selecionar o tipo do material">
+                        <option value="" disabled selected hidden>🔽 Selecione...</option>
+                        <option value="M">M</option>
+                        <option value="P">P</option>
+                    </select>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-left">
+                    <label asp-for="Valor" class="control-label"></label>
+                    <input asp-for="Valor" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Quantidade" class="control-label"></label>
+                    <input asp-for="Quantidade" class="form-control" />
+                    <span asp-validation-for="Quantidade" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Data" class="control-label"></label>
+                    <input asp-for="Data" class="form-control" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IdPessoa" class="control-label">Cooperado (ID)</label>
+                    <div class="input-group">
+                        <input asp-for="IdPessoa" class="form-control" id="IdPessoa" />
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-secondary" onclick="abrirBuscaPessoa()">Buscar</button>
+                        </div>
+                    </div>
+                    <span asp-validation-for="IdPessoa" class="text-danger"></span>
+                </div>
+            </div>
         </div>
-        <div class="form-group text-left">
-            <label asp-for="Valor" class="control-label"></label>
-            <input asp-for="Valor" class="form-control" type="number" step="0.01" />
-            <span asp-validation-for="Valor" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Quantidade" class="control-label"></label>
-            <input asp-for="Quantidade" class="form-control" />
-            <span asp-validation-for="Quantidade" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Data" class="control-label"></label>
-            <input asp-for="Data" class="form-control" />
-            <span asp-validation-for="Data" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="IdPessoa" class="control-label"></label>
-            <input asp-for="IdPessoa" class="form-control" />
-            <span asp-validation-for="IdPessoa" class="text-danger"></span>
-        </div>
-        <div class="button-group">
-            <input type="submit" value="Salvar" class="icon-button" />
-            <a asp-controller="AdmCooperativa" asp-action="VendasList" asp-route-id="@idCoop" class="icon-button">
-                <i class="fa fa-arrow-left"></i> Voltar
+
+        <div class="form-group button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <input type="submit" value="Salvar" class="icon-button" style="flex: 1; margin-right: 10px;" />
+
+            <a asp-controller="AdmCooperativa" asp-action="VendasList" asp-route-id="@idCoop" class="icon-button" style="flex: 1;">
+                <i class="fas fa-undo"></i> Voltar
             </a>
         </div>
     </form>
@@ -57,4 +74,23 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        function abrirBuscaPessoa() {
+            var idCooperativa = '@idCoop';
+            var url = '@Url.Action("BuscarCooperado", "AdmCooperativa")' + '?idCooperativa=' + idCooperativa;
+
+            var largura = 800;
+            var altura = 600;
+            var left = (window.innerWidth / 2) - (largura / 2);
+            var top = (window.innerHeight / 2) - (altura / 2);
+
+            window.open(url, 'Buscar Cooperado', width=${largura},height=${altura},top=${top},left=${left});
+        }
+
+        function selecionarPessoa(idPessoa) {
+            document.getElementById('IdPessoa').value = idPessoa;
+            window.focus();
+        }
+    </script>
 }

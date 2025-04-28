@@ -4,10 +4,58 @@
     ViewData["Title"] = "EcoConecte - Vendas";
     var PessoaId = ViewData["PessoaId"];
     var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
+    var tipoFiltro = ViewData["TipoFiltro"] as string ?? string.Empty; // Captura o filtro tipo de material, com valor default vazio
+    var dataInicio = ViewData["DataInicio"] as string ?? string.Empty;
+    var dataFim = ViewData["DataFim"] as string ?? string.Empty;
+    var idPessoaFiltro = ViewData["IdPessoaFiltro"] as string ?? string.Empty; // Filtro para IdPessoa
 }
 
 <div class="container py-5">
     <div class="card shadow-sm">
+        <!-- Barra de destaque Filtro -->
+        <div class="card-header bg-eco text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">
+                    <i class="bi bi-funnel me-2"></i>Filtro
+                </h4>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card-body p-4">
+            <form method="get" asp-action="VendasList" class="mb-3">
+                <div class="row">
+                    <!-- Filtro Tipo de Material -->
+                    <div class="col-md-2">
+                        <label for="Tipo">Tipo do Material</label>
+                        <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tipoFiltro" />
+                    </div>
+
+                    <!-- Filtro Data -->
+                    <div class="col-md-2">
+                        <label for="DataInicio">Data Inicial</label>
+                        <input type="date" class="form-control form-control-sm" name="dataInicial" value="@dataInicio" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="DataFim">Data Final</label>
+                        <input type="date" class="form-control form-control-sm" name="dataFinal" value="@dataFim" />
+                    </div>
+
+                    <!-- Filtro IdPessoa -->
+                    <div class="col-md-2">
+                        <label for="IdPessoaFiltro">Código Pessoa</label>
+                        <input type="text" class="form-control form-control-sm" name="idPessoaFiltro" value="@idPessoaFiltro" />
+                    </div>
+
+                    <div class="col-md-2 mt-4">
+                        <button type="submit" class="btn btn-eco-outline-light btn-sm">
+                            <i class="bi bi-search me-1"></i>Filtrar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <div class="card-header bg-eco text-white">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">
@@ -18,6 +66,8 @@
                 </a>
             </div>
         </div>
+
+        <!-- Tabela de Vendas -->
         <div class="card-body p-4">
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -56,6 +106,8 @@
                 </table>
             </div>
         </div>
+
+        <!-- Botão de Voltar -->
         <div class="card-footer bg-light d-flex justify-content-start p-3">
             <a class="btn btn-light" asp-controller="Home" asp-action="Index">
                 <i class="bi bi-arrow-left me-2"></i>Voltar
@@ -74,14 +126,15 @@
         border-color: #fff;
         border: 1px solid;
         transition: all 0.3s ease;
+        background-color: #38A169; /* Garantir que o botão tenha cor de fundo */
     }
 
-    .btn-eco-outline-light:hover {
-        background-color: #fff;
-        color: #38A169;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-    }
+        .btn-eco-outline-light:hover {
+            background-color: #fff;
+            color: #38A169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+        }
 
     .btn-eco-outline {
         background-color: transparent;
@@ -90,12 +143,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-eco-outline:hover {
-        background-color: #38A169;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-    }
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
 
     .btn-danger-outline {
         background-color: transparent;
@@ -104,12 +157,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-danger-outline:hover {
-        background-color: #e3342f;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
-    }
+        .btn-danger-outline:hover {
+            background-color: #e3342f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
+        }
 
     .btn-light {
         background-color: #f8f9fa;
@@ -119,12 +172,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-light:hover {
-        background-color: #e2e6ea;
-        color: #2D3748;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
+        .btn-light:hover {
+            background-color: #e2e6ea;
+            color: #2D3748;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
     .card {
         border: none;
