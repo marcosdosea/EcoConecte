@@ -222,7 +222,7 @@ namespace EcoConecteWeb.Controllers
             return View(OrientacoesListModel);
         }
 
-        public ActionResult VendasList(int id)
+        public ActionResult VendasList(int id, string tipoFiltro, DateTime? dataInicial, DateTime? dataFinal)
         {
             // Obter todas as pessoas da cooperativa informada
             var pessoasDaCooperativa = _pessoaService.GetAll()
@@ -231,15 +231,42 @@ namespace EcoConecteWeb.Controllers
                                                      .ToList();
 
             // Filtrar as vendas pelas pessoas que pertencem à cooperativa
-            var VendasList = _vendaService.GetAll()
-                                           .Where(v => pessoasDaCooperativa.Contains(v.IdPessoa))
-                                           .ToList();
+            var vendas = _vendaService.GetAll()
+                                      .Where(v => pessoasDaCooperativa.Contains(v.IdPessoa));
+
+            // Aplicar o filtro por tipo, se fornecido
+            if (!string.IsNullOrEmpty(tipoFiltro))
+            {
+                vendas = vendas.Where(v => v.Tipo.Contains(tipoFiltro)); // Usar Contains para filtrar por parte do tipo
+            }
+
+            // Aplicar o filtro por data, se fornecido
+            if (dataInicial.HasValue)
+            {
+                vendas = vendas.Where(v => v.Data >= dataInicial.Value);
+            }
+
+            if (dataFinal.HasValue)
+            {
+                vendas = vendas.Where(v => v.Data <= dataFinal.Value);
+            }
+
+            // Obter as vendas filtradas
+            var vendasList = vendas.ToList();
 
             // Mapear para a ViewModel
-            var VendasListModel = _mapper.Map<List<VendaViewModel>>(VendasList);
+            var vendasListModel = _mapper.Map<List<VendaViewModel>>(vendasList);
 
-            return View(VendasListModel);
+            // Definir os filtros aplicados para a View
+            ViewData["TipoFiltro"] = tipoFiltro;
+            ViewData["DataInicio"] = dataInicial?.ToString("yyyy-MM-dd");
+            ViewData["DataFim"] = dataFinal?.ToString("yyyy-MM-dd");
+
+            return View(vendasListModel);
         }
+
+
+
 
         // GET: Confirmar Exclusão da Coleta
         public async Task<IActionResult> ColetaDelete(uint id)
@@ -687,6 +714,19 @@ namespace EcoConecteWeb.Controllers
             return View(pessoaModel);
         }
 
+        public IActionResult BuscarCooperado(int idCooperativa)
+        {
+            var pessoas = _pessoaService.GetAll()
+                .Where(p => p.IdCooperativa == idCooperativa);
+
+            var pessoasViewModel = pessoas.Select(p => new PessoaViewModel
+            {
+                Id = p.Id,
+                Nome = p.Nome
+            }).ToList();
+
+            return View(pessoasViewModel);
+        }
 
     }
 }

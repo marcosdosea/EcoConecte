@@ -25,7 +25,7 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET/SET Valor em real
         /// </summary>
-        [Display(Name = "Valor")]
+        [Display(Name = "Valor R$")]
         [DataType(DataType.Currency)]
         [Range(0.01, 999999.99, ErrorMessage = "Informe um valor válido.")]
         public decimal Valor { get; set; }
@@ -33,6 +33,7 @@ namespace EcoConecteWeb.Models
         /// <summary>
         /// GET/SET Quantidade
         /// </summary>
+        [Display(Name = "Quantidade (kg)")]
         [Required(ErrorMessage = "Campo obrigatório.")]
         public int Quantidade { get; set; }
 
