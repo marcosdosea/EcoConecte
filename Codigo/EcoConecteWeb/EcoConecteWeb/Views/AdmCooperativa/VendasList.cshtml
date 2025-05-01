@@ -6,11 +6,11 @@
     var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
 
     // Configurar dados do filtro para o Partial
-    ViewData["TipoFiltro"] = ViewData["TipoFiltro"] ?? "";
-    ViewData["DataInicio"] = ViewData["DataInicio"] ?? "";
-    ViewData["DataFim"] = ViewData["DataFim"] ?? "";
-    ViewData["IdPessoaFiltro"] = ViewData["IdPessoaFiltro"] ?? "";
-    ViewData["FormAction"] = "VendasList";
+    var tipoFiltro = ViewData["TipoFiltro"] as string ?? "";
+    var dataInicio = ViewData["DataInicio"] as string ?? "";
+    var dataFim = ViewData["DataFim"] as string ?? "";
+    var idPessoaFiltro = ViewData["IdPessoaFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "VendasList";
 }
 
 <div class="container py-5">
@@ -26,7 +26,31 @@
 
         <!-- Filtros (Partial View) -->
         <div class="card-body p-4">
-            @Html.Partial("_FiltrosVendas")
+            <form method="get" asp-action="@formAction" class="mb-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="Tipo">Tipo do Material</label>
+                        <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tipoFiltro" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="DataInicio">Data Inicial</label>
+                        <input type="date" class="form-control form-control-sm" name="dataInicial" value="@dataInicio" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="DataFim">Data Final</label>
+                        <input type="date" class="form-control form-control-sm" name="dataFinal" value="@dataFim" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="IdPessoaFiltro">Código Pessoa</label>
+                        <input type="text" class="form-control form-control-sm" name="idPessoaFiltro" value="@idPessoaFiltro" />
+                    </div>
+                    <div class="col-md-2 mt-4">
+                        <button type="submit" class="btn btn-eco-outline-light btn-sm">
+                            <i class="bi bi-search me-1"></i>Filtrar
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <!-- Barra de título da tabela -->

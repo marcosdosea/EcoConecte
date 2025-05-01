@@ -22,10 +22,58 @@ namespace EcoConecteWeb.Controllers
         }
 
         // GET: VendaController
-        public ActionResult Index()
+        public ActionResult Index(string tipoFiltro, string dataInicio, string dataFim, string idPessoaFiltro)
         {
-            var ListaVendas = _vendaService.GetAll();
-            var ListaVendasModel = _mapper.Map<IEnumerable<VendaViewModel>>(ListaVendas);
+            // Converte as datas de string para DateTime, se possível
+            DateTime? dataInicial = null;
+            DateTime? dataFinal = null;
+
+            if (DateTime.TryParse(dataInicio, out DateTime parsedDataInicio))
+            {
+                dataInicial = parsedDataInicio;
+            }
+
+            if (DateTime.TryParse(dataFim, out DateTime parsedDataFim))
+            {
+                dataFinal = parsedDataFim;
+            }
+
+            // Obtém as vendas com base nos filtros
+            var vendas = _vendaService.GetAll();
+
+            // Aplica os filtros
+            if (!string.IsNullOrEmpty(tipoFiltro))
+            {
+                vendas = vendas.Where(v => v.Tipo.Contains(tipoFiltro, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (dataInicial.HasValue)
+            {
+                vendas = vendas.Where(v => v.Data >= dataInicial.Value);
+            }
+
+            if (dataFinal.HasValue)
+            {
+                vendas = vendas.Where(v => v.Data <= dataFinal.Value);
+            }
+
+            if (!string.IsNullOrEmpty(idPessoaFiltro))
+            {
+                if (uint.TryParse(idPessoaFiltro, out uint idPessoa))
+                {
+                    vendas = vendas.Where(v => v.IdPessoa == idPessoa);
+                }
+            }
+
+            // Mapeia para o ViewModel
+            var ListaVendasModel = _mapper.Map<IEnumerable<VendaViewModel>>(vendas);
+
+            // Passa os dados de filtro para a View
+            ViewData["TipoFiltro"] = tipoFiltro;
+            ViewData["DataInicio"] = dataInicio;
+            ViewData["DataFim"] = dataFim;
+            ViewData["IdPessoaFiltro"] = idPessoaFiltro;
+
             return View(ListaVendasModel);
         }
 
@@ -124,5 +172,6 @@ namespace EcoConecteWeb.Controllers
             _vendaService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
     }
 }
