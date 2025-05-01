@@ -5,74 +5,83 @@
     var pessoaId = Convert.ToInt32(ViewData["PessoaId"] ?? 0);
 }
 
-<h1 class="title">
-    <i class="fas fa-plus-circle"></i> Cadastrar Venda
-</h1>
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <!-- Cabeçalho -->
+        <div class="card-header bg-success text-white d-flex align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-plus-circle me-2"></i> Cadastrar Venda
+            </h4>
+        </div>
 
-<h4 class="subheading"><strong>Preencha os dados</strong></h4>
+        <!-- Corpo -->
+        <div class="card-body p-4">
+            <h5 class="mb-4 text-secondary"><strong>Preencha os dados abaixo:</strong></h5>
 
-<div class="form-container">
-    <form asp-action="VendasCreate">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="VendasCreate">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <!-- Divisão em duas colunas -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Tipo" class="control-label">Tipo do Material</label>
-                    <select asp-for="Tipo" class="form-control" title="Clique para selecionar o tipo do material">
-                        <option value="" disabled selected hidden>🔽 Selecione...</option>
-                        <option value="M">M</option>
-                        <option value="P">P</option>
-                    </select>
-                    <span asp-validation-for="Tipo" class="text-danger"></span>
-                </div>
+                <div class="row">
+                    <!-- Coluna esquerda -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="Tipo" class="form-label">Tipo do Material</label>
+                            <select asp-for="Tipo" class="form-select" title="Clique para selecionar o tipo do material">
+                                <option value="" disabled selected hidden>🔽 Selecione...</option>
+                                <option value="M">M</option>
+                                <option value="P">P</option>
+                            </select>
+                            <span asp-validation-for="Tipo" class="text-danger"></span>
+                        </div>
 
-                <div class="form-group text-left">
-                    <label asp-for="Valor" class="control-label"></label>
-                    <input asp-for="Valor" class="form-control" type="number" step="0.01" />
-                    <span asp-validation-for="Valor" class="text-danger"></span>
-                </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Valor" class="form-label"></label>
+                            <input asp-for="Valor" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="Valor" class="text-danger"></span>
+                        </div>
 
-                <div class="form-group text-left">
-                    <label asp-for="Quantidade" class="control-label"></label>
-                    <input asp-for="Quantidade" class="form-control" />
-                    <span asp-validation-for="Quantidade" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group text-left">
-                    <label asp-for="Data" class="control-label"></label>
-                    <input asp-for="Data" class="form-control" />
-                    <span asp-validation-for="Data" class="text-danger"></span>
-                </div>
-
-                <div class="form-group text-left">
-                    <label asp-for="IdPessoa" class="control-label">Cooperado (ID)</label>
-                    <div class="input-group">
-                        <input asp-for="IdPessoa" class="form-control" id="IdPessoa" />
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-secondary" onclick="abrirBuscaPessoa()">Buscar</button>
+                        <div class="form-group mb-3">
+                            <label asp-for="Quantidade" class="form-label"></label>
+                            <input asp-for="Quantidade" class="form-control" />
+                            <span asp-validation-for="Quantidade" class="text-danger"></span>
                         </div>
                     </div>
-                    <span asp-validation-for="IdPessoa" class="text-danger"></span>
+
+                    <!-- Coluna direita -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="Data" class="form-label"></label>
+                            <input asp-for="Data" class="form-control" />
+                            <span asp-validation-for="Data" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="IdPessoa" class="form-label">Cooperado (ID)</label>
+                            <div class="input-group">
+                                <input asp-for="IdPessoa" class="form-control" id="IdPessoa" />
+                                <button type="button" class="btn btn-outline-secondary" onclick="abrirBuscaPessoa()">Buscar</button>
+                            </div>
+                            <span asp-validation-for="IdPessoa" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="form-group" style="display: none;">
-            <input type="hidden" asp-for="IdCooperativa" value="@ViewData["PessoaId"]" />
-        </div>
+                <!-- Hidden -->
+                <input type="hidden" asp-for="IdCooperativa" value="@pessoaId" />
 
-        <div class="form-group button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
-            <input type="submit" value="Inserir" class="icon-button" style="flex: 1; margin-right: 10px;" />
+                <!-- Botões -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success w-50 me-2">
+                        <i class="bi bi-check-circle me-1"></i> Inserir
+                    </button>
 
-            <button type="button" class="icon-button" style="flex: 1;" onclick="window.location.href='@Url.Action("VendasList", "AdmCooperativa", new { id = pessoaId })'">
-                <i class="fas fa-undo"></i> Voltar
-            </button>
+                    <a href="@Url.Action("VendasList", "AdmCooperativa", new { id = pessoaId })" class="btn btn-light w-50 ms-2">
+                        <i class="bi bi-arrow-left me-1"></i> Voltar
+                    </a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 @section Scripts {
@@ -82,7 +91,7 @@
 
     <script>
         function abrirBuscaPessoa() {
-            var idCooperativa = '@ViewData["PessoaId"]'; // Pega o idCooperativa da View atual
+            var idCooperativa = '@ViewData["PessoaId"]';
             var url = '@Url.Action("BuscarCooperado", "AdmCooperativa")' + '?idCooperativa=' + idCooperativa;
 
             var largura = 800;

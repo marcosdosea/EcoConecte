@@ -4,15 +4,18 @@
     ViewData["Title"] = "EcoConecte - Vendas";
     var PessoaId = ViewData["PessoaId"];
     var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
-    var tipoFiltro = ViewData["TipoFiltro"] as string ?? string.Empty; // Captura o filtro tipo de material, com valor default vazio
-    var dataInicio = ViewData["DataInicio"] as string ?? string.Empty;
-    var dataFim = ViewData["DataFim"] as string ?? string.Empty;
-    var idPessoaFiltro = ViewData["IdPessoaFiltro"] as string ?? string.Empty; // Filtro para IdPessoa
+
+    // Configurar dados do filtro para o Partial
+    ViewData["TipoFiltro"] = ViewData["TipoFiltro"] ?? "";
+    ViewData["DataInicio"] = ViewData["DataInicio"] ?? "";
+    ViewData["DataFim"] = ViewData["DataFim"] ?? "";
+    ViewData["IdPessoaFiltro"] = ViewData["IdPessoaFiltro"] ?? "";
+    ViewData["FormAction"] = "VendasList";
 }
 
 <div class="container py-5">
     <div class="card shadow-sm">
-        <!-- Barra de destaque Filtro -->
+        <!-- Barra de título -->
         <div class="card-header bg-eco text-white">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">
@@ -21,41 +24,12 @@
             </div>
         </div>
 
-        <!-- Filtros -->
+        <!-- Filtros (Partial View) -->
         <div class="card-body p-4">
-            <form method="get" asp-action="VendasList" class="mb-3">
-                <div class="row">
-                    <!-- Filtro Tipo de Material -->
-                    <div class="col-md-2">
-                        <label for="Tipo">Tipo do Material</label>
-                        <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tipoFiltro" />
-                    </div>
-
-                    <!-- Filtro Data -->
-                    <div class="col-md-2">
-                        <label for="DataInicio">Data Inicial</label>
-                        <input type="date" class="form-control form-control-sm" name="dataInicial" value="@dataInicio" />
-                    </div>
-                    <div class="col-md-2">
-                        <label for="DataFim">Data Final</label>
-                        <input type="date" class="form-control form-control-sm" name="dataFinal" value="@dataFim" />
-                    </div>
-
-                    <!-- Filtro IdPessoa -->
-                    <div class="col-md-2">
-                        <label for="IdPessoaFiltro">Código Pessoa</label>
-                        <input type="text" class="form-control form-control-sm" name="idPessoaFiltro" value="@idPessoaFiltro" />
-                    </div>
-
-                    <div class="col-md-2 mt-4">
-                        <button type="submit" class="btn btn-eco-outline-light btn-sm">
-                            <i class="bi bi-search me-1"></i>Filtrar
-                        </button>
-                    </div>
-                </div>
-            </form>
+            @Html.Partial("_FiltrosVendas")
         </div>
 
+        <!-- Barra de título da tabela -->
         <div class="card-header bg-eco text-white">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">
@@ -116,6 +90,7 @@
     </div>
 </div>
 
+<!-- Estilos mantidos -->
 <style>
     .bg-eco {
         background-color: #38A169;
@@ -126,7 +101,7 @@
         border-color: #fff;
         border: 1px solid;
         transition: all 0.3s ease;
-        background-color: #38A169; /* Garantir que o botão tenha cor de fundo */
+        background-color: #38A169;
     }
 
         .btn-eco-outline-light:hover {
