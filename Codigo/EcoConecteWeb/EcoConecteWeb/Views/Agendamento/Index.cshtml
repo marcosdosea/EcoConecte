@@ -2,74 +2,245 @@
 
 @{
     ViewData["Title"] = "EcoConecte - Agendamentos";
+    var dataFiltro = ViewData["DataFiltro"] as string;
+    var statusFiltro = ViewData["StatusFiltro"] as string;
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="bi bi-calendar-event me-2"></i> Agendamentos
-    </h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            <div class="card admin-card">
 
-    <p class="add-button">
-        <button class="icon-button">
-            <a href="@Url.Action("Create")">
-                <i class="fas fa-plus"></i> Cadastrar novo agendamento
-            </a>
-        </button>
-    </p>
+                <!-- Barra Filtro -->
+                <div class="filter-bar bg-green text-white p-3 mb-4">
+                    <h2 class="m-0">Filtro</h2>
+                </div>
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Id)</th>
-                    <th>@Html.DisplayNameFor(model => model.IdPessoa)</th>
-                    <th>@Html.DisplayNameFor(model => model.Data)</th>
-                    <th>@Html.DisplayNameFor(model => model.Cep)</th>
-                    <th>@Html.DisplayNameFor(model => model.Logradouro)</th>
-                    <th>@Html.DisplayNameFor(model => model.Numero)</th>
-                    <th>@Html.DisplayNameFor(model => model.Bairro)</th>
-                    <th>@Html.DisplayNameFor(model => model.Cidade)</th>
-                    <th>@Html.DisplayNameFor(model => model.Estado)</th>
-                    <th>@Html.DisplayNameFor(model => model.Status)</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.IdPessoa)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Data)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Cep)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Numero)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Estado)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                        <td>
-                            <div class="button-group">
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Edit", new { id = item.Id })">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                </button>
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Details", new { id = item.Id })">
-                                        <i class="fas fa-info-circle"></i> Detalhes
-                                    </a>
-                                </button>
-                                <button class="icon-button">
-                                    <a href="@Url.Action("Delete", new { id = item.Id })">
-                                        <i class="fas fa-trash"></i> Apagar
-                                    </a>
-                                </button>
+                <!-- Filtros -->
+                <form method="get" action="@Url.Action("Index")" class="row g-3 mb-4 justify-content-center">
+                    <div class="col-md-3">
+                        <label class="form-label">Data</label>
+                        <input type="date" name="dataFiltro" value="@dataFiltro" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Status</label>
+                        <select name="statusFiltro" class="form-select">
+                            <option value="">Todos</option>
+                            <option value="A" class="@(statusFiltro == "A" ? "selected" : "")">Ativo</option>
+                            <option value="C" class="@(statusFiltro == "C" ? "selected" : "")">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-eco me-2">
+                            <i class="bi bi-funnel me-1"></i>Filtrar
+                        </button>
+                        <a href="@Url.Action("Index")" class="btn btn-eco-outline">
+                            Limpar
+                        </a>
+                    </div>
+                </form>
+
+                <!-- Título -->
+                <div class="card-header admin-header bg-green">
+                    <h1 class="admin-title">
+                        <i class="bi bi-calendar-event me-2"></i> Agendamentos
+                    </h1>
+                    <p class="text-muted mb-0">Lista de agendamentos registrados</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Lista -->
+                    @if (!Model.Any())
+                    {
+                        <div class="empty-state text-center py-5">
+                            <div class="empty-icon mb-3">
+                                <i class="bi bi-calendar-x"></i>
                             </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                            <h4>Nenhum agendamento encontrado</h4>
+                            <p class="text-muted">Não há agendamentos registrados.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(model => model.Id)</th>
+                                        <th>@Html.DisplayNameFor(model => model.IdPessoa)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Data)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Cep)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Logradouro)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Numero)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Bairro)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Status)</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.IdPessoa)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Data)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Cep)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td>
+                                                <div class="button-group">
+                                                    <button class="icon-button">
+                                                        <a href="@Url.Action("Edit", new { id = item.Id })">
+                                                            <i class="fas fa-edit"></i> Editar
+                                                        </a>
+                                                    </button>
+                                                    <button class="icon-button">
+                                                        <a href="@Url.Action("Details", new { id = item.Id })">
+                                                            <i class="fas fa-info-circle"></i> Detalhes
+                                                        </a>
+                                                    </button>
+                                                    <button class="icon-button">
+                                                        <a href="@Url.Action("Delete", new { id = item.Id })">
+                                                            <i class="fas fa-trash"></i> Apagar
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                    <div>
+                        <a href="@Url.Action("Create")" class="btn btn-light">
+                            <i class="bi bi-plus-circle me-2"></i>Cadastrar Novo Agendamento
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .admin-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .admin-header {
+        background-color: #38A169; /* Fundo verde */
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white; /* Texto branco */
+        margin-bottom: 0.25rem;
+    }
+
+    .filter-bar {
+        background-color: #38A169; /* Barra verde */
+        color: white;
+        padding: 1rem;
+        margin-bottom: 1.5rem; /* Espaço entre o filtro e o título */
+    }
+
+        .filter-bar h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+    .admin-table {
+        margin-bottom: 0;
+    }
+
+        .admin-table th {
+            font-weight: 600;
+            background-color: #f8f9fa;
+            color: #4A5568;
+            border-top: none;
+            padding: 0.75rem 1rem;
+        }
+
+        .admin-table td {
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
+    .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status-scheduled {
+        background-color: #E6FFFA;
+        color: #38B2AC;
+    }
+
+    .status-canceled {
+        background-color: #FFF5F5;
+        color: #E53E3E;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .icon-button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    .btn-eco {
+        background-color: #38A169;
+        color: white;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .btn-eco:hover {
+            background-color: #2F855A;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
+    .btn-eco-outline {
+        background-color: transparent;
+        color: #38A169;
+        border: 1px solid #38A169;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+</style>

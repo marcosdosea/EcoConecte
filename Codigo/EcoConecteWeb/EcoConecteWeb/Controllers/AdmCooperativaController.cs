@@ -109,7 +109,7 @@ namespace EcoConecteWeb.Controllers
         }
 
 
-        public ActionResult AgendamentosList(int id)
+        public ActionResult AgendamentosList(int id, string? dataFiltro, string? statusFiltro)
         {
             // Buscar a cooperativa pelo ID
             var cooperativa = _cooperativaService.Get((uint)id);
@@ -118,19 +118,37 @@ namespace EcoConecteWeb.Controllers
                 return NotFound("Cooperativa não encontrada.");
             }
 
-            // Obter o CEP da cooperativa
             string cepCooperativa = cooperativa.Cep;
 
-            var AgendamentosList = _agendamentoService.GetAll()
-                                                       .Where(a => a.Cep == cepCooperativa)
-                                                       .ToList();
+            var agendamentos = _agendamentoService.GetAll()
+                                                  .Where(a => a.Cep == cepCooperativa);
 
-            ViewData["PessoaId"] = id; // Passa o ID para a View
-            // Mapear para a ViewModel
-            var AgendamentosListModel = _mapper.Map<List<AgendamentoViewModel>>(AgendamentosList);
+            // Filtro por data (compara apenas a data, ignorando a hora)
+            if (!string.IsNullOrEmpty(dataFiltro) && DateTime.TryParse(dataFiltro, out var dataParsed))
+            {
+                agendamentos = agendamentos
+                    .Where(a => a.Data.Date == dataParsed.Date);
+            }
 
-            return View(AgendamentosListModel);
+            // Filtro por status ("A" ou "I")
+            if (!string.IsNullOrEmpty(statusFiltro) && (statusFiltro == "A" || statusFiltro == "I"))
+            {
+                agendamentos = agendamentos
+                    .Where(a => a.Status == statusFiltro);
+            }
+
+            // Mapeamento para a ViewModel após filtragem
+            var viewModel = _mapper.Map<List<AgendamentoViewModel>>(agendamentos);
+
+            // Usando ViewData para passar os filtros para a View (mas, novamente, considerar usar ViewModel para esses valores)
+            ViewData["idCoop"] = id;
+            ViewData["DataFiltro"] = dataFiltro;
+            ViewData["StatusFiltro"] = statusFiltro;
+
+            return View(viewModel);
         }
+
+
 
         public async Task<IActionResult> AgendamentosEdit(uint id, string CepCoop)
         {
