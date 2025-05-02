@@ -209,18 +209,34 @@ namespace EcoConecteWeb.Controllers
             return View(NoticiasListModel);
         }
 
-        public ActionResult OrientacoesList(int id)
+        public IActionResult OrientacoesList(int id, string tipoFiltro)
         {
-            // Filtrar as orientações pela cooperativa informada
-            var OrientacoesList = _orientacoesService.GetAll()
-                                                      .Where(o => o.IdCooperativa == id)
-                                                      .ToList();
+            ViewData["TituloFiltro"] = tipoFiltro;
+            ViewData["FormAction"] = "OrientacoesList";
 
-            // Mapear para a ViewModel
-            var OrientacoesListModel = _mapper.Map<List<OrientacoesViewModel>>(OrientacoesList);
+            // Busca todas as orientações vinculadas à cooperativa (pessoaId)
+            var orientacoes = _orientacoesService.GetAll()
+                .Where(o => o.IdCooperativa == id);
 
-            return View(OrientacoesListModel);
+            // Aplica o filtro, se informado
+            if (!string.IsNullOrWhiteSpace(tipoFiltro))
+            {
+                orientacoes = orientacoes
+                    .Where(o => o.Titulo.Contains(tipoFiltro));
+            }
+
+            var viewModel = orientacoes
+                .Select(o => new OrientacoesViewModel
+                {
+                    Id = o.Id,
+                    Titulo = o.Titulo,
+                    Descricao = o.Descricao
+                })
+                .ToList();
+
+            return View(viewModel);
         }
+
 
         public ActionResult VendasList(int id, string tipoFiltro, DateTime? dataInicial, DateTime? dataFinal)
         {

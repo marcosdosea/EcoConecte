@@ -20,12 +20,33 @@ namespace EcoConecteWeb.Controllers
         }
 
         // GET: Orientcoes_Controller
-        public ActionResult Index()
+        public IActionResult Index(int id, string tipoFiltro)
         {
-            var listaOrientacoes = _orientacoesService.GetAll();
-            var listaOrientacoesModel = _mapper.Map<IEnumerable<OrientacoesViewModel>>(listaOrientacoes);
-            return View(listaOrientacoesModel);
+            ViewData["TituloFiltro"] = tipoFiltro;
+            ViewData["FormAction"] = "Index";
+
+            // Busca todas as orientações
+            var orientacoes = _orientacoesService.GetAll();
+
+            // Aplica o filtro, se informado
+            if (!string.IsNullOrWhiteSpace(tipoFiltro))
+            {
+                orientacoes = orientacoes
+                    .Where(o => o.Titulo.Contains(tipoFiltro));
+            }
+
+            var viewModel = orientacoes
+                .Select(o => new OrientacoesViewModel
+                {
+                    Id = o.Id,
+                    Titulo = o.Titulo,
+                    Descricao = o.Descricao
+                })
+                .ToList();
+
+            return View(viewModel);
         }
+
         // GET: Orientcoes_Controller/Details/5
         public ActionResult ConsultarOrientacoes()
         {

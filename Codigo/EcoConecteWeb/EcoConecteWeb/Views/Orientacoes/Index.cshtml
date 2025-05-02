@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "EcoConnect - Orientações";
+    var tituloFiltro = ViewData["TituloFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "Index";
 }
 
 <div class="container">
@@ -9,8 +11,34 @@
         <i class="bi bi-lightbulb me-2"></i> Orientações
     </h1>
 
+    <!-- Barra de título -->
+    <div class="card-header bg-eco text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-funnel me-2"></i>Filtro
+            </h4>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="card-body p-4">
+        <form method="get" asp-action="@formAction" class="mb-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Tipo">Titulo</label>
+                    <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tituloFiltro" />
+                </div>
+                <div class="col-md-2 mt-4">
+                    <button type="submit" class="btn btn-eco-outline btn-sm">
+                        <i class="bi bi-search me-1"></i>Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <p class="add-button">
-        <a class="icon-button" asp-action="Create">
+        <a class="btn btn-eco-outline" asp-action="Create">
             <i class="fas fa-plus"></i> Cadastrar nova orientação
         </a>
     </p>
@@ -19,46 +47,30 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Titulo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Descricao)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IdCooperativa)
-                    </th>
-                     <th>Ações</th> <!-- Adicionada coluna para ações -->
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+                    <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdCooperativa)</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdCooperativa)</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Titulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Descricao)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdCooperativa)
-                        </td>
-                        <td>
-                            <div class="button-group">
-                                <a class="icon-button" asp-action="Edit" asp-route-id="@item.Id">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-eco-outline btn-sm" asp-action="Edit" asp-route-id="@item.Id">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
-                                <a class="icon-button" asp-action="Details" asp-route-id="@item.Id">
+                                <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">
                                     <i class="fas fa-eye"></i> Detalhes
                                 </a>
-                                <a class="icon-button" asp-action="Delete" asp-route-id="@item.Id">
+                                <a class="btn btn-danger-outline btn-sm" asp-action="Delete" asp-route-id="@item.Id">
                                     <i class="fas fa-trash"></i> Apagar
                                 </a>
                             </div>
@@ -69,3 +81,61 @@
         </table>
     </div>
 </div>
+
+<style>
+    .bg-eco {
+        background-color: #38A169;
+    }
+
+    .btn-eco-outline {
+        background-color: transparent;
+        color: #38A169;
+        border: 1px solid #38A169;
+        transition: all 0.3s ease;
+    }
+
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
+    .btn-danger-outline {
+        background-color: transparent;
+        color: #e3342f;
+        border: 1px solid #e3342f;
+        transition: all 0.3s ease;
+    }
+
+        .btn-danger-outline:hover {
+            background-color: #e3342f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
+        }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: #4a5568;
+        border: 1px solid #4a5568;
+        transition: all 0.3s ease;
+    }
+
+        .btn-secondary:hover {
+            background-color: #4a5568;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 85, 104, 0.15);
+        }
+
+    .title {
+        margin-top: 30px;
+        font-weight: 600;
+        color: #2D3748;
+    }
+
+    .add-button {
+        margin-bottom: 20px;
+    }
+</style>
