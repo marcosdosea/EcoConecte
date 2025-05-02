@@ -195,18 +195,46 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("AgendamentosList", "AdmCooperativa", new { id = idCoop });
         }
 
-        public ActionResult ColetasList(int id)
+        public ActionResult ColetasList(int id, string cepFiltro, string logradouroFiltro, string diaColetaFiltro)
         {
             // Filtrar as coletas apenas da cooperativa informada
-            var ColetasList = _coletaService.GetAll()
-                                             .Where(c => c.IdCooperativa == id)
-                                             .ToList();
+            var coletasQuery = _coletaService.GetAll().Where(c => c.IdCooperativa == id);
+
+            // Aplicar filtros, se forem fornecidos
+            if (!string.IsNullOrEmpty(cepFiltro))
+            {
+                coletasQuery = coletasQuery.Where(c => c.Cep.Contains(cepFiltro));
+            }
+
+            if (!string.IsNullOrEmpty(logradouroFiltro))
+            {
+                coletasQuery = coletasQuery.Where(c => c.Logradouro.Contains(logradouroFiltro));
+            }
+
+            if (!string.IsNullOrEmpty(diaColetaFiltro))
+            {
+                DateTime diaColeta;
+                if (DateTime.TryParse(diaColetaFiltro, out diaColeta))
+                {
+                    coletasQuery = coletasQuery.Where(c => c.DiaColeta.Date == diaColeta.Date);
+                }
+            }
+
+            // Obter as coletas filtradas
+            var coletasList = coletasQuery.ToList();
 
             // Mapear para a ViewModel
-            var ColetasListModel = _mapper.Map<List<ColetaViewModel>>(ColetasList);
+            var coletasListModel = _mapper.Map<List<ColetaViewModel>>(coletasList);
 
-            return View(ColetasListModel);
+            // Passar os filtros de volta para a View (para preenchimento dos campos de filtro)
+            ViewData["CepFiltro"] = cepFiltro;
+            ViewData["LogradouroFiltro"] = logradouroFiltro;
+            ViewData["DiaColetaFiltro"] = diaColetaFiltro;
+            ViewData["IdCoop"] = id;
+
+            return View(coletasListModel);
         }
+
 
         public ActionResult NoticiasList(int id, string tipoFiltro, string dataInicial)
         {
