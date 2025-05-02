@@ -84,18 +84,30 @@ namespace EcoConecteWeb.Controllers
             return (int)idCoop;
         }
 
-        public ActionResult CooperadosList(int id)
+        public ActionResult CooperadosList(int id, string nomeFiltro, string cpfFiltro, string cidadeFiltro)
         {
-            // Filtra as pessoas pelo IdCooperativa e apenas com Status diferente de "I"
-            var listaPessoas = _pessoaService.GetAll()
-                                              .Where(p => p.IdCooperativa == id && p.Status != "I")
-                                              .ToList();
+            var pessoas = _pessoaService.GetAll()
+                                        .Where(p => p.IdCooperativa == id && p.Status != "I");
 
-            ViewData["PessoaId"] = id; // Passa o ID para a View
-            // Mapeia para a ViewModel
-            var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
+            if (!string.IsNullOrWhiteSpace(nomeFiltro))
+                pessoas = pessoas.Where(p => p.Nome.Contains(nomeFiltro));
+
+            if (!string.IsNullOrWhiteSpace(cpfFiltro))
+                pessoas = pessoas.Where(p => p.Cpf.Contains(cpfFiltro));
+
+            if (!string.IsNullOrWhiteSpace(cidadeFiltro))
+                pessoas = pessoas.Where(p => p.Cidade.Contains(cidadeFiltro));
+
+            ViewData["PessoaId"] = id;
+            ViewData["NomeFiltro"] = nomeFiltro;
+            ViewData["CpfFiltro"] = cpfFiltro;
+            ViewData["CidadeFiltro"] = cidadeFiltro;
+            ViewData["FormAction"] = "CooperadosList"; // usado na View
+
+            var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(pessoas.ToList());
             return View(listaPessoasModel);
         }
+
 
         public ActionResult AgendamentosList(int id)
         {

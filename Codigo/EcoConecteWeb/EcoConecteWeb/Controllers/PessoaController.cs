@@ -35,12 +35,39 @@ namespace EcoConecteWeb.Controllers
         }
 
         // GET: Pessoa
-        public ActionResult Index()
+        public ActionResult Index(string nomeFiltro, string cpfFiltro, string cidadeFiltro, string statusFiltro)
         {
+            // Obtém a lista completa de pessoas
             var listaPessoas = _pessoaService.GetAll();
+
+            // Aplica os filtros, se houver
+            if (!string.IsNullOrEmpty(nomeFiltro))
+            {
+                listaPessoas = listaPessoas.Where(p => p.Nome.Contains(nomeFiltro, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(cpfFiltro))
+            {
+                listaPessoas = listaPessoas.Where(p => p.Cpf.Contains(cpfFiltro)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(cidadeFiltro))
+            {
+                listaPessoas = listaPessoas.Where(p => p.Cidade.Contains(cidadeFiltro, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(statusFiltro))
+            {
+                listaPessoas = listaPessoas.Where(p => p.Status.Contains(statusFiltro, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            // Mapeia a lista filtrada para o modelo de visualização
             var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
+
+            // Passa os dados para a view
             return View(listaPessoasModel);
         }
+
 
         // GET: Pessoa/Details/5
         public ActionResult Details(uint id)
