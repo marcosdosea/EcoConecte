@@ -196,18 +196,41 @@ namespace EcoConecteWeb.Controllers
             return View(ColetasListModel);
         }
 
-        public ActionResult NoticiasList(int id)
+        public ActionResult NoticiasList(int id, string tipoFiltro, string dataInicial)
         {
             // Filtrar as notícias pela cooperativa informada
             var NoticiasList = _noticiaService.GetAll()
-                                               .Where(n => n.IdCooperativa == id)
-                                               .ToList();
+                                              .Where(n => n.IdCooperativa == id)
+                                              .ToList();
+
+            // Aplicar filtro por título (Tipo do Material)
+            if (!string.IsNullOrWhiteSpace(tipoFiltro))
+            {
+                NoticiasList = NoticiasList
+                    .Where(n => n.Titulo.Contains(tipoFiltro, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            // Aplicar filtro por data (Data Inicial)
+            if (!string.IsNullOrWhiteSpace(dataInicial) && DateTime.TryParse(dataInicial, out var data))
+            {
+                NoticiasList = NoticiasList
+                    .Where(n => n.Data >= data)
+                    .ToList();
+            }
 
             // Mapear para a ViewModel
             var NoticiasListModel = _mapper.Map<List<NoticiaViewModel>>(NoticiasList);
 
+            // Passar parâmetros de filtro para a view
+            ViewData["TituloFiltro"] = tipoFiltro;
+            ViewData["DataFiltro"] = dataInicial;
+            ViewData["idCoop"] = id;
+            ViewData["FormAction"] = "NoticiasList";
+
             return View(NoticiasListModel);
         }
+
 
         public IActionResult OrientacoesList(int id, string tipoFiltro)
         {

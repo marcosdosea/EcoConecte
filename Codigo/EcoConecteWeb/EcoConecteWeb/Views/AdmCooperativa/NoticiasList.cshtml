@@ -4,9 +4,46 @@
     ViewData["Title"] = "EcoConnect - Notícias";
     var IdCoop = ViewData["idCoop"];
     var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
+
+    // Configurar dados do filtro para o Partial
+    var tituloFiltro = ViewData["TituloFiltro"] as string ?? "";
+    var dataFiltro = ViewData["DataFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "NoticiasList";
+
 }
 
 <div class="container py-5">
+
+    <!-- Barra de título -->
+    <div class="card-header bg-eco text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-funnel me-2"></i>Filtro
+            </h4>
+        </div>
+    </div>
+
+    <!-- Filtros (Partial View) -->
+    <div class="card-body p-4">
+        <form method="get" asp-action="@formAction" class="mb-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Tipo">Titulo</label>
+                    <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tituloFiltro" />
+                </div>
+                <div class="col-md-2">
+                    <label for="DataInicio">Data</label>
+                    <input type="date" class="form-control form-control-sm" name="dataInicial" value="@dataFiltro" />
+                </div>
+                <div class="col-md-2 mt-4">
+                    <button type="submit" class="btn btn-eco-outline btn-sm">
+                        <i class="bi bi-search me-1"></i>Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <div class="card shadow-sm">
         <div class="card-header bg-eco text-white">
             <div class="d-flex justify-content-between align-items-center">
