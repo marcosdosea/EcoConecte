@@ -2,12 +2,56 @@
 
 @{
     ViewData["Title"] = "EcoConecte - Vendas";
+    var tipoFiltro = ViewData["TipoFiltro"] as string ?? "";
+    var dataInicio = ViewData["DataInicio"] as string ?? "";
+    var dataFim = ViewData["DataFim"] as string ?? "";
+    var idPessoaFiltro = ViewData["IdPessoaFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "Index";
 }
 
+<!-- Tabela de Vendas -->
 <div class="container">
     <h1 class="title">
         <i class="bi bi-cart me-2"></i> Vendas
     </h1>
+
+    <!-- Barra de título -->
+    <div class="card-header bg-eco text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-funnel me-2"></i>Filtro
+            </h4>
+        </div>
+    </div>
+
+    <!-- Filtros (Partial View) -->
+    <div class="card-body p-4">
+        <form method="get" asp-action="@formAction" class="mb-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Tipo">Tipo do Material</label>
+                    <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tipoFiltro" />
+                </div>
+                <div class="col-md-2">
+                    <label for="DataInicio">Data Inicial</label>
+                    <input type="date" class="form-control form-control-sm" name="dataInicial" value="@dataInicio" />
+                </div>
+                <div class="col-md-2">
+                    <label for="DataFim">Data Final</label>
+                    <input type="date" class="form-control form-control-sm" name="dataFinal" value="@dataFim" />
+                </div>
+                <div class="col-md-2">
+                    <label for="IdPessoaFiltro">Código Pessoa</label>
+                    <input type="text" class="form-control form-control-sm" name="idPessoaFiltro" value="@idPessoaFiltro" />
+                </div>
+                <div class="col-md-2 mt-4">
+                    <button type="submit" class="btn btn-eco-outline-light btn-sm">
+                        <i class="bi bi-search me-1"></i>Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <p class="add-button">
         <button class="icon-button">
@@ -33,7 +77,6 @@
             </thead>
             <tbody>
                 @foreach (var item in Model)
-
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>

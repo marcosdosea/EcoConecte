@@ -5,6 +5,12 @@
 
     // Garantir que o Model não seja nulo
     var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();
+
+    // Recuperando os filtros passados
+    var cepFiltro = ViewData["CepFiltro"] as string ?? "";
+    var logradouroFiltro = ViewData["LogradouroFiltro"] as string ?? "";
+    var diaColetaFiltro = ViewData["DiaColetaFiltro"] as string ?? "";
+    var idCooperativaFiltro = ViewData["IdCooperativaFiltro"] as string ?? "";
 }
 
 <div class="container py-5">
@@ -17,6 +23,35 @@
                 <a href="@Url.Action("Create")" class="btn btn-eco">
                     <i class="bi bi-plus-circle me-2"></i>Cadastrar nova coleta
                 </a>
+            </div>
+
+            <!-- Filtros -->
+            <div class="mb-4">
+                <form method="get" asp-action="Index">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="cepFiltro">CEP</label>
+                            <input type="text" class="form-control form-control-sm" name="cepFiltro" value="@cepFiltro" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="logradouroFiltro">Logradouro</label>
+                            <input type="text" class="form-control form-control-sm" name="logradouroFiltro" value="@logradouroFiltro" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="diaColetaFiltro">Dia da Coleta</label>
+                            <input type="text" class="form-control form-control-sm" name="diaColetaFiltro" value="@diaColetaFiltro" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="idCooperativaFiltro">ID Cooperativa</label>
+                            <input type="text" class="form-control form-control-sm" name="idCooperativaFiltro" value="@idCooperativaFiltro" />
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="icon-button">
+                                <i class="bi bi-search"></i> Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <div class="card shadow-sm">
@@ -37,7 +72,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in coletas) {
+                                @foreach (var item in coletas)
+                                {
                                     <tr>
                                         <td class="px-4">@Html.DisplayFor(modelItem => item.Id)</td>
                                         <td class="px-4">@Html.DisplayFor(modelItem => item.Cep)</td>

@@ -6,21 +6,52 @@
     var idCoop = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
 
     var coletas = Model ?? Enumerable.Empty<EcoConecteWeb.Models.ColetaViewModel>();
+    var cepFiltro = ViewData["CepFiltro"] as string ?? "";
+    var logradouroFiltro = ViewData["LogradouroFiltro"] as string ?? "";
+    var diaColetaFiltro = ViewData["DiaColetaFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "ColetasList";
 }
 
 <div class="container py-5">
     <div class="text-center mb-4">
         <h1 class="title">
-            <i class="bi bi-recycle me-2"></i>Coletas
+            <i class="bi bi-recycle me-2"></i> Coletas
         </h1>
     </div>
 
+    <!-- Filtros -->
+    <div class="mb-4">
+        <form method="get" asp-action="ColetasList">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="cepFiltro">CEP</label>
+                    <input type="text" class="form-control form-control-sm" name="cepFiltro" value="@cepFiltro" />
+                </div>
+                <div class="col-md-3">
+                    <label for="logradouroFiltro">Logradouro</label>
+                    <input type="text" class="form-control form-control-sm" name="logradouroFiltro" value="@logradouroFiltro" />
+                </div>
+                <div class="col-md-3">
+                    <label for="diaColetaFiltro">Dia da Coleta</label>
+                    <input type="text" class="form-control form-control-sm" name="diaColetaFiltro" value="@diaColetaFiltro" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="icon-button">
+                        <i class="bi bi-search"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Cadastrar nova coleta -->
     <div class="mb-4">
         <a class="btn btn-eco" asp-controller="AdmCooperativa" asp-action="ColetasCreate" asp-route-pessoaId="@idCoop">
             <i class="bi bi-plus-lg me-2"></i>Cadastrar nova coleta
         </a>
     </div>
 
+    <!-- Tabela -->
     <table class="table table-striped">
         <thead>
             <tr>
@@ -70,10 +101,10 @@
                     <td>
                         <div class="button-group">
                             <a class="btn btn-eco-outline" href="@Url.Action("ColetaEdit", new { id = item.Id })">
-                                <i class="bi bi-pencil-square me-2"></i>Editar
+                                <i class="bi bi-pencil-square me-2"></i> Editar
                             </a>
                             <a class="btn btn-danger-outline" href="@Url.Action("ColetaDelete", new { id = item.Id })">
-                                <i class="bi bi-trash me-2"></i>Apagar
+                                <i class="bi bi-trash me-2"></i> Apagar
                             </a>
                         </div>
                     </td>
@@ -99,12 +130,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-eco:hover {
-        background-color: #2F855A;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-    }
+        .btn-eco:hover {
+            background-color: #2F855A;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
 
     .btn-eco-outline {
         background-color: transparent;
@@ -115,12 +146,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-eco-outline:hover {
-        background-color: #38A169;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-    }
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
 
     .btn-danger-outline {
         background-color: transparent;
@@ -131,10 +162,10 @@
         transition: all 0.3s ease;
     }
 
-    .btn-danger-outline:hover {
-        background-color: #e3342f;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
-    }
+        .btn-danger-outline:hover {
+            background-color: #e3342f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
+        }
 </style>

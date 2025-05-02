@@ -3,10 +3,39 @@
 @{
     ViewData["Title"] = "EcoConnect - Orientações";
     var pessoaId = Convert.ToInt32(ViewContext.RouteData.Values["id"] ?? 0);
+    var tituloFiltro = ViewData["TituloFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "OrientacoesList";
 }
 
 <div class="container py-5">
     <div class="card shadow-sm">
+        <!-- Barra de título -->
+        <div class="card-header bg-eco text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">
+                    <i class="bi bi-funnel me-2"></i>Filtro
+                </h4>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card-body p-4">
+            <form method="get" asp-action="@formAction" class="mb-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="Tipo">Titulo</label>
+                        <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tituloFiltro" />
+                    </div>
+                    <div class="col-md-2 mt-4">
+                        <button type="submit" class="btn btn-eco-outline-light btn-sm">
+                            <i class="bi bi-search me-1"></i>Filtrar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista de Orientações -->
         <div class="card-header bg-eco text-white">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">
@@ -35,12 +64,8 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Titulo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Descricao)
-                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
                                         <a class="btn btn-eco-outline btn-sm" asp-action="OrientacoesEdit" asp-route-id="@item.Id">
@@ -71,18 +96,18 @@
     }
 
     .btn-eco-outline-light {
-        color: #fff;
-        border-color: #fff;
-        border: 1px solid;
+        color: #38A169;
+        background-color: #fff;
+        border: 1px solid #38A169;
         transition: all 0.3s ease;
     }
 
-    .btn-eco-outline-light:hover {
-        background-color: #fff;
-        color: #38A169;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-    }
+        .btn-eco-outline-light:hover {
+            background-color: #38A169;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
 
     .btn-eco-outline {
         background-color: transparent;
@@ -91,12 +116,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-eco-outline:hover {
-        background-color: #38A169;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-    }
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
 
     .btn-danger-outline {
         background-color: transparent;
@@ -105,12 +130,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-danger-outline:hover {
-        background-color: #e3342f;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
-    }
+        .btn-danger-outline:hover {
+            background-color: #e3342f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
+        }
 
     .btn-light {
         background-color: #f8f9fa;
@@ -120,12 +145,12 @@
         transition: all 0.3s ease;
     }
 
-    .btn-light:hover {
-        background-color: #e2e6ea;
-        color: #2D3748;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
+        .btn-light:hover {
+            background-color: #e2e6ea;
+            color: #2D3748;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
     .card {
         border: none;

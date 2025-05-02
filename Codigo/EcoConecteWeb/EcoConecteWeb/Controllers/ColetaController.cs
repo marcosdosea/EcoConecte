@@ -59,12 +59,44 @@ namespace EcoConecteWeb.Controllers
 
 
         // GET: Coleta_Controller
-        public ActionResult Index()
+        public ActionResult Index(string cepFiltro, string logradouroFiltro, string diaColetaFiltro, string idCooperativaFiltro)
         {
+            // Obtém todos os dados de coleta
             var listaColeta = _coletaService.GetAll();
+
+            // Filtra os dados de acordo com os parâmetros recebidos
+            if (!string.IsNullOrEmpty(cepFiltro))
+            {
+                listaColeta = listaColeta.Where(c => c.Cep.Contains(cepFiltro)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(logradouroFiltro))
+            {
+                listaColeta = listaColeta.Where(c => c.Logradouro.Contains(logradouroFiltro)).ToList();
+            }
+
+            if (DateTime.TryParse(diaColetaFiltro, out DateTime diaColeta))
+            {
+                listaColeta = listaColeta.Where(c => c.DiaColeta.Date == diaColeta.Date).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(idCooperativaFiltro))
+            {
+                listaColeta = listaColeta.Where(c => c.IdCooperativa.ToString().Contains(idCooperativaFiltro)).ToList();
+            }
+
+            // Mapeia para o modelo de view
             var listaColetaModel = _mapper.Map<IEnumerable<ColetaViewModel>>(listaColeta);
+
+            // Passa os filtros para a view
+            ViewData["CepFiltro"] = cepFiltro;
+            ViewData["LogradouroFiltro"] = logradouroFiltro;
+            ViewData["DiaColetaFiltro"] = diaColetaFiltro;
+            ViewData["IdCooperativaFiltro"] = idCooperativaFiltro;
+
             return View(listaColetaModel);
         }
+
 
 
         public ActionResult AgendamentoCoop(uint id)

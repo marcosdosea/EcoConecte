@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Agendamentos";
     var IdCoop = ViewData["idCoop"];
+    var dataFiltro = ViewData["DataFiltro"] as string;
+    var statusFiltro = ViewData["StatusFiltro"] as string;
 }
 
 <div class="admin-container py-5">
@@ -10,15 +12,44 @@
         <div class="row justify-content-center">
             <div class="col-lg-11">
                 <div class="card admin-card">
-                    <div class="card-header admin-header">
+
+                    <!-- Barra Filtro -->
+                    <div class="filter-bar bg-green text-white p-3 mb-4">
+                        <h2 class="m-0">Filtro</h2>
+                    </div>
+
+                    <!-- Filtros -->
+                    <form method="get" action="@Url.Action("AgendamentosList", "AdmCooperativa")" class="row g-3 mb-4 justify-content-center">
+                        <input type="hidden" name="id" value="@IdCoop" />
+                        <div class="col-md-3">
+                            <label class="form-label">Data</label>
+                            <input type="date" name="dataFiltro" value="@dataFiltro" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Status</label>
+                            <select name="statusFiltro" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="A" class="@(statusFiltro == "A" ? "selected" : "")">Ativo</option>
+                                <option value="I" class="@(statusFiltro == "I" ? "selected" : "")">Inativo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-eco me-2">
+                                <i class="bi bi-funnel me-1"></i>Filtrar
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="card-header admin-header bg-green">
                         <h1 class="admin-title">
                             <i class="bi bi-calendar2-event me-2"></i>Gerenciar Agendamentos
                         </h1>
                         <p class="text-muted mb-0">Lista de agendamentos para sua cooperativa</p>
                     </div>
-                    
+
                     <div class="card-body p-4">
-                        @if(!Model.Any())
+                        <!-- Lista -->
+                        @if (!Model.Any())
                         {
                             <div class="empty-state text-center py-5">
                                 <div class="empty-icon mb-3">
@@ -61,25 +92,17 @@
                                                 </td>
                                                 <td>@item.Cidade - @item.Estado</td>
                                                 <td>
-                                                    @{
-                                                        string statusClass = item.Status switch
-                                                        {
-                                                            "Agendado" => "status-scheduled",
-                                                            "Confirmado" => "status-confirmed",
-                                                            "Concluído" => "status-completed",
-                                                            "Cancelado" => "status-canceled",
-                                                            _ => "status-default"
-                                                        };
-                                                    }
-                                                    <span class="status-badge @statusClass">@item.Status</span>
+                                                    <span class="status-badge @(item.Status == "A" ? "status-scheduled" : "status-canceled")">
+                                                        @item.Status
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center gap-2">
-                                                        <a href="@Url.Action("AgendamentosEdit", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })" class="btn btn-sm btn-outline-primary action-btn">
+                                                        <a href="@Url.Action("AgendamentosEdit", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })" class="btn btn-sm btn-eco-outline action-btn">
                                                             <i class="bi bi-pencil-square"></i>
                                                             <span class="action-text">Editar</span>
                                                         </a>
-                                                        <a href="@Url.Action("AgendamentosDelete", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })" class="btn btn-sm btn-outline-danger action-btn">
+                                                        <a href="@Url.Action("AgendamentosDelete", "AdmCooperativa", new { id = item.Id, CepCoop = item.Cep })" class="btn btn-sm btn-danger-outline action-btn">
                                                             <i class="bi bi-trash"></i>
                                                             <span class="action-text">Excluir</span>
                                                         </a>
@@ -92,7 +115,7 @@
                             </div>
                         }
                     </div>
-                    
+
                     <div class="card-footer p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
                         <div>
                             <a href="@Url.Action("Index", "AdmCooperativa")" class="btn btn-light">
@@ -110,50 +133,63 @@
     .admin-container {
         min-height: calc(100vh - 350px);
     }
-    
+
     .admin-card {
         border: none;
         border-radius: 1rem;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         overflow: hidden;
     }
-    
+
     .admin-header {
-        background-color: #f8f9fa;
+        background-color: #38A169; /* Fundo verde */
         padding: 1.75rem 1.5rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
-    
+
     .admin-title {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #2D3748;
+        color: white; /* Texto branco */
         margin-bottom: 0.25rem;
     }
-    
+
+    .filter-bar {
+        background-color: #38A169; /* Barra verde */
+        color: white;
+        padding: 1rem;
+        margin-bottom: 1.5rem; /* Espaço entre o filtro e o título */
+    }
+
+        .filter-bar h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
     .admin-table {
         margin-bottom: 0;
     }
-    
-    .admin-table th {
-        font-weight: 600;
-        background-color: #f8f9fa;
-        color: #4A5568;
-        border-top: none;
-        padding: 0.75rem 1rem;
-    }
-    
-    .admin-table td {
-        padding: 0.75rem 1rem;
-        vertical-align: middle;
-    }
-    
+
+        .admin-table th {
+            font-weight: 600;
+            background-color: #f8f9fa;
+            color: #4A5568;
+            border-top: none;
+            padding: 0.75rem 1rem;
+        }
+
+        .admin-table td {
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
     .date-cell {
         display: flex;
         align-items: center;
         gap: 0.75rem;
     }
-    
+
     .date-icon {
         width: 32px;
         height: 32px;
@@ -164,11 +200,11 @@
         border-radius: 50%;
         color: #3182CE;
     }
-    
+
     .address-cell {
         line-height: 1.4;
     }
-    
+
     .status-badge {
         display: inline-block;
         padding: 0.25rem 0.75rem;
@@ -176,64 +212,74 @@
         font-size: 0.75rem;
         font-weight: 500;
     }
-    
+
     .status-scheduled {
         background-color: #E6FFFA;
         color: #38B2AC;
     }
-    
-    .status-confirmed {
-        background-color: #EBF8FF;
-        color: #3182CE;
-    }
-    
-    .status-completed {
-        background-color: #F0FFF4;
-        color: #38A169;
-    }
-    
+
     .status-canceled {
         background-color: #FFF5F5;
         color: #E53E3E;
     }
-    
-    .status-default {
-        background-color: #EDF2F7;
-        color: #718096;
-    }
-    
+
     .action-btn {
         display: flex;
         align-items: center;
         gap: 0.25rem;
         transition: all 0.2s ease;
     }
-    
-    .action-btn:hover {
-        transform: translateY(-2px);
-    }
-    
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+    /* Estilos dos botões */
     .btn-eco {
         background-color: #38A169;
         color: white;
         border: none;
+        padding: 0.5rem 1.5rem;
         font-weight: 500;
         transition: all 0.3s ease;
     }
-    
-    .btn-eco:hover {
-        background-color: #2F855A;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+
+        .btn-eco:hover {
+            background-color: #2F855A;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
+    .btn-eco-outline {
+        background-color: transparent;
+        color: #38A169;
+        border: 1px solid #38A169;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
     }
-    
-    .empty-state {
-        padding: 3rem 0;
+
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
+    .btn-danger-outline {
+        background-color: transparent;
+        color: #e3342f;
+        border: 1px solid #e3342f;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
     }
-    
-    .empty-icon {
-        font-size: 3rem;
-        color: #CBD5E0;
-    }
+
+        .btn-danger-outline:hover {
+            background-color: #e3342f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(227, 52, 47, 0.15);
+        }
 </style>

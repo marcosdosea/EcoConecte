@@ -2,12 +2,48 @@
 
 @{
     ViewData["Title"] = "Notícias";
+
+    // Configurar dados do filtro para o Partial
+    var tituloFiltro = ViewData["TituloFiltro"] as string ?? "";
+    var dataFiltro = ViewData["DataFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "Index";
+
 }
 
 <div class="container">
     <h1 class="title">
         <i class="bi bi-newspaper me-2"></i> Notícias
     </h1>
+
+    <!-- Barra de título -->
+    <div class="card-header bg-eco text-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="bi bi-funnel me-2"></i>Filtro
+            </h4>
+        </div>
+    </div>
+
+    <!-- Filtros (Partial View) -->
+    <div class="card-body p-4">
+        <form method="get" asp-action="@formAction" class="mb-3">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="Tipo">Titulo</label>
+                    <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tituloFiltro" />
+                </div>
+                <div class="col-md-2">
+                    <label for="DataInicio">Data</label>
+                    <input type="date" class="form-control form-control-sm" name="dataInicial" value="@dataFiltro" />
+                </div>
+                <div class="col-md-2 mt-4">
+                    <button type="submit" class="icon-button">
+                        <i class="bi bi-search"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <p class="add-button">
         <a class="icon-button" asp-action="Create">
@@ -17,53 +53,53 @@
 </div>
 
 
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="px-4">
+                            @Html.DisplayNameFor(model => model.Titulo)
+                        </th>
+                        <th class="px-4">
+                            Data de Publicação
+                        </th>
+                        <th class="px-4">
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th class="px-4">
-                                @Html.DisplayNameFor(model => model.Titulo)
-                            </th>
-                            <th class="px-4">
-                                Data de Publicação
-                            </th>
-                            <th class="px-4">
-                                Ações
-                            </th>
+                            <td class="px-4">
+                                @Html.DisplayFor(modelItem => item.Titulo)
+                            </td>
+                            <td class="px-4">
+                                @Html.DisplayFor(modelItem => item.Data)
+                            </td>
+                            <td class="px-4">
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-sm btn-outline-success">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td class="px-4">
-                                    @Html.DisplayFor(modelItem => item.Titulo)
-                                </td>
-                                <td class="px-4">
-                                    @Html.DisplayFor(modelItem => item.Data)
-                                </td>
-                                <td class="px-4">
-                                    <div class="btn-group" role="group">
-                                        <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-sm btn-outline-success">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </div>
 
 <style>
@@ -73,35 +109,35 @@
         font-weight: 700;
         padding-bottom: 12px;
     }
-    
-    .section-title:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 60px;
-        height: 3px;
-        background-color: #38A169;
-        border-radius: 2px;
-    }
-    
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #38A169;
+            border-radius: 2px;
+        }
+
     .table thead th {
         background-color: #38A169;
         color: white;
         font-weight: 600;
         border: none;
     }
-    
+
     .btn-outline-success {
         color: #38A169;
         border-color: #38A169;
     }
-    
-    .btn-outline-success:hover {
-        background-color: #38A169;
-        color: white;
-    }
-    
+
+        .btn-outline-success:hover {
+            background-color: #38A169;
+            color: white;
+        }
+
     .btn-group .btn {
         padding: 0.25rem 0.5rem;
         margin-right: 3px;

@@ -44,12 +44,33 @@ namespace EcoConecteWeb.Controllers
 
         // GET: Noticia_Controller
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string tipoFiltro, string dataInicial)
         {
-            var listaNoticia = _noticiaService.GetAll();
-            var listaNoticiaModel = _mapper.Map<IEnumerable<NoticiaViewModel>>(listaNoticia);
-            return View(listaNoticiaModel);
+            // Inicializar a lista de notícias
+            var noticiasQuery = _noticiaService.GetAll();
+
+            // Aplicar filtro pelo título, caso o tipoFiltro tenha algum valor
+            if (!string.IsNullOrEmpty(tipoFiltro))
+            {
+                noticiasQuery = noticiasQuery.Where(n => n.Titulo.Contains(tipoFiltro));
+            }
+
+            // Aplicar filtro pela data inicial, caso tenha sido informada
+            if (!string.IsNullOrEmpty(dataInicial) && DateTime.TryParse(dataInicial, out DateTime data))
+            {
+                noticiasQuery = noticiasQuery.Where(n => n.Data >= data);
+            }
+
+            // Mapear para a ViewModel
+            var noticiasListModel = _mapper.Map<List<NoticiaViewModel>>(noticiasQuery.ToList());
+
+            // Passar os filtros para a View
+            ViewData["TituloFiltro"] = tipoFiltro;
+            ViewData["DataFiltro"] = dataInicial;
+
+            return View(noticiasListModel);
         }
+
 
         // GET: Noticia_Controller/Details/5
         [Authorize]

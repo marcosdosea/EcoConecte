@@ -2,12 +2,55 @@
 
 @{
     ViewData["Title"] = "EcoConecte - Pessoas";
+
+    var nomeFiltro = ViewData["NomeFiltro"] as string ?? "";
+    var cpfFiltro = ViewData["CpfFiltro"] as string ?? "";
+    var cidadeFiltro = ViewData["CidadeFiltro"] as string ?? "";
+    var statusFiltro = ViewData["StatusFiltro"] as string ?? "";
+    var formAction = ViewData["FormAction"] as string ?? "Index";
 }
 
 <h1 class="title">
     <i class="bi bi-person me-2"></i> Pessoa
 </h1>
 
+<!-- Filtro -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-eco text-white">
+        <h4 class="mb-0">
+            <i class="bi bi-funnel me-2"></i> Filtro
+        </h4>
+    </div>
+    <div class="card-body">
+        <form method="get" asp-action="@formAction">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="nomeFiltro">Nome</label>
+                    <input type="text" class="form-control form-control-sm" name="nomeFiltro" value="@nomeFiltro" />
+                </div>
+                <div class="col-md-3">
+                    <label for="cpfFiltro">CPF</label>
+                    <input type="text" class="form-control form-control-sm" name="cpfFiltro" value="@cpfFiltro" />
+                </div>
+                <div class="col-md-3">
+                    <label for="cidadeFiltro">Cidade</label>
+                    <input type="text" class="form-control form-control-sm" name="cidadeFiltro" value="@cidadeFiltro" />
+                </div>
+                <div class="col-md-3">
+                    <label for="statusFiltro">Status</label>
+                    <input type="text" class="form-control form-control-sm" name="statusFiltro" value="@statusFiltro" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="icon-button">
+                        <i class="bi bi-search"></i> Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Tabela -->
 <table class="table">
     <thead>
         <tr>
@@ -44,45 +87,24 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-             <th>Ações</th> <!-- Adicionada coluna para ações -->
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logradouro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCooperativa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cpf)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
+                <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
+                <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                <td>@Html.DisplayFor(modelItem => item.IdCooperativa)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
                 <td>
                     <div class="button-group">
                         <button class="icon-button">
@@ -102,7 +124,60 @@
                         </button>
                     </div>
                 </td>
-        </tr>
+            </tr>
         }
     </tbody>
 </table>
+
+<style>
+    .title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2D3748;
+    }
+
+    .btn-eco-outline {
+        background-color: transparent;
+        color: #38A169;
+        border: 1px solid #38A169;
+        padding: 0.5rem 1.2rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
+    .icon-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: #38A169;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+        .icon-button:hover {
+            background-color: #2f855a;
+            color: white;
+            text-decoration: none;
+        }
+
+    .card-header.bg-eco {
+        background-color: #38A169;
+    }
+
+    .table thead th {
+        vertical-align: middle;
+    }
+</style>

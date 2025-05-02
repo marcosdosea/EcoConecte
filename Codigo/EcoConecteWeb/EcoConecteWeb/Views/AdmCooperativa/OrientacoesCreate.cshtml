@@ -3,20 +3,19 @@
 @{
     ViewData["Title"] = "EcoConecte - Cadastrar Orientação";
     var pessoaId = Convert.ToInt32(ViewData["PessoaId"] ?? 0);
-
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-plus"></i> Cadastrar Orientação
-    </h1>
-
-    <h4>Preencha os dados</h4>
-    <hr />
-
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="OrientacoesCreate" class="form-container-expanded">
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-eco text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">
+                    <i class="bi bi-plus-lg me-2"></i> Cadastrar Orientação
+                </h4>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="OrientacoesCreate">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -35,15 +34,80 @@
                     <input type="hidden" asp-for="IdCooperativa" value="@ViewData["PessoaId"]" />
                 </div>
 
-                <div class="form-group button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
-                    <input type="submit" value="Inserir" class="icon-button" style="flex: 1; margin-right: 10px;" />
-
-                    <button type="button" class="icon-button" style="flex: 1;" onclick="window.location.href='@Url.Action("OrientacoesList", "AdmCooperativa", new { id = pessoaId })'">
-                        <i class="fas fa-undo"></i> Voltar
+                <div class="d-flex justify-content-between mt-4">
+                    <input type="submit" value="Inserir" class="btn btn-eco w-50 me-2" />
+                    <button type="button" class="btn btn-light w-50 ms-2" onclick="window.location.href='@Url.Action("OrientacoesList", "AdmCooperativa", new { id = pessoaId })'">
+                        <i class="bi bi-arrow-left me-1"></i> Voltar
                     </button>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
+
+<style>
+    .bg-eco {
+        background-color: #38A169;
+    }
+
+    .btn-eco {
+        background-color: #38A169;
+        color: #fff;
+        border: 1px solid #38A169;
+        transition: all 0.3s ease;
+    }
+
+        .btn-eco:hover {
+            background-color: #2f8c55;
+            border-color: #2f8c55;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        color: #2D3748;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .btn-light:hover {
+            background-color: #e2e6ea;
+            color: #2D3748;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #2D3748;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+    }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #38A169;
+            box-shadow: 0 0 5px rgba(56, 161, 105, 0.5);
+        }
+
+    .form-group span {
+        font-size: 0.875rem;
+        color: #e3342f;
+    }
+</style>

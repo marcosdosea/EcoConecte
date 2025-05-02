@@ -20,12 +20,37 @@ namespace EcoConecteWeb.Controllers
         }
 
         // GET: AgendamentoController
-        public ActionResult Index()
+        public ActionResult Index(string dataFiltro, string statusFiltro)
         {
+            // Buscar todos os agendamentos
             var agendamentos = agendamentoService.GetAll();
+
+            // Aplicar o filtro de Data, caso o parâmetro seja fornecido
+            if (!string.IsNullOrEmpty(dataFiltro))
+            {
+                DateTime dataFiltroParsed;
+                if (DateTime.TryParse(dataFiltro, out dataFiltroParsed))
+                {
+                    agendamentos = agendamentos.Where(a => a.Data.Date == dataFiltroParsed.Date);
+                }
+            }
+
+            // Aplicar o filtro de Status, caso o parâmetro seja fornecido
+            if (!string.IsNullOrEmpty(statusFiltro))
+            {
+                agendamentos = agendamentos.Where(a => a.Status.Equals(statusFiltro, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Mapear os agendamentos para o ViewModel
             var agendamentosViewModel = mapper.Map<IEnumerable<AgendamentoViewModel>>(agendamentos);
+
+            // Passar os valores dos filtros para a View
+            ViewData["DataFiltro"] = dataFiltro;
+            ViewData["StatusFiltro"] = statusFiltro;
+
             return View(agendamentosViewModel);
         }
+
 
         // GET: AgendamentoController/Details/5
         public ActionResult Details(uint id)

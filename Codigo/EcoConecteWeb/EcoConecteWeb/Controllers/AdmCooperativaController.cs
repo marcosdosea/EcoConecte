@@ -84,20 +84,32 @@ namespace EcoConecteWeb.Controllers
             return (int)idCoop;
         }
 
-        public ActionResult CooperadosList(int id)
+        public ActionResult CooperadosList(int id, string nomeFiltro, string cpfFiltro, string cidadeFiltro)
         {
-            // Filtra as pessoas pelo IdCooperativa e apenas com Status diferente de "I"
-            var listaPessoas = _pessoaService.GetAll()
-                                              .Where(p => p.IdCooperativa == id && p.Status != "I")
-                                              .ToList();
+            var pessoas = _pessoaService.GetAll()
+                                        .Where(p => p.IdCooperativa == id && p.Status != "I");
 
-            ViewData["PessoaId"] = id; // Passa o ID para a View
-            // Mapeia para a ViewModel
-            var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
+            if (!string.IsNullOrWhiteSpace(nomeFiltro))
+                pessoas = pessoas.Where(p => p.Nome.Contains(nomeFiltro));
+
+            if (!string.IsNullOrWhiteSpace(cpfFiltro))
+                pessoas = pessoas.Where(p => p.Cpf.Contains(cpfFiltro));
+
+            if (!string.IsNullOrWhiteSpace(cidadeFiltro))
+                pessoas = pessoas.Where(p => p.Cidade.Contains(cidadeFiltro));
+
+            ViewData["PessoaId"] = id;
+            ViewData["NomeFiltro"] = nomeFiltro;
+            ViewData["CpfFiltro"] = cpfFiltro;
+            ViewData["CidadeFiltro"] = cidadeFiltro;
+            ViewData["FormAction"] = "CooperadosList"; // usado na View
+
+            var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(pessoas.ToList());
             return View(listaPessoasModel);
         }
 
-        public ActionResult AgendamentosList(int id)
+
+        public ActionResult AgendamentosList(int id, string? dataFiltro, string? statusFiltro)
         {
             // Buscar a cooperativa pelo ID
             var cooperativa = _cooperativaService.Get((uint)id);
@@ -106,19 +118,37 @@ namespace EcoConecteWeb.Controllers
                 return NotFound("Cooperativa não encontrada.");
             }
 
-            // Obter o CEP da cooperativa
             string cepCooperativa = cooperativa.Cep;
 
-            var AgendamentosList = _agendamentoService.GetAll()
-                                                       .Where(a => a.Cep == cepCooperativa)
-                                                       .ToList();
+            var agendamentos = _agendamentoService.GetAll()
+                                                  .Where(a => a.Cep == cepCooperativa);
 
-            ViewData["PessoaId"] = id; // Passa o ID para a View
-            // Mapear para a ViewModel
-            var AgendamentosListModel = _mapper.Map<List<AgendamentoViewModel>>(AgendamentosList);
+            // Filtro por data (compara apenas a data, ignorando a hora)
+            if (!string.IsNullOrEmpty(dataFiltro) && DateTime.TryParse(dataFiltro, out var dataParsed))
+            {
+                agendamentos = agendamentos
+                    .Where(a => a.Data.Date == dataParsed.Date);
+            }
 
-            return View(AgendamentosListModel);
+            // Filtro por status ("A" ou "I")
+            if (!string.IsNullOrEmpty(statusFiltro) && (statusFiltro == "A" || statusFiltro == "I"))
+            {
+                agendamentos = agendamentos
+                    .Where(a => a.Status == statusFiltro);
+            }
+
+            // Mapeamento para a ViewModel após filtragem
+            var viewModel = _mapper.Map<List<AgendamentoViewModel>>(agendamentos);
+
+            // Usando ViewData para passar os filtros para a View (mas, novamente, considerar usar ViewModel para esses valores)
+            ViewData["idCoop"] = id;
+            ViewData["DataFiltro"] = dataFiltro;
+            ViewData["StatusFiltro"] = statusFiltro;
+
+            return View(viewModel);
         }
+
+
 
         public async Task<IActionResult> AgendamentosEdit(uint id, string CepCoop)
         {
@@ -183,44 +213,111 @@ namespace EcoConecteWeb.Controllers
             return RedirectToAction("AgendamentosList", "AdmCooperativa", new { id = idCoop });
         }
 
-        public ActionResult ColetasList(int id)
+        public ActionResult ColetasList(int id, string cepFiltro, string logradouroFiltro, string diaColetaFiltro)
         {
             // Filtrar as coletas apenas da cooperativa informada
-            var ColetasList = _coletaService.GetAll()
-                                             .Where(c => c.IdCooperativa == id)
-                                             .ToList();
+            var coletasQuery = _coletaService.GetAll().Where(c => c.IdCooperativa == id);
+
+            // Aplicar filtros, se forem fornecidos
+            if (!string.IsNullOrEmpty(cepFiltro))
+            {
+                coletasQuery = coletasQuery.Where(c => c.Cep.Contains(cepFiltro));
+            }
+
+            if (!string.IsNullOrEmpty(logradouroFiltro))
+            {
+                coletasQuery = coletasQuery.Where(c => c.Logradouro.Contains(logradouroFiltro));
+            }
+
+            if (!string.IsNullOrEmpty(diaColetaFiltro))
+            {
+                DateTime diaColeta;
+                if (DateTime.TryParse(diaColetaFiltro, out diaColeta))
+                {
+                    coletasQuery = coletasQuery.Where(c => c.DiaColeta.Date == diaColeta.Date);
+                }
+            }
+
+            // Obter as coletas filtradas
+            var coletasList = coletasQuery.ToList();
 
             // Mapear para a ViewModel
-            var ColetasListModel = _mapper.Map<List<ColetaViewModel>>(ColetasList);
+            var coletasListModel = _mapper.Map<List<ColetaViewModel>>(coletasList);
 
-            return View(ColetasListModel);
+            // Passar os filtros de volta para a View (para preenchimento dos campos de filtro)
+            ViewData["CepFiltro"] = cepFiltro;
+            ViewData["LogradouroFiltro"] = logradouroFiltro;
+            ViewData["DiaColetaFiltro"] = diaColetaFiltro;
+            ViewData["IdCoop"] = id;
+
+            return View(coletasListModel);
         }
 
-        public ActionResult NoticiasList(int id)
+
+        public ActionResult NoticiasList(int id, string tipoFiltro, string dataInicial)
         {
             // Filtrar as notícias pela cooperativa informada
             var NoticiasList = _noticiaService.GetAll()
-                                               .Where(n => n.IdCooperativa == id)
-                                               .ToList();
+                                              .Where(n => n.IdCooperativa == id)
+                                              .ToList();
+
+            // Aplicar filtro por título (Tipo do Material)
+            if (!string.IsNullOrWhiteSpace(tipoFiltro))
+            {
+                NoticiasList = NoticiasList
+                    .Where(n => n.Titulo.Contains(tipoFiltro, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            // Aplicar filtro por data (Data Inicial)
+            if (!string.IsNullOrWhiteSpace(dataInicial) && DateTime.TryParse(dataInicial, out var data))
+            {
+                NoticiasList = NoticiasList
+                    .Where(n => n.Data >= data)
+                    .ToList();
+            }
 
             // Mapear para a ViewModel
             var NoticiasListModel = _mapper.Map<List<NoticiaViewModel>>(NoticiasList);
 
+            // Passar parâmetros de filtro para a view
+            ViewData["TituloFiltro"] = tipoFiltro;
+            ViewData["DataFiltro"] = dataInicial;
+            ViewData["idCoop"] = id;
+            ViewData["FormAction"] = "NoticiasList";
+
             return View(NoticiasListModel);
         }
 
-        public ActionResult OrientacoesList(int id)
+
+        public IActionResult OrientacoesList(int id, string tipoFiltro)
         {
-            // Filtrar as orientações pela cooperativa informada
-            var OrientacoesList = _orientacoesService.GetAll()
-                                                      .Where(o => o.IdCooperativa == id)
-                                                      .ToList();
+            ViewData["TituloFiltro"] = tipoFiltro;
+            ViewData["FormAction"] = "OrientacoesList";
 
-            // Mapear para a ViewModel
-            var OrientacoesListModel = _mapper.Map<List<OrientacoesViewModel>>(OrientacoesList);
+            // Busca todas as orientações vinculadas à cooperativa (pessoaId)
+            var orientacoes = _orientacoesService.GetAll()
+                .Where(o => o.IdCooperativa == id);
 
-            return View(OrientacoesListModel);
+            // Aplica o filtro, se informado
+            if (!string.IsNullOrWhiteSpace(tipoFiltro))
+            {
+                orientacoes = orientacoes
+                    .Where(o => o.Titulo.Contains(tipoFiltro));
+            }
+
+            var viewModel = orientacoes
+                .Select(o => new OrientacoesViewModel
+                {
+                    Id = o.Id,
+                    Titulo = o.Titulo,
+                    Descricao = o.Descricao
+                })
+                .ToList();
+
+            return View(viewModel);
         }
+
 
         public ActionResult VendasList(int id, string tipoFiltro, DateTime? dataInicial, DateTime? dataFinal)
         {

@@ -5,40 +5,113 @@
     var idCoop = ViewData["idCoop"];
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-trash-alt"></i> Apagar Orientação
-    </h1>
-
-    <h3>Tem certeza?</h3>
-
-    <div>
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Titulo)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Titulo)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Descricao)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Descricao)
-            </dd>
-        </dl>
-    </div>
-
-    <form asp-action="OrientacaoDeleteConfirmed" method="post">
-        <input type="hidden" name="Id" value="@Model.Id" /> <!-- Passando o Id -->
-        <input type="hidden" name="IdCoop" value="@Model.IdCooperativa" /> <!-- Passando o IdCoop -->
-        <div class="button-group">
-            <button type="submit" class="icon-button">
-                <i class="fas fa-trash-alt"></i> Apagar
-            </button>
-            <button type="button" class="icon-button" onclick="window.location.href='@Url.Action("OrientacoesList", "AdmCooperativa", new { id = Model.IdCooperativa })'">
-                <i class="fas fa-undo"></i> Voltar
-            </button>
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <!-- Cabeçalho -->
+        <div class="card-header bg-eco text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">
+                    <i class="bi bi-trash me-2"></i> Apagar Orientação
+                </h4>
+                <!-- Botão de voltar -->
+                <button type="button" class="btn btn-eco-outline-light" onclick="window.location.href='@Url.Action("OrientacoesList", "AdmCooperativa", new { id = Model.IdCooperativa })'">
+                    <i class="bi bi-arrow-left me-2"></i> Voltar
+                </button>
+            </div>
         </div>
-    </form>
+
+        <!-- Conteúdo -->
+        <div class="card-body p-4">
+            <h5 class="mb-4 text-danger"><strong>Tem certeza de que deseja apagar esta orientação?</strong></h5>
+
+            <dl class="row">
+                <dt class="col-sm-3">Título</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Titulo)</dd>
+
+                <dt class="col-sm-3">Descrição</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Descricao)</dd>
+            </dl>
+
+            <!-- Formulário de confirmação -->
+            <form asp-action="OrientacaoDeleteConfirmed" method="post">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="IdCoop" value="@Model.IdCooperativa" />
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-danger btn-sm w-auto me-2">
+                        <i class="bi bi-trash-fill me-1"></i> Apagar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<!-- Estilos customizados -->
+<style>
+    .bg-eco {
+        background-color: #38A169;
+    }
+
+    .btn-eco-outline-light {
+        color: #fff;
+        border-color: #fff;
+        border: 1px solid;
+        transition: all 0.3s ease;
+        background-color: #38A169;
+    }
+
+        .btn-eco-outline-light:hover {
+            background-color: #fff;
+            color: #38A169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+        }
+
+    .btn-danger {
+        background-color: white;
+        color: #dc3545; /* Cor vermelha para o texto */
+        border: 1px solid #dc3545; /* Cor vermelha para a borda */
+        transition: all 0.3s ease;
+    }
+
+        .btn-danger:hover {
+            background-color: #dc3545;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+        }
+
+    .btn-sm {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+    }
+
+    .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control {
+        border-radius: 0.375rem;
+    }
+
+    .button-group {
+        margin-top: 20px;
+    }
+
+    dl.row dt {
+        font-weight: 600;
+        color: #2D3748;
+    }
+</style>

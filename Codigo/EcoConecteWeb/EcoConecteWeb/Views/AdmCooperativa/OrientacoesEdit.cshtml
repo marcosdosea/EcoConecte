@@ -5,15 +5,20 @@
     var idCoop = ViewData["idCoop"];
 }
 
-<div class="container">
-    <h1 class="title">
-        <i class="fas fa-edit"></i> Editar Orientação
-    </h1>
-    <hr />
-
-    <div class="row">
-        <div class="col-md-8">
-            <form asp-action="OrientacoesEdit" class="form-container-expanded">
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-eco text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">
+                    <i class="bi bi-pencil-square me-2"></i>Editar Orientação
+                </h4>
+                <a class="btn btn-eco-outline-light" asp-controller="AdmCooperativa" asp-action="OrientacoesList" asp-route-id="@idCoop">
+                    <i class="bi bi-arrow-left me-2"></i>Voltar
+                </a>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="OrientacoesEdit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -28,15 +33,84 @@
                     <span asp-validation-for="Descricao" class="text-danger"></span>
                 </div>
 
-                <input type="hidden" asp-for="IdCooperativa" value=@idCoop />
+                <input type="hidden" asp-for="IdCooperativa" value="@idCoop" />
 
                 <div class="button-group">
-                    <input type="submit" value="Salvar" class="icon-button" />
-                    <a asp-controller="AdmCooperativa" asp-action="OrientacoesList" asp-route-id="@idCoop" class="icon-button">
-                        <i class="fa fa-arrow-left"></i> Voltar
-                    </a>
+                    <input type="submit" value="Salvar" class="btn btn-eco-outline" />
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<style>
+    .bg-eco {
+        background-color: #38A169;
+    }
+
+    .btn-eco-outline-light {
+        color: #fff;
+        border-color: #fff;
+        border: 1px solid;
+        transition: all 0.3s ease;
+    }
+
+        .btn-eco-outline-light:hover {
+            background-color: #fff;
+            color: #38A169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+        }
+
+    .btn-eco-outline {
+        background-color: transparent;
+        color: #38A169;
+        border: 1px solid #38A169;
+        transition: all 0.3s ease;
+    }
+
+        .btn-eco-outline:hover {
+            background-color: #38A169;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        border-radius: 0.5rem;
+        border: 1px solid #ddd;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #38A169;
+            box-shadow: 0 0 0 0.2rem rgba(56, 161, 105, 0.25);
+        }
+
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    .button-group {
+        margin-top: 20px;
+    }
+</style>
