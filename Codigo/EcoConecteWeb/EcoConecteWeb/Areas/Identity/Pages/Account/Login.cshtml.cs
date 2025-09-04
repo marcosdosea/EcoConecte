@@ -74,19 +74,19 @@ public class LoginModel : PageModel
             // Redirecionamento com base nas roles
             if (roles.Contains("ADMROOT"))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "AdmRoot");
             }
             else if (roles.Contains("COOPERADO"))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Cooperado", new { id = pessoaId });
             }
             else if (roles.Contains("COOPERATIVA"))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "AdmCooperativa", new { id = pessoaId });
             }
 
             // Se não houver role específica, redireciona para a área padrão (Cliente)
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Home", "Usuario", new { id = pessoaId });
         }
         else
         {

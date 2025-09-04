@@ -1,3 +1,4 @@
+
 html {
     font-size: 14px;
 }
@@ -63,15 +64,15 @@ body {
     transition: all 0.2s ease;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link:focus {
-    color: #2F855A;
-    background-color: rgba(56, 161, 105, 0.06);
-}
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+        color: #2F855A;
+        background-color: rgba(56, 161, 105, 0.06);
+    }
 
-.navbar-nav .nav-link i {
-    margin-right: 5px;
-}
+    .navbar-nav .nav-link i {
+        margin-right: 5px;
+    }
 
 /* Container principal */
 .main-container {
@@ -94,16 +95,16 @@ body {
     padding-bottom: 10px;
 }
 
-.footer-heading:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 40px;
-    height: 3px;
-    background-color: #38A169;
-    border-radius: 2px;
-}
+    .footer-heading:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 3px;
+        background-color: #38A169;
+        border-radius: 2px;
+    }
 
 .social-link {
     display: inline-flex;
@@ -118,48 +119,48 @@ body {
     transition: all 0.3s ease;
 }
 
-.social-link:hover {
-    background-color: #38A169;
-    color: white;
-    transform: translateY(-3px);
-}
+    .social-link:hover {
+        background-color: #38A169;
+        color: white;
+        transform: translateY(-3px);
+    }
 
 .footer-links {
     list-style: none;
     padding-left: 0;
 }
 
-.footer-links li {
-    margin-bottom: 12px;
-}
+    .footer-links li {
+        margin-bottom: 12px;
+    }
 
-.footer-links a {
-    color: #CBD5E0;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
+    .footer-links a {
+        color: #CBD5E0;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
 
-.footer-links a:hover {
-    color: #38A169;
-    padding-left: 5px;
-}
+        .footer-links a:hover {
+            color: #38A169;
+            padding-left: 5px;
+        }
 
 .footer-contact {
     list-style: none;
     padding-left: 0;
 }
 
-.footer-contact li {
-    margin-bottom: 12px;
-    display: flex;
-    align-items: flex-start;
-}
+    .footer-contact li {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+    }
 
-.footer-contact li i {
-    color: #38A169;
-    margin-right: 10px;
-    margin-top: 3px;
-}
+        .footer-contact li i {
+            color: #38A169;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
 
 .eco-footer hr {
     background-color: rgba(255, 255, 255, 0.1);
@@ -179,7 +180,7 @@ body {
     .brand-text {
         font-size: 1.2rem;
     }
-    
+
     .footer-heading {
         margin-top: 10px;
     }
@@ -188,7 +189,7 @@ body {
 /* Customização dos botões e elementos da UI */
 .title {
     text-align: left;
-    color: #2D3748; 
+    color: #2D3748;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -258,20 +259,20 @@ tr:hover {
     justify-content: center;
 }
 
-.icon-button a {
-    color: white;
-    text-decoration: none;
-}
+    .icon-button a {
+        color: white;
+        text-decoration: none;
+    }
 
-.icon-button:hover {
-    background-color: #2F855A;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-}
+    .icon-button:hover {
+        background-color: #2F855A;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
 
-.icon-button i {
-    margin-right: 8px;
-}
+    .icon-button i {
+        margin-right: 8px;
+    }
 
 /* Estilos para formulários */
 .form-container-expanded {
@@ -300,10 +301,10 @@ tr:hover {
     transition: all 0.2s ease;
 }
 
-.form-control:focus {
-    border-color: #38A169;
-    box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.2);
-}
+    .form-control:focus {
+        border-color: #38A169;
+        box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.2);
+    }
 
 .control-label {
     font-weight: 500;
@@ -318,9 +319,9 @@ a {
     transition: all 0.2s ease;
 }
 
-a:hover {
-    color: #2F855A;
-}
+    a:hover {
+        color: #2F855A;
+    }
 
 /* Estilos para cards e sections */
 .card {
@@ -331,10 +332,10 @@ a:hover {
     overflow: hidden;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
 
 .card-header {
     background-color: #38A169;
@@ -358,18 +359,18 @@ a:hover {
     background-image: linear-gradient(135deg, #F0FFF4 0%, #EDFDFD 100%);
 }
 
-.hero-section h1 {
-    color: #2D3748;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
+    .hero-section h1 {
+        color: #2D3748;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
 
-.hero-section p {
-    color: #4A5568;
-    font-size: 1.1rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
+    .hero-section p {
+        color: #4A5568;
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
 
 /* Estilo para componentes de alerta/feedback */
 .alert {
@@ -404,14 +405,14 @@ a:hover {
     margin-bottom: 20px;
 }
 
-.search-box .form-control {
-    border-radius: 6px 0 0 6px;
-    border-right: none;
-}
+    .search-box .form-control {
+        border-radius: 6px 0 0 6px;
+        border-right: none;
+    }
 
-.search-box .btn {
-    border-radius: 0 6px 6px 0;
-}
+    .search-box .btn {
+        border-radius: 0 6px 6px 0;
+    }
 
 /* Animações e transições */
 .fade-in {
@@ -419,8 +420,15 @@ a:hover {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Classes de utilidade */
@@ -452,19 +460,19 @@ a:hover {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .role-button {
         margin-bottom: 0.5rem;
     }
-    
+
     .role-list {
         grid-template-columns: 1fr;
     }
-    
+
     .admin-header {
         padding: 1.25rem 1rem;
     }
-    
+
     .admin-title {
         font-size: 1.25rem;
     }
@@ -504,25 +512,25 @@ a:hover {
     padding-bottom: 12px;
 }
 
-.section-title:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 60px;
-    height: 3px;
-    background-color: #38A169;
-    border-radius: 2px;
-}
+    .section-title:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #38A169;
+        border-radius: 2px;
+    }
 
 .news-card {
     transition: all 0.3s ease;
 }
 
-.news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
 
 .eco-tip-box {
     background-color: #E6FFFA;
@@ -565,18 +573,18 @@ a:hover {
     margin-bottom: 0;
 }
 
-.schedule-table th {
-    font-weight: 600;
-    background-color: #f8f9fa;
-    color: #4A5568;
-    border-top: none;
-    padding: 0.75rem 1rem;
-}
+    .schedule-table th {
+        font-weight: 600;
+        background-color: #f8f9fa;
+        color: #4A5568;
+        border-top: none;
+        padding: 0.75rem 1rem;
+    }
 
-.schedule-table td {
-    padding: 0.75rem 1rem;
-    vertical-align: middle;
-}
+    .schedule-table td {
+        padding: 0.75rem 1rem;
+        vertical-align: middle;
+    }
 
 .date-cell {
     display: flex;
@@ -639,9 +647,9 @@ a:hover {
     transition: all 0.2s ease;
 }
 
-.action-btn:hover {
-    transform: translateY(-2px);
-}
+    .action-btn:hover {
+        transform: translateY(-2px);
+    }
 
 /* Estilos dos Formulários */
 .schedule-form-container {
@@ -675,12 +683,12 @@ a:hover {
     transition: all 0.3s ease;
 }
 
-.btn-eco:hover {
-    background-color: #2F855A;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
-}
+    .btn-eco:hover {
+        background-color: #2F855A;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+    }
 
 .input-group-text {
     background-color: #F9FAFB;
@@ -715,11 +723,11 @@ a:hover {
     .form-header {
         padding: 1.25rem 1rem;
     }
-    
+
     .form-title {
         font-size: 1.25rem;
     }
-    
+
     .eco-tip-icon {
         font-size: 3rem;
         margin-bottom: 1rem;
@@ -743,9 +751,9 @@ a:hover {
     height: 200px;
 }
 
-.news-card-img-container i {
-    font-size: 5rem;
-}
+    .news-card-img-container i {
+        font-size: 5rem;
+    }
 
 .btn-outline-eco {
     color: #38A169;
@@ -753,10 +761,10 @@ a:hover {
     transition: all 0.3s ease;
 }
 
-.btn-outline-eco:hover {
-    background-color: #38A169;
-    color: white;
-}
+    .btn-outline-eco:hover {
+        background-color: #38A169;
+        color: white;
+    }
 
 .text-eco-light {
     color: rgba(56, 161, 105, 0.2);
@@ -796,9 +804,9 @@ a:hover {
     overflow: hidden;
 }
 
-.article-image-container i {
-    font-size: 8rem;
-}
+    .article-image-container i {
+        font-size: 8rem;
+    }
 
 .article-content {
     font-size: 1.1rem;
@@ -806,9 +814,9 @@ a:hover {
     color: #4A5568;
 }
 
-.article-content p {
-    margin-bottom: 1.5rem;
-}
+    .article-content p {
+        margin-bottom: 1.5rem;
+    }
 
 .breadcrumb {
     background-color: transparent;
@@ -836,17 +844,17 @@ a:hover {
     transition: all 0.3s ease;
 }
 
-.social-icon:hover {
-    color: white;
-    background-color: #38A169;
-    transform: translateY(-3px);
-}
+    .social-icon:hover {
+        color: white;
+        background-color: #38A169;
+        transform: translateY(-3px);
+    }
 
 @media (max-width: 768px) {
     .article-title {
         font-size: 2rem;
     }
-    
+
     .article-image-container {
         height: 250px;
     }
