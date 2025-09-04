@@ -43,15 +43,15 @@
             </div>
         </div>
 
-        <!-- Card: Meus Agendamentos -->
+        <!-- Card: Minha Agenda de Coletas -->
         <div class="col-12 col-sm-6 col-lg-4">
             <div class="card h-100 shadow-sm feature-card">
                 <div class="card-body text-center d-flex flex-column">
                     <div class="feature-icon bg-eco text-white mb-3">
                         <i class="bi bi-calendar2-week-fill fs-2"></i>
                     </div>
-                    <h5 class="card-title mb-2">Meus Agendamentos</h5>
-                    <p class="card-text text-muted flex-grow-1">Veja suas próximas coletas agendadas e o status.</p>
+                    <h5 class="card-title mb-2">Minha Agenda de Coletas</h5>
+                    <p class="card-text text-muted flex-grow-1">Veja suas próximas coletas programadas e o status.</p>
                     <a asp-controller="Usuario" asp-action="Agendadas" asp-route-id="@pessoaId" class="btn btn-eco-outline mt-auto">Visualizar</a>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     </div>
                     <h5 class="card-title mb-2">Coletas Realizadas</h5>
                     <p class="card-text text-muted flex-grow-1">Acesse o histórico de todas as suas coletas já concluídas.</p>
-                    <a asp-action="AgendamentoCoop" asp-route-id="@pessoaId" class="btn btn-eco-outline mt-auto">Ver Histórico</a>
+                    <a asp-controller="Coleta" asp-action="AgendamentoCoop" asp-route-id="@pessoaId" class="btn btn-eco-outline mt-auto">Ver Histórico</a>
                 </div>
             </div>
         </div>
