@@ -22,6 +22,18 @@ namespace EcoConecteWeb.Controllers
             _mapper = mapper;
         }
 
+        public ActionResult Home(uint id)
+        {
+            if (id == 0)
+            {
+                return NotFound(); // Evita erro se o ID for inválido
+            }
+            ViewData["PessoaId"] = id; // Passa o ID para a View
+            Pessoa? pessoa = _pessoaService.Get(id);
+            PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            return View(pessoaModel);
+        }
+
         // GET: Cooperado_Controller
         public ActionResult Index(uint id)
         {

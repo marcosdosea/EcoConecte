@@ -78,7 +78,7 @@ public class LoginModel : PageModel
             }
             else if (roles.Contains("COOPERADO"))
             {
-                return RedirectToAction("Home", "AdmCooperado", new { id = pessoaId });
+                return RedirectToAction("Home", "Cooperado", new { id = pessoaId });
             }
             else if (roles.Contains("COOPERATIVA"))
             {
