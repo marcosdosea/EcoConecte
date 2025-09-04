@@ -11,29 +11,21 @@
         <i class="bi bi-lightbulb me-2"></i> Orientações
     </h1>
 
-    <!-- Barra de título -->
-    <div class="card-header bg-eco text-white">
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">
-                <i class="bi bi-funnel me-2"></i>Filtro
-            </h4>
-        </div>
-    </div>
+    <div class="filter-panel mb-4">
+        <form method="get" asp-action="@formAction" class="d-flex flex-wrap align-items-center gap-3">
 
-    <!-- Filtros -->
-    <div class="card-body p-4">
-        <form method="get" asp-action="@formAction" class="mb-3">
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="Tipo">Titulo</label>
-                    <input type="text" class="form-control form-control-sm" name="tipoFiltro" value="@tituloFiltro" />
-                </div>
-                <div class="col-md-2 mt-4">
-                    <button type="submit" class="btn btn-eco-outline btn-sm">
-                        <i class="bi bi-search me-1"></i>Filtrar
-                    </button>
-                </div>
+            <div class="filter-icon">
+                <i class="bi bi-funnel"></i>
             </div>
+
+            <input type="text" class="form-control form-control-sm flex-grow-1" name="tituloFiltro" placeholder="Filtrar por título..." value="@tituloFiltro" />
+
+            <button type="submit" class="btn btn-sm btn-eco-action">
+                <i class="bi bi-search"></i> Filtrar
+            </button>
+            <a href="@Url.Action(formAction)" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-eraser"></i> Limpar
+            </a>
         </form>
     </div>
 
@@ -83,6 +75,36 @@
 </div>
 
 <style>
+    /* Estilos do novo filtro */
+    .filter-panel {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .filter-icon {
+        color: #38A169;
+        font-size: 1.2rem;
+    }
+
+    .btn-eco-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+        .btn-eco-action:hover {
+            background-color: #2f855a;
+            color: white;
+        }
+
+    /* Estilos originais da sua página (preservados) */
     .bg-eco {
         background-color: #38A169;
     }

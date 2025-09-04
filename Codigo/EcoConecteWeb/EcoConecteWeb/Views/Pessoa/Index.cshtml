@@ -14,79 +14,42 @@
     <i class="bi bi-person me-2"></i> Pessoa
 </h1>
 
-<!-- Filtro -->
-<div class="card shadow-sm mb-4">
-    <div class="card-header bg-eco text-white">
-        <h4 class="mb-0">
-            <i class="bi bi-funnel me-2"></i> Filtro
-        </h4>
-    </div>
-    <div class="card-body">
-        <form method="get" asp-action="@formAction">
-            <div class="row">
-                <div class="col-md-3">
-                    <label for="nomeFiltro">Nome</label>
-                    <input type="text" class="form-control form-control-sm" name="nomeFiltro" value="@nomeFiltro" />
-                </div>
-                <div class="col-md-3">
-                    <label for="cpfFiltro">CPF</label>
-                    <input type="text" class="form-control form-control-sm" name="cpfFiltro" value="@cpfFiltro" />
-                </div>
-                <div class="col-md-3">
-                    <label for="cidadeFiltro">Cidade</label>
-                    <input type="text" class="form-control form-control-sm" name="cidadeFiltro" value="@cidadeFiltro" />
-                </div>
-                <div class="col-md-3">
-                    <label for="statusFiltro">Status</label>
-                    <input type="text" class="form-control form-control-sm" name="statusFiltro" value="@statusFiltro" />
-                </div>
-                <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" class="icon-button">
-                        <i class="bi bi-search"></i> Filtrar
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+<div class="filter-panel mb-4">
+    <form method="get" asp-action="@formAction" class="d-flex flex-wrap align-items-center gap-3">
+
+        <div class="filter-icon">
+            <i class="bi bi-funnel"></i>
+        </div>
+
+        <input type="text" class="form-control form-control-sm" name="nomeFiltro" placeholder="Nome" value="@nomeFiltro" />
+        <input type="text" class="form-control form-control-sm" name="cpfFiltro" placeholder="CPF" value="@cpfFiltro" />
+        <input type="text" class="form-control form-control-sm" name="cidadeFiltro" placeholder="Cidade" value="@cidadeFiltro" />
+        <input type="text" class="form-control form-control-sm" name="statusFiltro" placeholder="Status" value="@statusFiltro" />
+
+        <button type="submit" class="btn btn-sm btn-eco-action">
+            <i class="bi bi-search"></i> Filtrar
+        </button>
+        <a href="@Url.Action(formAction)" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-eraser"></i> Limpar
+        </a>
+    </form>
 </div>
 
-<!-- Tabela -->
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cpf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Logradouro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Numero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bairro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCooperativa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Cpf)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefone)</th>
+            <th>@Html.DisplayNameFor(model => model.Logradouro)</th>
+            <th>@Html.DisplayNameFor(model => model.Numero)</th>
+            <th>@Html.DisplayNameFor(model => model.Bairro)</th>
+            <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>@Html.DisplayNameFor(model => model.IdCooperativa)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -136,22 +99,47 @@
         color: #2D3748;
     }
 
-    .btn-eco-outline {
-        background-color: transparent;
-        color: #38A169;
-        border: 1px solid #38A169;
-        padding: 0.5rem 1.2rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
+    /* Estilos do filtro novo */
+    .filter-panel {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        padding: 1rem;
+        border-radius: 8px;
     }
 
-        .btn-eco-outline:hover {
-            background-color: #38A169;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.15);
+        .filter-panel .form-control-sm {
+            min-width: 150px;
+            flex: 1;
         }
 
+    .filter-icon {
+        color: #38A169;
+        font-size: 1.2rem;
+    }
+
+    .btn-eco-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: #38A169;
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+        .btn-eco-action:hover {
+            background-color: #2f855a;
+            color: white;
+        }
+
+    .btn-outline-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Estilos originais da sua tabela e botões (preservados) */
     .icon-button {
         display: inline-flex;
         align-items: center;
@@ -173,9 +161,14 @@
             text-decoration: none;
         }
 
-    .card-header.bg-eco {
-        background-color: #38A169;
-    }
+        /* Garante que o link dentro do botão ocupe todo o espaço e tenha a cor correta */
+        .icon-button a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
 
     .table thead th {
         vertical-align: middle;
