@@ -27,210 +27,65 @@
 
         @if (ehCliente)
         {
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="clienteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person"></i> Área do Cliente
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Usuario" asp-action="Home" asp-route-id="@pessoaId">
+                    <i class="bi bi-layout-text-window-reverse me-2"></i>Meu Painel
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="clienteDropdown">
-                    <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Index" asp-route-id="@pessoaId">
-                        <i class="bi bi-person-vcard me-2"></i>Minhas Informações</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="Suporte" asp-action="Index">
-                        <i class="bi bi-headset me-2"></i>Suporte</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Agendadas" asp-route-id="@pessoaId">
-                        <i class="bi bi-calendar-check me-2"></i>Coletas Agendadas</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Agendamento" asp-route-id="@pessoaId">
-                        <i class="bi bi-calendar-plus me-2"></i>Agendar Coleta</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <form class="dropdown-item d-flex" asp-area="Identity" asp-page="/Account/Logout"
-                              asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                <i class="bi bi-box-arrow-right me-2"></i>Sair
-                            </button>
-                            @Html.AntiForgeryToken()
-                        </form>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link btn btn-link border-0 text-danger">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sair
+                    </button>
+                </form>
             </li>
         }
 
         @if (ehAdmin)
         {
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-gear"></i> Área Administrativa
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdmRoot" asp-action="Home">
+                    <i class="bi bi-layout-text-window-reverse me-2"></i>Meu Painel
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="adminDropdown">
-                    <li class="px-3 py-1 bg-light text-center">
-                        <span class="d-block text-dark fw-semibold text-uppercase small">Minha Conta</span>
-                    </li>
-                    <li><a class="dropdown-item" href="/Identity/Account/Manage/ChangePassword">
-                        <i class="bi bi-key me-2"></i>Alterar Senha</a>
-                    </li>
-                    <li><a class="dropdown-item" href="/Identity/Account/Manage/Email">
-                        <i class="bi bi-envelope me-2"></i>Alterar E-mail</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="px-3 py-1 bg-light text-center">
-                        <span class="d-block text-dark fw-semibold text-uppercase small">Sistema</span>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmIdentity" asp-action="Users">
-                        <i class="bi bi-people me-2"></i>Usuários Identity</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmIdentity" asp-action="Roles">
-                        <i class="bi bi-person-badge me-2"></i>Funções Identity</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="Pessoa" asp-action="">
-                        <i class="bi bi-person me-2"></i>Pessoas</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Cooperativa" asp-action="">
-                        <i class="bi bi-building me-2"></i>Cooperativas</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Agendamento" asp-action="">
-                        <i class="bi bi-calendar-event me-2"></i>Agendamentos</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Coleta" asp-action="">
-                        <i class="bi bi-recycle me-2"></i>Coleta</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Noticia" asp-action="">
-                        <i class="bi bi-newspaper me-2"></i>Notícias</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Orientacoes" asp-action="">
-                        <i class="bi bi-lightbulb me-2"></i>Orientações</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Venda" asp-action="">
-                        <i class="bi bi-cart me-2"></i>Vendas</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <form class="dropdown-item d-flex" asp-area="Identity" asp-page="/Account/Logout"
-                              asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                <i class="bi bi-box-arrow-right me-2"></i>Sair
-                            </button>
-                            @Html.AntiForgeryToken()
-                        </form>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link btn btn-link border-0 text-danger">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sair
+                    </button>
+                </form>
             </li>
         }
 
         @if (ehCooperativa)
         {
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="coopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-building"></i> Área Administrativa
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdmCooperativa" asp-action="Home" asp-route-id="@pessoaId">
+                    <i class="bi bi-layout-text-window-reverse me-2"></i>Meu Painel
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="coopDropdown">
-                    <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="Index" asp-route-id="@pessoaId">
-                        <i class="bi bi-building-gear me-2"></i>Dados da Cooperativa</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="px-3 py-1 bg-light text-center">
-                        <span class="d-block text-dark fw-semibold text-uppercase small">Gerenciamento</span>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="CooperadosList" asp-route-id="@pessoaId">
-                        <i class="bi bi-people me-2"></i>Cooperados</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="AgendamentosList" asp-route-id="@pessoaId">
-                        <i class="bi bi-calendar-event me-2"></i>Agendamentos</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="ColetasList" asp-route-id="@pessoaId">
-                        <i class="bi bi-recycle me-2"></i>Coletas</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="NoticiasList" asp-route-id="@pessoaId">
-                        <i class="bi bi-newspaper me-2"></i>Notícias</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="OrientacoesList" asp-route-id="@pessoaId">
-                        <i class="bi bi-lightbulb me-2"></i>Orientações</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="AdmCooperativa" asp-action="VendasList" asp-route-id="@pessoaId">
-                        <i class="bi bi-cart me-2"></i>Vendas</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <form class="dropdown-item d-flex" asp-area="Identity" asp-page="/Account/Logout"
-                              asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                <i class="bi bi-box-arrow-right me-2"></i>Sair
-                            </button>
-                            @Html.AntiForgeryToken()
-                        </form>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link btn btn-link border-0 text-danger">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sair
+                    </button>
+                </form>
             </li>
         }
 
         @if (ehCooperado)
         {
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="CooperadoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-badge"></i> Área Cooperado
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdmCooperado" asp-action="Home" asp-route-id="@pessoaId">
+                    <i class="bi bi-layout-text-window-reverse me-2"></i>Meu Painel
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="CooperadoDropdown">
-                    <li><a class="dropdown-item" asp-controller="Cooperado" asp-action="Index" asp-route-id="@pessoaId">
-                        <i class="bi bi-person-vcard me-2"></i>Dados do Cooperado</a>
-                    </li>
-                    <li><a class="dropdown-item" asp-controller="Venda" asp-action="ConsultaVenda" asp-route-id="@pessoaId">
-                        <i class="bi bi-cart me-2"></i>Minhas Vendas</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="px-3 py-1 bg-light text-center">
-                        <span class="d-block text-dark fw-semibold text-uppercase small">Agendamentos</span>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Usuario" asp-action="Agendamento" asp-route-id="@pessoaId">
-                            <i class="bi bi-calendar-plus me-2"></i>Agendar Coleta
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Usuario" asp-action="Agendadas" asp-route-id="@pessoaId">
-                            <i class="bi bi-calendar-check me-2"></i>Meus Agendamentos
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" asp-controller="Coleta" asp-action="AgendamentoCoop" asp-route-id="@pessoaId">
-                            <i class="bi bi-recycle me-2"></i>Coletas
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <form class="dropdown-item d-flex" asp-area="Identity" asp-page="/Account/Logout"
-                              asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                <i class="bi bi-box-arrow-right me-2"></i>Sair
-                            </button>
-                            @Html.AntiForgeryToken()
-                        </form>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link btn btn-link border-0 text-danger">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sair
+                    </button>
+                </form>
             </li>
         }
     }

@@ -38,6 +38,18 @@ namespace EcoConecteWeb.Controllers
             _vendaService = vendaService;
         }
 
+        public IActionResult Home(uint id)
+        {
+            if (id == 0)
+            {
+                return NotFound(); // Evita erro se o ID for inválido
+            }
+            ViewData["PessoaId"] = id; // Passa o ID para a View
+            Cooperativa? cooperativa = _cooperativaService.Get(id);
+            CooperativaViewModel cooperativaModel = _mapper.Map<CooperativaViewModel>(cooperativa);
+            return View();
+        }
+
         // GET: Pessoa_Controller
         public ActionResult Index(uint id)
         {
